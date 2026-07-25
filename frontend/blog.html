@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Blog | AxonFlow AI - Insights on Autonomous Agents &amp; RAG Systems</title>
+    <meta name="description" content="Expert insights on AI agents, RAG systems, automation, and the future of autonomous intelligence from the AxonFlow AI team. Tutorials, case studies, and industry analysis.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://axonflow.in/blog">
+    <link rel="alternate" hreflang="en-IN" href="https://axonflow.in/blog">
+    <link rel="alternate" hreflang="en" href="https://axonflow.in/blog">
+    <link rel="alternate" hreflang="x-default" href="https://axonflow.in/blog">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://axonflow.in/blog">
+    <meta property="og:title" content="AI Blog | AxonFlow AI">
+    <meta property="og:description" content="Expert insights on AI agents, RAG systems, and autonomous intelligence.">
+    <meta property="og:site_name" content="AxonFlow AI">
+    <meta property="og:locale" content="en_IN">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" href="/assets/logo_pro.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: { 950: '#020617' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="/js/config.js"></script>
+    <style>
+        .hero-gradient {
+            background: radial-gradient(circle at 30% 20%, rgba(6, 182, 212, 0.12), transparent),
+                radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.12), transparent),
+                #020617;
+        }
+        .filter-active {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(139, 92, 246, 0.2));
+            border-color: rgba(6, 182, 212, 0.4);
+        }
+        .pagination-active {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(139, 92, 246, 0.2));
+        }
+    </style>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "AxonFlow AI Blog",
+            "description": "Expert insights on AI agents, RAG systems, automation, and the future of autonomous intelligence.",
+            "url": "https://axonflow.in/blog",
+            "author": {
+                "@type": "Person",
+                "name": "Saurabh Bajpai"
+            },
+            "blogPost": [
+                {
+                    "@type": "BlogPosting",
+                    "headline": "Building Production-Ready RAG Systems in 2025",
+                    "datePublished": "2025-06-15",
+                    "author": { "@type": "Person", "name": "Saurabh Bajpai" }
+                },
+                {
+                    "@type": "BlogPosting",
+                    "headline": "Multi-Agent Orchestration: Patterns That Scale",
+                    "datePublished": "2025-06-08",
+                    "author": { "@type": "Person", "name": "Saurabh Bajpai" }
+                },
+                {
+                    "@type": "BlogPosting",
+                    "headline": "How We Automated 500+ Enterprise Workflows",
+                    "datePublished": "2025-05-28",
+                    "author": { "@type": "Person", "name": "Saurabh Bajpai" }
+                },
+                {
+                    "@type": "BlogPosting",
+                    "headline": "Vector Databases: Complete Guide for AI Engineers",
+                    "datePublished": "2025-05-20",
+                    "author": { "@type": "Person", "name": "Saurabh Bajpai" }
+                },
+                {
+                    "@type": "BlogPosting",
+                    "headline": "AI in Healthcare: From Diagnostics to Autonomous Care",
+                    "datePublished": "2025-05-12",
+                    "author": { "@type": "Person", "name": "Saurabh Bajpai" }
+                },
+                {
+                    "@type": "BlogPosting",
+                    "headline": "The Evolution from Chatbots to Autonomous Agents",
+                    "datePublished": "2025-05-04",
+                    "author": { "@type": "Person", "name": "Saurabh Bajpai" }
+                }
+            ]
+        }
+    </script>
+</head>
+
+<body class="bg-black text-slate-200 antialiased selection:bg-cyan-500/30 font-['Inter']">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-3">
+                <img src="/assets/logo_pro.png" alt="AxonFlow" class="h-10 hover:scale-110 transition-transform">
+                <span class="text-xl font-black tracking-tighter text-white uppercase">AxonFlow AI</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest">
+                <a href="/#services" class="hover:text-cyan-400 transition-colors text-slate-300">Services</a>
+                <a href="/#portfolio" class="hover:text-cyan-400 transition-colors text-slate-300">Portfolio</a>
+                <a href="/about-us" class="hover:text-cyan-400 transition-colors text-slate-300">About</a>
+                <a href="/what-we-do" class="hover:text-cyan-400 transition-colors text-slate-300">What We Do</a>
+                <a href="/who-we-are" class="hover:text-cyan-400 transition-colors text-slate-300">Who We Are</a>
+                <a href="/careers/" class="hover:text-cyan-400 transition-colors text-slate-300">Careers</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=saurabhbajpai03@outlook.com" class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-cyan-500/20 px-6 py-2 rounded-lg text-white">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-gradient pt-48 pb-24 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-4 py-1 mb-8">
+                <span class="w-2 h-2 bg-cyan-500 rounded-full animate-ping"></span>
+                <span class="text-cyan-300 text-xs font-bold tracking-widest uppercase">Latest Thinking</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter leading-tight">
+                AI Insights &amp; <span class="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Tutorials</span>
+            </h1>
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                Expert perspectives on building autonomous systems
+            </p>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <section class="py-8 px-6 bg-slate-950/50 border-y border-white/5">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-center gap-3">
+            <button class="filter-active px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border transition-all duration-300 text-cyan-300">All</button>
+            <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/30 transition-all duration-300">AI Agents</button>
+            <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/30 transition-all duration-300">RAG Systems</button>
+            <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/30 transition-all duration-300">Automation</button>
+            <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/30 transition-all duration-300">Tutorials</button>
+            <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/30 transition-all duration-300">Industry</button>
+        </div>
+    </section>
+
+    <!-- Blog Grid + Sidebar -->
+    <section class="py-20 px-6 bg-black">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-3 gap-12">
+            <!-- Main Content -->
+            <div class="lg:col-span-2">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Post 1 -->
+                    <article class="group bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/40 transition-all duration-500 rounded-[2rem] overflow-hidden">
+                        <div class="p-1">
+                            <div class="bg-slate-800/50 rounded-[1.75rem] overflow-hidden">
+                                <div class="h-48 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 flex items-center justify-center">
+                                    <div class="text-6xl opacity-30 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700">📚</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-8 pt-4">
+                            <span class="inline-block bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-purple-500/20 mb-4">RAG Systems</span>
+                            <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors leading-snug">Building Production-Ready RAG Systems in 2025</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">Learn the architecture patterns, vector database selection, chunking strategies, and evaluation frameworks for deploying RAG systems at scale in production environments.</p>
+                            <div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+                                <span>June 15, 2025</span>
+                                <span>8 min read</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                                <span class="text-xs text-slate-400">by Saurabh Bajpai</span>
+                                <a href="#" class="text-cyan-400 text-xs font-bold uppercase tracking-widest hover:text-purple-400 transition-colors">Read More →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Post 2 -->
+                    <article class="group bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/40 transition-all duration-500 rounded-[2rem] overflow-hidden">
+                        <div class="p-1">
+                            <div class="bg-slate-800/50 rounded-[1.75rem] overflow-hidden">
+                                <div class="h-48 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center">
+                                    <div class="text-6xl opacity-30 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700">🤖</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-8 pt-4">
+                            <span class="inline-block bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-cyan-500/20 mb-4">AI Agents</span>
+                            <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors leading-snug">Multi-Agent Orchestration: Patterns That Scale</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">Explore supervisor, swarm, and hierarchical orchestration patterns for multi-agent systems. Real-world benchmarks and deployment strategies for enterprise-grade reliability.</p>
+                            <div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+                                <span>June 8, 2025</span>
+                                <span>12 min read</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                                <span class="text-xs text-slate-400">by Saurabh Bajpai</span>
+                                <a href="#" class="text-cyan-400 text-xs font-bold uppercase tracking-widest hover:text-purple-400 transition-colors">Read More →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Post 3 -->
+                    <article class="group bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/40 transition-all duration-500 rounded-[2rem] overflow-hidden">
+                        <div class="p-1">
+                            <div class="bg-slate-800/50 rounded-[1.75rem] overflow-hidden">
+                                <div class="h-48 bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 flex items-center justify-center">
+                                    <div class="text-6xl opacity-30 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700">⚡</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-8 pt-4">
+                            <span class="inline-block bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-emerald-500/20 mb-4">Automation</span>
+                            <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors leading-snug">How We Automated 500+ Enterprise Workflows</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">A behind-the-scenes look at our automation pipeline combining n8n, custom Python scripts, and AI agents to eliminate manual enterprise processes across departments.</p>
+                            <div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+                                <span>May 28, 2025</span>
+                                <span>6 min read</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                                <span class="text-xs text-slate-400">by Saurabh Bajpai</span>
+                                <a href="#" class="text-cyan-400 text-xs font-bold uppercase tracking-widest hover:text-purple-400 transition-colors">Read More →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Post 4 -->
+                    <article class="group bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/40 transition-all duration-500 rounded-[2rem] overflow-hidden">
+                        <div class="p-1">
+                            <div class="bg-slate-800/50 rounded-[1.75rem] overflow-hidden">
+                                <div class="h-48 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center">
+                                    <div class="text-6xl opacity-30 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700">🗄️</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-8 pt-4">
+                            <span class="inline-block bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-blue-500/20 mb-4">Tutorials</span>
+                            <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors leading-snug">Vector Databases: Complete Guide for AI Engineers</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">From Pinecone to Weaviate to Qdrant — understand vector database internals, indexing algorithms, hybrid search, and how to choose the right one for your RAG pipeline.</p>
+                            <div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+                                <span>May 20, 2025</span>
+                                <span>15 min read</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                                <span class="text-xs text-slate-400">by Saurabh Bajpai</span>
+                                <a href="#" class="text-cyan-400 text-xs font-bold uppercase tracking-widest hover:text-purple-400 transition-colors">Read More →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Post 5 -->
+                    <article class="group bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/40 transition-all duration-500 rounded-[2rem] overflow-hidden">
+                        <div class="p-1">
+                            <div class="bg-slate-800/50 rounded-[1.75rem] overflow-hidden">
+                                <div class="h-48 bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center">
+                                    <div class="text-6xl opacity-30 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700">🏥</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-8 pt-4">
+                            <span class="inline-block bg-pink-500/10 text-pink-400 text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-pink-500/20 mb-4">Industry</span>
+                            <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors leading-snug">AI in Healthcare: From Diagnostics to Autonomous Care</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">How AI agents are transforming clinical workflows, medical imaging analysis, patient monitoring, and the path toward fully autonomous healthcare delivery systems.</p>
+                            <div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+                                <span>May 12, 2025</span>
+                                <span>10 min read</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                                <span class="text-xs text-slate-400">by Saurabh Bajpai</span>
+                                <a href="#" class="text-cyan-400 text-xs font-bold uppercase tracking-widest hover:text-purple-400 transition-colors">Read More →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Post 6 -->
+                    <article class="group bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/40 transition-all duration-500 rounded-[2rem] overflow-hidden">
+                        <div class="p-1">
+                            <div class="bg-slate-800/50 rounded-[1.75rem] overflow-hidden">
+                                <div class="h-48 bg-gradient-to-br from-violet-500/20 to-purple-500/20 flex items-center justify-center">
+                                    <div class="text-6xl opacity-30 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700">🧠</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-8 pt-4">
+                            <span class="inline-block bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-cyan-500/20 mb-4">AI Agents</span>
+                            <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors leading-snug">The Evolution from Chatbots to Autonomous Agents</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">Tracing the journey from simple retrieval-based chatbots to today's autonomous AI agents capable of complex reasoning, tool use, and multi-step task execution.</p>
+                            <div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+                                <span>May 4, 2025</span>
+                                <span>7 min read</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                                <span class="text-xs text-slate-400">by Saurabh Bajpai</span>
+                                <a href="#" class="text-cyan-400 text-xs font-bold uppercase tracking-widest hover:text-purple-400 transition-colors">Read More →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-16 flex items-center justify-center gap-4">
+                    <button class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest border border-white/10 text-slate-400 hover:text-white hover:border-cyan-500/30 transition-all duration-300">← Prev</button>
+                    <div class="flex gap-2">
+                        <span class="pagination-active w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold text-cyan-300 border border-cyan-500/30">1</span>
+                        <span class="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 border border-white/10 hover:border-cyan-500/30 hover:text-cyan-300 transition-all duration-300 cursor-pointer">2</span>
+                        <span class="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 border border-white/10 hover:border-cyan-500/30 hover:text-cyan-300 transition-all duration-300 cursor-pointer">3</span>
+                    </div>
+                    <button class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest border border-white/10 text-slate-400 hover:text-white hover:border-cyan-500/30 transition-all duration-300">Next →</button>
+                </div>
+                <p class="text-center text-[10px] text-slate-600 uppercase tracking-[0.2em] font-bold mt-4">Page 1 of 3</p>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="space-y-8">
+                <!-- Newsletter -->
+                <div class="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8">
+                    <h3 class="text-lg font-bold text-white mb-4 uppercase tracking-wider">Stay Updated</h3>
+                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">Get the latest AI insights delivered to your inbox. No spam, ever.</p>
+                    <form class="space-y-4">
+                        <input type="email" placeholder="your@email.com" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 transition-colors">
+                        <button class="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 transition-all duration-300 rounded-xl px-4 py-3 text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-cyan-500/20">Subscribe</button>
+                    </form>
+                </div>
+
+                <!-- Popular Tags -->
+                <div class="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8">
+                    <h3 class="text-lg font-bold text-white mb-6 uppercase tracking-wider">Popular Tags</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">AI Agents</span>
+                        <span class="bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">RAG</span>
+                        <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Automation</span>
+                        <span class="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Vector DB</span>
+                        <span class="bg-pink-500/10 text-pink-400 border border-pink-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Healthcare</span>
+                        <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">LLMs</span>
+                        <span class="bg-violet-500/10 text-violet-400 border border-violet-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Orchestration</span>
+                        <span class="bg-rose-500/10 text-rose-400 border border-rose-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Tutorials</span>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8">
+                    <h3 class="text-lg font-bold text-white mb-6 uppercase tracking-wider">Categories</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex justify-between items-center">
+                            <a href="#" class="text-slate-400 hover:text-cyan-300 transition-colors">AI Agents</a>
+                            <span class="text-slate-600 text-xs bg-slate-800 px-2 py-0.5 rounded-full">12</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <a href="#" class="text-slate-400 hover:text-cyan-300 transition-colors">RAG Systems</a>
+                            <span class="text-slate-600 text-xs bg-slate-800 px-2 py-0.5 rounded-full">8</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <a href="#" class="text-slate-400 hover:text-cyan-300 transition-colors">Automation</a>
+                            <span class="text-slate-600 text-xs bg-slate-800 px-2 py-0.5 rounded-full">6</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <a href="#" class="text-slate-400 hover:text-cyan-300 transition-colors">Tutorials</a>
+                            <span class="text-slate-600 text-xs bg-slate-800 px-2 py-0.5 rounded-full">15</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <a href="#" class="text-slate-400 hover:text-cyan-300 transition-colors">Industry</a>
+                            <span class="text-slate-600 text-xs bg-slate-800 px-2 py-0.5 rounded-full">9</span>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- Newsletter Banner -->
+    <section class="py-24 px-6 bg-slate-950 border-t border-white/5">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="bg-slate-900/60 backdrop-blur-xl border border-cyan-500/20 rounded-[2.5rem] p-12 md:p-16 relative overflow-hidden">
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter">Never Miss an <span class="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Insight</span></h2>
+                <p class="text-slate-400 text-lg mb-10 leading-relaxed">Join 500+ AI engineers reading our weekly newsletter on autonomous systems, RAG, and AI engineering.</p>
+                <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                    <input type="email" placeholder="Enter your email" class="flex-1 bg-slate-950 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 transition-colors">
+                    <button class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-cyan-500/20 px-8 py-4 rounded-xl text-sm font-bold uppercase tracking-widest text-white whitespace-nowrap">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-slate-900 py-24 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-2">
+                <div class="flex items-center space-x-3 mb-8">
+                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-10">
+                    <span class="text-2xl font-black tracking-tighter uppercase text-white">AXONFLOW AI</span>
+                </div>
+                <p class="text-slate-400 max-w-sm mb-8 leading-relaxed">The world's most comprehensive ecosystem of autonomous AI agents and intelligent systems.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Quick Links</h4>
+                <ul class="space-y-4 text-slate-400 text-sm font-medium">
+                    <li><a href="/#services" class="hover:text-white transition-colors">Services</a></li>
+                    <li><a href="/#portfolio" class="hover:text-white transition-colors">Portfolio</a></li>
+                    <li><a href="/about-us" class="hover:text-white transition-colors">About Us</a></li>
+                    <li><a href="/what-we-do" class="hover:text-white transition-colors">What We Do</a></li>
+                    <li><a href="/who-we-are" class="hover:text-white transition-colors">Who We Are</a></li>
+                    <li><a href="/careers/" class="hover:text-white transition-colors">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Legal</h4>
+                <p class="text-slate-400 text-[10px] tracking-widest uppercase mb-2 font-bold">UDYAM-UP-50-0236406</p>
+                <p class="text-slate-600 text-[10px]">© 2025 AxonFlow AI. All rights reserved.</p>
+                <div class="flex items-center space-x-2 mt-4">
+                    <span class="text-emerald-500">●</span>
+                    <span class="text-[10px] text-slate-500 uppercase tracking-[0.2em] font-bold">MSME Registered</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        async function handleSPARouting() {
+            const path = window.location.pathname;
+            const routes = {
+                '/blog': '/blog.html',
+                '/about-us': '/about-us.html',
+                '/what-we-do': '/what-we-do.html',
+                '/who-we-are': '/who-we-are.html',
+                '/careers': '/careers/index.html',
+                '/careers/': '/careers/index.html',
+                '/agency': '/agency/index.html'
+            };
+            if (routes[path]) {
+                try {
+                    const response = await fetch(routes[path]);
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    const text = await response.text();
+                    document.open();
+                    document.write(text);
+                    document.close();
+                } catch (e) {
+                    window.location.href = routes[path];
+                }
+            }
+        }
+        handleSPARouting();
+        window.addEventListener('popstate', handleSPARouting);
+    </script>
+</body>
+
+</html>

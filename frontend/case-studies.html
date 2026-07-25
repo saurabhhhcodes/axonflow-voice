@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies | AxonFlow AI - AI Implementation Results</title>
+    <meta name="description"
+        content="Explore detailed case studies showing how AxonFlow AI delivered measurable ROI through autonomous agents, RAG systems, and intelligent automation.">
+    <link rel="icon" type="image/png" href="/assets/logo_pro.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://axonflow.in/case-studies">
+    <link rel="alternate" hreflang="en-IN" href="https://axonflow.in/case-studies">
+    <link rel="alternate" hreflang="en" href="https://axonflow.in/case-studies">
+    <link rel="alternate" hreflang="x-default" href="https://axonflow.in/case-studies">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://axonflow.in/case-studies">
+    <meta property="og:site_name" content="AxonFlow AI">
+    <meta property="og:locale" content="en_IN">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@saurabhhhcodes">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { slate: { 950: '#020617' } }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="/js/config.js"></script>
+    <style>
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.15), transparent),
+                radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.15), transparent),
+                #020617;
+        }
+        .glass-card {
+            background: rgba(15, 15, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .case-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+        .case-details.open {
+            max-height: 800px;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-white antialiased selection:bg-cyan-500/30 font-['Inter']">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "AxonFlow AI Case Studies",
+        "itemListElement": [
+            {
+                "@type": "CaseStudy",
+                "position": 1,
+                "name": "AI Diagnostic Assistant for Healthcare",
+                "industry": "Healthcare",
+                "description": "RAG-powered diagnostic system querying 2M+ medical research papers for clinical decision support.",
+                "result": "60% faster diagnosis"
+            },
+            {
+                "@type": "CaseStudy",
+                "position": 2,
+                "name": "Autonomous Fraud Detection Platform",
+                "industry": "FinTech",
+                "description": "Multi-agent system processing 50,000+ transactions daily with real-time fraud scoring.",
+                "result": "90% fraud reduction"
+            },
+            {
+                "@type": "CaseStudy",
+                "position": 3,
+                "name": "Personalized Learning Path Engine",
+                "industry": "EdTech",
+                "description": "AI agents creating dynamic curricula based on student performance and learning patterns.",
+                "result": "40% engagement increase"
+            },
+            {
+                "@type": "CaseStudy",
+                "position": 4,
+                "name": "Intelligent Supply Chain Optimizer",
+                "industry": "Logistics",
+                "description": "Autonomous routing and inventory management across 12 regional distribution centers.",
+                "result": "25% cost reduction"
+            },
+            {
+                "@type": "CaseStudy",
+                "position": 5,
+                "name": "AI-Powered Product Recommendation Engine",
+                "industry": "E-Commerce",
+                "description": "Real-time RAG system analyzing user behavior for hyper-personalized recommendations.",
+                "result": "35% revenue increase"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-3">
+                <img src="/assets/logo_pro.png" alt="AxonFlow" class="h-10 hover:scale-110 transition-transform">
+                <span class="text-xl font-black tracking-tighter text-white uppercase">AxonFlow AI</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest">
+                <a href="/#services" class="hover:text-cyan-400 transition-colors">Services</a>
+                <a href="/#portfolio" class="hover:text-cyan-400 transition-colors">Portfolio</a>
+                <a href="/about-us" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="/what-we-do" class="hover:text-cyan-400 transition-colors">What We Do</a>
+                <a href="/who-we-are" class="hover:text-cyan-400 transition-colors">Who We Are</a>
+                <a href="/careers/" class="hover:text-cyan-400 transition-colors">Careers</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=saurabhbajpai03@outlook.com"
+                    class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-cyan-500/20 px-6 py-2 rounded-lg text-white">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-gradient pt-48 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-4 py-1 mb-8">
+                <span class="w-2 h-2 bg-cyan-500 rounded-full animate-ping"></span>
+                <span class="text-cyan-300 text-xs font-bold tracking-widest uppercase">Measurable ROI</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter leading-tight">Proven <span class="text-gradient">Results</span></h1>
+            <p class="text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto">Detailed case studies showing how we delivered real business outcomes through AI.</p>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="py-12 bg-slate-900/30 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div><div class="text-4xl font-black text-white mb-2">95%</div><div class="text-xs text-slate-500 uppercase tracking-widest font-bold">Avg. Accuracy</div></div>
+            <div><div class="text-4xl font-black text-white mb-2">80%</div><div class="text-xs text-slate-500 uppercase tracking-widest font-bold">Time Saved</div></div>
+            <div><div class="text-4xl font-black text-white mb-2">35%</div><div class="text-xs text-slate-500 uppercase tracking-widest font-bold">Cost Reduction</div></div>
+            <div><div class="text-4xl font-black text-white mb-2">50+</div><div class="text-xs text-slate-500 uppercase tracking-widest font-bold">Projects Delivered</div></div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto space-y-8">
+
+            <!-- Case Study 1: Healthcare -->
+            <div class="glass-card rounded-3xl overflow-hidden hover-lift">
+                <div class="p-10">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <span class="bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full">Healthcare</span>
+                        <span class="bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-full">RAG Systems</span>
+                    </div>
+                    <div class="flex items-center justify-center w-full h-48 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 rounded-2xl mb-8 border border-white/5">
+                        <span class="text-6xl">🏥</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">AI Diagnostic Assistant for Healthcare</h3>
+                    <p class="text-slate-400 mb-6">Built a RAG-powered diagnostic system querying 2M+ medical research papers to assist clinicians with evidence-based decision making in real-time.</p>
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-emerald-400">60%</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Faster Diagnosis</div>
+                        </div>
+                        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-cyan-400">2M+</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Papers Indexed</div>
+                        </div>
+                        <div class="bg-purple-500/10 border border-purple-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-purple-400">92%</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Accuracy Rate</div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCase(this)" class="text-cyan-400 font-bold hover:text-cyan-300 transition-colors">Read Full Case Study ▼</button>
+                </div>
+                <div class="case-details px-10 pb-10">
+                    <div class="bg-slate-950 rounded-2xl p-8 border border-white/5">
+                        <h4 class="font-bold text-white mb-3">Challenge</h4>
+                        <p class="text-slate-400 text-sm mb-6">Clinicians spent hours manually searching through medical literature for evidence supporting their diagnoses, leading to delays and inconsistent care quality.</p>
+                        <h4 class="font-bold text-white mb-3">Solution</h4>
+                        <p class="text-slate-400 text-sm mb-6">Deployed a multi-step RAG pipeline with semantic chunking, cross-encoder re-ranking, and a fine-tuned medical LLM for context-aware retrieval from 2M+ indexed papers.</p>
+                        <h4 class="font-bold text-white mb-3">Impact</h4>
+                        <p class="text-slate-400 text-sm">Average diagnostic time reduced from 45 minutes to 18 minutes. Adoption reached 85% of clinical staff within 3 months. Annual savings estimated at ₹1.2 Cr.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Study 2: FinTech -->
+            <div class="glass-card rounded-3xl overflow-hidden hover-lift">
+                <div class="p-10">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <span class="bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1 rounded-full">FinTech</span>
+                        <span class="bg-cyan-500/20 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full">AI Agents</span>
+                    </div>
+                    <div class="flex items-center justify-center w-full h-48 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl mb-8 border border-white/5">
+                        <span class="text-6xl">🏦</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Autonomous Fraud Detection Platform</h3>
+                    <p class="text-slate-400 mb-6">Multi-agent system processing 50,000+ transactions daily with real-time fraud scoring and automated suspicious activity reporting.</p>
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-blue-400">90%</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Fraud Reduction</div>
+                        </div>
+                        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-cyan-400">50K+</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Daily Transactions</div>
+                        </div>
+                        <div class="bg-green-500/10 border border-green-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-green-400">&lt;200ms</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Response Time</div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCase(this)" class="text-cyan-400 font-bold hover:text-cyan-300 transition-colors">Read Full Case Study ▼</button>
+                </div>
+                <div class="case-details px-10 pb-10">
+                    <div class="bg-slate-950 rounded-2xl p-8 border border-white/5">
+                        <h4 class="font-bold text-white mb-3">Challenge</h4>
+                        <p class="text-slate-400 text-sm mb-6">Legacy rule-based fraud detection flagged 40% false positives, overwhelming the compliance team and missing sophisticated fraud patterns.</p>
+                        <h4 class="font-bold text-white mb-3">Solution</h4>
+                        <p class="text-slate-400 text-sm mb-6">Designed a multi-agent architecture with a pattern-recognition agent, a behavioral-analysis agent, and a reporting agent working in concert via a LangGraph orchestrator.</p>
+                        <h4 class="font-bold text-white mb-3">Impact</h4>
+                        <p class="text-slate-400 text-sm">False positives dropped from 40% to 3%. Real-time detection caught ₹4.5 Cr in potential fraud in the first quarter. Compliance team workload reduced by 70%.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Study 3: EdTech -->
+            <div class="glass-card rounded-3xl overflow-hidden hover-lift">
+                <div class="p-10">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">EdTech</span>
+                        <span class="bg-cyan-500/20 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full">AI Agents</span>
+                    </div>
+                    <div class="flex items-center justify-center w-full h-48 bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-2xl mb-8 border border-white/5">
+                        <span class="text-6xl">🎓</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Personalized Learning Path Engine</h3>
+                    <p class="text-slate-400 mb-6">AI agents creating dynamic curricula based on student performance, learning velocity, and knowledge gaps for 10,000+ active learners.</p>
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-amber-400">40%</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Engagement ↑</div>
+                        </div>
+                        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-cyan-400">2x</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Completion Rate</div>
+                        </div>
+                        <div class="bg-green-500/10 border border-green-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-green-400">10K+</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Active Learners</div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCase(this)" class="text-cyan-400 font-bold hover:text-cyan-300 transition-colors">Read Full Case Study ▼</button>
+                </div>
+                <div class="case-details px-10 pb-10">
+                    <div class="bg-slate-950 rounded-2xl p-8 border border-white/5">
+                        <h4 class="font-bold text-white mb-3">Challenge</h4>
+                        <p class="text-slate-400 text-sm mb-6">One-size-fits-all curriculum resulted in 60% dropout rates and low engagement. Students had vastly different learning speeds and styles.</p>
+                        <h4 class="font-bold text-white mb-3">Solution</h4>
+                        <p class="text-slate-400 text-sm mb-6">Built a multi-agent system: an assessment agent, a content-curation agent, and a progress-tracking agent that dynamically adapt learning paths in real-time.</p>
+                        <h4 class="font-bold text-white mb-3">Impact</h4>
+                        <p class="text-slate-400 text-sm">Course completion doubled from 40% to 80%. Student satisfaction scores increased by 55%. Platform revenue grew 3x within 6 months of deployment.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Study 4: Logistics -->
+            <div class="glass-card rounded-3xl overflow-hidden hover-lift">
+                <div class="p-10">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <span class="bg-green-500/20 text-green-300 text-xs font-bold px-3 py-1 rounded-full">Logistics</span>
+                        <span class="bg-orange-500/20 text-orange-300 text-xs font-bold px-3 py-1 rounded-full">Automation</span>
+                    </div>
+                    <div class="flex items-center justify-center w-full h-48 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl mb-8 border border-white/5">
+                        <span class="text-6xl">🚛</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Intelligent Supply Chain Optimizer</h3>
+                    <p class="text-slate-400 mb-6">Autonomous routing and inventory management across 12 regional distribution centers with predictive demand forecasting.</p>
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <div class="bg-green-500/10 border border-green-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-green-400">25%</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Cost Reduction</div>
+                        </div>
+                        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-cyan-400">98%</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">On-Time Delivery</div>
+                        </div>
+                        <div class="bg-purple-500/10 border border-purple-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-purple-400">12</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Centers Automated</div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCase(this)" class="text-cyan-400 font-bold hover:text-cyan-300 transition-colors">Read Full Case Study ▼</button>
+                </div>
+                <div class="case-details px-10 pb-10">
+                    <div class="bg-slate-950 rounded-2xl p-8 border border-white/5">
+                        <h4 class="font-bold text-white mb-3">Challenge</h4>
+                        <p class="text-slate-400 text-sm mb-6">Manual routing across 12 distribution centers caused 15% delivery delays and 20% excess fuel consumption. Inventory forecasting was reactive, not predictive.</p>
+                        <h4 class="font-bold text-white mb-3">Solution</h4>
+                        <p class="text-slate-400 text-sm mb-6">Implemented N8N automation workflows with AI agents for route optimization, demand prediction using time-series RAG, and real-time inventory rebalancing.</p>
+                        <h4 class="font-bold text-white mb-3">Impact</h4>
+                        <p class="text-slate-400 text-sm">Annual logistics costs reduced by ₹8 Cr. On-time delivery improved from 82% to 98%. Fuel consumption dropped 25%. Predictive restocking reduced stockouts by 90%.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Study 5: E-Commerce -->
+            <div class="glass-card rounded-3xl overflow-hidden hover-lift">
+                <div class="p-10">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <span class="bg-pink-500/20 text-pink-300 text-xs font-bold px-3 py-1 rounded-full">E-Commerce</span>
+                        <span class="bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-full">RAG Systems</span>
+                    </div>
+                    <div class="flex items-center justify-center w-full h-48 bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-2xl mb-8 border border-white/5">
+                        <span class="text-6xl">🛒</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">AI-Powered Product Recommendation Engine</h3>
+                    <p class="text-slate-400 mb-6">Real-time RAG system analyzing user behavior, purchase history, and product metadata for hyper-personalized recommendations at scale.</p>
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <div class="bg-pink-500/10 border border-pink-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-pink-400">35%</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Revenue Increase</div>
+                        </div>
+                        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-cyan-400">3x</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Avg. Order Value</div>
+                        </div>
+                        <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl px-5 py-3 text-center">
+                            <div class="text-2xl font-black text-amber-400">200ms</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-wider">Latency</div>
+                        </div>
+                    </div>
+                    <button onclick="toggleCase(this)" class="text-cyan-400 font-bold hover:text-cyan-300 transition-colors">Read Full Case Study ▼</button>
+                </div>
+                <div class="case-details px-10 pb-10">
+                    <div class="bg-slate-950 rounded-2xl p-8 border border-white/5">
+                        <h4 class="font-bold text-white mb-3">Challenge</h4>
+                        <p class="text-slate-400 text-sm mb-6">Generic recommendation algorithms produced low click-through rates (1.2%) and poor cross-sell performance. Customer sessions averaged only 2 minutes.</p>
+                        <h4 class="font-bold text-white mb-3">Solution</h4>
+                        <p class="text-slate-400 text-sm mb-6">Built a real-time RAG pipeline combining collaborative filtering with semantic product understanding. Vector embeddings of 500K+ products enable instant contextual matching.</p>
+                        <h4 class="font-bold text-white mb-3">Impact</h4>
+                        <p class="text-slate-400 text-sm">Click-through rates jumped from 1.2% to 8.5%. Average order value increased 3x. Customer session duration grew from 2 to 7 minutes. Annual revenue uplift of ₹15 Cr.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card rounded-[2.5rem] p-16 text-center border border-cyan-500/20 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5"></div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter">Start Your <span class="text-gradient">Success Story</span></h2>
+                    <p class="text-xl text-slate-400 mb-10 max-w-xl mx-auto">Ready to achieve measurable results? Let's discuss your project and build a case study together.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=saurabhbajpai03@outlook.com&su=Case+Study+Inquiry"
+                            class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-cyan-500/20 px-10 py-5 rounded-2xl font-bold text-xl text-white">Start Your Project</a>
+                        <a href="/contact"
+                            class="bg-slate-900/80 backdrop-blur-xl border border-white/10 shadow-2xl px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/5 transition-all text-white">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-24 px-6 bg-slate-950 border-t border-white/5">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
+            <div class="col-span-2 bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/30 transition-all duration-500 p-12 rounded-[2.5rem]">
+                <div class="flex items-center space-x-3 mb-10">
+                    <img src="/assets/logo_pro.png" alt="AxonFlow" class="h-10">
+                    <span class="text-2xl font-black tracking-tighter text-white uppercase">AxonFlow AI</span>
+                </div>
+                <p class="text-slate-400 max-w-sm leading-relaxed mb-8">The world's most comprehensive ecosystem of autonomous AI agents and intelligent systems.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Quick Links</h4>
+                <ul class="space-y-4 text-slate-400 text-sm font-medium">
+                    <li><a href="/#services" class="hover:text-white transition-colors">Services</a></li>
+                    <li><a href="/#portfolio" class="hover:text-white transition-colors">Portfolio</a></li>
+                    <li><a href="/about-us" class="hover:text-white transition-colors">About Us</a></li>
+                    <li><a href="/what-we-do" class="hover:text-white transition-colors">What We Do</a></li>
+                    <li><a href="/who-we-are" class="hover:text-white transition-colors">Who We Are</a></li>
+                    <li><a href="/careers/" class="hover:text-white transition-colors">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Legal</h4>
+                <p class="text-slate-400 text-[10px] tracking-widest uppercase mb-2">UDYAM-UP-50-0236406</p>
+                <p class="text-slate-600 text-[10px]">&copy; 2025 AxonFlow AI. All rights reserved.</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-slate-600 tracking-[0.2em] uppercase font-bold gap-6 text-center">
+            <p>&copy; 2025 AxonFlow AI. All rights reserved.</p>
+            <div class="flex items-center space-x-2">
+                <span class="text-emerald-500">●</span>
+                <span>MSME Registered Enterprise</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleCase(btn) {
+            const details = btn.closest('.glass-card').querySelector('.case-details');
+            details.classList.toggle('open');
+            btn.textContent = details.classList.contains('open') ? 'Close Case Study ▲' : 'Read Full Case Study ▼';
+        }
+    </script>
+</body>
+</html>

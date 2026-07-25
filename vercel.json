@@ -26,6 +26,50 @@
       "destination": "/frontend/agency/index.html"
     },
     {
+      "source": "/testimonials",
+      "destination": "/frontend/testimonials.html"
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/frontend/case-studies.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/frontend/pricing.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/frontend/blog.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/frontend/contact.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/frontend/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/frontend/terms.html"
+    },
+    {
+      "source": "/crmadminlogin/?",
+      "destination": "/frontend/crmadminlogin.html"
+    },
+    {
+      "source": "/crmdashboard",
+      "destination": "/frontend/crmdashboard.html"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/frontend/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/frontend/robots.txt"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/frontend/$1"
     }

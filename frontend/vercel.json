@@ -3,6 +3,14 @@
     "trailingSlash": false,
     "rewrites": [
         {
+            "source": "/crmadminlogin",
+            "destination": "/crmadminlogin.html"
+        },
+        {
+            "source": "/crmdashboard",
+            "destination": "/crmdashboard.html"
+        },
+        {
             "source": "/about-us",
             "destination": "/about-us.html"
         },
@@ -13,6 +21,34 @@
         {
             "source": "/who-we-are",
             "destination": "/who-we-are.html"
+        },
+        {
+            "source": "/testimonials",
+            "destination": "/testimonials.html"
+        },
+        {
+            "source": "/case-studies",
+            "destination": "/case-studies.html"
+        },
+        {
+            "source": "/pricing",
+            "destination": "/pricing.html"
+        },
+        {
+            "source": "/blog",
+            "destination": "/blog.html"
+        },
+        {
+            "source": "/contact",
+            "destination": "/contact.html"
+        },
+        {
+            "source": "/privacy",
+            "destination": "/privacy.html"
+        },
+        {
+            "source": "/terms",
+            "destination": "/terms.html"
         },
         {
             "source": "/careers",

@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AxonFlow Agency | AI Development & Automation Services</title>
-    <meta name="description" content="Professional AI agency building autonomous agents, RAG systems, and custom software solutions for enterprises.">
+    <title>AI Agency Services | AxonFlow AI - Autonomous Agents & RAG Development India</title>
+    <meta name="description" content="AxonFlow AI is India's leading AI agency building autonomous agents, RAG systems, and custom software. MSME registered. 6 months post-launch support.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://axonflow.in/agency">
+    <link rel="alternate" hreflang="en-IN" href="https://axonflow.in/agency">
+    <link rel="alternate" hreflang="en" href="https://axonflow.in/agency">
+    <link rel="alternate" hreflang="x-default" href="https://axonflow.in/agency">
     <link rel="icon" type="image/png" href="assets/axonflow-logo.svg">
-    <link rel="shortcut icon" type="image/png" href="assets/axonflow-logo.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://axonflow.in/agency">
+    <meta property="og:title" content="AI Agency Services | AxonFlow AI">
+    <meta property="og:description" content="India's leading AI agency for autonomous agents, RAG systems, and custom software.">
+    <meta property="og:site_name" content="AxonFlow AI">
+    <meta property="og:locale" content="en_IN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@saurabhhhcodes">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
     <script src="firebase-config.js"></script>
     <script src="config.js"></script>
     <script src="auth.js"></script>
@@ -21,66 +30,20 @@
     <script src="sso-auth.js"></script>
     <script src="enhanced-courses.js"></script>
     <style>
-        * { font-family: 'Inter', sans-serif; }
-        html { scroll-behavior: smooth; }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-            animation: pulse 4s ease-in-out infinite alternate;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-        
-        .glass-card {
-            background: rgba(15, 15, 15, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-        
-        .hover-lift {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .hover-lift:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
-        
-        .text-gradient {
-            background: linear-gradient(135deg, #06b6d4, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #06b6d4, #0ea5e9);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #0ea5e9, #0284c7);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3);
-        }
+        *{font-family:'Inter',sans-serif}html{scroll-behavior:smooth}
+        .hero-gradient{background:linear-gradient(135deg,#000000 0%,#0a0a0a 50%,#000000 100%);position:relative;overflow:hidden}
+        .hero-gradient::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 20% 20%,rgba(6,182,212,0.1) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(139,92,246,0.1) 0%,transparent 50%);animation:pulse 4s ease-in-out infinite alternate}
+        @keyframes pulse{0%{opacity:.5}100%{opacity:1}}
+        .glass-card{background:rgba(15,15,15,.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+        .hover-lift{transition:all .3s cubic-bezier(.4,0,.2,1)}
+        .hover-lift:hover{transform:translateY(-8px);box-shadow:0 25px 50px rgba(0,0,0,.25)}
+        .text-gradient{background:linear-gradient(135deg,#06b6d4,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .btn-primary{background:linear-gradient(135deg,#06b6d4,#0ea5e9);transition:all .3s ease}
+        .btn-primary:hover{background:linear-gradient(135deg,#0ea5e9,#0284c7);transform:translateY(-2px);box-shadow:0 10px 25px rgba(6,182,212,.3)}
     </style>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Service","provider":{"@type":"Organization","name":"AxonFlow AI"},"name":"AI Agency Services","description":"Autonomous agent development, RAG systems, custom software, and AI consulting for enterprises.","areaServed":"IN","serviceType":["AI Agent Development","RAG Systems","Custom Software","Intelligent Automation"]}
+    </script>
 </head>
 <body class="bg-black text-white antialiased min-h-screen">
     <!-- Navigation -->
@@ -113,9 +76,11 @@
                 
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#services" class="text-slate-300 hover:text-white transition-colors">Services</a>
-                    <a href="#process" class="text-slate-300 hover:text-white transition-colors">Process</a>
                     <a href="#work" class="text-slate-300 hover:text-white transition-colors">Portfolio</a>
-                    <a href="academy.html" class="text-slate-300 hover:text-white transition-colors">Academy</a>
+                    <a href="#testimonials" class="text-slate-300 hover:text-white transition-colors">Testimonials</a>
+                    <a href="#about" class="text-slate-300 hover:text-white transition-colors">About</a>
+                    <a href="#process" class="text-slate-300 hover:text-white transition-colors">What We Do</a>
+                    <a href="blog.html" class="text-slate-300 hover:text-white transition-colors">Blog</a>
                     <a href="#contact" class="btn-primary text-white px-6 py-2 rounded-lg font-medium">Get Started</a>
                 </div>
                 
@@ -323,6 +288,121 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    What Our <span class="text-gradient">Clients Say</span>
+                </h2>
+                <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+                    Trusted by businesses across India and beyond
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card rounded-2xl p-8 hover-lift">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">R</span>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Rajesh Mehta</h4>
+                            <p class="text-slate-400 text-sm">CTO, FinTech Solutions</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300">"AxonFlow built us an AI document processing system that cut our operational costs by 60%. Exceptional quality and support."</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-8 hover-lift">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">P</span>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Priya Sharma</h4>
+                            <p class="text-slate-400 text-sm">Founder, EcomHub</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300">"Their automation workflows transformed our order management. We scaled from 1,000 to 50,000 orders without adding headcount."</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-8 hover-lift">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">A</span>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Arun Kumar</h4>
+                            <p class="text-slate-400 text-sm">VP Engineering, HealthAI</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300">"The RAG system they developed for us handles 100k+ patient queries accurately. Game changer for our platform."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        India's Premier <span class="text-gradient">AI Agency</span>
+                    </h2>
+                    <p class="text-xl text-slate-300 mb-6">
+                        AxonFlow AI is an MSME-registered Indian AI agency specializing in autonomous agents, 
+                        RAG systems, and custom software development.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start space-x-3">
+                            <svg class="w-6 h-6 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-300">MSME Registered enterprise</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <svg class="w-6 h-6 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-300">6+ months post-launch support included</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <svg class="w-6 h-6 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-300">100+ successful projects delivered</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <svg class="w-6 h-6 text-green-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-300">Expert team of AI engineers & consultants</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="btn-primary text-white font-semibold py-4 px-8 rounded-xl text-lg inline-block">
+                        Work With Us
+                    </a>
+                </div>
+                <div class="glass-card rounded-2xl p-8 text-center">
+                    <div class="text-6xl font-black text-gradient mb-4">4+</div>
+                    <p class="text-slate-300 text-lg mb-8">Years of AI Innovation</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-slate-800 rounded-xl p-4">
+                            <div class="text-3xl font-bold text-gradient">100+</div>
+                            <div class="text-slate-400 text-sm">Projects</div>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-4">
+                            <div class="text-3xl font-bold text-gradient">95%</div>
+                            <div class="text-slate-400 text-sm">Client Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-24 bg-slate-900">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -373,32 +453,62 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-slate-800 py-12">
+    <footer class="bg-black border-t border-slate-800 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center space-x-3 mb-4 md:mb-0">
-                    <img src="assets/axonflow-logo.svg" alt="AxonFlow Logo" class="w-10 h-10 rounded-xl" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-xl flex items-center justify-center" style="display:none">
-                        <span class="text-white font-bold text-lg">A</span>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="assets/axonflow-logo.svg" alt="AxonFlow Logo" class="w-10 h-10 rounded-xl" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-xl flex items-center justify-center" style="display:none">
+                            <span class="text-white font-bold text-lg">A</span>
+                        </div>
+                        <span class="font-bold text-xl">AxonFlow</span>
                     </div>
-                    <span class="font-bold text-xl">AxonFlow Agency</span>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        India's premier AI agency building autonomous agents, RAG systems, and custom software. MSME registered.
+                    </p>
+                    <div class="flex items-center space-x-2 mt-4">
+                        <div class="w-4 h-4 bg-green-500 rounded flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">✓</span>
+                        </div>
+                        <span class="text-green-300 text-xs font-medium">MSME Registered Enterprise</span>
+                    </div>
                 </div>
                 
-                <div class="flex space-x-6">
-                    <a href="academy.html" class="text-slate-400 hover:text-white transition-colors">Academy</a>
-                    <a href="#services" class="text-slate-400 hover:text-white transition-colors">Services</a>
-                    <a href="#contact" class="text-slate-400 hover:text-white transition-colors">Contact</a>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-slate-400 hover:text-white transition-colors">AI Agents & RAG</a></li>
+                        <li><a href="#services" class="text-slate-400 hover:text-white transition-colors">Custom Software</a></li>
+                        <li><a href="#services" class="text-slate-400 hover:text-white transition-colors">Automation & Integration</a></li>
+                        <li><a href="#services" class="text-slate-400 hover:text-white transition-colors">AI Consultation</a></li>
+                        <li><a href="#work" class="text-slate-400 hover:text-white transition-colors">Portfolio</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-slate-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#testimonials" class="text-slate-400 hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="blog.html" class="text-slate-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#process" class="text-slate-400 hover:text-white transition-colors">What We Do</a></li>
+                        <li><a href="#contact" class="text-slate-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="privacy-policy.html" class="text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="text-slate-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="refund-policy.html" class="text-slate-400 hover:text-white transition-colors">Refund Policy</a></li>
+                        <li><span class="text-slate-500 text-sm">UDYAM-UP-50-0236406</span></li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="border-t border-slate-800 mt-8 pt-8 text-center">
-                <div class="flex items-center justify-center space-x-2 mb-2">
-                    <div class="w-4 h-4 bg-green-500 rounded flex items-center justify-center">
-                        <span class="text-white text-xs font-bold">✓</span>
-                    </div>
-                    <span class="text-green-300 text-sm font-medium">MSME Registered Enterprise</span>
-                </div>
-                <p class="text-gray-400 text-xs mb-1">UDYAM Registration: UDYAM-UP-50-0236406</p>
+            <div class="border-t border-slate-800 mt-12 pt-8 text-center">
                 <p class="text-slate-400">&copy; 2025 AxonFlow. All rights reserved. | Building the future with AI</p>
             </div>
         </div>

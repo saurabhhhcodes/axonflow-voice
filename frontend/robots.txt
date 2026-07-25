@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /crmadminlogin
+Disallow: /admin-dashboard.html
+Disallow: /backend-dashboard.html
+Disallow: /test-api-simple.html
+Disallow: /test-api.html
+Disallow: /api/
+Disallow: /backend/
+Disallow: /tests/
+Disallow: /*.json$
+Disallow: /*.txt$
+Disallow: /*.sh$
+Disallow: /*.md$
+Disallow: /__pycache__/
+
+Sitemap: https://axonflow.in/sitemap.xml
+Host: https://axonflow.in

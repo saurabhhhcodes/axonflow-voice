@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AxonFlow CRM Dashboard</title>
+    <meta name="description" content="AxonFlow CRM Dashboard - Manage enquiries, team members, projects and analytics.">
+    <meta name="keywords" content="AxonFlow CRM, dashboard, enquiry management, team management, project tracking">
+    <meta name="author" content="AxonFlow AI">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="/assets/logo_pro.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
+    <link rel="canonical" href="https://axonflow.in/crmadminlogin">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AxonFlow CRM Dashboard">
+    <meta property="og:description" content="Manage enquiries, team, projects and analytics from the AxonFlow CRM.">
+    <meta property="og:image" content="/assets/logo_pro.png">
+    <meta property="og:url" content="https://axonflow.in/crmadminlogin">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="AxonFlow CRM Dashboard">
+    <link rel="alternate" hreflang="en" href="https://axonflow.in/crmadminlogin">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AxonFlow CRM",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "Customer Relationship Management dashboard for AxonFlow AI.",
+        "url": "https://axonflow.in/crmadminlogin"
+    }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { slate: { 950: '#020617' } } } }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+        }
+        .sidebar-link { transition: all 0.2s ease; }
+        .sidebar-link.active {
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(147,51,234,0.15));
+            border-color: rgba(6,182,212,0.4);
+        }
+        .sidebar-link:hover:not(.active) { background: rgba(100,116,139,0.15); }
+        .input-field {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+            outline: none;
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, #06b6d4, #9333ea);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 8px 25px rgba(6,182,212,0.3); }
+        .table-row { transition: background 0.15s ease; }
+        .table-row:hover { background: rgba(100,116,139,0.08); }
+        .pie-chart { width: 160px; height: 160px; border-radius: 50%; }
+        .bar-chart-bar { transition: height 0.5s ease; }
+        .status-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 9999px; font-weight: 600; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+        .fade-in { animation: fadeIn 0.3s ease forwards; }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen antialiased selection:bg-cyan-500/30 font-['Inter']">
+
+<!-- Auth Guard (inline, runs before body renders) -->
+<script>
+    (function() {
+        const SESSION_KEY = 'crm_admin_session';
+        const session = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+        if (!session || !session.authenticated) { window.location.href = '/crmadminlogin'; return; }
+        if (new Date(session.expiresAt) < new Date()) { localStorage.removeItem(SESSION_KEY); window.location.href = '/crmadminlogin'; return; }
+    })();
+</script>
+
+<!-- Mobile Overlay -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-slate-950/95 backdrop-blur-xl border-r border-slate-800 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300" role="navigation" aria-label="CRM Sidebar">
+    <div class="p-6 border-b border-slate-800">
+        <div class="flex items-center space-x-3">
+            <img src="/assets/logo_pro.png" alt="AxonFlow" class="h-9">
+            <div>
+                <h1 class="text-lg font-bold text-white tracking-tight">AxonFlow CRM</h1>
+                <p class="text-xs text-slate-500">Admin Panel</p>
+            </div>
+        </div>
+    </div>
+    <nav class="p-4 space-y-1" aria-label="Main navigation">
+        <button onclick="showSection('dashboard')" data-section="dashboard" class="sidebar-link active w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 border border-transparent" aria-current="page">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+            <span>Dashboard</span>
+        </button>
+        <button onclick="showSection('enquiries')" data-section="enquiries" class="sidebar-link w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 border border-transparent">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>Enquiries</span>
+        </button>
+        <button onclick="showSection('team')" data-section="team" class="sidebar-link w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 border border-transparent">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Team</span>
+        </button>
+        <button onclick="showSection('projects')" data-section="projects" class="sidebar-link w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 border border-transparent">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>Projects</span>
+        </button>
+        <button onclick="showSection('analytics')" data-section="analytics" class="sidebar-link w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 border border-transparent">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            <span>Analytics</span>
+        </button>
+    </nav>
+    <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-800">
+        <button onclick="logout()" class="w-full flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-all" aria-label="Logout">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            <span>Logout</span>
+        </button>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<div class="lg:ml-64 min-h-screen">
+    <!-- Top Bar -->
+    <header class="sticky top-0 z-30 bg-black/70 backdrop-blur-xl border-b border-slate-800">
+        <div class="flex items-center justify-between px-4 lg:px-6 py-3">
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" aria-label="Toggle sidebar">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+                <h2 id="pageTitle" class="text-lg font-bold text-white">Dashboard</h2>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="text-sm text-slate-400 hidden sm:block" id="currentUser"></span>
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold">A</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="p-4 lg:p-6" id="mainContent" role="main">
+        <!-- Content injected by JS -->
+    </main>
+</div>
+
+<!-- Modal Overlay -->
+<div id="modalOverlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="glass-card rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto" id="modalContent">
+    </div>
+</div>
+
+<script>
+// ============================================
+// DATA LAYER
+// ============================================
+const DATA_KEY = 'crm_data';
+
+const DEFAULT_DATA = {
+    enquiries: [
+        { id: 1, name: 'Rajesh Kumar', email: 'rajesh@techcorp.in', phone: '+91-9876543210', company: 'TechCorp India', service: 'AI Agent Development', message: 'Need a custom AI agent for customer support automation.', date: '2025-01-15', status: 'New' },
+        { id: 2, name: 'Sarah Mitchell', email: 'sarah@greenlabs.com', phone: '+1-555-0123', company: 'GreenLabs', service: 'RAG System', message: 'Looking for a RAG solution for our internal knowledge base.', date: '2025-01-18', status: 'Contacted' },
+        { id: 3, name: 'Amit Patel', email: 'amit@finserve.co', phone: '+91-9988776655', company: 'FinServe', service: 'Autonomous Systems', message: 'Want to automate our loan processing pipeline.', date: '2025-02-02', status: 'Qualified' },
+        { id: 4, name: 'Emily Zhang', email: 'emily@dataflow.io', phone: '+1-555-0456', company: 'DataFlow', service: 'AI Agent Development', message: 'Need an AI agent to process incoming data requests.', date: '2025-02-10', status: 'Converted' },
+        { id: 5, name: 'Vikram Singh', email: 'vikram@medtech.in', phone: '+91-9112233445', company: 'MedTech Solutions', service: 'RAG System', message: 'Healthcare knowledge base requiring RAG implementation.', date: '2025-02-20', status: 'New' },
+        { id: 6, name: 'Lisa Chen', email: 'lisa@retailmax.com', phone: '+1-555-0789', company: 'RetailMax', service: 'Custom Software', message: 'Need inventory management software with AI features.', date: '2025-03-01', status: 'Contacted' },
+        { id: 7, name: 'Arjun Mehta', email: 'arjun@edulearn.in', phone: '+91-9445566778', company: 'EduLearn', service: 'AI Agent Development', message: 'AI tutor agent for our online learning platform.', date: '2025-03-12', status: 'New' },
+        { id: 8, name: 'Priya Sharma', email: 'priya@logisticspro.in', phone: '+91-9556677889', company: 'LogisticsPro', service: 'Autonomous Systems', message: 'Route optimization and fleet management automation.', date: '2025-03-20', status: 'Qualified' },
+        { id: 9, name: 'Michael Brown', email: 'michael@saastool.com', phone: '+1-555-0321', company: 'SaaSTool', service: 'RAG System', message: 'Product documentation RAG for our SaaS platform.', date: '2025-04-05', status: 'New' },
+        { id: 10, name: 'Neha Gupta', email: 'neha@agritech.in', phone: '+91-9667788990', company: 'AgriTech India', service: 'Custom Software', message: 'Farm management software with crop prediction AI.', date: '2025-04-15', status: 'Contacted' }
+    ],
+    team: [
+        { id: 1, name: 'Arjun Reddy', email: 'arjun@axonflow.in', role: 'AI Engineer', department: 'AI/ML', joinDate: '2023-06-15', status: 'Active', type: 'Employee' },
+        { id: 2, name: 'Sneha Kulkarni', email: 'sneha@axonflow.in', role: 'Full Stack Developer', department: 'Engineering', joinDate: '2023-09-01', status: 'Active', type: 'Employee' },
+        { id: 3, name: 'Rohit Verma', email: 'rohit@axonflow.in', role: 'UI/UX Designer', department: 'Design', joinDate: '2024-01-10', status: 'Active', type: 'Employee' },
+        { id: 4, name: 'Kavya Nair', email: 'kavya@axonflow.in', role: 'Marketing Lead', department: 'Marketing', joinDate: '2024-03-20', status: 'Active', type: 'Employee' },
+        { id: 5, name: 'Deepak Joshi', email: 'deepak@axonflow.in', role: 'DevOps Engineer', department: 'Operations', joinDate: '2024-06-01', status: 'On Leave', type: 'Employee' },
+        { id: 6, name: 'Ananya Iyer', email: 'ananya@axonflow.in', role: 'ML Intern', department: 'AI/ML', joinDate: '2025-01-05', status: 'Active', type: 'Intern' },
+        { id: 7, name: 'Karan Malhotra', email: 'karan@axonflow.in', role: 'Frontend Intern', department: 'Engineering', joinDate: '2025-02-01', status: 'Active', type: 'Intern' },
+        { id: 8, name: 'Pooja Desai', email: 'pooja@axonflow.in', role: 'Design Intern', department: 'Design', joinDate: '2025-03-10', status: 'Active', type: 'Intern' }
+    ],
+    projects: [
+        { id: 1, name: 'PlantCare AI', client: 'GreenThumb Labs', status: 'Completed', startDate: '2024-08-01', endDate: '2024-11-15', value: 450000 },
+        { id: 2, name: 'NutriSync', client: 'HealthFirst Inc', status: 'In Progress', startDate: '2025-01-10', endDate: '2025-06-30', value: 680000 },
+        { id: 3, name: 'XRay Orchestrator', client: 'MedDiag Corp', status: 'In Progress', startDate: '2025-02-15', endDate: '2025-08-15', value: 920000 },
+        { id: 4, name: 'Chatlly', client: 'ConverseTech', status: 'Planning', startDate: '2025-04-01', endDate: '2025-10-30', value: 350000 },
+        { id: 5, name: 'Deal Doctor', client: 'SalesPro Solutions', status: 'Completed', startDate: '2024-05-01', endDate: '2024-09-30', value: 520000 }
+    ]
+};
+
+function loadData() {
+    const stored = localStorage.getItem(DATA_KEY);
+    if (!stored) {
+        localStorage.setItem(DATA_KEY, JSON.stringify(DEFAULT_DATA));
+        return JSON.parse(JSON.stringify(DEFAULT_DATA));
+    }
+    return JSON.parse(stored);
+}
+
+function saveData(data) { localStorage.setItem(DATA_KEY, JSON.stringify(data)); }
+
+let CRM = loadData();
+let currentSection = 'dashboard';
+
+// ============================================
+// AUTH
+// ============================================
+const SESSION_KEY = 'crm_admin_session';
+const session = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+if (session) document.getElementById('currentUser').textContent = session.email;
+
+function logout() {
+    localStorage.removeItem(SESSION_KEY);
+    window.location.href = '/crmadminlogin';
+}
+
+// ============================================
+// SIDEBAR
+// ============================================
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('-translate-x-full');
+    overlay.classList.toggle('hidden');
+}
+
+function showSection(section) {
+    currentSection = section;
+    document.querySelectorAll('.sidebar-link').forEach(btn => {
+        const isActive = btn.dataset.section === section;
+        btn.classList.toggle('active', isActive);
+        if (isActive) btn.setAttribute('aria-current', 'page');
+        else btn.removeAttribute('aria-current');
+    });
+    const titles = { dashboard: 'Dashboard', enquiries: 'Enquiries', team: 'Team', projects: 'Projects', analytics: 'Analytics' };
+    document.getElementById('pageTitle').textContent = titles[section] || 'Dashboard';
+    renderSection();
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (window.innerWidth < 1024) { sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); }
+}
+
+// ============================================
+// RENDERING
+// ============================================
+function renderSection() {
+    const c = document.getElementById('mainContent');
+    c.className = 'p-4 lg:p-6 fade-in';
+    switch(currentSection) {
+        case 'dashboard': renderDashboard(c); break;
+        case 'enquiries': renderEnquiries(c); break;
+        case 'team': renderTeam(c); break;
+        case 'projects': renderProjects(c); break;
+        case 'analytics': renderAnalytics(c); break;
+    }
+}
+
+// ---------- DASHBOARD ----------
+function renderDashboard(container) {
+    const newCount = CRM.enquiries.filter(e => e.status === 'New').length;
+    const activeTeam = CRM.team.filter(t => t.status === 'Active').length;
+    const activeProjects = CRM.projects.filter(p => p.status === 'In Progress').length;
+    const totalValue = CRM.projects.reduce((s, p) => s + p.value, 0);
+    const recent = [...CRM.enquiries].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+
+    container.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="glass-card rounded-2xl p-5 hover:border-cyan-500/30 transition-colors">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-slate-400 text-sm">Total Enquiries</span>
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center"><svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+                </div>
+                <p class="text-3xl font-bold text-white">${CRM.enquiries.length}</p>
+                <p class="text-xs text-cyan-400 mt-1">${newCount} new</p>
+            </div>
+            <div class="glass-card rounded-2xl p-5 hover:border-purple-500/30 transition-colors">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-slate-400 text-sm">Team Members</span>
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center"><svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+                </div>
+                <p class="text-3xl font-bold text-white">${CRM.team.length}</p>
+                <p class="text-xs text-purple-400 mt-1">${activeTeam} active</p>
+            </div>
+            <div class="glass-card rounded-2xl p-5 hover:border-green-500/30 transition-colors">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-slate-400 text-sm">Active Projects</span>
+                    <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center"><svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+                </div>
+                <p class="text-3xl font-bold text-white">${activeProjects}</p>
+                <p class="text-xs text-green-400 mt-1">of ${CRM.projects.length} total</p>
+            </div>
+            <div class="glass-card rounded-2xl p-5 hover:border-yellow-500/30 transition-colors">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-slate-400 text-sm">Portfolio Value</span>
+                    <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center"><svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                </div>
+                <p class="text-3xl font-bold text-white">₹${(totalValue / 1000).toFixed(0)}K</p>
+                <p class="text-xs text-yellow-400 mt-1">${CRM.projects.length} projects</p>
+            </div>
+        </div>
+        <div class="glass-card rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-white font-semibold">Recent Enquiries</h3>
+                <button onclick="showSection('enquiries')" class="text-cyan-400 text-sm hover:underline">View All</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm" role="table">
+                    <thead><tr class="border-b border-slate-700/50">
+                        <th class="text-left text-slate-400 font-medium py-3 px-3">Name</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-3 hidden sm:table-cell">Email</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-3">Service</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-3">Status</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-3 hidden md:table-cell">Date</th>
+                    </tr></thead>
+                    <tbody>${recent.map(e => `
+                        <tr class="table-row border-b border-slate-800/50">
+                            <td class="py-3 px-3 text-white font-medium">${esc(e.name)}</td>
+                            <td class="py-3 px-3 text-slate-400 hidden sm:table-cell">${esc(e.email)}</td>
+                            <td class="py-3 px-3 text-slate-300">${esc(e.service)}</td>
+                            <td class="py-3 px-3">${statusBadge(e.status)}</td>
+                            <td class="py-3 px-3 text-slate-500 hidden md:table-cell">${e.date}</td>
+                        </tr>
+                    `).join('')}</tbody>
+                </table>
+            </div>
+        </div>`;
+}
+
+// ---------- ENQUIRIES ----------
+function renderEnquiries(container) {
+    container.innerHTML = `
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+            <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                <input type="text" id="enqSearch" placeholder="Search enquiries..." class="input-field px-4 py-2.5 rounded-xl text-white text-sm w-full sm:w-64" oninput="filterEnquiries()" aria-label="Search enquiries">
+                <select id="enqFilter" class="input-field px-4 py-2.5 rounded-xl text-white text-sm" onchange="filterEnquiries()" aria-label="Filter by status">
+                    <option value="">All Status</option>
+                    <option value="New">New</option><option value="Contacted">Contacted</option>
+                    <option value="Qualified">Qualified</option><option value="Converted">Converted</option>
+                    <option value="Closed">Closed</option>
+                </select>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="exportEnquiriesCSV()" class="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 border border-slate-700 hover:border-slate-500 transition-colors">Export CSV</button>
+                <button onclick="openAddEnquiryModal()" class="btn-gradient px-4 py-2.5 rounded-xl text-sm font-medium text-white">+ Add Enquiry</button>
+            </div>
+        </div>
+        <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm" role="table">
+                    <thead><tr class="border-b border-slate-700/50">
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Name</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden lg:table-cell">Email</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden xl:table-cell">Phone</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden lg:table-cell">Company</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Service</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden md:table-cell">Message</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Status</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden lg:table-cell">Date</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Actions</th>
+                    </tr></thead>
+                    <tbody id="enqTableBody"></tbody>
+                </table>
+            </div>
+        </div>`;
+    filterEnquiries();
+}
+
+function filterEnquiries() {
+    const search = (document.getElementById('enqSearch')?.value || '').toLowerCase();
+    const status = document.getElementById('enqFilter')?.value || '';
+    const filtered = CRM.enquiries.filter(e =>
+        (!status || e.status === status) &&
+        (!search || e.name.toLowerCase().includes(search) || e.email.toLowerCase().includes(search) || e.company.toLowerCase().includes(search) || e.service.toLowerCase().includes(search))
+    );
+    document.getElementById('enqTableBody').innerHTML = filtered.length ? filtered.map(e => `
+        <tr class="table-row border-b border-slate-800/50">
+            <td class="py-3 px-4 text-white font-medium">${esc(e.name)}</td>
+            <td class="py-3 px-4 text-slate-400 hidden lg:table-cell">${esc(e.email)}</td>
+            <td class="py-3 px-4 text-slate-400 hidden xl:table-cell">${esc(e.phone)}</td>
+            <td class="py-3 px-4 text-slate-300 hidden lg:table-cell">${esc(e.company)}</td>
+            <td class="py-3 px-4 text-slate-300">${esc(e.service)}</td>
+            <td class="py-3 px-4 text-slate-500 hidden md:table-cell max-w-[200px] truncate" title="${esc(e.message)}">${esc(e.message)}</td>
+            <td class="py-3 px-4">
+                <select class="input-field px-2 py-1 rounded-lg text-xs text-white" onchange="updateEnquiryStatus(${e.id}, this.value)" aria-label="Status for ${esc(e.name)}">
+                    ${['New','Contacted','Qualified','Converted','Closed'].map(s => `<option value="${s}" ${s===e.status?'selected':''}>${s}</option>`).join('')}
+                </select>
+            </td>
+            <td class="py-3 px-4 text-slate-500 hidden lg:table-cell">${e.date}</td>
+            <td class="py-3 px-4">
+                <button onclick="deleteEnquiry(${e.id})" class="text-red-400 hover:text-red-300 transition-colors p-1" aria-label="Delete enquiry from ${esc(e.name)}" title="Delete">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </button>
+            </td>
+        </tr>`).join('') : '<tr><td colspan="9" class="py-8 text-center text-slate-500">No enquiries found</td></tr>';
+}
+
+function updateEnquiryStatus(id, status) {
+    const e = CRM.enquiries.find(x => x.id === id);
+    if (e) { e.status = status; saveData(CRM); }
+}
+
+function deleteEnquiry(id) {
+    if (!confirm('Delete this enquiry?')) return;
+    CRM.enquiries = CRM.enquiries.filter(x => x.id !== id);
+    saveData(CRM);
+    filterEnquiries();
+}
+
+function openAddEnquiryModal() {
+    showModal(`
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-bold text-white">Add New Enquiry</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white" aria-label="Close modal"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <form id="addEnqForm" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label class="block text-sm text-slate-300 mb-1">Name *</label><input required id="ae_name" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Email *</label><input required type="email" id="ae_email" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Phone</label><input id="ae_phone" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Company</label><input id="ae_company" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div class="sm:col-span-2"><label class="block text-sm text-slate-300 mb-1">Service Interest *</label>
+                        <select required id="ae_service" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm">
+                            <option value="">Select</option>
+                            <option>AI Agent Development</option><option>RAG System</option>
+                            <option>Autonomous Systems</option><option>Custom Software</option>
+                        </select>
+                    </div>
+                    <div class="sm:col-span-2"><label class="block text-sm text-slate-300 mb-1">Message *</label><textarea required id="ae_message" rows="3" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></textarea></div>
+                </div>
+                <button type="submit" class="btn-gradient w-full py-3 rounded-xl text-white font-semibold text-sm">Add Enquiry</button>
+            </form>
+        </div>`);
+    document.getElementById('addEnqForm').onsubmit = function(e) {
+        e.preventDefault();
+        const maxId = CRM.enquiries.reduce((m, x) => Math.max(m, x.id), 0);
+        CRM.enquiries.push({
+            id: maxId + 1,
+            name: document.getElementById('ae_name').value.trim(),
+            email: document.getElementById('ae_email').value.trim(),
+            phone: document.getElementById('ae_phone').value.trim(),
+            company: document.getElementById('ae_company').value.trim(),
+            service: document.getElementById('ae_service').value,
+            message: document.getElementById('ae_message').value.trim(),
+            date: new Date().toISOString().split('T')[0],
+            status: 'New'
+        });
+        saveData(CRM);
+        closeModal();
+        filterEnquiries();
+    };
+}
+
+function exportEnquiriesCSV() {
+    const headers = ['Name','Email','Phone','Company','Service','Message','Date','Status'];
+    const rows = CRM.enquiries.map(e => [e.name, e.email, e.phone, e.company, e.service, e.message, e.date, e.status]);
+    const csv = [headers, ...rows].map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+    downloadFile(csv, 'enquiries.csv', 'text/csv');
+}
+
+// ---------- TEAM ----------
+let teamView = 'Employee';
+
+function renderTeam(container) {
+    const employees = CRM.team.filter(t => t.type === 'Employee');
+    const interns = CRM.team.filter(t => t.type === 'Intern');
+    container.innerHTML = `
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+            <div class="flex gap-2">
+                <button onclick="setTeamView('Employee')" class="px-4 py-2 rounded-xl text-sm font-medium ${teamView==='Employee'?'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30':'text-slate-400 border border-slate-700 hover:border-slate-500'} transition-colors">Employees (${employees.length})</button>
+                <button onclick="setTeamView('Intern')" class="px-4 py-2 rounded-xl text-sm font-medium ${teamView==='Intern'?'bg-purple-500/20 text-purple-400 border border-purple-500/30':'text-slate-400 border border-slate-700 hover:border-slate-500'} transition-colors">Interns (${interns.length})</button>
+            </div>
+            <div class="flex gap-3 w-full sm:w-auto">
+                <input type="text" id="teamSearch" placeholder="Search team..." class="input-field px-4 py-2.5 rounded-xl text-white text-sm w-full sm:w-56" oninput="filterTeam()" aria-label="Search team members">
+                <button onclick="openAddTeamModal()" class="btn-gradient px-4 py-2.5 rounded-xl text-sm font-medium text-white whitespace-nowrap">+ Add Member</button>
+            </div>
+        </div>
+        <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm" role="table">
+                    <thead><tr class="border-b border-slate-700/50">
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Name</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden lg:table-cell">Email</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Role</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden md:table-cell">Department</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden lg:table-cell">Join Date</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Status</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Actions</th>
+                    </tr></thead>
+                    <tbody id="teamTableBody"></tbody>
+                </table>
+            </div>
+        </div>`;
+    filterTeam();
+}
+
+function setTeamView(type) { teamView = type; renderTeam(document.getElementById('mainContent')); }
+
+function filterTeam() {
+    const search = (document.getElementById('teamSearch')?.value || '').toLowerCase();
+    const filtered = CRM.team.filter(t => t.type === teamView && (!search || t.name.toLowerCase().includes(search) || t.role.toLowerCase().includes(search) || t.department.toLowerCase().includes(search)));
+    document.getElementById('teamTableBody').innerHTML = filtered.length ? filtered.map(t => `
+        <tr class="table-row border-b border-slate-800/50">
+            <td class="py-3 px-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold">${t.name.split(' ').map(n=>n[0]).join('')}</div>
+                    <span class="text-white font-medium">${esc(t.name)}</span>
+                </div>
+            </td>
+            <td class="py-3 px-4 text-slate-400 hidden lg:table-cell">${esc(t.email)}</td>
+            <td class="py-3 px-4 text-slate-300">${esc(t.role)}</td>
+            <td class="py-3 px-4 text-slate-300 hidden md:table-cell">${esc(t.department)}</td>
+            <td class="py-3 px-4 text-slate-500 hidden lg:table-cell">${t.joinDate}</td>
+            <td class="py-3 px-4">
+                <select class="input-field px-2 py-1 rounded-lg text-xs text-white" onchange="updateTeamStatus(${t.id}, this.value)" aria-label="Status for ${esc(t.name)}">
+                    ${['Active','On Leave','Inactive'].map(s => `<option value="${s}" ${s===t.status?'selected':''}>${s}</option>`).join('')}
+                </select>
+            </td>
+            <td class="py-3 px-4">
+                <button onclick="deleteTeamMember(${t.id})" class="text-red-400 hover:text-red-300 transition-colors p-1" aria-label="Delete ${esc(t.name)}" title="Delete">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </button>
+            </td>
+        </tr>`).join('') : '<tr><td colspan="7" class="py-8 text-center text-slate-500">No team members found</td></tr>';
+}
+
+function updateTeamStatus(id, status) {
+    const t = CRM.team.find(x => x.id === id);
+    if (t) { t.status = status; saveData(CRM); }
+}
+
+function deleteTeamMember(id) {
+    if (!confirm('Delete this team member?')) return;
+    CRM.team = CRM.team.filter(x => x.id !== id);
+    saveData(CRM);
+    filterTeam();
+}
+
+function openAddTeamModal() {
+    showModal(`
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-bold text-white">Add Team Member</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white" aria-label="Close"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <form id="addTeamForm" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label class="block text-sm text-slate-300 mb-1">Name *</label><input required id="at_name" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Email *</label><input required type="email" id="at_email" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Role *</label><input required id="at_role" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Department *</label>
+                        <select required id="at_dept" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm">
+                            <option value="">Select</option>
+                            <option>Engineering</option><option>AI/ML</option><option>Design</option><option>Marketing</option><option>Operations</option>
+                        </select>
+                    </div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Type *</label>
+                        <select required id="at_type" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm">
+                            <option value="Employee">Employee</option><option value="Intern">Intern</option><option value="Freelancer">Freelancer</option>
+                        </select>
+                    </div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Join Date *</label><input required type="date" id="at_date" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                </div>
+                <button type="submit" class="btn-gradient w-full py-3 rounded-xl text-white font-semibold text-sm">Add Member</button>
+            </form>
+        </div>`);
+    document.getElementById('addTeamForm').onsubmit = function(e) {
+        e.preventDefault();
+        const maxId = CRM.team.reduce((m, x) => Math.max(m, x.id), 0);
+        CRM.team.push({
+            id: maxId + 1,
+            name: document.getElementById('at_name').value.trim(),
+            email: document.getElementById('at_email').value.trim(),
+            role: document.getElementById('at_role').value.trim(),
+            department: document.getElementById('at_dept').value,
+            joinDate: document.getElementById('at_date').value,
+            status: 'Active',
+            type: document.getElementById('at_type').value
+        });
+        saveData(CRM);
+        closeModal();
+        filterTeam();
+    };
+}
+
+// ---------- PROJECTS ----------
+function renderProjects(container) {
+    container.innerHTML = `
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+            <div class="flex gap-3 w-full sm:w-auto">
+                <input type="text" id="projSearch" placeholder="Search projects..." class="input-field px-4 py-2.5 rounded-xl text-white text-sm w-full sm:w-56" oninput="filterProjects()" aria-label="Search projects">
+                <select id="projFilter" class="input-field px-3 py-2.5 rounded-xl text-white text-sm" onchange="filterProjects()" aria-label="Filter projects">
+                    <option value="">All Status</option>
+                    <option>Planning</option><option>In Progress</option><option>Completed</option><option>On Hold</option>
+                </select>
+            </div>
+            <button onclick="openAddProjectModal()" class="btn-gradient px-4 py-2.5 rounded-xl text-sm font-medium text-white">+ Add Project</button>
+        </div>
+        <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm" role="table">
+                    <thead><tr class="border-b border-slate-700/50">
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Project Name</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden md:table-cell">Client</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Status</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden lg:table-cell">Start Date</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4 hidden lg:table-cell">End Date</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Value</th>
+                        <th class="text-left text-slate-400 font-medium py-3 px-4">Actions</th>
+                    </tr></thead>
+                    <tbody id="projTableBody"></tbody>
+                </table>
+            </div>
+        </div>`;
+    filterProjects();
+}
+
+function filterProjects() {
+    const search = (document.getElementById('projSearch')?.value || '').toLowerCase();
+    const status = document.getElementById('projFilter')?.value || '';
+    const filtered = CRM.projects.filter(p =>
+        (!status || p.status === status) &&
+        (!search || p.name.toLowerCase().includes(search) || p.client.toLowerCase().includes(search))
+    );
+    const statusColors = {
+        'Planning': 'bg-blue-500/20 text-blue-400 border border-blue-500/30',
+        'In Progress': 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30',
+        'Completed': 'bg-green-500/20 text-green-400 border border-green-500/30',
+        'On Hold': 'bg-red-500/20 text-red-400 border border-red-500/30'
+    };
+    document.getElementById('projTableBody').innerHTML = filtered.length ? filtered.map(p => `
+        <tr class="table-row border-b border-slate-800/50">
+            <td class="py-3 px-4 text-white font-medium">${esc(p.name)}</td>
+            <td class="py-3 px-4 text-slate-300 hidden md:table-cell">${esc(p.client)}</td>
+            <td class="py-3 px-4"><span class="status-badge ${statusColors[p.status] || ''}">${p.status}</span></td>
+            <td class="py-3 px-4 text-slate-500 hidden lg:table-cell">${p.startDate}</td>
+            <td class="py-3 px-4 text-slate-500 hidden lg:table-cell">${p.endDate}</td>
+            <td class="py-3 px-4 text-green-400 font-medium">₹${p.value.toLocaleString()}</td>
+            <td class="py-3 px-4">
+                <button onclick="openEditProjectModal(${p.id})" class="text-cyan-400 hover:text-cyan-300 transition-colors p-1 mr-1" aria-label="Edit ${esc(p.name)}" title="Edit">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                </button>
+                <button onclick="deleteProject(${p.id})" class="text-red-400 hover:text-red-300 transition-colors p-1" aria-label="Delete ${esc(p.name)}" title="Delete">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </button>
+            </td>
+        </tr>`).join('') : '<tr><td colspan="7" class="py-8 text-center text-slate-500">No projects found</td></tr>';
+}
+
+function deleteProject(id) {
+    if (!confirm('Delete this project?')) return;
+    CRM.projects = CRM.projects.filter(x => x.id !== id);
+    saveData(CRM);
+    filterProjects();
+}
+
+function openAddProjectModal() {
+    showModal(`
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-bold text-white">Add Project</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white" aria-label="Close"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <form id="addProjForm" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="sm:col-span-2"><label class="block text-sm text-slate-300 mb-1">Project Name *</label><input required id="ap_name" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Client *</label><input required id="ap_client" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Status *</label>
+                        <select required id="ap_status" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm">
+                            <option>Planning</option><option>In Progress</option><option>Completed</option><option>On Hold</option>
+                        </select>
+                    </div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Start Date *</label><input required type="date" id="ap_start" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">End Date *</label><input required type="date" id="ap_end" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div class="sm:col-span-2"><label class="block text-sm text-slate-300 mb-1">Value (₹) *</label><input required type="number" id="ap_value" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                </div>
+                <button type="submit" class="btn-gradient w-full py-3 rounded-xl text-white font-semibold text-sm">Add Project</button>
+            </form>
+        </div>`);
+    document.getElementById('addProjForm').onsubmit = function(e) {
+        e.preventDefault();
+        const maxId = CRM.projects.reduce((m, x) => Math.max(m, x.id), 0);
+        CRM.projects.push({
+            id: maxId + 1,
+            name: document.getElementById('ap_name').value.trim(),
+            client: document.getElementById('ap_client').value.trim(),
+            status: document.getElementById('ap_status').value,
+            startDate: document.getElementById('ap_start').value,
+            endDate: document.getElementById('ap_end').value,
+            value: parseInt(document.getElementById('ap_value').value) || 0
+        });
+        saveData(CRM);
+        closeModal();
+        filterProjects();
+    };
+}
+
+function openEditProjectModal(id) {
+    const p = CRM.projects.find(x => x.id === id);
+    if (!p) return;
+    showModal(`
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-bold text-white">Edit Project</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white" aria-label="Close"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <form id="editProjForm" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="sm:col-span-2"><label class="block text-sm text-slate-300 mb-1">Project Name *</label><input required id="ep_name" value="${esc(p.name)}" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Client *</label><input required id="ep_client" value="${esc(p.client)}" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Status *</label>
+                        <select required id="ep_status" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm">
+                            ${['Planning','In Progress','Completed','On Hold'].map(s => `<option ${s===p.status?'selected':''}>${s}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div><label class="block text-sm text-slate-300 mb-1">Start Date *</label><input required type="date" id="ep_start" value="${p.startDate}" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div><label class="block text-sm text-slate-300 mb-1">End Date *</label><input required type="date" id="ep_end" value="${p.endDate}" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                    <div class="sm:col-span-2"><label class="block text-sm text-slate-300 mb-1">Value (₹) *</label><input required type="number" id="ep_value" value="${p.value}" class="input-field w-full px-3 py-2.5 rounded-xl text-white text-sm"></div>
+                </div>
+                <button type="submit" class="btn-gradient w-full py-3 rounded-xl text-white font-semibold text-sm">Save Changes</button>
+            </form>
+        </div>`);
+    document.getElementById('editProjForm').onsubmit = function(e) {
+        e.preventDefault();
+        p.name = document.getElementById('ep_name').value.trim();
+        p.client = document.getElementById('ep_client').value.trim();
+        p.status = document.getElementById('ep_status').value;
+        p.startDate = document.getElementById('ep_start').value;
+        p.endDate = document.getElementById('ep_end').value;
+        p.value = parseInt(document.getElementById('ep_value').value) || 0;
+        saveData(CRM);
+        closeModal();
+        filterProjects();
+    };
+}
+
+// ---------- ANALYTICS ----------
+function renderAnalytics(container) {
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const monthlyCounts = new Array(12).fill(0);
+    CRM.enquiries.forEach(e => {
+        const m = new Date(e.date).getMonth();
+        monthlyCounts[m]++;
+    });
+    const maxCount = Math.max(...monthlyCounts, 1);
+
+    const statusCounts = {};
+    CRM.enquiries.forEach(e => { statusCounts[e.status] = (statusCounts[e.status] || 0) + 1; });
+    const statusColors = { New: '#06b6d4', Contacted: '#a855f7', Qualified: '#eab308', Converted: '#22c55e', Closed: '#64748b' };
+    const totalEnq = CRM.enquiries.length || 1;
+    let pieGradient = '';
+    let angle = 0;
+    const statusEntries = Object.entries(statusCounts);
+    statusEntries.forEach(([status, count]) => {
+        const pct = (count / totalEnq) * 360;
+        pieGradient += `${statusColors[status] || '#64748b'} ${angle}deg ${angle + pct}deg, `;
+        angle += pct;
+    });
+    pieGradient = pieGradient.slice(0, -2);
+
+    const deptCounts = {};
+    CRM.team.forEach(t => { deptCounts[t.department] = (deptCounts[t.department] || 0) + 1; });
+    const maxDept = Math.max(...Object.values(deptCounts), 1);
+
+    container.innerHTML = `
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-white font-semibold mb-4">Enquiries by Month</h3>
+                <div class="flex items-end space-x-2 h-48">
+                    ${monthlyCounts.map((c, i) => `
+                        <div class="flex-1 flex flex-col items-center">
+                            <div class="w-full bg-gradient-to-t from-cyan-500 to-purple-500 rounded-t-md bar-chart-bar" style="height: ${(c / maxCount) * 160}px; min-height: ${c > 0 ? '8px' : '2px'}" title="${months[i]}: ${c}"></div>
+                            <span class="text-xs text-slate-500 mt-2">${months[i]}</span>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-white font-semibold mb-4">Status Breakdown</h3>
+                <div class="flex items-center space-x-8">
+                    <div class="pie-chart flex-shrink-0" style="background: conic-gradient(${pieGradient});" role="img" aria-label="Status breakdown pie chart"></div>
+                    <div class="space-y-2">
+                        ${statusEntries.map(([status, count]) => `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full flex-shrink-0" style="background: ${statusColors[status]}"></div>
+                                <span class="text-sm text-slate-300">${status}</span>
+                                <span class="text-sm text-slate-500 ml-auto">${count}</span>
+                            </div>`).join('')}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="glass-card rounded-2xl p-6">
+            <h3 class="text-white font-semibold mb-4">Team Distribution by Department</h3>
+            <div class="space-y-4">
+                ${Object.entries(deptCounts).map(([dept, count]) => `
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm text-slate-300">${dept}</span>
+                            <span class="text-sm text-slate-500">${count} member${count !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transition-all duration-700" style="width: ${(count / maxDept) * 100}%"></div>
+                        </div>
+                    </div>`).join('')}
+            </div>
+        </div>`;
+}
+
+// ============================================
+// UTILITIES
+// ============================================
+function esc(str) {
+    const d = document.createElement('div');
+    d.textContent = str || '';
+    return d.innerHTML;
+}
+
+function statusBadge(status) {
+    const colors = {
+        New: 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30',
+        Contacted: 'bg-purple-500/20 text-purple-400 border border-purple-500/30',
+        Qualified: 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30',
+        Converted: 'bg-green-500/20 text-green-400 border border-green-500/30',
+        Closed: 'bg-slate-500/20 text-slate-400 border border-slate-500/30'
+    };
+    return `<span class="status-badge inline-block ${colors[status] || ''}">${status}</span>`;
+}
+
+function showModal(html) {
+    document.getElementById('modalContent').innerHTML = html;
+    document.getElementById('modalOverlay').classList.remove('hidden');
+    const firstInput = document.querySelector('#modalContent input, #modalContent select, #modalContent textarea');
+    if (firstInput) firstInput.focus();
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.add('hidden'); }
+
+function downloadFile(content, filename, type) {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+// Initial render
+showSection('dashboard');
+</script>
+</body>
+</html>
