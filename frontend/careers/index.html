@@ -1,252 +1,159 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-
+<html lang="en-IN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AxonFlow Careers | Industrial Training & Global Internships</title>
-    <meta name="description"
-        content="Join AxonFlow AI for world-class industrial training and internships in autonomous agents and enterprise AI.">
+    <title>AxonFlow Careers | Industrial Training &amp; Global Internships</title>
+    <meta name="description" content="Empowering the next generation of AI engineers through industrial training and global internship opportunities at AxonFlow AI.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://axonflow.in/careers/">
     <link rel="icon" type="image/png" href="/assets/logo_pro.png">
     <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
+    <link rel="apple-touch-icon" href="/assets/logo_pro.png">
+    <meta name="theme-color" content="#07080a">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        slate: {
-                            950: '#020617',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <script>tailwind.config={theme:{extend:{colors:{ink:'#07080a'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <script src="/js/config.js"></script>
-    <style>
-        .hero-gradient {
-            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
-        }
-
-        .hero-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
-            animation: pulse 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 0.5;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/enterprise.css">
+    <script src="/js/config.js" defer></script>
 </head>
-
-<body class="bg-black text-white antialiased selection:bg-purple-500/30 font-['Inter']">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <a href="/" class="flex items-center space-x-3">
-                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-10">
-                    <span
-                        class="text-xl font-black tracking-tighter uppercase whitespace-nowrap sm:inline hidden">AXONFLOW
-                        CAREERS</span>
-                    <span class="text-xl font-black tracking-tighter uppercase sm:hidden inline">CAREERS</span>
+<body class="ef-body antialiased">
+    <header>
+        <nav class="ef-nav" aria-label="Main navigation">
+            <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+                <a href="/" class="flex items-center space-x-3" aria-label="AxonFlow AI Home">
+                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-9" width="36" height="36">
+                    <span class="ef-display text-lg font-semibold tracking-tight uppercase">AXONFLOW CAREERS</span>
                 </a>
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="/" class="ef-navlink">Home</a>
+                    <a href="/about-us" class="ef-navlink">About</a>
+                    <a href="/what-we-do" class="ef-navlink">What We Do</a>
+                    <a href="/who-we-are" class="ef-navlink">Who We Are</a>
+                    <a href="#training" class="ef-navlink">Training</a>
+                    <a href="#internships" class="ef-navlink">Internships</a>
+                    <a href="mailto:saurabhbajpai03@outlook.com?subject=Career+Application" class="ef-cta">Apply Now</a>
+                </div>
             </div>
-            <div class="hidden lg:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest">
-                <a href="/" class="hover:text-purple-400 transition-colors text-slate-300">Home</a>
-                <a href="/about-us" class="hover:text-purple-400 transition-colors text-slate-300">About</a>
-                <a href="/what-we-do" class="hover:text-purple-400 transition-colors text-slate-300">What We Do</a>
-                <a href="/who-we-are" class="hover:text-purple-400 transition-colors text-slate-300">Who We Are</a>
-                <a href="#training" class="hover:text-purple-400 transition-colors text-slate-300">Training</a>
-                <a href="#internships" class="hover:text-purple-400 transition-colors text-slate-300">Internships</a>
-                <a href="mailto:saurabhbajpai03@outlook.com"
-                    class="bg-gradient-to-r from-purple-500 to-pink-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-purple-500/20 flex items-center justify-center px-6 py-2 rounded-lg text-white">Apply
-                    Now</a>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero-gradient pt-48 pb-32 relative min-h-[85vh] flex items-center">
-        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
-            <div
-                class="inline-flex items-center space-x-2 bg-purple-500/10 border border-purple-500/20 rounded-full px-4 py-1 mb-8">
-                <span class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>
-                <span class="text-purple-300 text-xs font-bold tracking-widest uppercase">Career Launchpad</span>
-            </div>
-            <h1 class="text-6xl md:text-8xl font-black mb-8 leading-tight tracking-tighter">
-                Engineer the <br><span
-                    class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">AI
-                    Revolution</span>
+    <main class="pt-40 pb-24">
+        <!-- Hero Section -->
+        <section class="max-w-5xl mx-auto px-6 mb-20 text-center">
+            <div class="ef-eyebrow mb-6">Career Launchpad</div>
+            <h1 class="ef-display text-5xl md:text-7xl font-semibold mb-8 leading-[1.05] tracking-tight">
+                Engineer the <span class="italic" style="color:var(--accent)">AI Revolution.</span>
             </h1>
-            <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-                Empowering the next generation of AI engineers through rigorous industrial training and global
-                internship opportunities.
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed mb-10" style="color:var(--text-dim)">
+                Empowering the next generation of AI engineers through rigorous industrial training and global internship opportunities.
             </p>
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a href="mailto:saurabhbajpai03@outlook.com?subject=Industrial+Training+Inquiry"
-                    class="bg-gradient-to-r from-purple-500 to-pink-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-purple-500/20 flex items-center justify-center px-10 py-5 rounded-2xl font-bold text-xl shadow-2xl">
-                    Join Training
-                </a>
-                <a href="#internships"
-                    class="bg-slate-900/80 backdrop-blur-xl border border-white/10 shadow-2xl px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/5 transition-all">
-                    View Internships
-                </a>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#training" class="ef-btn-primary">Join Training →</a>
+                <a href="#internships" class="ef-btn-secondary">View Internships</a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Programs Grid -->
-    <section id="training" class="py-32 bg-black">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl font-black mb-8 text-white">Our <span
-                        class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Programs</span>
-                </h2>
-                <p class="text-xl text-slate-400 max-w-2xl mx-auto">Master modern AI development from fundamentals to
-                    production-grade agents.</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12">
-                <div
-                    class="bg-slate-900/80 backdrop-blur-xl border border-white/10 shadow-2xl p-12 rounded-[3.5rem] border-purple-500/20 transition-all duration-300 hover:-translate-y-2 hover:border-purple-500/40 hover:shadow-purple-500/10">
-                    <div
-                        class="w-16 h-16 rounded-2xl flex items-center justify-center text-6xl mb-10 transition-transform duration-500 hover:scale-110">
-                        🚀</div>
-                    <h3
-                        class="text-3xl font-black mb-6 text-white bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Industrial Training</h3>
-                    <p class="text-slate-400 text-sm mb-10 leading-relaxed uppercase tracking-widest font-bold">
-                        Duration: 6 Weeks / 6 Months Tracks</p>
-                    <p class="text-slate-300 text-lg mb-10 leading-relaxed">
-                        Master the core pillars of modern AI: Generative AI, RAG Systems, and Multi-Agent Orchestration.
-                        Go beyond simple chatbots—build autonomous systems that execute real business logic.
-                    </p>
-                    <ul class="space-y-4 mb-12 text-slate-400 font-medium">
-                        <li class="flex items-center gap-4">
-                            <span class="text-purple-500 font-bold">✓</span> Industry-Recognized Certification
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <span class="text-purple-500 font-bold">✓</span> Production-Scale Project Exposure
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <span class="text-purple-500 font-bold">✓</span> Direct Placement Assistance
-                        </li>
-                    </ul>
-                    <a href="mailto:saurabhbajpai03@outlook.com?subject=Industrial+Training+Inquiry"
-                        class="bg-gradient-to-r from-purple-500 to-pink-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-purple-500/20 flex items-center justify-center py-5 rounded-2xl font-bold text-xl text-white">Enquire
-                        via Gmail</a>
-                </div>
-
-                <div id="internships"
-                    class="bg-slate-900/80 backdrop-blur-xl border border-white/10 shadow-2xl p-12 rounded-[3.5rem] border-pink-500/20 transition-all duration-300 hover:-translate-y-2 hover:border-pink-500/40 hover:shadow-pink-500/10">
-                    <div
-                        class="w-16 h-16 rounded-2xl flex items-center justify-center text-6xl mb-10 transition-transform duration-500 hover:scale-110">
-                        🌍</div>
-                    <h3
-                        class="text-3xl font-black mb-6 text-white bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-                        Global Internships</h3>
-                    <p class="text-slate-400 text-sm mb-10 leading-relaxed uppercase tracking-widest font-bold">Roles:
-                        AI Research & Agent Engineering</p>
-                    <p class="text-slate-300 text-lg mb-10 leading-relaxed">
-                        Join a remote-first lab environment. Collaborate with global mentors to forge the
-                        next generation of autonomous tools. High-impact work for high-scale applications.
-                    </p>
-                    <ul class="space-y-4 mb-12 text-slate-400 font-medium">
-                        <li class="flex items-center gap-4">
-                            <span class="text-pink-500 font-bold">✓</span> Performance-Based Stipends
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <span class="text-pink-500 font-bold">✓</span> Letter of Recommendation (LoR)
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <span class="text-pink-500 font-bold">✓</span> Pre-Placement Offers (PPO) for Top Talent
-                        </li>
-                    </ul>
-                    <a href="mailto:saurabhbajpai03@outlook.com?subject=Global+Internship+Application"
-                        class="bg-gradient-to-r from-pink-500 to-purple-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-purple-500/20 flex items-center justify-center py-5 rounded-2xl font-bold text-xl text-white">Apply
-                        via Gmail</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sync Portfolio Section -->
-    <section class="py-32 bg-slate-950">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-24">
-                <h2 class="text-5xl font-black mb-6 text-white">Build Like <span
-                        class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Our
-                        Pros</span>
-                </h2>
-                <p class="text-xl text-slate-400">Interns contribute directly to our high-scale agentic ecosystem.</p>
+        <!-- Our Programs Section -->
+        <section class="max-w-7xl mx-auto px-6 mb-24">
+            <div class="text-center mb-16">
+                <div class="ef-eyebrow mb-4">Our Programs</div>
+                <h2 class="ef-display text-4xl font-semibold">Master modern AI development</h2>
+                <p class="text-lg mt-2" style="color:var(--text-dim)">From fundamentals to production-grade agents.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Sample Portfolio Items -->
-                <div
-                    class="group relative bg-slate-900 rounded-[2.5rem] p-8 border border-white/5 hover:border-purple-500/40 transition-all duration-500">
-                    <img src="/assets/heteromind_thumbnail_1773347454341.png" alt="HeteroMind"
-                        class="w-full h-48 object-cover rounded-2xl mb-6 group-hover:scale-105 transition-transform duration-500">
-                    <h3 class="text-2xl font-bold mb-2 text-white">HeteroMind Ent.</h3>
-                    <p class="text-slate-500 text-sm mb-6">Workload Orchestration Engine</p>
-                    <a href="https://heteromind-enterprise.onrender.com/"
-                        class="text-purple-400 font-bold flex items-center gap-2">Visit Lab Output <span>→</span></a>
-                </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Program 1: Industrial Training -->
+                <article id="training" class="ef-card p-10 flex flex-col justify-between">
+                    <div>
+                        <div class="ef-mono text-xs mb-4" style="color:var(--accent)">🚀 INDUSTRIAL TRAINING</div>
+                        <h3 class="text-2xl font-bold mb-2">Duration: 6 Weeks / 6 Months Tracks</h3>
+                        <p class="text-sm leading-relaxed mb-8" style="color:var(--text-dim)">
+                            Master the core pillars of modern AI: Generative AI, RAG Systems, and Multi-Agent Orchestration. Go beyond simple chatbots—build autonomous systems that execute real business logic.
+                        </p>
+                        <ul class="space-y-3 text-sm mb-8" style="color:var(--text-dim)">
+                            <li class="flex items-center gap-2"><span style="color:var(--accent-2)">✓</span> Industry-Recognized Certification</li>
+                            <li class="flex items-center gap-2"><span style="color:var(--accent-2)">✓</span> Production-Scale Project Exposure</li>
+                            <li class="flex items-center gap-2"><span style="color:var(--accent-2)">✓</span> Direct Placement Assistance</li>
+                        </ul>
+                    </div>
+                    <a href="mailto:saurabhbajpai03@outlook.com?subject=Industrial+Training+Enquiry" class="ef-btn-secondary w-full justify-center">Enquire via Gmail →</a>
+                </article>
 
-                <div
-                    class="group relative bg-slate-900 rounded-[2.5rem] p-8 border border-white/5 hover:border-emerald-500/40 transition-all duration-500">
-                    <img src="/assets/helixmind_thumbnail_1773347475642.png" alt="HelixMind"
-                        class="w-full h-48 object-cover rounded-2xl mb-6 group-hover:scale-105 transition-transform duration-500">
-                    <h3 class="text-2xl font-bold mb-2 text-white">HelixMind</h3>
-                    <p class="text-slate-500 text-sm mb-6">Healthcare AI Diagnostic Logic</p>
-                    <a href="https://helixmind.onrender.com/"
-                        class="text-emerald-400 font-bold flex items-center gap-2">Visit Lab Output <span>→</span></a>
-                </div>
-
-                <div
-                    class="group relative bg-slate-900 rounded-[2.5rem] p-8 border border-white/5 hover:border-blue-500/40 transition-all duration-500 text-center flex flex-col items-center justify-center min-h-[300px]">
-                    <h4 class="text-slate-500 font-bold uppercase tracking-widest text-xs mb-4">Research Lab</h4>
-                    <p class="text-white text-lg font-bold mb-6">And 20+ more active research projects...</p>
-                    <a href="#training" class="text-purple-400 font-bold hover:underline">Start Building Your Own →</a>
-                </div>
+                <!-- Program 2: Global Internships -->
+                <article id="internships" class="ef-card p-10 flex flex-col justify-between" style="border-color:var(--accent)">
+                    <div>
+                        <div class="ef-mono text-xs mb-4" style="color:var(--accent)">🌍 GLOBAL INTERNSHIPS</div>
+                        <h3 class="text-2xl font-bold mb-2">Roles: AI Research &amp; Agent Engineering</h3>
+                        <p class="text-sm leading-relaxed mb-8" style="color:var(--text-dim)">
+                            Join a remote-first lab environment. Collaborate with global mentors to forge the next generation of autonomous tools. High-impact work for high-scale applications.
+                        </p>
+                        <ul class="space-y-3 text-sm mb-8" style="color:var(--text-dim)">
+                            <li class="flex items-center gap-2"><span style="color:var(--accent-2)">✓</span> Performance-Based Stipends</li>
+                            <li class="flex items-center gap-2"><span style="color:var(--accent-2)">✓</span> Letter of Recommendation (LoR)</li>
+                            <li class="flex items-center gap-2"><span style="color:var(--accent-2)">✓</span> Pre-Placement Offers (PPO) for Top Talent</li>
+                        </ul>
+                    </div>
+                    <a href="mailto:saurabhbajpai03@outlook.com?subject=Global+Internship+Application" class="ef-cta w-full text-center">Apply via Gmail →</a>
+                </article>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Build Like Our Pros Section -->
+        <section class="max-w-7xl mx-auto px-6 mb-24">
+            <div class="text-center mb-16">
+                <div class="ef-eyebrow mb-4">Live Engineering Output</div>
+                <h2 class="ef-display text-4xl font-semibold">Build Like Our Pros</h2>
+                <p class="text-lg mt-2" style="color:var(--text-dim)">Interns contribute directly to our high-scale agentic ecosystem.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <article class="ef-card p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="ef-mono text-xs mb-4" style="color:var(--accent)">HETEROMIND ENT.</div>
+                        <h3 class="text-xl font-bold mb-2">Workload Orchestration Engine</h3>
+                        <p class="text-xs leading-relaxed mb-6" style="color:var(--text-dim)">Hardware-aware AI compute routing engine.</p>
+                    </div>
+                    <a href="https://heteromind-enterprise.onrender.com/" target="_blank" rel="noopener noreferrer" class="ef-btn-secondary py-2 px-4 text-xs w-full justify-center">Visit Lab Output →</a>
+                </article>
+
+                <article class="ef-card p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="ef-mono text-xs mb-4" style="color:var(--accent)">HELIXMIND</div>
+                        <h3 class="text-xl font-bold mb-2">Healthcare AI Diagnostic Logic</h3>
+                        <p class="text-xs leading-relaxed mb-6" style="color:var(--text-dim)">AI clinical diagnostic assistance system.</p>
+                    </div>
+                    <a href="https://helixmind.onrender.com/" target="_blank" rel="noopener noreferrer" class="ef-btn-secondary py-2 px-4 text-xs w-full justify-center">Visit Lab Output →</a>
+                </article>
+
+                <article class="ef-card p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="ef-mono text-xs mb-4" style="color:var(--accent)">RESEARCH LAB</div>
+                        <h3 class="text-xl font-bold mb-2">20+ Active Research Projects</h3>
+                        <p class="text-xs leading-relaxed mb-6" style="color:var(--text-dim)">Building autonomous platforms and agent tools.</p>
+                    </div>
+                    <a href="mailto:saurabhbajpai03@outlook.com?subject=Research+Lab+Inquiry" class="ef-cta py-2 px-4 text-xs text-center">Start Building Your Own →</a>
+                </article>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-slate-900 py-24">
+    <footer class="ef-footer py-20" role="contentinfo">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-12 mb-16">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-2">
-                    <div class="flex items-center space-x-3 mb-8">
-                        <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-10">
-                        <span class="text-2xl font-black tracking-tighter uppercase text-white">AXONFLOW CAREERS</span>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8" width="32" height="32">
+                        <span class="ef-display text-lg font-semibold uppercase">AXONFLOW CAREERS</span>
                     </div>
-                    <p class="text-slate-400 max-w-sm mb-8">Pioneering autonomous intelligence. We deliver high-value AI
-                        solutions and forge the next generation of engineers.</p>
+                    <p class="text-sm max-w-sm" style="color:var(--text-dim)">Pioneering autonomous intelligence. We deliver high-value AI solutions and forge the next generation of engineers.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Quick Links</h4>
-                    <ul class="space-y-4 text-slate-400 text-sm">
+                    <h4 class="ef-mono font-semibold mb-6 tracking-widest uppercase text-xs">Quick Links</h4>
+                    <ul class="space-y-3 text-xs" style="color:var(--text-dim)">
                         <li><a href="/" class="hover:text-white transition-colors">Home Page</a></li>
                         <li><a href="/about-us" class="hover:text-white transition-colors">About Us</a></li>
                         <li><a href="/what-we-do" class="hover:text-white transition-colors">What We Do</a></li>
@@ -255,13 +162,12 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Legal</h4>
-                    <p class="text-slate-400 text-[10px] tracking-widest uppercase mb-2">UDYAM-UP-50-0236406</p>
-                    <p class="text-slate-600 text-[10px]">© 2025 AxonFlow AI. All rights reserved.</p>
+                    <h4 class="ef-mono font-semibold mb-6 tracking-widest uppercase text-xs">Legal</h4>
+                    <p class="ef-mono text-xs mb-2" style="color:var(--text-faint)">UDYAM-UP-50-0236406</p>
+                    <p class="text-xs" style="color:var(--text-faint)">&copy; 2026 AxonFlow AI. All rights reserved.</p>
                 </div>
             </div>
         </div>
     </footer>
 </body>
-
 </html>
