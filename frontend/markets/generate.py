@@ -118,15 +118,24 @@ TEMPLATE = """<!DOCTYPE html>
 <body class="ef-body antialiased">
     <header>
         <nav class="ef-nav" aria-label="Main navigation">
-            <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
-                <a href="/" class="flex items-center space-x-3" aria-label="AxonFlow AI Home">
-                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-9" width="36" height="36">
-                    <span class="ef-display text-lg font-semibold tracking-tight">AxonFlow AI</span>
+            <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
+                <a href="/" class="flex items-center space-x-2 shrink-0" aria-label="AxonFlow AI Home">
+                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8 w-8" width="32" height="32">
+                    <span class="ef-display text-base font-bold tracking-tight">AxonFlow AI</span>
                 </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/markets/" class="ef-navlink">All markets</a>
-                    <a href="/case-studies" class="ef-navlink">Case studies</a>
-                    <a href="/contact" class="ef-cta">Talk to us</a>
+                <div class="hidden lg:flex items-center space-x-5 text-xs font-medium">
+                    <a href="/" class="ef-navlink">Home</a>
+                    <a href="/#services" class="ef-navlink">Services</a>
+                    <a href="/#portfolio" class="ef-navlink">Portfolio</a>
+                    <a href="/about-us" class="ef-navlink">About</a>
+                    <a href="/what-we-do" class="ef-navlink">What We Do</a>
+                    <a href="/who-we-are" class="ef-navlink">Who We Are</a>
+                    <a href="/case-studies" class="ef-navlink">Case Studies</a>
+                    <a href="/testimonials" class="ef-navlink">Testimonials</a>
+                    <a href="/pricing" class="ef-navlink">Pricing</a>
+                    <a href="/careers/" class="ef-navlink">Careers</a>
+                    <a href="/blog" class="ef-navlink">Blog</a>
+                    <a href="/contact" class="ef-cta py-1.5 px-3 text-xs">Talk to us</a>
                 </div>
             </div>
         </nav>
