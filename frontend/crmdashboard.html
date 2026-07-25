@@ -124,6 +124,10 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
             <span>Analytics</span>
         </button>
+        <button onclick="showSection('social')" data-section="social" class="sidebar-link w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 border border-transparent">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342a4.986 4.986 0 000-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+            <span>Social Channels</span>
+        </button>
     </nav>
     <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-800">
         <button onclick="logout()" class="w-full flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-all" aria-label="Logout">
@@ -256,7 +260,7 @@ function showSection(section) {
         if (isActive) btn.setAttribute('aria-current', 'page');
         else btn.removeAttribute('aria-current');
     });
-    const titles = { dashboard: 'Dashboard', enquiries: 'Enquiries', team: 'Team', projects: 'Projects', analytics: 'Analytics' };
+    const titles = { dashboard: 'Dashboard', enquiries: 'Enquiries', team: 'Team', projects: 'Projects', analytics: 'Analytics', social: 'Social Channels' };
     document.getElementById('pageTitle').textContent = titles[section] || 'Dashboard';
     renderSection();
     const sidebar = document.getElementById('sidebar');
@@ -276,7 +280,53 @@ function renderSection() {
         case 'team': renderTeam(c); break;
         case 'projects': renderProjects(c); break;
         case 'analytics': renderAnalytics(c); break;
+        case 'social': renderSocial(c); break;
     }
+}
+
+// ---------- SOCIAL CHANNELS ----------
+const SOCIAL_CHANNELS = [
+    { name: 'Instagram', handle: '@axonflow.ai', url: 'https://instagram.com/axonflow.ai', connected: false, color: '#E1306C', icon: '<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/>' },
+    { name: 'LinkedIn', handle: 'AxonFlow AI', url: 'https://linkedin.com/company/axonflow-ai', connected: false, color: '#0A66C2', icon: '<path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/>' },
+    { name: 'Facebook', handle: 'Not set up yet', url: null, connected: false, color: '#1877F2', icon: '<path d="M22 12a10 10 0 10-11.56 9.87v-6.98H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.98A10 10 0 0022 12z"/>' }
+];
+
+function renderSocial(container) {
+    container.innerHTML = `
+        <div class="mb-6 p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 flex items-start gap-3">
+            <svg class="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div>
+                <p class="text-sm text-amber-200 font-medium">No channel is connected to auto-posting yet</p>
+                <p class="text-xs text-amber-200/70 mt-1">This panel will show real content, follower counts, and post history only once each platform's API is connected. It will never display placeholder numbers as if they were live data. To connect: Instagram/Facebook need a Meta Developer App with Graph API publishing access on a linked Business account; LinkedIn needs a Developer App approved for the Marketing API on the AxonFlow AI company page.</p>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4 mb-8">
+            ${SOCIAL_CHANNELS.map(ch => `
+                <div class="p-5 rounded-xl border border-slate-800 bg-slate-900/60">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-6 h-6" style="color:${ch.color}" viewBox="0 0 24 24" fill="currentColor">${ch.icon}</svg>
+                            <span class="font-semibold text-white text-sm">${ch.name}</span>
+                        </div>
+                        <span class="text-[10px] font-mono uppercase px-2 py-1 rounded-full ${ch.connected ? 'bg-emerald-500/15 text-emerald-400' : 'bg-slate-700/50 text-slate-400'}">${ch.connected ? 'Connected' : 'Not connected'}</span>
+                    </div>
+                    ${ch.url
+                        ? `<a href="${ch.url}" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-400 hover:text-white break-all">${ch.handle}</a>`
+                        : `<span class="text-xs text-slate-500">${ch.handle}</span>`}
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-xs text-slate-500">Auto-post on approval: <span class="text-slate-400">pending setup</span></div>
+                </div>
+            `).join('')}
+        </div>
+        <div class="p-5 rounded-xl border border-slate-800 bg-slate-900/60">
+            <h3 class="text-sm font-semibold text-white mb-2">How auto-posting will work, once connected</h3>
+            <ol class="text-xs text-slate-400 space-y-2 list-decimal list-inside">
+                <li>A post is drafted here (or via webhook from an approved source).</li>
+                <li>You review and tap Approve.</li>
+                <li>A serverless function (in <code class="text-slate-300">/api</code>) calls the Instagram/LinkedIn/Facebook Graph APIs to publish it.</li>
+                <li>This panel updates with the live post link and status — never before the platform confirms it actually published.</li>
+            </ol>
+        </div>
+    `;
 }
 
 // ---------- DASHBOARD ----------
