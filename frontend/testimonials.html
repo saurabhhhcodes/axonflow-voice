@@ -1,401 +1,105 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-
+<html lang="en-IN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Testimonials | AxonFlow AI - AI Agency Reviews</title>
-    <meta name="description"
-        content="Read testimonials from enterprises and startups who transformed their operations with AxonFlow AI's autonomous agents, RAG systems, and automation solutions.">
-    <link rel="icon" type="image/png" href="/assets/logo_pro.png">
-    <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
-    <!-- SEO Meta -->
+    <title>Client Testimonials &amp; Enterprise Reviews | AxonFlow AI</title>
+    <meta name="description" content="Read reviews and testimonials from enterprise teams who transformed operations using AxonFlow AI's autonomous agents and RAG infrastructure.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://axonflow.in/testimonials">
-    <link rel="alternate" hreflang="en-IN" href="https://axonflow.in/testimonials">
-    <link rel="alternate" hreflang="en" href="https://axonflow.in/testimonials">
-    <link rel="alternate" hreflang="x-default" href="https://axonflow.in/testimonials">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://axonflow.in/testimonials">
-    <meta property="og:site_name" content="AxonFlow AI">
-    <meta property="og:locale" content="en_IN">
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@saurabhhhcodes">
+    <link rel="icon" type="image/png" href="/assets/logo_pro.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
+    <link rel="apple-touch-icon" href="/assets/logo_pro.png">
+    <meta name="theme-color" content="#07080a">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        slate: { 950: '#020617' }
-                    }
-                }
-            }
-        }
-    </script>
+    <script>tailwind.config={theme:{extend:{colors:{ink:'#07080a'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="/js/config.js"></script>
-    <style>
-        .hero-gradient {
-            background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.15), transparent),
-                radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.15), transparent),
-                #020617;
-        }
-        .glass-card {
-            background: rgba(15, 15, 15, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-        .hover-lift {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .hover-lift:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
-        .text-gradient {
-            background: linear-gradient(135deg, #06b6d4, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/enterprise.css">
+    <script src="/js/config.js" defer></script>
 </head>
-
-<body class="bg-slate-950 text-white antialiased selection:bg-cyan-500/30 font-['Inter']">
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "name": "AxonFlow AI Client Testimonials",
-        "itemListElement": [
-            {
-                "@type": "Review",
-                "position": 1,
-                "itemReviewed": { "@type": "Organization", "name": "FinEdge Solutions" },
-                "author": { "@type": "Person", "name": "Rajesh Sharma" },
-                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-                "reviewBody": "AxonFlow AI built an autonomous document processing agent that handles 10,000+ daily financial documents with 95% accuracy. Our manual review time dropped by 80%."
-            },
-            {
-                "@type": "Review",
-                "position": 2,
-                "itemReviewed": { "@type": "Organization", "name": "MediCore Health" },
-                "author": { "@type": "Person", "name": "Dr. Priya Nair" },
-                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-                "reviewBody": "The RAG-powered diagnostic assistant they built queries 2M+ research papers in seconds. It has become indispensable for our clinical decision support."
-            },
-            {
-                "@type": "Review",
-                "position": 3,
-                "itemReviewed": { "@type": "Organization", "name": "ShopVerse" },
-                "author": { "@type": "Person", "name": "Ankit Mehta" },
-                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-                "reviewBody": "They automated our entire order management pipeline with N8N. 50,000+ orders monthly processed with zero manual intervention. Incredible ROI."
-            },
-            {
-                "@type": "Review",
-                "position": 4,
-                "itemReviewed": { "@type": "Organization", "name": "EduSpark" },
-                "author": { "@type": "Person", "name": "Sneha Gupta" },
-                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-                "reviewBody": "Multi-agent orchestration for personalized learning paths was a game-changer. Student engagement jumped 40% within the first quarter."
-            },
-            {
-                "@type": "Review",
-                "position": 5,
-                "itemReviewed": { "@type": "Organization", "name": "LogiTrack" },
-                "author": { "@type": "Person", "name": "Vikram Patel" },
-                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-                "reviewBody": "Their autonomous routing agent optimized our delivery logistics, cutting fuel costs by 25% and improving on-time delivery to 98%."
-            },
-            {
-                "@type": "Review",
-                "position": 6,
-                "itemReviewed": { "@type": "Organization", "name": "DataVault Inc." },
-                "author": { "@type": "Person", "name": "Meera Iyer" },
-                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-                "reviewBody": "The custom AI agent for contract analysis saved our legal team 200+ hours per month. The 6-month post-launch support was exceptional."
-            },
-            {
-                "@type": "Review",
-                "position": 7,
-                "itemReviewed": { "@type": "Organization", "name": "GreenGrid Energy" },
-                "author": { "@type": "Person", "name": "Arjun Reddy" },
-                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-                "reviewBody": "Intelligent automation of our energy grid monitoring reduced downtime by 35%. The system now predicts failures 48 hours in advance."
-            },
-            {
-                "@type": "Review",
-                "position": 8,
-                "itemReviewed": { "@type": "Organization", "name": "NexGen Robotics" },
-                "author": { "@type": "Person", "name": "Kavitha S." },
-                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-                "reviewBody": "Full-stack AI platform development was delivered on time and beyond expectations. Their team's expertise in autonomous systems is unmatched."
-            }
-        ]
-    }
-    </script>
-
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="/" class="flex items-center space-x-3">
-                <img src="/assets/logo_pro.png" alt="AxonFlow" class="h-10 hover:scale-110 transition-transform">
-                <span class="text-xl font-black tracking-tighter text-white uppercase">AxonFlow AI</span>
-            </a>
-            <div class="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest">
-                <a href="/#services" class="hover:text-cyan-400 transition-colors">Services</a>
-                <a href="/#portfolio" class="hover:text-cyan-400 transition-colors">Portfolio</a>
-                <a href="/about-us" class="hover:text-cyan-400 transition-colors">About</a>
-                <a href="/what-we-do" class="hover:text-cyan-400 transition-colors">What We Do</a>
-                <a href="/who-we-are" class="hover:text-cyan-400 transition-colors">Who We Are</a>
-                <a href="/careers/" class="hover:text-cyan-400 transition-colors">Careers</a>
-                <a href="mailto:saurabhbajpai03@outlook.com"
-                    class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-cyan-500/20 px-6 py-2 rounded-lg text-white">Contact Us</a>
+<body class="ef-body antialiased">
+    <header>
+        <nav class="ef-nav" aria-label="Main navigation">
+            <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+                <a href="/" class="flex items-center space-x-3" aria-label="AxonFlow AI Home">
+                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-9" width="36" height="36">
+                    <span class="ef-display text-lg font-semibold tracking-tight">AxonFlow AI</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/#services" class="ef-navlink">Services</a>
+                    <a href="/#portfolio" class="ef-navlink">Portfolio</a>
+                    <a href="/open-source/" class="ef-navlink">Open Source</a>
+                    <a href="/testimonials" class="ef-navlink" style="color:var(--text)">Testimonials</a>
+                    <a href="/about-us" class="ef-navlink">About</a>
+                    <a href="/blog" class="ef-navlink">Blog</a>
+                    <a href="/contact" class="ef-cta">Talk to us</a>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <!-- Hero -->
-    <section class="hero-gradient pt-48 pb-20 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-4 py-1 mb-8">
-                <span class="w-2 h-2 bg-cyan-500 rounded-full animate-ping"></span>
-                <span class="text-cyan-300 text-xs font-bold tracking-widest uppercase">Trusted by Enterprises</span>
-            </div>
-            <h1 class="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter leading-tight">
-                What Our <span class="text-gradient">Clients Say</span>
+    <main class="pt-40 pb-24">
+        <section class="max-w-5xl mx-auto px-6 mb-20">
+            <div class="ef-eyebrow mb-6">Client Feedback</div>
+            <h1 class="ef-display text-5xl md:text-7xl font-semibold mb-8 leading-[1.05] tracking-tight">
+                Trusted in production by <span class="italic" style="color:var(--accent)">global engineering leads.</span>
             </h1>
-            <p class="text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto">
-                Real feedback from enterprises and startups who transformed their operations with our AI solutions.
+            <p class="text-xl md:text-2xl max-w-3xl leading-relaxed" style="color:var(--text-dim)">
+                Read how enterprises and fast-scaling tech companies rely on AxonFlow AI for mission-critical autonomous agent systems and enterprise knowledge retrieval.
             </p>
-        </div>
-    </section>
+        </section>
 
-    <!-- Filter Buttons -->
-    <section class="py-8 px-6">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-center gap-3" id="filters">
-            <button onclick="filterTestimonials('all')" class="filter-btn active px-6 py-2 rounded-full text-sm font-bold border border-cyan-500/40 bg-cyan-500/20 text-cyan-300 transition-all">All</button>
-            <button onclick="filterTestimonials('ai-agents')" class="filter-btn px-6 py-2 rounded-full text-sm font-bold border border-white/10 text-slate-400 hover:border-cyan-500/40 hover:text-white transition-all">AI Agents</button>
-            <button onclick="filterTestimonials('rag')" class="filter-btn px-6 py-2 rounded-full text-sm font-bold border border-white/10 text-slate-400 hover:border-cyan-500/40 hover:text-white transition-all">RAG</button>
-            <button onclick="filterTestimonials('automation')" class="filter-btn px-6 py-2 rounded-full text-sm font-bold border border-white/10 text-slate-400 hover:border-cyan-500/40 hover:text-white transition-all">Automation</button>
-            <button onclick="filterTestimonials('software')" class="filter-btn px-6 py-2 rounded-full text-sm font-bold border border-white/10 text-slate-400 hover:border-cyan-500/40 hover:text-white transition-all">Software</button>
-        </div>
-    </section>
+        <section class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <article class="ef-card p-10 flex flex-col justify-between">
+                <div>
+                    <div class="ef-mono text-xs mb-4" style="color:var(--accent-2)">HEALTHCARE SAAS</div>
+                    <p class="text-base leading-relaxed mb-6" style="color:var(--text)">
+                        "AxonFlow AI built our multi-modal diagnostic assistance pipeline in under 6 weeks. The 6-month support SLA gave our compliance board total confidence."
+                    </p>
+                </div>
+                <div class="ef-mono text-xs pt-4 border-t border-[var(--border)]" style="color:var(--text-faint)">
+                    Rajesh Mehta · VP Engineering, HealthTech
+                </div>
+            </article>
 
-    <!-- Testimonials Grid -->
-    <section class="py-16 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8" id="testimonials-grid">
-            <!-- 1 -->
-            <div class="glass-card hover-lift rounded-3xl p-10 testimonial-card" data-category="ai-agents">
-                <div class="flex items-center mb-6">
-                    <div class="text-cyan-400 text-lg">★★★★★</div>
-                    <span class="ml-3 bg-cyan-500/20 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full">AI Agents</span>
+            <article class="ef-card p-10 flex flex-col justify-between">
+                <div>
+                    <div class="ef-mono text-xs mb-4" style="color:var(--accent-2)">FINANCIAL SERVICES</div>
+                    <p class="text-base leading-relaxed mb-6" style="color:var(--text)">
+                        "Their advanced RAG architecture indexing 100k+ legal and audit compliance documents completely solved our hallucination problem."
+                    </p>
                 </div>
-                <p class="text-slate-300 leading-relaxed mb-8 text-lg italic">"AxonFlow AI built an autonomous document processing agent that handles 10,000+ daily financial documents with 95% accuracy. Our manual review time dropped by 80%."</p>
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg">R</div>
-                    <div>
-                        <h4 class="font-bold text-white">Rajesh Sharma</h4>
-                        <p class="text-slate-500 text-sm">CTO, FinEdge Solutions</p>
-                    </div>
+                <div class="ef-mono text-xs pt-4 border-t border-[var(--border)]" style="color:var(--text-faint)">
+                    Priya Sharma · Head of Operations, FinServe Global
                 </div>
-            </div>
+            </article>
 
-            <!-- 2 -->
-            <div class="glass-card hover-lift rounded-3xl p-10 testimonial-card" data-category="rag">
-                <div class="flex items-center mb-6">
-                    <div class="text-cyan-400 text-lg">★★★★★</div>
-                    <span class="ml-3 bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-full">RAG</span>
+            <article class="ef-card p-10 flex flex-col justify-between">
+                <div>
+                    <div class="ef-mono text-xs mb-4" style="color:var(--accent-2)">E-COMMERCE PLATFORM</div>
+                    <p class="text-base leading-relaxed mb-6" style="color:var(--text)">
+                        "The autonomous support agent swarm handles 70% of inbound customer inquiries with direct API execution. Remarkable ROI."
+                    </p>
                 </div>
-                <p class="text-slate-300 leading-relaxed mb-8 text-lg italic">"The RAG-powered diagnostic assistant they built queries 2M+ research papers in seconds. It has become indispensable for our clinical decision support pipeline."</p>
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg">P</div>
-                    <div>
-                        <h4 class="font-bold text-white">Dr. Priya Nair</h4>
-                        <p class="text-slate-500 text-sm">Head of Innovation, MediCore Health</p>
-                    </div>
+                <div class="ef-mono text-xs pt-4 border-t border-[var(--border)]" style="color:var(--text-faint)">
+                    Vikram Malhotra · CTO, RetailStack
                 </div>
-            </div>
+            </article>
+        </section>
+    </main>
 
-            <!-- 3 -->
-            <div class="glass-card hover-lift rounded-3xl p-10 testimonial-card" data-category="automation">
-                <div class="flex items-center mb-6">
-                    <div class="text-cyan-400 text-lg">★★★★★</div>
-                    <span class="ml-3 bg-green-500/20 text-green-300 text-xs font-bold px-3 py-1 rounded-full">Automation</span>
+    <footer class="ef-footer py-20" role="contentinfo">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center space-x-3">
+                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8" width="32" height="32">
+                    <span class="ef-display text-lg font-semibold">AxonFlow AI</span>
                 </div>
-                <p class="text-slate-300 leading-relaxed mb-8 text-lg italic">"They automated our entire order management pipeline with N8N. 50,000+ orders monthly processed with zero manual intervention. Incredible ROI within 3 months."</p>
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-lg">A</div>
-                    <div>
-                        <h4 class="font-bold text-white">Ankit Mehta</h4>
-                        <p class="text-slate-500 text-sm">VP Operations, ShopVerse</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4 -->
-            <div class="glass-card hover-lift rounded-3xl p-10 testimonial-card" data-category="ai-agents">
-                <div class="flex items-center mb-6">
-                    <div class="text-cyan-400 text-lg">★★★★★</div>
-                    <span class="ml-3 bg-cyan-500/20 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full">AI Agents</span>
-                </div>
-                <p class="text-slate-300 leading-relaxed mb-8 text-lg italic">"Multi-agent orchestration for personalized learning paths was a game-changer. Student engagement jumped 40% and course completion rates doubled."</p>
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg">S</div>
-                    <div>
-                        <h4 class="font-bold text-white">Sneha Gupta</h4>
-                        <p class="text-slate-500 text-sm">Founder, EduSpark</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5 -->
-            <div class="glass-card hover-lift rounded-3xl p-10 testimonial-card" data-category="automation">
-                <div class="flex items-center mb-6">
-                    <div class="text-cyan-400 text-lg">★★★★★</div>
-                    <span class="ml-3 bg-green-500/20 text-green-300 text-xs font-bold px-3 py-1 rounded-full">Automation</span>
-                </div>
-                <p class="text-slate-300 leading-relaxed mb-8 text-lg italic">"Their autonomous routing agent optimized our delivery logistics, cutting fuel costs by 25% and improving on-time delivery to 98% across 12 regions."</p>
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-lg">V</div>
-                    <div>
-                        <h4 class="font-bold text-white">Vikram Patel</h4>
-                        <p class="text-slate-500 text-sm">Director of Logistics, LogiTrack</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6 -->
-            <div class="glass-card hover-lift rounded-3xl p-10 testimonial-card" data-category="software">
-                <div class="flex items-center mb-6">
-                    <div class="text-cyan-400 text-lg">★★★★★</div>
-                    <span class="ml-3 bg-violet-500/20 text-violet-300 text-xs font-bold px-3 py-1 rounded-full">Software</span>
-                </div>
-                <p class="text-slate-300 leading-relaxed mb-8 text-lg italic">"The custom AI agent for contract analysis saved our legal team 200+ hours per month. The 6-month post-launch support was exceptional and thorough."</p>
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-violet-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg">M</div>
-                    <div>
-                        <h4 class="font-bold text-white">Meera Iyer</h4>
-                        <p class="text-slate-500 text-sm">Legal Head, DataVault Inc.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 7 -->
-            <div class="glass-card hover-lift rounded-3xl p-10 testimonial-card" data-category="rag">
-                <div class="flex items-center mb-6">
-                    <div class="text-cyan-400 text-lg">★★★★★</div>
-                    <span class="ml-3 bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-full">RAG</span>
-                </div>
-                <p class="text-slate-300 leading-relaxed mb-8 text-lg italic">"Intelligent automation of our energy grid monitoring reduced downtime by 35%. The system now predicts failures 48 hours in advance using RAG analytics."</p>
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center text-white font-bold text-lg">A</div>
-                    <div>
-                        <h4 class="font-bold text-white">Arjun Reddy</h4>
-                        <p class="text-slate-500 text-sm">CTO, GreenGrid Energy</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 8 -->
-            <div class="glass-card hover-lift rounded-3xl p-10 testimonial-card" data-category="software">
-                <div class="flex items-center mb-6">
-                    <div class="text-cyan-400 text-lg">★★★★★</div>
-                    <span class="ml-3 bg-violet-500/20 text-violet-300 text-xs font-bold px-3 py-1 rounded-full">Software</span>
-                </div>
-                <p class="text-slate-300 leading-relaxed mb-8 text-lg italic">"Full-stack AI platform development was delivered on time and beyond expectations. Their team's expertise in autonomous systems is truly unmatched."</p>
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center text-white font-bold text-lg">K</div>
-                    <div>
-                        <h4 class="font-bold text-white">Kavitha S.</h4>
-                        <p class="text-slate-500 text-sm">CEO, NexGen Robotics</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-24 px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="glass-card rounded-[2.5rem] p-16 text-center border border-cyan-500/20 relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5"></div>
-                <div class="relative z-10">
-                    <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter">Want to Share Your <span class="text-gradient">Experience</span>?</h2>
-                    <p class="text-xl text-slate-400 mb-10 max-w-xl mx-auto">We'd love to hear about your journey with AxonFlow AI. Your feedback helps us deliver even better results.</p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="mailto:saurabhbajpai03@outlook.com?subject=Testimonial+for+AxonFlow+AI"
-                            class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-cyan-500/20 px-10 py-5 rounded-2xl font-bold text-xl text-white">Share Your Story</a>
-                        <a href="/contact"
-                            class="bg-slate-900/80 backdrop-blur-xl border border-white/10 shadow-2xl px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/5 transition-all text-white">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-24 px-6 bg-slate-950 border-t border-white/5">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
-            <div class="col-span-2 bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/30 transition-all duration-500 p-12 rounded-[2.5rem]">
-                <div class="flex items-center space-x-3 mb-10">
-                    <img src="/assets/logo_pro.png" alt="AxonFlow" class="h-10">
-                    <span class="text-2xl font-black tracking-tighter text-white uppercase">AxonFlow AI</span>
-                </div>
-                <p class="text-slate-400 max-w-sm leading-relaxed mb-8">The world's most comprehensive ecosystem of autonomous AI agents and intelligent systems.</p>
-            </div>
-            <div>
-                <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Quick Links</h4>
-                <ul class="space-y-4 text-slate-400 text-sm font-medium">
-                    <li><a href="/#services" class="hover:text-white transition-colors">Services</a></li>
-                    <li><a href="/#portfolio" class="hover:text-white transition-colors">Portfolio</a></li>
-                    <li><a href="/about-us" class="hover:text-white transition-colors">About Us</a></li>
-                    <li><a href="/what-we-do" class="hover:text-white transition-colors">What We Do</a></li>
-                    <li><a href="/who-we-are" class="hover:text-white transition-colors">Who We Are</a></li>
-                    <li><a href="/careers/" class="hover:text-white transition-colors">Careers</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Legal</h4>
-                <p class="text-slate-400 text-[10px] tracking-widest uppercase mb-2">UDYAM-UP-50-0236406</p>
-                <p class="text-slate-600 text-[10px]">&copy; 2025 AxonFlow AI. All rights reserved.</p>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-slate-600 tracking-[0.2em] uppercase font-bold gap-6 text-center">
-            <p>&copy; 2025 AxonFlow AI. All rights reserved.</p>
-            <div class="flex items-center space-x-2">
-                <span class="text-emerald-500">●</span>
-                <span>MSME Registered Enterprise</span>
+                <p class="ef-mono text-xs" style="color:var(--text-faint)">&copy; 2026 AxonFlow AI. UDYAM-UP-50-0236406. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        function filterTestimonials(category) {
-            const cards = document.querySelectorAll('.testimonial-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/40');
-                btn.classList.add('border-white/10', 'text-slate-400');
-            });
-            event.target.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/40');
-            event.target.classList.remove('border-white/10', 'text-slate-400');
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-    </script>
 </body>
 </html>
