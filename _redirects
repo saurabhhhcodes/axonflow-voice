@@ -1,13 +1,24 @@
 # Redirect rules for Render static site, Netlify, or similar
 # These rules ensure clean URLs (without .html) work correctly
 
-/careers/    /frontend/careers/index.html   200
-/agency/     /frontend/agency/index.html    200
-/academy     /frontend/careers/index.html   200
-/index       /frontend/index.html           200
-/about-us    /frontend/about-us.html        200
-/what-we-do  /frontend/what-we-do.html      200
-/who-we-are  /frontend/who-we-are.html      200
+/careers/       /frontend/careers/index.html    200
+/careers        /frontend/careers/index.html    200
+/agency/        /frontend/agency/index.html     200
+/agency         /frontend/agency/index.html     200
+/academy        /frontend/careers/index.html    200
+/index          /frontend/index.html            200
+/about-us       /frontend/about-us.html         200
+/what-we-do     /frontend/what-we-do.html       200
+/who-we-are     /frontend/who-we-are.html       200
+/testimonials   /frontend/testimonials.html     200
+/case-studies   /frontend/case-studies.html     200
+/pricing        /frontend/pricing.html          200
+/blog           /frontend/blog.html             200
+/contact        /frontend/contact.html          200
+/privacy        /frontend/privacy.html          200
+/terms          /frontend/terms.html            200
+/open-source/   /frontend/open-source/index.html 200
+/markets/       /frontend/markets/index.html    200
 
 # Catch-all for SPA/Routing
-/*           /frontend/index.html           200
+/*              /frontend/index.html            200
