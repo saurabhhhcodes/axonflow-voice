@@ -11,6 +11,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://axonflow.in/"/>
   </url>
   <url>
+    <loc>https://axonflow.in/open-source/</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://axonflow.in/markets/</loc>
     <lastmod>2026-07-25</lastmod>
     <changefreq>monthly</changefreq>

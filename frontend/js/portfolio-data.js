@@ -12,7 +12,9 @@
     { name: 'Chatlly Assistant', url: 'https://pal.chatlly.com', host: 'pal.chatlly.com', img: '/assets/chatlly_thumbnail_1773348633645.png', desc: 'Enterprise RAG knowledge assistant.', icon: '💬' },
     { name: 'AI Calendar Agent', url: 'https://ai-outlook-calendar-agent.streamlit.app', host: 'ai-outlook-calendar-agent.streamlit.app', img: '/assets/outlook_agent_thumbnail_v2_1773348691601.png', desc: 'Natural language Outlook automation.', icon: '📅' },
     { name: 'OpenBioGen-AI', url: 'https://openbiogen.vercel.app', host: 'openbiogen.vercel.app', img: '/assets/openbiogen_thumbnail_1773348613701.png', desc: 'Biological data generation system.', icon: '🧬' },
-    { name: 'Smart Plant Care', url: 'https://smart-plant-care-langchain.streamlit.app/', host: 'smart-plant-care-langchain.streamlit.app', img: '/assets/plant_care_thumbnail_v2_1773348708767.png', desc: 'AI-powered plant health monitoring.', icon: '🌿' }
+    { name: 'Smart Plant Care', url: 'https://smart-plant-care-langchain.streamlit.app/', host: 'smart-plant-care-langchain.streamlit.app', img: '/assets/plant_care_thumbnail_v2_1773348708767.png', desc: 'AI-powered plant health monitoring.', icon: '🌿' },
+    { name: 'Prestige Estates', url: 'https://legendary-tapioca-50caa6.netlify.app', host: 'legendary-tapioca-50caa6.netlify.app', gradient: 'linear-gradient(135deg,#1a1a2e,#16213e)', desc: 'Ultra-luxury real estate showcase built for an Irvine, CA client.', icon: '🏰' },
+    { name: 'Wanderlux Landing', url: 'https://animated-profiterole-542134.netlify.app', host: 'animated-profiterole-542134.netlify.app', gradient: 'linear-gradient(135deg,#2b1a1a,#3e2a16)', desc: 'Bespoke ultra-luxury travel experiences landing platform.', icon: '✈️' }
   ];
 
   function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -22,8 +24,8 @@
       '<article class="group relative ef-card overflow-hidden p-8 cursor-pointer" data-preview-url="' + esc(p.url) + '" data-preview-name="' + esc(p.name) + '" role="button" tabindex="0" aria-label="Open live preview of ' + esc(p.name) + '">' +
         '<div class="browser-mockup mb-6 relative">' +
           '<div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url-bar">' + esc(p.host) + '</span></div>' +
-          '<div class="screen">' +
-            '<img src="' + p.img + '" alt="' + esc(p.name) + ' screenshot" loading="lazy">' +
+          '<div class="screen"' + (p.gradient ? ' style="background:' + p.gradient + '"' : '') + '>' +
+            (p.img ? '<img src="' + p.img + '" alt="' + esc(p.name) + ' screenshot" loading="lazy">' : '<div class="w-full h-full flex items-center justify-center text-5xl opacity-40" aria-hidden="true">' + p.icon + '</div>') +
             '<div class="gradient-overlay"></div>' +
             '<div class="absolute bottom-3 left-3 w-9 h-9 rounded-lg flex items-center justify-center text-lg" style="background:var(--accent-soft)" aria-hidden="true">' + p.icon + '</div>' +
             '<span class="preview-tag">▶ Live preview</span>' +
