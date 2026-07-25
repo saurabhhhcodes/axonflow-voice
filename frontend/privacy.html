@@ -23,26 +23,35 @@
     <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{slate:{950:'#020617'}}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/enterprise.css">
+    <script src="/js/config.js" defer></script>
 </head>
-<body class="bg-black text-slate-300 antialiased selection:bg-cyan-500/30 font-['Inter']">
-    <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
-            <a href="/" class="flex items-center space-x-3">
-                <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-10">
-                <span class="text-xl font-black tracking-tighter uppercase text-white">AXONFLOW AI</span>
-            </a>
-            <div class="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest">
-                <a href="/#services" class="hover:text-cyan-400 transition-colors text-slate-300">Services</a>
-                <a href="/#portfolio" class="hover:text-cyan-400 transition-colors text-slate-300">Portfolio</a>
-                <a href="/about-us" class="hover:text-cyan-400 transition-colors text-slate-300">About</a>
-                <a href="/what-we-do" class="hover:text-cyan-400 transition-colors text-slate-300">What We Do</a>
-                <a href="/who-we-are" class="hover:text-cyan-400 transition-colors text-slate-300">Who We Are</a>
-                <a href="/careers/" class="hover:text-cyan-400 transition-colors text-slate-300">Careers</a>
-                <a href="/contact" class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 px-6 py-2 rounded-lg text-white">Contact Us</a>
+<body class="ef-body antialiased">
+    <header>
+        <nav class="ef-nav" aria-label="Main navigation">
+            <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
+                <a href="/" class="flex items-center space-x-2 shrink-0" aria-label="AxonFlow AI Home">
+                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8 w-8" width="32" height="32">
+                    <span class="ef-display text-base font-bold tracking-tight">AxonFlow AI</span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-5 text-xs font-medium">
+                    <a href="/" class="ef-navlink">Home</a>
+                    <a href="/#services" class="ef-navlink">Services</a>
+                    <a href="/#portfolio" class="ef-navlink">Portfolio</a>
+                    <a href="/about-us" class="ef-navlink">About</a>
+                    <a href="/what-we-do" class="ef-navlink">What We Do</a>
+                    <a href="/who-we-are" class="ef-navlink">Who We Are</a>
+                    <a href="/case-studies" class="ef-navlink">Case Studies</a>
+                    <a href="/testimonials" class="ef-navlink">Testimonials</a>
+                    <a href="/pricing" class="ef-navlink">Pricing</a>
+                    <a href="/careers/" class="ef-navlink">Careers</a>
+                    <a href="/blog" class="ef-navlink">Blog</a>
+                    <a href="/contact" class="ef-cta py-1.5 px-3 text-xs">Talk to us</a>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <section class="pt-40 pb-24 px-6 min-h-screen">
         <div class="max-w-4xl mx-auto">

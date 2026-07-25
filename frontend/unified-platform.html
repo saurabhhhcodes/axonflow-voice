@@ -9,28 +9,36 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="js/firebase-config.js"></script>
     <script src="js/backend-integration.js"></script>
-    <script src="js/global-auth.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/enterprise.css">
 </head>
-<body class="bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white">
-    <!-- Unified Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-purple-500/30">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <img src="assets/axonflow-logo.svg" alt="AxonFlow" class="h-10">
-                <span class="text-2xl font-bold">AxonFlow</span>
-                <div class="ml-4 bg-gradient-to-r from-orange-500/10 to-green-500/10 border border-orange-400/30 rounded-xl px-4 py-2">
-                    <div class="text-xs text-orange-300">🇮🇳 MSME Registered</div>
-                    <div class="text-[10px] text-orange-200 font-mono">UDYAM-UP-50-0236406</div>
+<body class="ef-body antialiased">
+    <header>
+        <nav class="ef-nav" aria-label="Main navigation">
+            <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
+                <a href="/" class="flex items-center space-x-2 shrink-0" aria-label="AxonFlow AI Home">
+                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8 w-8" width="32" height="32">
+                    <span class="ef-display text-base font-bold tracking-tight">AxonFlow AI</span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-5 text-xs font-medium">
+                    <a href="/" class="ef-navlink">Home</a>
+                    <a href="/#services" class="ef-navlink">Services</a>
+                    <a href="/#portfolio" class="ef-navlink">Portfolio</a>
+                    <a href="/about-us" class="ef-navlink">About</a>
+                    <a href="/what-we-do" class="ef-navlink">What We Do</a>
+                    <a href="/who-we-are" class="ef-navlink">Who We Are</a>
+                    <a href="/case-studies" class="ef-navlink">Case Studies</a>
+                    <a href="/testimonials" class="ef-navlink">Testimonials</a>
+                    <a href="/pricing" class="ef-navlink">Pricing</a>
+                    <a href="/careers/" class="ef-navlink">Careers</a>
+                    <a href="/blog" class="ef-navlink">Blog</a>
+                    <a href="/contact" class="ef-cta py-1.5 px-3 text-xs">Talk to us</a>
                 </div>
             </div>
-            <div class="flex items-center space-x-6">
-                <a href="#academy" class="hover:text-cyan-400">Academy</a>
-                <a href="#agency" class="hover:text-purple-400">Agency</a>
-                <a href="#pricing" class="hover:text-green-400">Pricing</a>
-                <button onclick="globalAuth.showAuthModal()" class="bg-gradient-to-r from-purple-500 to-cyan-500 px-6 py-2 rounded-lg font-bold">Sign In</button>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center justify-center pt-20">
