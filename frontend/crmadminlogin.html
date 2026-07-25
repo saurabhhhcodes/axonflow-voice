@@ -91,7 +91,16 @@
 </head>
 <body class="login-bg min-h-screen flex items-center justify-center antialiased selection:bg-cyan-500/30 font-['Inter']">
     <div class="login-bg fixed inset-0"></div>
-    <div class="relative z-10 w-full max-w-md px-6 fade-in">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-xl border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-2">
+                <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-7">
+                <span class="text-sm font-bold tracking-tighter uppercase text-white/80">AXONFLOW AI</span>
+            </a>
+            <a href="/" class="text-cyan-400 hover:text-cyan-300 text-xs font-medium transition-colors">Back to Site</a>
+        </div>
+    </nav>
+    <div class="relative z-10 w-full max-w-md px-6 fade-in pt-24">
         <div class="glass-card rounded-2xl p-8 shadow-2xl shadow-black/50">
             <div class="text-center mb-8">
                 <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-16 mx-auto mb-4">
@@ -136,10 +145,17 @@
                 <p class="text-slate-500 text-xs">Protected area. Unauthorized access is prohibited.</p>
             </div>
         </div>
-        <p class="text-center text-slate-600 text-xs mt-6">
-            &copy; 2025 AxonFlow AI. All rights reserved.
-        </p>
     </div>
+    <footer class="relative w-full z-10 border-t border-slate-800 bg-black/50 backdrop-blur-xl mt-12">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-6">
+                <span class="text-sm font-bold tracking-tighter uppercase text-white/80">AXONFLOW AI</span>
+            </div>
+            <p class="text-slate-600 text-xs">&copy; 2025 AxonFlow AI. All rights reserved. <span class="text-slate-700">UDYAM-UP-50-0236406</span></p>
+            <a href="/" class="text-cyan-400 hover:text-cyan-300 text-xs font-medium transition-colors">Back to Site</a>
+        </div>
+    </footer>
     <script>
         const CRM_CREDENTIALS = { email: 'admin@axonflow.in', password: 'axonflow2025' };
         const SESSION_KEY = 'crm_admin_session';

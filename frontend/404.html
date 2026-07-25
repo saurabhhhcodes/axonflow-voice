@@ -470,10 +470,12 @@
 
     <script>
         async function handleSPARouting() {
-            const path = window.location.pathname;
-            console.log(`SPA Route detected: ${path}`);
+            const path = window.location.pathname.replace(/\/+$/, '') || '/';
+
+            if (path === '/' || path === '/index.html') return;
 
             const routes = {
+                '/': '/index.html',
                 '/about-us': '/about-us.html',
                 '/what-we-do': '/what-we-do.html',
                 '/who-we-are': '/who-we-are.html',
