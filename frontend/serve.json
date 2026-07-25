@@ -10,10 +10,6 @@
             "destination": "/agency/index.html"
         },
         {
-            "source": "/academy",
-            "destination": "/careers/index.html"
-        },
-        {
             "source": "/careers/",
             "destination": "/careers/index.html"
         },
