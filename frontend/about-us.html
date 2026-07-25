@@ -1,178 +1,104 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-
+<html lang="en-IN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | AxonFlow AI - India's Premier AI Agency</title>
-    <meta name="description" content="Learn about AxonFlow AI's mission to democratize intelligence through autonomous agent systems. India's MSME-registered AI agency building the future of enterprise AI.">
+    <title>About Us | AxonFlow AI — Enterprise Autonomous Systems</title>
+    <meta name="description" content="AxonFlow AI designs and operates enterprise-grade autonomous agent infrastructure, custom RAG systems, and intelligent workflow automation. MSME registered.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://axonflow.in/about-us">
-    <link rel="alternate" hreflang="en-IN" href="https://axonflow.in/about-us">
-    <link rel="alternate" hreflang="en" href="https://axonflow.in/about-us">
-    <link rel="alternate" hreflang="x-default" href="https://axonflow.in/about-us">
     <link rel="icon" type="image/png" href="/assets/logo_pro.png">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://axonflow.in/about-us">
-    <meta property="og:title" content="About Us | AxonFlow AI">
-    <meta property="og:description" content="Learn about AxonFlow AI's mission to democratize intelligence through autonomous agent systems.">
-    <meta property="og:site_name" content="AxonFlow AI">
-    <meta property="og:locale" content="en_IN">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@saurabhhhcodes">
+    <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
+    <link rel="apple-touch-icon" href="/assets/logo_pro.png">
+    <meta name="theme-color" content="#07080a">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{slate:{950:'#020617'}}}}}</script>
+    <script>tailwind.config={theme:{extend:{colors:{ink:'#07080a'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="/js/config.js"></script>
-    <style>.hero-gradient{background:radial-gradient(circle at top right,rgba(139,92,246,0.15),transparent),radial-gradient(circle at bottom left,rgba(6,182,212,0.15),transparent),#020617}</style>
-    <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Organization","name":"AxonFlow AI","url":"https://axonflow.in","logo":"https://axonflow.in/assets/logo_pro.png","description":"India's MSME-registered AI agency building autonomous agent systems.","foundingDate":"2024","address":{"@type":"PostalAddress","addressCountry":"IN"},"contactPoint":{"@type":"ContactPoint","email":"saurabhbajpai03@outlook.com","contactType":"customer service"},"sameAs":["https://github.com/saurabhhhcodes","https://linkedin.com/in/saurabhbajpai03"]}
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/enterprise.css">
+    <script src="/js/config.js" defer></script>
 </head>
-
-<body class="bg-slate-950 text-slate-200 antialiased selection:bg-cyan-500/30">
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-cyan-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold">Skip to main content</a>
-
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="/" class="flex items-center space-x-3">
-                <img src="/assets/logo_pro.png" alt="AxonFlow" class="h-10 hover:scale-110 transition-transform">
-                <span class="text-xl font-black tracking-tighter text-white uppercase">AxonFlow AI</span>
-            </a>
-
-            <div class="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-widest">
-                <a href="/#services" class="hover:text-cyan-400 transition-colors">Services</a>
-                <a href="/#portfolio" class="hover:text-cyan-400 transition-colors">Portfolio</a>
-                <a href="/testimonials" class="hover:text-cyan-400 transition-colors">Testimonials</a>
-                <a href="/about-us" class="text-cyan-400">About</a>
-                <a href="/what-we-do" class="hover:text-cyan-400 transition-colors">What We Do</a>
-                <a href="/blog" class="hover:text-cyan-400 transition-colors">Blog</a>
-                <a href="/contact"
-                    class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-cyan-500/20 px-6 py-2 rounded-lg text-white">Contact
-                    Us</a>
+<body class="ef-body antialiased">
+    <header>
+        <nav class="ef-nav" aria-label="Main navigation">
+            <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+                <a href="/" class="flex items-center space-x-3" aria-label="AxonFlow AI Home">
+                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-9" width="36" height="36">
+                    <span class="ef-display text-lg font-semibold tracking-tight">AxonFlow AI</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/#services" class="ef-navlink">Services</a>
+                    <a href="/#portfolio" class="ef-navlink">Portfolio</a>
+                    <a href="/open-source/" class="ef-navlink">Open Source</a>
+                    <a href="/markets/" class="ef-navlink">Global</a>
+                    <a href="/about-us" class="ef-navlink" style="color:var(--text)">About</a>
+                    <a href="/blog" class="ef-navlink">Blog</a>
+                    <a href="/contact" class="ef-cta">Talk to us</a>
+                </div>
             </div>
+        </nav>
+    </header>
+
+    <main class="pt-40 pb-24">
+        <section class="max-w-5xl mx-auto px-6 mb-24">
+            <div class="ef-eyebrow mb-6">Our Mission & Mandate</div>
+            <h1 class="ef-display text-5xl md:text-7xl font-semibold mb-8 leading-[1.05] tracking-tight">
+                Democratizing intelligence through <span class="italic" style="color:var(--accent)">autonomous systems.</span>
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl leading-relaxed" style="color:var(--text-dim)">
+                AxonFlow AI is an enterprise AI engineering agency based in India and operating globally. We design, deploy, and maintain mission-critical autonomous agent systems and enterprise RAG pipelines for teams that need audited accuracy, uptime, and real-world results.
+            </p>
+        </section>
+
+        <div class="ef-rail px-6 mb-24">
+            <span><span class="dot-live"></span>MSME Registered Enterprise: UDYAM-UP-50-0236406</span>
+            <span>·</span>
+            <span>6-Month Post-Launch SLA on every build</span>
+            <span>·</span>
+            <span>Clients across US, EU, Gulf & India</span>
         </div>
-    </nav>
 
-    <main id="main-content">
-        <!-- Hero Section -->
-        <section class="hero-gradient pt-48 pb-32 px-6">
-            <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter leading-tight">
-                    Democratizing <span
-                        class="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Intelligence</span>
-                </h1>
-                <p class="text-xl text-slate-400 leading-relaxed mb-12 max-w-2xl mx-auto">
-                    At AxonFlow AI, we believe the next leap in human productivity won't come from better tools, but from
-                    autonomous systems that understand our goals and act on them.
-                </p>
+        <section class="max-w-7xl mx-auto px-6 mb-24">
+            <div class="grid md:grid-cols-2 gap-8">
+                <article class="ef-card p-12">
+                    <div class="ef-mono text-xs mb-6" style="color:var(--accent)">01 / MISSION</div>
+                    <h2 class="ef-display text-3xl font-semibold mb-4">Engineering Autonomy</h2>
+                    <p class="leading-relaxed text-base" style="color:var(--text-dim)">
+                        To build agent systems that eliminate cognitive overload, automate intricate multi-step workflows, and operate continuously with verifiable accuracy.
+                    </p>
+                </article>
+                <article class="ef-card p-12">
+                    <div class="ef-mono text-xs mb-6" style="color:var(--accent-2)">02 / RELIABILITY</div>
+                    <h2 class="ef-display text-3xl font-semibold mb-4">6-Month SLA Guarantee</h2>
+                    <p class="leading-relaxed text-base" style="color:var(--text-dim)">
+                        Every production deployment is backed by 6 months of dedicated post-launch support and performance optimization to ensure zero downtime.
+                    </p>
+                </article>
             </div>
         </section>
 
-        <!-- Mission & Vision -->
-        <section class="py-24 px-6 bg-slate-950 relative overflow-hidden">
-            <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
-                <div
-                    class="bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/30 transition-all duration-500 p-12 rounded-[2.5rem]">
-                    <div
-                        class="w-14 h-14 bg-cyan-500/20 rounded-2xl flex items-center justify-center text-3xl mb-8 border border-cyan-500/30">
-                        🎯</div>
-                    <h3 class="text-3xl font-bold text-white mb-6">Our Mission</h3>
-                    <p class="text-slate-400 leading-relaxed text-lg">
-                        To engineer autonomous AI agent ecosystems that bridge the gap between complex data and actionable
-                        outcomes. We empower businesses to offload cognitive debt to battle-tested AI architectures.
-                    </p>
+        <section class="max-w-7xl mx-auto px-6">
+            <div class="ef-card p-12 md:p-16 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div>
+                    <h3 class="ef-display text-3xl font-semibold mb-2">Ready to deploy enterprise AI?</h3>
+                    <p style="color:var(--text-dim)">Schedule a technical architecture call with our engineering team.</p>
                 </div>
-                <div
-                    class="bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/30 transition-all duration-500 p-12 rounded-[2.5rem]">
-                    <div
-                        class="w-14 h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center text-3xl mb-8 border border-purple-500/30">
-                        🚀</div>
-                    <h3 class="text-3xl font-bold text-white mb-6">Our Vision</h3>
-                    <p class="text-slate-400 leading-relaxed text-lg">
-                        A world where every individual and enterprise is augmented by a personalized swarm of AI agents,
-                        democratizing expertise and accelerating the pace of global innovation.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats -->
-        <section class="py-24 bg-slate-900/30 border-y border-white/5">
-            <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-                <div class="group">
-                    <div class="text-5xl font-black text-white mb-3 group-hover:text-cyan-400 transition-colors">15+</div>
-                    <div class="text-xs text-slate-500 uppercase tracking-[0.2em] font-bold">Live Agents</div>
-                </div>
-                <div class="group">
-                    <div class="text-5xl font-black text-white mb-3 group-hover:text-purple-400 transition-colors">50+</div>
-                    <div class="text-xs text-slate-500 uppercase tracking-[0.2em] font-bold">Lab Projects</div>
-                </div>
-                <div class="group">
-                    <div class="text-5xl font-black text-white mb-3 group-hover:text-emerald-400 transition-colors">100%
-                    </div>
-                    <div class="text-xs text-slate-500 uppercase tracking-[0.2em] font-bold">Open Source DNA</div>
-                </div>
-                <div class="group">
-                    <div class="text-5xl font-black text-white mb-3 group-hover:text-blue-400 transition-colors">24/7</div>
-                    <div class="text-xs text-slate-500 uppercase tracking-[0.2em] font-bold">Autonomous Uptime</div>
-                </div>
+                <a href="/contact" class="ef-btn-primary whitespace-nowrap">Schedule Consultation →</a>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="py-24 px-6 bg-slate-950 border-t border-white/5">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
-            <div class="bg-slate-900/60 backdrop-blur-xl border border-white/10 hover:border-cyan-500/30 transition-all duration-500 p-12 rounded-[2.5rem]">
-                <div class="flex items-center space-x-3 mb-10">
-                    <img src="/assets/logo_pro.png" alt="AxonFlow" class="h-10">
-                    <span class="text-2xl font-black tracking-tighter text-white uppercase">AxonFlow AI</span>
+    <footer class="ef-footer py-20" role="contentinfo">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center space-x-3">
+                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8" width="32" height="32">
+                    <span class="ef-display text-lg font-semibold">AxonFlow AI</span>
                 </div>
-                <p class="text-slate-400 max-w-sm leading-relaxed mb-8">
-                    The world's most comprehensive ecosystem of autonomous AI agents and intelligent systems.
-                </p>
-            </div>
-            <div>
-                <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Services</h4>
-                <ul class="space-y-4 text-slate-400 text-sm font-medium">
-                    <li><a href="/#services" class="hover:text-white transition-colors">AI Agents</a></li>
-                    <li><a href="/#services" class="hover:text-white transition-colors">RAG</a></li>
-                    <li><a href="/#services" class="hover:text-white transition-colors">Automation</a></li>
-                    <li><a href="/agency" class="hover:text-white transition-colors">Agency Solutions</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Company</h4>
-                <ul class="space-y-4 text-slate-400 text-sm font-medium">
-                    <li><a href="/about-us" class="hover:text-white transition-colors">About Us</a></li>
-                    <li><a href="/who-we-are" class="hover:text-white transition-colors">Who We Are</a></li>
-                    <li><a href="/testimonials" class="hover:text-white transition-colors">Testimonials</a></li>
-                    <li><a href="/case-studies" class="hover:text-white transition-colors">Case Studies</a></li>
-                    <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
-                    <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold mb-8 tracking-widest uppercase text-white text-sm">Legal</h4>
-                <ul class="space-y-4 text-slate-400 text-sm font-medium">
-                    <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                    <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
-                </ul>
-                <p class="text-slate-400 text-[10px] tracking-widest uppercase mt-8">UDYAM-UP-50-0236406</p>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-slate-600 tracking-[0.2em] uppercase font-bold gap-6 text-center">
-            <p>&copy; 2025 AxonFlow AI. All rights reserved.</p>
-            <div class="flex items-center space-x-2">
-                <span class="text-emerald-500">●</span>
-                <span>MSME Registered Enterprise</span>
+                <p class="ef-mono text-xs" style="color:var(--text-faint)">&copy; 2026 AxonFlow AI. UDYAM-UP-50-0236406. All rights reserved.</p>
             </div>
         </div>
     </footer>
 </body>
-
 </html>
