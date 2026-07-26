@@ -1,100 +1,78 @@
 {
-  "functions": {
-    "api/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "headers": [
     {
-      "source": "/(.*)\\.html",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" },
-        { "key": "Pragma", "value": "no-cache" }
-      ]
-    },
-    {
-      "source": "/",
+      "source": "/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" }
       ]
     }
   ],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/about-us",
-      "destination": "/frontend/about-us.html"
+      "destination": "/about-us.html"
     },
     {
       "source": "/what-we-do",
-      "destination": "/frontend/what-we-do.html"
+      "destination": "/what-we-do.html"
     },
     {
       "source": "/who-we-are",
-      "destination": "/frontend/who-we-are.html"
+      "destination": "/who-we-are.html"
     },
     {
       "source": "/careers",
-      "destination": "/frontend/careers/index.html"
-    },
-    {
-      "source": "/careers/",
-      "destination": "/frontend/careers/index.html"
-    },
-    {
-      "source": "/agency",
-      "destination": "/frontend/agency/index.html"
-    },
-    {
-      "source": "/agency/",
-      "destination": "/frontend/agency/index.html"
+      "destination": "/careers/index.html"
     },
     {
       "source": "/testimonials",
-      "destination": "/frontend/testimonials.html"
+      "destination": "/testimonials.html"
     },
     {
       "source": "/case-studies",
-      "destination": "/frontend/case-studies.html"
+      "destination": "/case-studies.html"
     },
     {
       "source": "/pricing",
-      "destination": "/frontend/pricing.html"
+      "destination": "/pricing.html"
     },
     {
       "source": "/blog",
-      "destination": "/frontend/blog.html"
+      "destination": "/blog.html"
     },
     {
       "source": "/contact",
-      "destination": "/frontend/contact.html"
+      "destination": "/contact.html"
     },
     {
       "source": "/privacy",
-      "destination": "/frontend/privacy.html"
+      "destination": "/privacy.html"
     },
     {
       "source": "/terms",
-      "destination": "/frontend/terms.html"
+      "destination": "/terms.html"
     },
     {
-      "source": "/crmadminlogin/?",
-      "destination": "/frontend/crmadminlogin.html"
+      "source": "/open-source",
+      "destination": "/open-source/index.html"
     },
     {
-      "source": "/crmdashboard",
-      "destination": "/frontend/crmdashboard.html"
+      "source": "/agency",
+      "destination": "/agency/index.html"
     },
     {
-      "source": "/sitemap.xml",
-      "destination": "/frontend/sitemap.xml"
+      "source": "/unified-platform",
+      "destination": "/unified-platform.html"
     },
     {
-      "source": "/robots.txt",
-      "destination": "/frontend/robots.txt"
+      "source": "/markets",
+      "destination": "/markets/index.html"
     },
     {
-      "source": "/((?!api/).*)",
-      "destination": "/frontend/$1"
+      "source": "/markets/:slug",
+      "destination": "/markets/:slug/index.html"
     }
   ]
 }
