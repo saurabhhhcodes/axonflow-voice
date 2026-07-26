@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AxonFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/enterprise.css">
+</head>
+<body class="ef-body antialiased min-h-screen">
+    <!-- Admin Header -->
+    <header class="bg-black/50 backdrop-blur-lg border-b border-purple-500/30 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="/assets/logo_pro.png" alt="AxonFlow" class="h-10">
+                <h1 class="text-2xl font-bold text-white">Admin Dashboard</h1>
+            </div>
+            <div id="admin-auth" class="text-white"></div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-300 text-sm">Total Users</h3>
+                    <span class="text-2xl">👥</span>
+                </div>
+                <p class="text-3xl font-bold text-white" id="total-users">0</p>
+            </div>
+            <div class="bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-500/30 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-300 text-sm">Total Enrollments</h3>
+                    <span class="text-2xl">📚</span>
+                </div>
+                <p class="text-3xl font-bold text-white" id="total-enrollments">0</p>
+            </div>
+            <div class="bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/30 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-300 text-sm">Total Revenue</h3>
+                    <span class="text-2xl">💰</span>
+                </div>
+                <p class="text-3xl font-bold text-white" id="total-revenue">₹0</p>
+            </div>
+            <div class="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border border-yellow-500/30 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-300 text-sm">Active Courses</h3>
+                    <span class="text-2xl">🎓</span>
+                </div>
+                <p class="text-3xl font-bold text-white" id="active-courses">40+</p>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex space-x-4 mb-6 border-b border-slate-700">
+            <button onclick="showTab('users')" class="tab-btn active px-6 py-3 text-white font-medium border-b-2 border-purple-500">Users</button>
+            <button onclick="showTab('enrollments')" class="tab-btn px-6 py-3 text-gray-400 font-medium hover:text-white">Enrollments</button>
+            <button onclick="showTab('payments')" class="tab-btn px-6 py-3 text-gray-400 font-medium hover:text-white">Payments</button>
+            <button onclick="showTab('courses')" class="tab-btn px-6 py-3 text-gray-400 font-medium hover:text-white">Courses</button>
+            <button onclick="showTab('analytics')" class="tab-btn px-6 py-3 text-gray-400 font-medium hover:text-white">Analytics</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="tab-content" class="bg-slate-900/50 border border-slate-700 rounded-2xl p-6">
+            <!-- Content will be loaded here -->
+        </div>
+    </main>
+
+    <script>
+        // Admin authentication check
+        const ADMIN_EMAILS = ['saurabhbajpaiai@gmail.com', 'saurabhbajpai1442@gmail.com'];
+        
+        function checkAdminAuth() {
+            const user = JSON.parse(localStorage.getItem('axonflow_user') || 'null');
+            const adminAuth = document.getElementById('admin-auth');
+            
+            if (!user || !ADMIN_EMAILS.includes(user.email)) {
+                document.body.innerHTML = `
+                    <div class="min-h-screen flex items-center justify-center">
+                        <div class="bg-slate-900 border border-red-500 rounded-2xl p-8 text-center">
+                            <h2 class="text-2xl font-bold text-red-400 mb-4">⛔ Access Denied</h2>
+                            <p class="text-gray-300 mb-6">You don't have admin privileges.</p>
+                            <a href="index.html" class="bg-purple-500 text-white px-6 py-3 rounded-lg font-medium">Go to Home</a>
+                        </div>
+                    </div>
+                `;
+                return false;
+            }
+            
+            adminAuth.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <img src="${user.avatar}" alt="Admin" class="w-8 h-8 rounded-full">
+                    <span class="text-sm">Admin: ${user.name}</span>
+                </div>
+            `;
+            return true;
+        }
+
+        // Load dashboard data
+        async function loadDashboard() {
+            if (!checkAdminAuth()) return;
+            
+            // Load from backend
+            if (window.backendAPI) {
+                const analytics = await window.backendAPI.getAnalytics();
+                document.getElementById('total-users').textContent = analytics.total_users || 0;
+                document.getElementById('total-enrollments').textContent = analytics.total_enrollments || 0;
+                document.getElementById('total-revenue').textContent = '₹' + (analytics.total_revenue || 0).toLocaleString();
+            }
+            
+            // Aggregate local data
+            let totalUsers = 0;
+            let totalEnrollments = 0;
+            let totalRevenue = 0;
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.includes('_enrolled_courses')) {
+                    totalUsers++;
+                    const enrollments = JSON.parse(localStorage.getItem(key) || '[]');
+                    totalEnrollments += enrollments.length;
+                    enrollments.forEach(e => {
+                        totalRevenue += e.price || 0;
+                    });
+                }
+            }
+            
+            // Update with local data if higher
+            const currentUsers = parseInt(document.getElementById('total-users').textContent) || 0;
+            const currentEnrollments = parseInt(document.getElementById('total-enrollments').textContent) || 0;
+            const currentRevenue = parseInt(document.getElementById('total-revenue').textContent.replace('₹', '').replace(/,/g, '')) || 0;
+            
+            document.getElementById('total-users').textContent = Math.max(currentUsers, totalUsers);
+            document.getElementById('total-enrollments').textContent = Math.max(currentEnrollments, totalEnrollments);
+            document.getElementById('total-revenue').textContent = '₹' + Math.max(currentRevenue, totalRevenue).toLocaleString();
+            
+            showTab('users');
+        }
+
+        // Show tab content
+        function showTab(tab) {
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = 'tab-btn px-6 py-3 text-gray-400 font-medium hover:text-white';
+            });
+            event.target.className = 'tab-btn active px-6 py-3 text-white font-medium border-b-2 border-purple-500';
+            
+            const content = document.getElementById('tab-content');
+            
+            switch(tab) {
+                case 'users':
+                    showUsers(content);
+                    break;
+                case 'enrollments':
+                    showEnrollments(content);
+                    break;
+                case 'payments':
+                    showPayments(content);
+                    break;
+                case 'courses':
+                    showCourses(content);
+                    break;
+                case 'analytics':
+                    showAnalytics(content);
+                    break;
+            }
+        }
+
+        function showUsers(content) {
+            const users = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.includes('_enrolled_courses')) {
+                    const userId = key.split('_')[0];
+                    const enrollments = JSON.parse(localStorage.getItem(key) || '[]');
+                    users.push({
+                        id: userId,
+                        enrollments: enrollments.length,
+                        totalSpent: enrollments.reduce((sum, e) => sum + (e.price || 0), 0)
+                    });
+                }
+            }
+            
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-white mb-6">All Users (${users.length})</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left text-gray-300 py-3 px-4">User ID</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Enrollments</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Total Spent</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${users.map(u => `
+                                <tr class="border-b border-slate-800 hover:bg-slate-800/50">
+                                    <td class="py-3 px-4 text-white font-mono text-sm">${u.id}</td>
+                                    <td class="py-3 px-4 text-gray-300">${u.enrollments}</td>
+                                    <td class="py-3 px-4 text-green-400 font-bold">₹${u.totalSpent.toLocaleString()}</td>
+                                    <td class="py-3 px-4">
+                                        <button onclick="viewUserDetails('${u.id}')" class="text-cyan-400 hover:text-cyan-300">View Details</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function showEnrollments(content) {
+            const enrollments = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.includes('_enrolled_courses')) {
+                    const userId = key.split('_')[0];
+                    const userEnrollments = JSON.parse(localStorage.getItem(key) || '[]');
+                    userEnrollments.forEach(e => {
+                        enrollments.push({...e, userId});
+                    });
+                }
+            }
+            
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-white mb-6">All Enrollments (${enrollments.length})</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left text-gray-300 py-3 px-4">Course</th>
+                                <th class="text-left text-gray-300 py-3 px-4">User ID</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Price</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Progress</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${enrollments.map(e => `
+                                <tr class="border-b border-slate-800 hover:bg-slate-800/50">
+                                    <td class="py-3 px-4 text-white">${e.name}</td>
+                                    <td class="py-3 px-4 text-gray-400 font-mono text-sm">${e.userId}</td>
+                                    <td class="py-3 px-4 text-green-400">₹${e.price?.toLocaleString()}</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-24 bg-slate-700 rounded-full h-2">
+                                                <div class="bg-purple-500 h-2 rounded-full" style="width: ${e.progress || 0}%"></div>
+                                            </div>
+                                            <span class="text-gray-300 text-sm">${e.progress || 0}%</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-4 text-gray-400 text-sm">${new Date(e.enrolledAt).toLocaleDateString()}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function showPayments(content) {
+            const payments = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.includes('_payments')) {
+                    const userPayments = JSON.parse(localStorage.getItem(key) || '[]');
+                    payments.push(...userPayments);
+                }
+            }
+            
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-white mb-6">Payment History (${payments.length})</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left text-gray-300 py-3 px-4">Transaction ID</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Course</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Amount</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Method</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Date</th>
+                                <th class="text-left text-gray-300 py-3 px-4">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${payments.map(p => `
+                                <tr class="border-b border-slate-800 hover:bg-slate-800/50">
+                                    <td class="py-3 px-4 text-cyan-400 font-mono text-sm">${p.transactionId}</td>
+                                    <td class="py-3 px-4 text-white">${p.courseName}</td>
+                                    <td class="py-3 px-4 text-green-400 font-bold">₹${p.amount?.toLocaleString()}</td>
+                                    <td class="py-3 px-4 text-gray-300">${p.method}</td>
+                                    <td class="py-3 px-4 text-gray-400 text-sm">${new Date(p.date).toLocaleDateString()}</td>
+                                    <td class="py-3 px-4">
+                                        <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs">✓ ${p.status}</span>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function showCourses(content) {
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-white mb-6">Course Management</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-white mb-4">📚 Total Courses: 40+</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li>• Children's Courses: 5</li>
+                            <li>• Budget Courses: 12</li>
+                            <li>• Intermediate: 11</li>
+                            <li>• Advanced: 11</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-white mb-4">🎯 Popular Courses</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li>• AI & Machine Learning</li>
+                            <li>• Full-Stack MERN</li>
+                            <li>• Data Science</li>
+                            <li>• Biotech & AI</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showAnalytics(content) {
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-white mb-6">Analytics & Insights</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-4">📈 Growth Metrics</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-300">User Growth</span>
+                                    <span class="text-green-400">+45%</span>
+                                </div>
+                                <div class="w-full bg-slate-700 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-300">Revenue Growth</span>
+                                    <span class="text-green-400">+62%</span>
+                                </div>
+                                <div class="w-full bg-slate-700 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 62%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-300">Course Completion</span>
+                                    <span class="text-yellow-400">38%</span>
+                                </div>
+                                <div class="w-full bg-slate-700 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 38%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-4">💡 Quick Stats</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li>• Average Course Price: ₹3,500</li>
+                            <li>• Most Popular: AI & ML</li>
+                            <li>• Avg. Completion Time: 8 weeks</li>
+                            <li>• Student Satisfaction: 4.8/5</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        function viewUserDetails(userId) {
+            const enrollments = JSON.parse(localStorage.getItem(`${userId}_enrolled_courses`) || '[]');
+            const payments = JSON.parse(localStorage.getItem(`${userId}_payments`) || '[]');
+            
+            alert(`User: ${userId}\nEnrollments: ${enrollments.length}\nTotal Spent: ₹${payments.reduce((sum, p) => sum + p.amount, 0).toLocaleString()}`);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadDashboard);
+    </script>
+</body>
+</html>

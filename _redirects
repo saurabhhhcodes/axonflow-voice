@@ -1,24 +1,34 @@
-# Redirect rules for Render static site, Netlify, or similar
-# These rules ensure clean URLs (without .html) work correctly
+# Redirect rules for Render/Netlify static sites
+# These ensure clean URLs (without .html) work correctly
 
-/careers/       /frontend/careers/index.html    200
-/careers        /frontend/careers/index.html    200
-/agency/        /frontend/agency/index.html     200
-/agency         /frontend/agency/index.html     200
-/academy        /frontend/careers/index.html    200
-/index          /frontend/index.html            200
-/about-us       /frontend/about-us.html         200
-/what-we-do     /frontend/what-we-do.html       200
-/who-we-are     /frontend/who-we-are.html       200
-/testimonials   /frontend/testimonials.html     200
-/case-studies   /frontend/case-studies.html     200
-/pricing        /frontend/pricing.html          200
-/blog           /frontend/blog.html             200
-/contact        /frontend/contact.html          200
-/privacy        /frontend/privacy.html          200
-/terms          /frontend/terms.html            200
-/open-source/   /frontend/open-source/index.html 200
-/markets/       /frontend/markets/index.html    200
+/index        /index.html           200
+/about-us.html     /about-us        301
+/what-we-do.html   /what-we-do      301
+/who-we-are.html   /who-we-are      301
+/testimonials.html /testimonials   301
+/case-studies.html  /case-studies    301
+/pricing.html      /pricing         301
+/blog.html         /blog            301
+/contact.html      /contact         301
 
-# Catch-all for SPA/Routing
-/*              /frontend/index.html            200
+/about-us          /about-us.html   200
+/what-we-do        /what-we-do.html 200
+/who-we-are        /who-we-are.html 200
+/testimonials      /testimonials.html 200
+/case-studies      /case-studies.html 200
+/pricing           /pricing.html    200
+/blog              /blog.html       200
+/contact           /contact.html    200
+/privacy           /privacy.html    200
+/terms             /terms.html      200
+/careers           /careers/index.html 200
+/careers/          /careers/index.html 200
+/agency            /agency/index.html 200
+/agency/           /agency/index.html 200
+/crmadminlogin /crmadminlogin.html  200
+/crmdashboard /crmdashboard.html    200
+/sitemap.xml  /sitemap.xml          200
+/robots.txt   /robots.txt           200
+
+# Catch-all for SPA
+/*            /index.html           200
