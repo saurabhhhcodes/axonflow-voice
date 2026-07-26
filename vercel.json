@@ -33,11 +33,19 @@
       "destination": "/frontend/who-we-are.html"
     },
     {
-      "source": "/careers/?",
+      "source": "/careers",
       "destination": "/frontend/careers/index.html"
     },
     {
-      "source": "/agency/?",
+      "source": "/careers/",
+      "destination": "/frontend/careers/index.html"
+    },
+    {
+      "source": "/agency",
+      "destination": "/frontend/agency/index.html"
+    },
+    {
+      "source": "/agency/",
       "destination": "/frontend/agency/index.html"
     },
     {
