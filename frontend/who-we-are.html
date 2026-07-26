@@ -3,23 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who We Are | AxonFlow AI — Engineering Leadership & Team</title>
-    <meta name="description" content="Meet the AI engineering team and leadership behind AxonFlow AI, building autonomous agent systems and enterprise RAG platforms.">
-    <meta name="robots" content="index, follow">
+    <title>Who We Are | AxonFlow AI Team — Enterprise AI Engineers</title>
+    <meta name="description" content="Meet the AxonFlow AI team — engineers who build and operate autonomous AI systems for global enterprises. MSME-registered, India-based, globally deployed.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://axonflow.in/who-we-are">
     <link rel="icon" type="image/png" href="/assets/logo_pro.png">
     <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
     <link rel="apple-touch-icon" href="/assets/logo_pro.png">
     <meta name="theme-color" content="#07080a">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://axonflow.in/who-we-are">
+    <meta property="og:title" content="Who We Are | AxonFlow AI Team">
+    <meta property="og:description" content="Engineers who build and operate autonomous AI systems for global enterprises.">
+    <meta property="og:image" content="https://axonflow.in/assets/og-image.jpg">
+    <meta property="og:site_name" content="AxonFlow AI">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={theme:{extend:{colors:{ink:'#07080a'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/enterprise.css">
-    <script src="/js/config.js" defer></script>
+    <style>
+        .team-card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:2.5rem; transition:border-color .25s; }
+        .team-card:hover { border-color:var(--border-strong); }
+        .avatar-lg { width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.75rem;font-weight:600;flex-shrink:0;margin-bottom:1.5rem; }
+        .skill-tag { font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:5px;background:var(--bg-raised);border:1px solid var(--border);color:var(--text-dim); }
+        .val-row { display:flex;align-items:flex-start;gap:1rem;padding:1.5rem 0;border-bottom:1px solid var(--border); }
+        .val-row:last-child { border-bottom:none; }
+    </style>
 </head>
-<body class="ef-body antialiased">
+<body class="ef-body antialiased selection:bg-[var(--accent-soft)]">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-[var(--accent)] focus:text-white focus:px-4 focus:py-2 focus:rounded">Skip to main content</a>
+
     <header>
         <nav class="ef-nav" aria-label="Main navigation">
             <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
@@ -27,59 +42,199 @@
                     <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8 w-8" width="32" height="32">
                     <span class="ef-display text-base font-bold tracking-tight">AxonFlow AI</span>
                 </a>
-                <div class="hidden lg:flex items-center space-x-5 text-xs font-medium">
-                    <a href="/" class="ef-navlink">Home</a>
-                    <a href="/#services" class="ef-navlink">Services</a>
-                    <a href="/#portfolio" class="ef-navlink">Portfolio</a>
-                    <a href="/about-us" class="ef-navlink">About</a>
-                    <a href="/what-we-do" class="ef-navlink">What We Do</a>
-                    <a href="/who-we-are" class="ef-navlink" style="color:var(--text)">Who We Are</a>
-                    <a href="/case-studies" class="ef-navlink">Case Studies</a>
-                    <a href="/testimonials" class="ef-navlink">Testimonials</a>
-                    <a href="/pricing" class="ef-navlink">Pricing</a>
-                    <a href="/careers/" class="ef-navlink">Careers</a>
-                    <a href="/blog" class="ef-navlink">Blog</a>
-                    <a href="/contact" class="ef-cta py-1.5 px-3 text-xs">Talk to us</a>
+                <div class="hidden lg:flex items-center space-x-5 text-xs font-medium" role="menubar">
+                    <a href="/" class="ef-navlink" role="menuitem">Home</a>
+                    <a href="/#services" class="ef-navlink" role="menuitem">Services</a>
+                    <a href="/#portfolio" class="ef-navlink" role="menuitem">Portfolio</a>
+                    <a href="/about-us" class="ef-navlink" role="menuitem">About</a>
+                    <a href="/what-we-do" class="ef-navlink" role="menuitem">What We Do</a>
+                    <a href="/who-we-are" class="ef-navlink" role="menuitem" aria-current="page">Who We Are</a>
+                    <a href="/case-studies" class="ef-navlink" role="menuitem">Case Studies</a>
+                    <a href="/testimonials" class="ef-navlink" role="menuitem">Testimonials</a>
+                    <a href="/pricing" class="ef-navlink" role="menuitem">Pricing</a>
+                    <a href="/careers/" class="ef-navlink" role="menuitem">Careers</a>
+                    <a href="/blog" class="ef-navlink" role="menuitem">Blog</a>
+                    <a href="/contact" class="ef-cta py-1.5 px-3 text-xs" role="menuitem">Talk to us</a>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main class="pt-40 pb-24">
-        <section class="max-w-5xl mx-auto px-6 mb-24">
-            <div class="ef-eyebrow mb-6">Engineering Leadership</div>
-            <h1 class="ef-display text-5xl md:text-7xl font-semibold mb-8 leading-[1.05] tracking-tight">
-                Pioneering <span class="italic" style="color:var(--accent)">applied AI engineering.</span>
-            </h1>
-            <p class="text-xl md:text-2xl max-w-3xl leading-relaxed" style="color:var(--text-dim)">
-                AxonFlow AI was founded by engineers committed to turning cutting-edge artificial intelligence research into robust, production-ready systems.
-            </p>
+    <main id="main-content">
+        <!-- Hero -->
+        <section class="pt-44 pb-20 relative overflow-hidden">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 60% 0%,rgba(84,87,255,.11) 0%,transparent 60%);pointer-events:none"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="ef-eyebrow mb-8">The Team</div>
+                <h1 class="ef-display text-6xl md:text-8xl font-semibold leading-[0.97] tracking-tight mb-8 max-w-5xl">
+                    Engineers who<br><span class="italic" style="color:var(--accent)">own what they build.</span>
+                </h1>
+                <p class="text-xl md:text-2xl max-w-2xl leading-relaxed mb-16" style="color:var(--text-dim)">
+                    A small, serious team. We don't outsource. We don't hand off. The engineers who scope your system are the ones who build it and stay accountable 6 months after launch.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="/careers/" class="ef-btn-primary">Join the team →</a>
+                    <a href="/about-us" class="ef-btn-secondary">About AxonFlow</a>
+                </div>
+            </div>
         </section>
 
-        <section class="max-w-7xl mx-auto px-6 mb-24">
-            <article class="ef-card p-12 max-w-3xl">
-                <div class="ef-mono text-xs mb-4" style="color:var(--accent)">FOUNDER & AI ARCHITECT</div>
-                <h2 class="ef-display text-3xl font-semibold mb-2">Saurabh Kumar Bajpai</h2>
-                <p class="text-sm mb-6" style="color:var(--accent-2)">AI Systems & Autonomous Agents Engineering Lead</p>
-                <p class="leading-relaxed mb-8" style="color:var(--text-dim)">
-                    Specializing in multi-agent orchestration, hardware-aware inference routing, and full-stack enterprise automation. Creator of 98+ open-source contributions across AI/ML, healthcare platforms, and developer tooling.
-                </p>
-                <div class="flex gap-4">
-                    <a href="https://github.com/saurabhhhcodes" target="_blank" rel="noopener noreferrer" class="ef-btn-secondary py-2 px-4 text-xs">GitHub Profile →</a>
-                    <a href="https://linkedin.com/in/saurabhbajpai03" target="_blank" rel="noopener noreferrer" class="ef-btn-secondary py-2 px-4 text-xs">LinkedIn →</a>
+        <div class="ef-rail px-6">
+            <span><span class="dot-live"></span>Remote-first</span>
+            <span>·</span><span>India-based</span>
+            <span>·</span><span>Globally deployed</span>
+            <span>·</span><span>MSME UDYAM-UP-50-0236406</span>
+            <span>·</span><span>9 production systems live</span>
+        </div>
+
+        <!-- Team cards -->
+        <section class="py-24" aria-label="Team members">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-16 max-w-2xl">
+                    <div class="ef-eyebrow mb-6">The Builders</div>
+                    <h2 class="ef-display text-5xl font-semibold mb-6">People behind the systems</h2>
+                    <p class="text-lg" style="color:var(--text-dim)">Small by design. Every person touches production code on every project.</p>
                 </div>
-            </article>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <div class="team-card">
+                        <div class="avatar-lg" style="background:rgba(84,87,255,0.15);color:var(--accent)">S</div>
+                        <h3 class="text-xl font-bold mb-1">Saurabh Bajpai</h3>
+                        <div class="ef-mono text-xs mb-4" style="color:var(--accent)">Founder & Lead Engineer</div>
+                        <p class="text-sm leading-relaxed mb-6" style="color:var(--text-dim)">Architect of the agent orchestration systems and RAG pipelines. Responsible for technical decisions, client architecture, and the 6-month post-launch SLA on every project.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">LangGraph</span>
+                            <span class="skill-tag">RAG</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">FastAPI</span>
+                            <span class="skill-tag">Agents</span>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="avatar-lg" style="background:rgba(53,208,127,0.12);color:var(--accent-2)">A</div>
+                        <h3 class="text-xl font-bold mb-1">AI Systems Team</h3>
+                        <div class="ef-mono text-xs mb-4" style="color:var(--accent)">Agent & Automation Engineers</div>
+                        <p class="text-sm leading-relaxed mb-6" style="color:var(--text-dim)">A rotating core of specialist engineers who join specific projects. Each brings deep vertical expertise — logistics, healthcare, legal, or fintech — and production deployment experience.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">N8N</span>
+                            <span class="skill-tag">Automation</span>
+                            <span class="skill-tag">LLMs</span>
+                            <span class="skill-tag">APIs</span>
+                        </div>
+                    </div>
+
+                    <div class="team-card" style="border:1px dashed rgba(84,87,255,0.3);background:var(--accent-soft)">
+                        <div class="avatar-lg" style="background:rgba(84,87,255,0.1);color:var(--accent)">+</div>
+                        <h3 class="text-xl font-bold mb-1">Your Role</h3>
+                        <div class="ef-mono text-xs mb-4" style="color:var(--accent)">We're Hiring</div>
+                        <p class="text-sm leading-relaxed mb-6" style="color:var(--text-dim)">We hire when we have a specific, real problem. If you build production AI systems and want to own a system end-to-end — we want to hear from you.</p>
+                        <a href="/careers/" class="ef-btn-primary text-sm inline-flex">View open roles →</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- How we operate -->
+        <section class="py-24" style="background:var(--bg-raised)" aria-label="How we work">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-20 items-start">
+                    <div>
+                        <div class="ef-eyebrow mb-8">How We Work</div>
+                        <h2 class="ef-display text-4xl font-semibold mb-8">No handoffs.<br>No ghosting after launch.</h2>
+                        <p class="text-lg leading-relaxed mb-6" style="color:var(--text-dim)">
+                            Most agencies hand off code and disappear. We stay. Every project comes with a 6-month post-launch period where we monitor, fix, and improve the system together.
+                        </p>
+                        <p class="text-lg leading-relaxed" style="color:var(--text-dim)">
+                            Our team is small by design — so every engineer is always close to the client, the data, and the real-world performance of the system they built.
+                        </p>
+                    </div>
+                    <div class="ef-card p-10">
+                        <div class="ef-mono text-xs mb-8" style="color:var(--accent)">OUR OPERATING MODEL</div>
+                        <div class="val-row">
+                            <span style="color:var(--accent-2);font-weight:700;font-size:1.1rem;margin-top:2px;flex-shrink:0">✓</span>
+                            <div><h4 class="font-bold mb-1">Direct client access to engineers</h4><p class="text-sm" style="color:var(--text-dim)">No account managers in between. You talk to the person writing the code.</p></div>
+                        </div>
+                        <div class="val-row">
+                            <span style="color:var(--accent-2);font-weight:700;font-size:1.1rem;margin-top:2px;flex-shrink:0">✓</span>
+                            <div><h4 class="font-bold mb-1">Async-first collaboration</h4><p class="text-sm" style="color:var(--text-dim)">We document every decision. You always know what's being built and why.</p></div>
+                        </div>
+                        <div class="val-row">
+                            <span style="color:var(--accent-2);font-weight:700;font-size:1.1rem;margin-top:2px;flex-shrink:0">✓</span>
+                            <div><h4 class="font-bold mb-1">Monitored deployments</h4><p class="text-sm" style="color:var(--text-dim)">Every production system has observability built in. We catch issues before you do.</p></div>
+                        </div>
+                        <div class="val-row">
+                            <span style="color:var(--accent-2);font-weight:700;font-size:1.1rem;margin-top:2px;flex-shrink:0">✓</span>
+                            <div><h4 class="font-bold mb-1">6-month SLA included</h4><p class="text-sm" style="color:var(--text-dim)">Post-launch support is not an upsell. It's standard on every engagement.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="pb-32 pt-24 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="ef-card p-12 md:p-20 text-center">
+                    <div class="ef-eyebrow mb-8 justify-center">Work With Us</div>
+                    <h2 class="ef-display text-4xl md:text-6xl font-semibold mb-6 tracking-tight">
+                        Small team.<br><span class="italic" style="color:var(--accent)">Big systems.</span>
+                    </h2>
+                    <p class="text-lg mb-12 max-w-xl mx-auto" style="color:var(--text-dim)">Ready to build autonomous infrastructure with a team that stays accountable? Let's talk.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="/contact" class="ef-btn-primary">Start a conversation →</a>
+                        <a href="/careers/" class="ef-btn-secondary">Join our team</a>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer class="ef-footer py-20" role="contentinfo">
+    <footer class="ef-footer py-24" role="contentinfo">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex items-center space-x-3">
-                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8" width="32" height="32">
-                    <span class="ef-display text-lg font-semibold">AxonFlow AI</span>
+            <div class="grid md:grid-cols-5 gap-12 mb-16">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-9" width="36" height="36">
+                        <span class="ef-display text-xl font-semibold">AxonFlow AI</span>
+                    </div>
+                    <p class="max-w-sm mb-8" style="color:var(--text-dim)">Enterprise autonomous agent infrastructure and RAG systems. MSME registered, operating globally.</p>
+                    <div class="flex space-x-3">
+                        <a href="https://instagram.com/axonflow.ai" class="ef-social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+                        <a href="https://linkedin.com/company/axonflow-ai" class="ef-social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                        <a href="https://github.com/saurabhhhcodes" class="ef-social-btn" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.15c-3.2.7-3.87-1.35-3.87-1.35-.53-1.33-1.29-1.69-1.29-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.9-.39.98 0 1.98.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg></a>
+                    </div>
                 </div>
-                <p class="ef-mono text-xs" style="color:var(--text-faint)">&copy; 2026 AxonFlow AI. UDYAM-UP-50-0236406. All rights reserved.</p>
+                <div>
+                    <h4 class="ef-mono font-semibold mb-8 tracking-widest uppercase text-xs">Services</h4>
+                    <ul class="space-y-4 text-sm" style="color:var(--text-dim)">
+                        <li><a href="/what-we-do" class="hover:text-white transition-colors">AI Agents</a></li>
+                        <li><a href="/what-we-do" class="hover:text-white transition-colors">RAG Systems</a></li>
+                        <li><a href="/what-we-do" class="hover:text-white transition-colors">Automation</a></li>
+                        <li><a href="/agency" class="hover:text-white transition-colors">Agency Solutions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="ef-mono font-semibold mb-8 tracking-widest uppercase text-xs">Company</h4>
+                    <ul class="space-y-4 text-sm" style="color:var(--text-dim)">
+                        <li><a href="/about-us" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/who-we-are" class="hover:text-white transition-colors">Who We Are</a></li>
+                        <li><a href="/testimonials" class="hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="/case-studies" class="hover:text-white transition-colors">Case Studies</a></li>
+                        <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="ef-mono font-semibold mb-8 tracking-widest uppercase text-xs">Legal</h4>
+                    <ul class="space-y-4 text-sm" style="color:var(--text-dim)">
+                        <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                    <p class="ef-mono text-[10px] tracking-widest uppercase mt-8 mb-2" style="color:var(--text-faint)">UDYAM-UP-50-0236406</p>
+                    <p class="text-[10px]" style="color:var(--text-faint)">&copy; 2026 AxonFlow AI. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>

@@ -3,23 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise AI Pricing &amp; Packages | AxonFlow AI</title>
-    <meta name="description" content="Transparent enterprise pricing for autonomous AI agent development, custom RAG architectures, and workflow automation solutions.">
+    <title>Pricing | AxonFlow AI — Enterprise AI Engineering Packages</title>
+    <meta name="description" content="Transparent pricing for autonomous AI agent development, enterprise RAG systems, and workflow automation. Fixed-scope engagements with 6-month post-launch SLA included.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://axonflow.in/pricing">
     <link rel="icon" type="image/png" href="/assets/logo_pro.png">
     <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
     <link rel="apple-touch-icon" href="/assets/logo_pro.png">
     <meta name="theme-color" content="#07080a">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://axonflow.in/pricing">
+    <meta property="og:title" content="Pricing | AxonFlow AI Enterprise Packages">
+    <meta property="og:description" content="Fixed-scope AI engineering with 6-month post-launch SLA. Transparent pricing for autonomous agents, RAG, and automation.">
+    <meta property="og:image" content="https://axonflow.in/assets/og-image.jpg">
+    <meta property="og:site_name" content="AxonFlow AI">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={theme:{extend:{colors:{ink:'#07080a'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/enterprise.css">
-    <script src="/js/config.js" defer></script>
+    <style>
+        .price-card { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2.5rem; transition:border-color .25s, transform .2s; display:flex; flex-direction:column; }
+        .price-card:hover { border-color:var(--border-strong); transform:translateY(-4px); }
+        .price-card.featured { border-color:var(--accent); background:var(--accent-soft); }
+        .price-card.featured:hover { border-color:rgba(84,87,255,.6); }
+        .price-num { font-family:var(--font-display); font-size:3rem; font-weight:700; line-height:1; }
+        .feature-line { display:flex; align-items:flex-start; gap:.75rem; padding:.6rem 0; font-size:.875rem; }
+        .check { color:var(--accent-2); font-weight:700; flex-shrink:0; margin-top:1px; }
+        .dash { color:var(--text-faint); flex-shrink:0; margin-top:1px; }
+    </style>
 </head>
-<body class="ef-body antialiased">
+<body class="ef-body antialiased selection:bg-[var(--accent-soft)]">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-[var(--accent)] focus:text-white focus:px-4 focus:py-2 focus:rounded">Skip to main content</a>
+
     <header>
         <nav class="ef-nav" aria-label="Main navigation">
             <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
@@ -27,91 +44,206 @@
                     <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8 w-8" width="32" height="32">
                     <span class="ef-display text-base font-bold tracking-tight">AxonFlow AI</span>
                 </a>
-                <div class="hidden lg:flex items-center space-x-5 text-xs font-medium">
-                    <a href="/" class="ef-navlink">Home</a>
-                    <a href="/#services" class="ef-navlink">Services</a>
-                    <a href="/#portfolio" class="ef-navlink">Portfolio</a>
-                    <a href="/about-us" class="ef-navlink">About</a>
-                    <a href="/what-we-do" class="ef-navlink">What We Do</a>
-                    <a href="/who-we-are" class="ef-navlink">Who We Are</a>
-                    <a href="/case-studies" class="ef-navlink">Case Studies</a>
-                    <a href="/testimonials" class="ef-navlink">Testimonials</a>
-                    <a href="/pricing" class="ef-navlink" style="color:var(--text)">Pricing</a>
-                    <a href="/careers/" class="ef-navlink">Careers</a>
-                    <a href="/blog" class="ef-navlink">Blog</a>
-                    <a href="/contact" class="ef-cta py-1.5 px-3 text-xs">Talk to us</a>
+                <div class="hidden lg:flex items-center space-x-5 text-xs font-medium" role="menubar">
+                    <a href="/" class="ef-navlink" role="menuitem">Home</a>
+                    <a href="/#services" class="ef-navlink" role="menuitem">Services</a>
+                    <a href="/#portfolio" class="ef-navlink" role="menuitem">Portfolio</a>
+                    <a href="/about-us" class="ef-navlink" role="menuitem">About</a>
+                    <a href="/what-we-do" class="ef-navlink" role="menuitem">What We Do</a>
+                    <a href="/who-we-are" class="ef-navlink" role="menuitem">Who We Are</a>
+                    <a href="/case-studies" class="ef-navlink" role="menuitem">Case Studies</a>
+                    <a href="/testimonials" class="ef-navlink" role="menuitem">Testimonials</a>
+                    <a href="/pricing" class="ef-navlink" role="menuitem" aria-current="page">Pricing</a>
+                    <a href="/careers/" class="ef-navlink" role="menuitem">Careers</a>
+                    <a href="/blog" class="ef-navlink" role="menuitem">Blog</a>
+                    <a href="/contact" class="ef-cta py-1.5 px-3 text-xs" role="menuitem">Talk to us</a>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main class="pt-40 pb-24">
-        <section class="max-w-5xl mx-auto px-6 mb-20">
-            <div class="ef-eyebrow mb-6">Transparent Agency Rates</div>
-            <h1 class="ef-display text-5xl md:text-7xl font-semibold mb-8 leading-[1.05] tracking-tight">
-                Enterprise packages built for <span class="italic" style="color:var(--accent)">guaranteed ROI.</span>
-            </h1>
-            <p class="text-xl md:text-2xl max-w-3xl leading-relaxed" style="color:var(--text-dim)">
-                Every engagement includes full production code ownership, complete documentation, and 6 months of post-launch maintenance SLA.
-            </p>
+    <main id="main-content">
+        <!-- Hero -->
+        <section class="pt-44 pb-20 relative overflow-hidden">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% -10%,rgba(84,87,255,.12) 0%,transparent 65%);pointer-events:none"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+                <div class="ef-eyebrow mb-8 justify-center">Transparent Agency Rates</div>
+                <h1 class="ef-display text-6xl md:text-8xl font-semibold leading-[0.97] tracking-tight mb-8">
+                    Fixed scope.<br><span class="italic" style="color:var(--accent)">No surprises.</span>
+                </h1>
+                <p class="text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed" style="color:var(--text-dim)">
+                    Every engagement is scoped, priced, and delivered as agreed. Post-launch support is included — not an upsell.
+                </p>
+            </div>
         </section>
 
-        <section class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8 mb-24">
-            <article class="ef-card p-10 flex flex-col justify-between">
-                <div>
-                    <div class="ef-mono text-xs mb-4" style="color:var(--text-dim)">STARTER</div>
-                    <h2 class="text-3xl font-bold mb-2">₹49,999</h2>
-                    <p class="text-xs mb-8" style="color:var(--text-faint)">Single Agent System</p>
-                    <ul class="space-y-4 text-sm mb-8" style="color:var(--text-dim)">
-                        <li>✓ 1 Custom Autonomous AI Agent</li>
-                        <li>✓ 1 Primary API / Tool Integration</li>
-                        <li>✓ 30 Days Post-Launch Support</li>
-                        <li>✓ Full Source Code Ownership</li>
-                    </ul>
-                </div>
-                <a href="mailto:saurabhbajpai03@outlook.com?subject=Starter+Package+Inquiry" class="ef-btn-secondary w-full justify-center">Select Starter →</a>
-            </article>
+        <div class="ef-rail px-6">
+            <span><span class="dot-live"></span>Fixed-scope pricing</span>
+            <span>·</span><span>6-month SLA included in every tier</span>
+            <span>·</span><span>No retainer required</span>
+            <span>·</span><span>Response within 24h</span>
+        </div>
 
-            <article class="ef-card p-10 flex flex-col justify-between" style="border-color:var(--accent)">
-                <div>
-                    <div class="ef-mono text-xs mb-4" style="color:var(--accent)">MOST POPULAR · GROWTH</div>
-                    <h2 class="text-3xl font-bold mb-2">₹149,999</h2>
-                    <p class="text-xs mb-8" style="color:var(--accent)">Multi-Agent &amp; RAG Architecture</p>
-                    <ul class="space-y-4 text-sm mb-8" style="color:var(--text-dim)">
-                        <li>✓ Multi-Agent Swarm System</li>
-                        <li>✓ Custom Enterprise RAG Pipeline</li>
-                        <li>✓ 3 System API Integrations</li>
-                        <li>✓ 90 Days Post-Launch Maintenance</li>
-                    </ul>
-                </div>
-                <a href="mailto:saurabhbajpai03@outlook.com?subject=Growth+Package+Inquiry" class="ef-cta w-full text-center">Select Growth →</a>
-            </article>
+        <!-- Pricing tiers -->
+        <section class="py-24" aria-label="Pricing tiers">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-3 gap-6 mb-16">
 
-            <article class="ef-card p-10 flex flex-col justify-between">
-                <div>
-                    <div class="ef-mono text-xs mb-4" style="color:var(--text-dim)">ENTERPRISE</div>
-                    <h2 class="text-3xl font-bold mb-2">Custom Quote</h2>
-                    <p class="text-xs mb-8" style="color:var(--text-faint)">Full Platform Infrastructure</p>
-                    <ul class="space-y-4 text-sm mb-8" style="color:var(--text-dim)">
-                        <li>✓ Full AI Ecosystem Architecture</li>
-                        <li>✓ Unlimited Integrations &amp; Custom Models</li>
-                        <li>✓ 6 Months Dedicated SLA Support</li>
-                        <li>✓ Dedicated Lead AI Engineer</li>
-                    </ul>
+                    <!-- Starter -->
+                    <div class="price-card">
+                        <div class="ef-mono text-xs mb-8" style="color:var(--accent)">FOUNDATION</div>
+                        <h2 class="text-2xl font-bold mb-2">Automation Sprint</h2>
+                        <p class="text-sm mb-8" style="color:var(--text-dim)">Single-workflow automation or a focused AI integration. Best for validated use cases with clear scope.</p>
+                        <div class="mb-2">
+                            <div class="price-num">$3K</div>
+                        </div>
+                        <p class="ef-mono text-xs mb-10" style="color:var(--text-faint)">USD — fixed scope</p>
+                        <div class="space-y-0 flex-1 mb-10">
+                            <div class="feature-line"><span class="check">✓</span><span>1 production automation workflow</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>N8N or Python orchestration</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>API / webhook integrations</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>2 months post-launch support</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>Delivery in 3–4 weeks</span></div>
+                            <div class="feature-line"><span class="dash">–</span><span style="color:var(--text-faint)">Agent orchestration</span></div>
+                            <div class="feature-line"><span class="dash">–</span><span style="color:var(--text-faint)">RAG pipeline</span></div>
+                        </div>
+                        <a href="/contact" class="ef-btn-secondary text-sm text-center mt-auto">Get started →</a>
+                    </div>
+
+                    <!-- Standard (featured) -->
+                    <div class="price-card featured">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="ef-mono text-xs" style="color:var(--accent)">MOST POPULAR</div>
+                            <span class="ef-mono text-xs px-3 py-1 rounded-full" style="background:var(--accent);color:#fff">★ Recommended</span>
+                        </div>
+                        <h2 class="text-2xl font-bold mb-2">Agent System</h2>
+                        <p class="text-sm mb-8" style="color:var(--text-dim)">Multi-agent orchestration or enterprise RAG pipeline. Full production deployment with monitoring.</p>
+                        <div class="mb-2">
+                            <div class="price-num">$8K–$15K</div>
+                        </div>
+                        <p class="ef-mono text-xs mb-10" style="color:var(--text-faint)">USD — scoped per project</p>
+                        <div class="space-y-0 flex-1 mb-10">
+                            <div class="feature-line"><span class="check">✓</span><span>Multi-agent orchestration system</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>RAG pipeline (optional)</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>Full production deployment</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>Observability & monitoring setup</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>API / CRM / DB integrations</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span><strong>6 months</strong> post-launch support</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>Delivery in 6–10 weeks</span></div>
+                        </div>
+                        <a href="/contact" class="ef-btn-primary text-sm text-center mt-auto">Start a conversation →</a>
+                    </div>
+
+                    <!-- Enterprise -->
+                    <div class="price-card">
+                        <div class="ef-mono text-xs mb-8" style="color:var(--accent)">ENTERPRISE</div>
+                        <h2 class="text-2xl font-bold mb-2">Full-Stack AI Platform</h2>
+                        <p class="text-sm mb-8" style="color:var(--text-dim)">Complex multi-agent systems, custom RAG at scale, and full-stack product delivery. Built for enterprises.</p>
+                        <div class="mb-2">
+                            <div class="price-num">Custom</div>
+                        </div>
+                        <p class="ef-mono text-xs mb-10" style="color:var(--text-faint)">Scoped after technical discovery</p>
+                        <div class="space-y-0 flex-1 mb-10">
+                            <div class="feature-line"><span class="check">✓</span><span>Enterprise-grade agent infrastructure</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>Custom RAG at millions of docs scale</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>Full-stack UI + backend delivery</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>SLA-backed uptime guarantee</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>Dedicated engineer point-of-contact</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span><strong>6 months</strong> post-launch support</span></div>
+                            <div class="feature-line"><span class="check">✓</span><span>12–16 week delivery timeline</span></div>
+                        </div>
+                        <a href="/contact" class="ef-btn-secondary text-sm text-center mt-auto">Request scoping call →</a>
+                    </div>
+
                 </div>
-                <a href="mailto:saurabhbajpai03@outlook.com?subject=Enterprise+Quote+Request" class="ef-btn-secondary w-full justify-center">Request Quote →</a>
-            </article>
+
+                <!-- Included in all -->
+                <div class="ef-card p-12 md:p-16">
+                    <div class="ef-eyebrow mb-8">Always Included</div>
+                    <h2 class="ef-display text-3xl font-semibold mb-10">Every engagement comes with these, by default.</h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div>
+                            <div class="text-2xl mb-3" style="color:var(--accent-2)">✓</div>
+                            <h4 class="font-bold mb-2">Fixed-scope delivery</h4>
+                            <p class="text-sm" style="color:var(--text-dim)">Agreed scope, agreed price. No scope creep billing.</p>
+                        </div>
+                        <div>
+                            <div class="text-2xl mb-3" style="color:var(--accent-2)">✓</div>
+                            <h4 class="font-bold mb-2">Engineer accountability</h4>
+                            <p class="text-sm" style="color:var(--text-dim)">You talk to the person writing the code — not a PM.</p>
+                        </div>
+                        <div>
+                            <div class="text-2xl mb-3" style="color:var(--accent-2)">✓</div>
+                            <h4 class="font-bold mb-2">Post-launch SLA</h4>
+                            <p class="text-sm" style="color:var(--text-dim)">Monitoring, fixes, and improvements included post-go-live.</p>
+                        </div>
+                        <div>
+                            <div class="text-2xl mb-3" style="color:var(--accent-2)">✓</div>
+                            <h4 class="font-bold mb-2">Full IP ownership</h4>
+                            <p class="text-sm" style="color:var(--text-dim)">All code, models, and data remain yours. No lock-in.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="pb-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="ef-card p-12 md:p-20 text-center">
+                    <div class="ef-eyebrow mb-8 justify-center">Not Sure Which Tier?</div>
+                    <h2 class="ef-display text-4xl md:text-5xl font-semibold mb-6">Tell us your problem.<br><span class="italic" style="color:var(--accent)">We'll scope it for free.</span></h2>
+                    <p class="text-lg mb-12 max-w-xl mx-auto" style="color:var(--text-dim)">A 30-minute technical call where we assess your use case and recommend the right engagement. No commitment required.</p>
+                    <a href="/contact" class="ef-btn-primary inline-flex">Book a free scoping call →</a>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer class="ef-footer py-20" role="contentinfo">
+    <footer class="ef-footer py-24" role="contentinfo">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex items-center space-x-3">
-                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8" width="32" height="32">
-                    <span class="ef-display text-lg font-semibold">AxonFlow AI</span>
+            <div class="grid md:grid-cols-5 gap-12 mb-16">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-9" width="36" height="36">
+                        <span class="ef-display text-xl font-semibold">AxonFlow AI</span>
+                    </div>
+                    <p class="max-w-sm mb-8" style="color:var(--text-dim)">Enterprise autonomous agent infrastructure and RAG systems. MSME registered, operating globally.</p>
+                    <div class="flex space-x-3">
+                        <a href="https://instagram.com/axonflow.ai" class="ef-social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+                        <a href="https://linkedin.com/company/axonflow-ai" class="ef-social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                        <a href="https://github.com/saurabhhhcodes" class="ef-social-btn" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.15c-3.2.7-3.87-1.35-3.87-1.35-.53-1.33-1.29-1.69-1.29-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.9-.39.98 0 1.98.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg></a>
+                    </div>
                 </div>
-                <p class="ef-mono text-xs" style="color:var(--text-faint)">&copy; 2026 AxonFlow AI. UDYAM-UP-50-0236406. All rights reserved.</p>
+                <div>
+                    <h4 class="ef-mono font-semibold mb-8 tracking-widest uppercase text-xs">Services</h4>
+                    <ul class="space-y-4 text-sm" style="color:var(--text-dim)">
+                        <li><a href="/what-we-do" class="hover:text-white transition-colors">AI Agents</a></li>
+                        <li><a href="/what-we-do" class="hover:text-white transition-colors">RAG Systems</a></li>
+                        <li><a href="/what-we-do" class="hover:text-white transition-colors">Automation</a></li>
+                        <li><a href="/agency" class="hover:text-white transition-colors">Agency Solutions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="ef-mono font-semibold mb-8 tracking-widest uppercase text-xs">Company</h4>
+                    <ul class="space-y-4 text-sm" style="color:var(--text-dim)">
+                        <li><a href="/about-us" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/who-we-are" class="hover:text-white transition-colors">Who We Are</a></li>
+                        <li><a href="/testimonials" class="hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="/case-studies" class="hover:text-white transition-colors">Case Studies</a></li>
+                        <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="ef-mono font-semibold mb-8 tracking-widest uppercase text-xs">Legal</h4>
+                    <ul class="space-y-4 text-sm" style="color:var(--text-dim)">
+                        <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                    <p class="ef-mono text-[10px] tracking-widest uppercase mt-8 mb-2" style="color:var(--text-faint)">UDYAM-UP-50-0236406</p>
+                    <p class="text-[10px]" style="color:var(--text-faint)">&copy; 2026 AxonFlow AI. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
