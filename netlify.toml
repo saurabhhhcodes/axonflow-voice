@@ -1,0 +1,118 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/case-studies"
+  to = "/case-studies.html"
+  status = 200
+
+[[redirects]]
+  from = "/case-studies/"
+  to = "/case-studies.html"
+  status = 200
+
+[[redirects]]
+  from = "/about-us"
+  to = "/about-us.html"
+  status = 200
+
+[[redirects]]
+  from = "/about-us/"
+  to = "/about-us.html"
+  status = 200
+
+[[redirects]]
+  from = "/what-we-do"
+  to = "/what-we-do.html"
+  status = 200
+
+[[redirects]]
+  from = "/what-we-do/"
+  to = "/what-we-do.html"
+  status = 200
+
+[[redirects]]
+  from = "/who-we-are"
+  to = "/who-we-are.html"
+  status = 200
+
+[[redirects]]
+  from = "/who-we-are/"
+  to = "/who-we-are.html"
+  status = 200
+
+[[redirects]]
+  from = "/testimonials"
+  to = "/testimonials.html"
+  status = 200
+
+[[redirects]]
+  from = "/testimonials/"
+  to = "/testimonials.html"
+  status = 200
+
+[[redirects]]
+  from = "/pricing"
+  to = "/pricing.html"
+  status = 200
+
+[[redirects]]
+  from = "/pricing/"
+  to = "/pricing.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/"
+  to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact/"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/open-source"
+  to = "/open-source/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/agency"
+  to = "/agency/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/unified-platform"
+  to = "/unified-platform.html"
+  status = 200
+
+[[redirects]]
+  from = "/markets"
+  to = "/markets/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/markets/"
+  to = "/markets/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/markets/:slug"
+  to = "/markets/:slug/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/markets/:slug/"
+  to = "/markets/:slug/index.html"
+  status = 200
+
