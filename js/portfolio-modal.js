@@ -20,8 +20,8 @@
         '</div>' +
         '<div class="ef-modal-frame-wrap">' +
           '<div class="ef-modal-loading"><span class="spin"></span><span>Loading live preview…</span></div>' +
-          '<div class="ef-modal-fallback"><span>This project can\'t be embedded here due to its own security settings.</span><a class="ef-btn-secondary ef-open-tab" target="_blank" rel="noopener noreferrer">Open it directly →</a></div>' +
-          '<iframe title="Project live preview" loading="lazy" referrerpolicy="no-referrer"></iframe>' +
+          '<div class="ef-modal-fallback"><span>This project can\'t be embedded here due to its security settings.</span><a class="ef-btn-secondary ef-open-tab" target="_blank" rel="noopener noreferrer">Open it directly →</a></div>' +
+          '<iframe title="Project live preview" loading="lazy"></iframe>' +
         '</div>' +
       '</div>';
     document.body.appendChild(overlay);
@@ -50,13 +50,18 @@
 
     clearTimeout(loadTimer);
     var loaded = false;
-    iframe.onload = function () { loaded = true; loading.style.display = 'none'; };
-    // If a site blocks framing, onload still fires but the frame stays blank.
-    // We can't read cross-origin content, so use a heuristic timeout as a
-    // reasonable fallback trigger and let the user open it directly.
+    iframe.onload = function () {
+      loaded = true;
+      loading.style.display = 'none';
+    };
+    
+    // Safety timeout: if target site blocks iframe via CSP/X-Frame-Options or takes long to respond, show fallback open-in-tab link
     loadTimer = setTimeout(function () {
-      if (!loaded) { loading.style.display = 'none'; fallback.classList.add('show'); }
-    }, 6000);
+      if (!loaded) {
+        loading.style.display = 'none';
+        fallback.classList.add('show');
+      }
+    }, 4000);
   }
 
   function close() {

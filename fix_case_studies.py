@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""
+Update Case Studies page (case-studies/index.html) to render interactive live project preview cards with portfolio modal support.
+"""
+import os
+
+BASE = "/Users/saurabhkumarbajpaiai/.gemini/antigravity/scratch/autonomiq-website"
+
+CONTENT = """<!DOCTYPE html>
 <html lang="en-IN">
 <head>
 <meta charset="UTF-8">
@@ -191,4 +199,14 @@
 })();
 </script>
 </body>
-</html>
+</html>"""
+
+p1 = os.path.join(BASE, "case-studies/index.html")
+p2 = os.path.join(BASE, "case-studies.html")
+
+with open(p1, "w", encoding="utf-8") as f:
+    f.write(CONTENT)
+with open(p2, "w", encoding="utf-8") as f:
+    f.write(CONTENT)
+
+print("🎉 Updated case-studies/index.html and case-studies.html with full live portfolio modal cards!")
