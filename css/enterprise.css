@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AxonFlow AI — Enterprise Design System & Master Mobile Responsive Rules
+   AxonFlow AI — Enterprise Design System (Premium Desktop & Mobile CSS)
    ========================================================================== */
 
 :root {
@@ -52,41 +52,73 @@ body.ef-body {
   width: 100%;
 }
 
-/* ---- Nav Bar ---- */
+/* ---- Sleek Premium Nav Bar ---- */
 .ef-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(7, 8, 10, 0.92);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  background: rgba(7, 8, 10, 0.85);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border-bottom: 1px solid var(--border);
   width: 100%;
+  height: 4.25rem;
+  display: flex;
+  align-items: center;
 }
+
+.ef-nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Desktop Horizontal Nav Links */
+.ef-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .ef-nav a.ef-navlink {
-  color: var(--text-dim); font-size: 0.8rem; font-weight: 500;
-  letter-spacing: 0.04em; transition: color .2s ease;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color .2s ease;
   white-space: nowrap;
 }
 .ef-nav a.ef-navlink:hover { color: var(--text); }
+
 .ef-cta {
-  background: var(--accent); color: #fff; font-weight: 600;
-  padding: .55rem 1.2rem; border-radius: 8px; font-size: .8rem;
-  transition: transform .18s ease, background .18s ease;
-  display: inline-block; white-space: nowrap; text-align: center;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  padding: .55rem 1.25rem;
+  border-radius: 8px;
+  font-size: .85rem;
+  transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
-.ef-cta:hover { background: #6e70ff; transform: translateY(-1px); }
+.ef-cta:hover {
+  background: #6e70ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(84, 87, 255, 0.3);
+}
 
 /* Hamburger Toggle Button */
 .ef-menu-toggle {
   display: none;
-  background: transparent;
-  border: 1px solid var(--border);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
   color: var(--text);
   padding: .45rem .65rem;
   border-radius: 8px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  z-index: 110;
 }
 .ef-menu-toggle svg {
   width: 22px;
@@ -124,7 +156,7 @@ body.ef-body {
   100% { box-shadow: 0 0 0 0 rgba(53,208,127,0); }
 }
 
-/* ---- Eyebrows & Cards ---- */
+/* ---- Cards & Buttons ---- */
 .ef-eyebrow {
   font-family: var(--font-mono); font-size: .72rem; letter-spacing: .12em;
   text-transform: uppercase; color: var(--accent);
@@ -172,34 +204,35 @@ body.ef-body {
 .ef-social-btn:hover { border-color: var(--accent); color: var(--text); background: var(--accent-soft); }
 
 /* ==========================================================================
-   Comprehensive Mobile & Tablet Responsive Media Queries
+   Mobile & Tablet Responsive Adjustments
    ========================================================================== */
-@media (max-width: 1024px) {
+@media (max-width: 990px) {
   .ef-menu-toggle { display: flex; }
   .ef-nav-menu {
     display: none;
-    position: absolute;
-    top: 4rem; left: 0; right: 0;
+    position: fixed;
+    top: 4.25rem; left: 0; right: 0;
     background: rgba(13, 15, 19, 0.98);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     border-bottom: 1px solid var(--border-strong);
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 1.75rem 1.5rem;
     gap: 1.25rem !important;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.9);
     width: 100%;
   }
   .ef-nav-menu.open { display: flex; }
   .ef-nav-menu a.ef-navlink {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     padding: .5rem 0;
     display: block;
     width: 100%;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
   }
   .ef-nav-menu a.ef-cta {
     width: 100%;
-    padding: .85rem;
+    padding: .9rem;
     font-size: 1rem;
     margin-top: .5rem;
   }
@@ -242,17 +275,9 @@ body.ef-body {
   .section, .section-alt { padding: 3rem 0 !important; }
   .card, .ef-card { padding: 1.5rem !important; }
   
-  /* Article and Pricing Specific Mobile Overlaps Prevention */
   .article-content { font-size: 1rem !important; line-height: 1.7 !important; }
   .article-content pre { padding: 1rem !important; font-size: .8rem !important; overflow-x: auto; }
   .price-tag { font-size: 2.3rem !important; }
   .stat-big { font-size: 2.8rem !important; }
-  
-  /* Prevent Header text clipping on small phones */
   .ef-display { font-size: .95rem !important; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ef-card, .card, .ef-cta, .ef-btn-primary, .ef-btn-secondary { transition: none; }
-  .ef-rail .dot-live { animation: none; }
 }
