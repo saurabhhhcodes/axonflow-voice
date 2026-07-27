@@ -205,6 +205,18 @@
   }
 })();
 </script>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('efMenuToggle');
+  var menu = document.getElementById('efNavMenu');
+  if(btn && menu){
+    btn.addEventListener('click', function(){
+      menu.classList.toggle('open');
+    });
+  }
+})();
+</script>
 </nav>
     </header>
 
