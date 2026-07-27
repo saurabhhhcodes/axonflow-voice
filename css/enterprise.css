@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AxonFlow AI — Enterprise Design System (Sleek Mobile & Desktop CSS)
+   AxonFlow AI — Enterprise Design System (Master Layout & Aesthetic CSS)
    ========================================================================== */
 
 :root {
@@ -30,6 +30,7 @@
 html {
   overflow-x: hidden;
   max-width: 100vw;
+  background: var(--bg);
 }
 
 body.ef-body {
@@ -39,7 +40,11 @@ body.ef-body {
   overflow-x: hidden;
   max-width: 100vw;
   width: 100%;
+  line-height: 1.6;
 }
+
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
 
 .ef-display { font-family: var(--font-display); font-optical-sizing: auto; }
 .ef-mono { font-family: var(--font-mono); letter-spacing: 0.02em; }
@@ -52,7 +57,89 @@ body.ef-body {
   width: 100%;
 }
 
-/* ---- Ultra-Clean Header & Nav ---- */
+/* ---- Master Layout Grids & Spacing ---- */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+.section { padding: 5rem 0; width: 100%; }
+.section-alt { padding: 5rem 0; background: var(--bg-raised); width: 100%; }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+  letter-spacing: -.01em;
+}
+.section-sub {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  max-width: 54ch;
+}
+
+/* ---- Page Hero Section ---- */
+.page-hero {
+  padding: 9rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 65% 55% at 60% 0%, rgba(84,87,255,.14) 0%, transparent 65%),
+              radial-gradient(ellipse 40% 40% at 10% 60%, rgba(53,208,127,.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.page-hero .inner { position: relative; z-index: 1; }
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  margin-bottom: 1.5rem;
+}
+.hero-p {
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  max-width: 52ch;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.cta-row { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.accent { color: var(--accent); font-style: italic; }
+.accent-green { color: var(--accent-2); }
+
+.pill {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .35rem .85rem;
+  border-radius: 6px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  display: inline-block;
+}
+.pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+
+.check-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.check-list li { display: flex; gap: .75rem; font-size: .95rem; align-items: flex-start; color: var(--text-dim); }
+.check-list li::before { content: '✓'; color: var(--accent-2); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+.stat-big { font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; line-height: 1; color: var(--accent-2); }
+.stat-label { font-size: .875rem; color: var(--text-dim); margin-top: .4rem; }
+
+/* ---- Sleek Desktop Header & Nav ---- */
 .ef-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: rgba(7, 8, 10, 0.90);
@@ -71,7 +158,6 @@ body.ef-body {
   width: 100%;
 }
 
-/* Desktop Horizontal Nav Links */
 .ef-nav-menu {
   display: flex;
   align-items: center;
@@ -107,7 +193,6 @@ body.ef-body {
   box-shadow: 0 4px 16px rgba(84, 87, 255, 0.3);
 }
 
-/* Hamburger Toggle Button */
 .ef-menu-toggle {
   display: none;
   background: var(--surface);
@@ -120,23 +205,19 @@ body.ef-body {
   justify-content: center;
   outline: none;
 }
-.ef-menu-toggle svg {
-  width: 20px;
-  height: 20px;
-  stroke: currentColor;
-}
+.ef-menu-toggle svg { width: 20px; height: 20px; stroke: currentColor; }
 
 /* ---- System Rail ---- */
 .ef-rail {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--text-faint);
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.75rem;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 0.65rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
@@ -156,7 +237,6 @@ body.ef-body {
   100% { box-shadow: 0 0 0 0 rgba(53,208,127,0); }
 }
 
-/* ---- Cards & Buttons ---- */
 .ef-eyebrow {
   font-family: var(--font-mono); font-size: .72rem; letter-spacing: .12em;
   text-transform: uppercase; color: var(--accent);
@@ -179,6 +259,31 @@ body.ef-body {
   background: var(--surface-hover);
   transform: translateY(-3px);
 }
+.card-h { font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; color: var(--text); }
+.card-p { font-size: .95rem; color: var(--text-dim); line-height: 1.65; }
+
+.tag {
+  font-family: var(--font-mono); font-size: .65rem; letter-spacing: .1em;
+  text-transform: uppercase; padding: .25rem .7rem; border-radius: 6px;
+  background: var(--accent-soft); color: var(--accent); display: inline-block;
+}
+.tag-green { background: var(--accent-2-soft); color: var(--accent-2); }
+
+.price-tag { font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--text); margin: 1.5rem 0 .5rem; }
+.price-sub { font-size: .85rem; color: var(--text-dim); margin-bottom: 2rem; }
+
+.cta-block {
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 5rem 3rem;
+  text-align: center;
+}
+
+.faq-item { padding: 1.75rem 0; border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { font-weight: 700; font-size: 1.05rem; margin-bottom: .75rem; color: var(--text); }
+.faq-a { color: var(--text-dim); font-size: .95rem; line-height: 1.7; }
 
 .ef-btn-primary {
   background: var(--text); color: var(--bg); font-weight: 600;
@@ -194,7 +299,6 @@ body.ef-body {
 }
 .ef-btn-secondary:hover { border-color: var(--accent); background: var(--accent-soft); }
 
-/* ---- Footer ---- */
 .ef-footer { background: var(--bg-raised); border-top: 1px solid var(--border); width: 100%; }
 .ef-social-btn {
   width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border);
@@ -204,7 +308,7 @@ body.ef-body {
 .ef-social-btn:hover { border-color: var(--accent); color: var(--text); background: var(--accent-soft); }
 
 /* ==========================================================================
-   Clean Mobile Drawer (< 1080px)
+   Mobile & Tablet Responsive Drawer Styles (< 1080px)
    ========================================================================== */
 @media (max-width: 1080px) {
   .ef-menu-toggle { display: flex; }
