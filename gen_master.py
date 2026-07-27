@@ -437,85 +437,49 @@ what_we_do = HEAD("Full-Stack IT Services & Enterprise AI | AxonFlow AI",
 
 write_both("what-we-do/index.html", what_we_do)
 
-# 2. CASE STUDIES (Detailed Full-Stack IT + AI Case Studies)
-case_studies = HEAD("IT & AI Case Studies | Production Results | AxonFlow AI",
-    "Verified production case studies across cloud infrastructure, custom enterprise software, logistics automation, and AI agents.",
-    "/case-studies") + """
+# 2. CASE STUDIES (Live Systems Portfolio Modal Grid)
+case_studies = HEAD("Case Studies & Live Production Deployments | AxonFlow AI",
+    "Explore live production systems engineered by AxonFlow AI. Click any project to launch its live working preview inline.",
+    "/case-studies",
+    """
+.browser-mockup { border-radius: 12px; background: var(--surface); border: 1px solid var(--border-strong); overflow: hidden; position: relative; }
+.browser-mockup .bar { background: rgba(255,255,255,0.03); padding: .5rem .75rem; display: flex; align-items: center; gap: .4rem; border-bottom: 1px solid var(--border); }
+.browser-mockup .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-strong); }
+.browser-mockup .url-bar { font-family: var(--font-mono); font-size: .68rem; color: var(--text-dim); margin-left: .5rem; background: rgba(0,0,0,0.3); padding: .15rem .6rem; border-radius: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.browser-mockup .screen { height: 210px; position: relative; overflow: hidden; background: #040507; display: flex; align-items: center; justify-content: center; }
+.browser-mockup .screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .4s ease; }
+.ef-card:hover .browser-mockup .screen img { transform: scale(1.04); }
+.preview-tag { position: absolute; top: .75rem; right: .75rem; background: var(--accent); color: #fff; font-family: var(--font-mono); font-size: .65rem; font-weight: 600; padding: .35rem .75rem; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); display: flex; align-items: center; gap: .35rem; }
+""") + """
 <section class="page-hero">
 <div class="wrap inner">
-<div class="ef-eyebrow" style="margin-bottom:1.5rem">Production Deployments</div>
-<h1 class="hero-h1">Results from <br><span class="accent">live systems.</span></h1>
-<p class="hero-p">Every case study below represents a real production system engineered, deployed, and monitored by AxonFlow AI.</p>
+<div class="ef-eyebrow" style="margin-bottom:1.5rem">Live Systems Portfolio</div>
+<h1 class="hero-h1">Portfolio you can open, <br><span class="accent">not just read about.</span></h1>
+<p class="hero-p">Click any project to load it live, right here in an inline interactive modal — no new tab required.</p>
 </div>
 </section>
 
 <div class="ef-rail wrap" style="padding-left:1.5rem;padding-right:1.5rem">
-<span><span class="dot-live"></span>9 Production Systems Live</span>
-<span>&middot;</span><span>Global Enterprise Deployments</span>
-<span>&middot;</span><span>6-Month Post-Launch Support SLA</span>
+<span><span class="dot-live"></span>12 Interactive Production Projects</span>
+<span>&middot;</span><span>Click to Test Live Systems</span>
+<span>&middot;</span><span>6-Month Post-Launch SLA</span>
 </div>
 
 <section class="section">
 <div class="wrap">
-<div class="grid-2" style="gap:2rem;margin-bottom:4rem">
-<div class="card" style="padding:2.5rem">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
-<span class="tag">Financial IT & AI</span>
-<span class="stat-big" style="font-size:2rem">80% ROI</span>
-</div>
-<h3 class="card-h" style="font-size:1.4rem">FinEdge Solutions — Automated Financial Processing</h3>
-<p class="card-p" style="margin-bottom:1.5rem">Engineered a cloud pipeline processing 10,000+ daily financial documents with 95% accuracy using custom OCR and multi-agent verification algorithms.</p>
-<ul class="check-list" style="margin-bottom:1.5rem">
-<li>Manual review time cut by 80%</li>
-<li>Automated AWS cloud pipeline with failovers</li>
-<li>SOC2 data privacy compliance</li>
-</ul>
+<div class="grid-3" style="gap:2rem;margin-bottom:4rem" id="portfolio-grid">
+<!-- Live cards injected via JS -->
 </div>
 
-<div class="card" style="padding:2.5rem">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
-<span class="tag">Healthcare IT</span>
-<span class="stat-big" style="font-size:2rem">&lt;400ms</span>
-</div>
-<h3 class="card-h" style="font-size:1.4rem">MediCore Health — Clinical Decision Pipeline</h3>
-<p class="card-p" style="margin-bottom:1.5rem">Deployed an enterprise RAG knowledge engine querying 2M+ medical papers in real time with semantic re-ranking and HIPAA compliance.</p>
-<ul class="check-list" style="margin-bottom:1.5rem">
-<li>Sub-400ms query latency</li>
-<li>Vector search with Cohere Rerank</li>
-<li>HIPAA & GDPR audit cleared</li>
-</ul>
-</div>
-
-<div class="card" style="padding:2.5rem">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
-<span class="tag">E-Commerce IT</span>
-<span class="stat-big" style="font-size:2rem">50,000+</span>
-</div>
-<h3 class="card-h" style="font-size:1.4rem">ShopVerse — Order Management & Logistics</h3>
-<p class="card-p" style="margin-bottom:1.5rem">Automated total order processing workflow with N8N webhooks, custom API middleware, and inventory database syncing.</p>
-<ul class="check-list" style="margin-bottom:1.5rem">
-<li>50,000+ monthly orders processed automatically</li>
-<li>Zero manual order entry errors</li>
-<li>Real-time inventory alerts</li>
-</ul>
-</div>
-
-<div class="card" style="padding:2.5rem">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
-<span class="tag">Logistics IT</span>
-<span class="stat-big" style="font-size:2rem">-25% Fuel</span>
-</div>
-<h3 class="card-h" style="font-size:1.4rem">LogiTrack — Autonomous Delivery Routing</h3>
-<p class="card-p" style="margin-bottom:1.5rem">Custom route optimization algorithm and driver mobile web portal for managing multi-city vehicle dispatches.</p>
-<ul class="check-list" style="margin-bottom:1.5rem">
-<li>25% reduction in fuel consumption</li>
-<li>98% on-time delivery across 12 cities</li>
-<li>Real-time fleet tracking portal</li>
-</ul>
-</div>
+<div class="cta-block">
+<h2 class="section-title">Want Us to Build a Similar <span class="accent">Live System for You?</span></h2>
+<p class="hero-p" style="margin:0 auto 2rem">Speak directly with our lead solution architects and senior developers.</p>
+<a href="/contact" class="ef-btn-primary">Schedule Scoping Call &rarr;</a>
 </div>
 </div>
 </section>
+<script src="/js/portfolio-modal.js" defer></script>
+<script src="/js/portfolio-data.js" defer></script>
 """ + FOOTER
 
 write_both("case-studies/index.html", case_studies)
