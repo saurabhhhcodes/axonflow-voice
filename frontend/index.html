@@ -102,27 +102,45 @@
 
     <header>
         <nav class="ef-nav" aria-label="Main navigation">
-            <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
-                <a href="/" class="flex items-center space-x-2 shrink-0" aria-label="AxonFlow AI Home">
-                    <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-8 w-8" width="32" height="32">
-                    <span class="ef-display text-base font-bold tracking-tight">AxonFlow AI</span>
-                </a>
-                <div class="hidden lg:flex items-center space-x-5 text-xs font-medium" role="menubar">
-                    <a href="/" class="ef-navlink" role="menuitem">Home</a>
-                    <a href="/#services" class="ef-navlink" role="menuitem">Services</a>
-                    <a href="/#portfolio" class="ef-navlink" role="menuitem">Portfolio</a>
-                    <a href="/about-us" class="ef-navlink" role="menuitem">About</a>
-                    <a href="/what-we-do" class="ef-navlink" role="menuitem">What We Do</a>
-                    <a href="/who-we-are" class="ef-navlink" role="menuitem">Who We Are</a>
-                    <a href="/case-studies" class="ef-navlink" role="menuitem">Case Studies</a>
-                    <a href="/testimonials" class="ef-navlink" role="menuitem">Testimonials</a>
-                    <a href="/pricing" class="ef-navlink" role="menuitem">Pricing</a>
-                    <a href="/careers/" class="ef-navlink" role="menuitem">Careers</a>
-                    <a href="/blog" class="ef-navlink" role="menuitem">Blog</a>
-                    <a href="/contact" class="ef-cta py-1.5 px-3 text-xs" role="menuitem">Talk to us</a>
-                </div>
-            </div>
-        </nav>
+<div class="wrap ef-nav-bar">
+<a href="/" aria-label="AxonFlow AI Home" style="display:flex;align-items:center;gap:.625rem;flex-shrink:0">
+<img src="/assets/logo_pro.png" alt="AxonFlow AI" style="height:2rem;width:2rem">
+<span class="ef-display" style="font-size:1rem;font-weight:700;letter-spacing:-.01em">AxonFlow AI</span>
+</a>
+<button class="ef-menu-toggle" id="efMenuToggle" aria-label="Toggle navigation menu">
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+</button>
+<div class="ef-nav-menu" id="efNavMenu" role="menubar">
+<a href="/" class="ef-navlink" role="menuitem">Home</a>
+<a href="/what-we-do" class="ef-navlink" role="menuitem">Services</a>
+<a href="/case-studies" class="ef-navlink" role="menuitem">Case Studies</a>
+<a href="/testimonials" class="ef-navlink" role="menuitem">Testimonials</a>
+<a href="/open-source" class="ef-navlink" role="menuitem">Open Source</a>
+<a href="/blog" class="ef-navlink" role="menuitem">Blog</a>
+<a href="/about-us" class="ef-navlink" role="menuitem">About</a>
+<a href="/who-we-are" class="ef-navlink" role="menuitem">Who We Are</a>
+<a href="/pricing" class="ef-navlink" role="menuitem">Pricing</a>
+<a href="/contact" class="ef-cta" role="menuitem">Talk to us</a>
+</div>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('efMenuToggle');
+  var menu = document.getElementById('efNavMenu');
+  if(btn && menu){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      menu.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e){
+      if(!menu.contains(e.target) && !btn.contains(e.target)){
+        menu.classList.remove('open');
+      }
+    });
+  }
+})();
+</script>
+</nav>
     </header>
 
     <main id="main-content">

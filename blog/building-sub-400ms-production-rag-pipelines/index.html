@@ -71,7 +71,7 @@ img{max-width:100%;display:block}
 <a href="#main" style="position:absolute;top:-100px;left:1rem;z-index:999;background:var(--accent);color:#fff;padding:.5rem 1rem;border-radius:6px;font-size:.85rem;transition:top .2s" onfocus="this.style.top='1rem'" onblur="this.style.top='-100px'">Skip to main content</a>
 <header>
 <nav class="ef-nav" aria-label="Main navigation">
-<div class="wrap" style="height:4rem;display:flex;align-items:center;justify-content:space-between">
+<div class="wrap ef-nav-bar">
 <a href="/" aria-label="AxonFlow AI Home" style="display:flex;align-items:center;gap:.625rem;flex-shrink:0">
 <img src="/assets/logo_pro.png" alt="AxonFlow AI" style="height:2rem;width:2rem">
 <span class="ef-display" style="font-size:1rem;font-weight:700;letter-spacing:-.01em">AxonFlow AI</span>
@@ -87,6 +87,7 @@ img{max-width:100%;display:block}
 <a href="/open-source" class="ef-navlink" role="menuitem">Open Source</a>
 <a href="/blog" class="ef-navlink" role="menuitem">Blog</a>
 <a href="/about-us" class="ef-navlink" role="menuitem">About</a>
+<a href="/who-we-are" class="ef-navlink" role="menuitem">Who We Are</a>
 <a href="/pricing" class="ef-navlink" role="menuitem">Pricing</a>
 <a href="/contact" class="ef-cta" role="menuitem">Talk to us</a>
 </div>
@@ -96,73 +97,18 @@ img{max-width:100%;display:block}
   var btn = document.getElementById('efMenuToggle');
   var menu = document.getElementById('efNavMenu');
   if(btn && menu){
-    btn.addEventListener('click', function(){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
       menu.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e){
+      if(!menu.contains(e.target) && !btn.contains(e.target)){
+        menu.classList.remove('open');
+      }
     });
   }
 })();
 </script>
-</div>
-<script>
-(function(){
-  var btn = document.getElementById('efMenuToggle');
-  var menu = document.getElementById('efNavMenu');
-  if(btn && menu){
-    btn.addEventListener('click', function(){
-      menu.classList.toggle('open');
-    });
-  }
-})();
-</script>
-</div>
-<script>
-(function(){
-  var btn = document.getElementById('efMenuToggle');
-  var menu = document.getElementById('efNavMenu');
-  if(btn && menu){
-    btn.addEventListener('click', function(){
-      menu.classList.toggle('open');
-    });
-  }
-})();
-</script>
-</div>
-<script>
-(function(){
-  var btn = document.getElementById('efMenuToggle');
-  var menu = document.getElementById('efNavMenu');
-  if(btn && menu){
-    btn.addEventListener('click', function(){
-      menu.classList.toggle('open');
-    });
-  }
-})();
-</script>
-</div>
-<script>
-(function(){
-  var btn = document.getElementById('efMenuToggle');
-  var menu = document.getElementById('efNavMenu');
-  if(btn && menu){
-    btn.addEventListener('click', function(){
-      menu.classList.toggle('open');
-    });
-  }
-})();
-</script>
-</div>
-<script>
-(function(){
-  var btn = document.getElementById('efMenuToggle');
-  var menu = document.getElementById('efNavMenu');
-  if(btn && menu){
-    btn.addEventListener('click', function(){
-      menu.classList.toggle('open');
-    });
-  }
-})();
-</script>
-</div>
 </nav>
 </header>
 <main id="main">

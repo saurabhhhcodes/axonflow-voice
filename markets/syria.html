@@ -50,6 +50,23 @@ script[type='application/ld+json'] { display: none; }
 <a href="/contact" class="ef-cta" role="menuitem">Talk to us</a>
 </div>
 </div>
+<script>
+(function(){
+  var btn = document.getElementById('efMenuToggle');
+  var menu = document.getElementById('efNavMenu');
+  if(btn && menu){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      menu.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e){
+      if(!menu.contains(e.target) && !btn.contains(e.target)){
+        menu.classList.remove('open');
+      }
+    });
+  }
+})();
+</script>
 </nav>
 </header>
 <main id="main">
