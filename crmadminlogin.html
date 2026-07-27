@@ -5,226 +5,374 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AxonFlow CRM Login | Admin Access</title>
     <meta name="description" content="Secure admin login for AxonFlow CRM - Manage enquiries, team, projects and analytics.">
-    <meta name="keywords" content="AxonFlow CRM, admin login, CRM dashboard, enquiry management">
-    <meta name="author" content="AxonFlow AI">
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/png" href="/assets/logo_pro.png">
     <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
-    <link rel="canonical" href="https://axonflow.in/crmadminlogin">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="AxonFlow CRM Login">
-    <meta property="og:description" content="Secure admin login for AxonFlow CRM system.">
-    <meta property="og:image" content="/assets/logo_pro.png">
-    <meta property="og:url" content="https://axonflow.in/crmadminlogin">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="AxonFlow CRM Login">
-    <meta name="twitter:description" content="Secure admin login for AxonFlow CRM system.">
-    <link rel="alternate" hreflang="en" href="https://axonflow.in/crmadminlogin">
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "AxonFlow CRM Login",
-        "description": "Secure admin login portal for AxonFlow CRM system.",
-        "publisher": {
-            "@type": "Organization",
-            "name": "AxonFlow AI",
-            "url": "https://axonflow.in"
-        }
-    }
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        slate: { 950: '#020617' }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="apple-touch-icon" href="/assets/logo_pro.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/enterprise.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: var(--font-body); background: var(--bg); color: var(--text); }
-        .login-bg {
-            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #07080a;
+            --surface: #0d0f13;
+            --border: rgba(255,255,255,0.08);
+            --border-strong: rgba(255,255,255,0.16);
+            --text: #f4f4f1;
+            --text-dim: #9aa0ab;
+            --accent: #5457ff;
+            --accent-2: #35d07f;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-display: 'Fraunces', serif;
+            --font-mono: 'IBM Plex Mono', monospace;
         }
-        .login-bg::before {
+
+        html, body {
+            height: 100%;
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        /* Animated background */
+        .bg-layer {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 0;
+        }
+        .bg-layer::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+            background:
+                radial-gradient(ellipse 70% 60% at 15% 20%, rgba(84,87,255,0.14) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 85% 80%, rgba(53,208,127,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 80% 10%, rgba(84,87,255,0.07) 0%, transparent 55%);
         }
-        .glass-card {
-            background: rgba(13, 15, 19, 0.85);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+
+        /* Top nav */
+        .login-nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 10;
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            background: rgba(7,8,10,0.6);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
         }
-        .input-field {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            transition: all 0.3s ease;
+        .login-nav a {
+            text-decoration: none;
+            color: inherit;
         }
-        .input-field:focus {
-            border-color: rgba(6, 182, 212, 0.6);
-            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        .login-nav .brand {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+        .login-nav .brand img { height: 1.75rem; }
+        .login-nav .brand span {
+            font-family: var(--font-mono);
+            font-size: .72rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+        .login-nav .back-link {
+            font-size: .8rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        .login-nav .back-link:hover { color: #8a8cff; }
+
+        /* Centered layout */
+        .login-wrap {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 1.25rem 2rem;
+        }
+
+        /* Card */
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(13, 15, 19, 0.9);
+            backdrop-filter: blur(32px) saturate(160%);
+            -webkit-backdrop-filter: blur(32px) saturate(160%);
+            border: 1px solid var(--border-strong);
+            border-radius: 20px;
+            padding: 2.75rem 2.25rem 2.25rem;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.04);
+            animation: slideUp .45s cubic-bezier(.22,1,.36,1) both;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(24px) scale(.98); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Card header */
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .login-header img {
+            height: 3.5rem;
+            margin: 0 auto 1rem;
+            display: block;
+        }
+        .login-header h1 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -.01em;
+            color: var(--text);
+            margin-bottom: .25rem;
+        }
+        .login-header p {
+            font-size: .8rem;
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        /* Form fields */
+        .field { margin-bottom: 1.25rem; }
+        .field label {
+            display: block;
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            margin-bottom: .5rem;
+        }
+        .field input {
+            width: 100%;
+            padding: .8rem 1rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-strong);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: .9rem;
+            font-family: var(--font-body);
             outline: none;
+            transition: border-color .2s, box-shadow .2s;
         }
-        .btn-gradient {
-            background: linear-gradient(135deg, #06b6d4, #9333ea);
-            transition: all 0.3s ease;
+        .field input::placeholder { color: rgba(154,160,171,0.45); }
+        .field input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(84,87,255,.18);
         }
-        .btn-gradient:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.3);
+        .field .input-wrap {
+            position: relative;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-in { animation: fadeIn 0.5s ease forwards; }
+        .field .input-wrap input { padding-right: 3rem; }
+        .field .eye-btn {
+            position: absolute;
+            right: .75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            padding: .25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .field .eye-btn:hover { color: var(--text); }
+        .field .field-err {
+            font-size: .75rem;
+            color: #f87171;
+            margin-top: .35rem;
+            display: none;
+        }
+        .field .field-err.show { display: block; }
+
+        /* Login error */
+        .login-err {
+            display: none;
+            background: rgba(239,68,68,0.08);
+            border: 1px solid rgba(239,68,68,0.25);
+            border-radius: 10px;
+            padding: .75rem 1rem;
+            font-size: .83rem;
+            color: #f87171;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .login-err.show { display: block; }
+
+        /* Submit button */
+        .submit-btn {
+            width: 100%;
+            padding: .9rem;
+            background: linear-gradient(135deg, var(--accent), #7f81ff);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: .9rem;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+            letter-spacing: .01em;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(84,87,255,.4);
+        }
+        .submit-btn:active { transform: translateY(0); opacity: .9; }
+
+        /* Footer note */
+        .card-footer {
+            margin-top: 1.5rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: .72rem;
+            color: rgba(154,160,171,.5);
+            font-family: var(--font-mono);
+        }
     </style>
 </head>
-<body class="login-bg min-h-screen flex items-center justify-center antialiased selection:bg-cyan-500/30 font-['Inter']">
-    <div class="login-bg fixed inset-0"></div>
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-xl border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-            <a href="/" class="flex items-center space-x-2">
-                <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-7">
-                <span class="text-sm font-bold tracking-tighter uppercase text-white/80">AXONFLOW AI</span>
-            </a>
-            <a href="/" class="text-cyan-400 hover:text-cyan-300 text-xs font-medium transition-colors">Back to Site</a>
+<body>
+
+<div class="bg-layer"></div>
+
+<nav class="login-nav" role="navigation" aria-label="CRM navigation">
+    <a href="/" class="brand">
+        <img src="/assets/logo_pro.png" alt="AxonFlow AI">
+        <span>AxonFlow AI</span>
+    </a>
+    <a href="/" class="back-link">← Back to site</a>
+</nav>
+
+<div class="login-wrap">
+    <div class="login-card">
+        <div class="login-header">
+            <img src="/assets/logo_pro.png" alt="AxonFlow AI">
+            <h1>AxonFlow CRM</h1>
+            <p>Admin Portal</p>
         </div>
-    </nav>
-    <div class="relative z-10 w-full max-w-md px-6 fade-in pt-24">
-        <div class="glass-card rounded-2xl p-8 shadow-2xl shadow-black/50">
-            <div class="text-center mb-8">
-                <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-16 mx-auto mb-4">
-                <h1 class="text-2xl font-bold text-white tracking-tight">AxonFlow CRM</h1>
-                <p class="text-slate-400 text-sm mt-1">Admin Portal</p>
+
+        <form id="loginForm" aria-label="Admin login form" novalidate>
+            <div class="field">
+                <label for="email">Email Address</label>
+                <input
+                    type="email" id="email" name="email"
+                    required autocomplete="email"
+                    placeholder="admin@axonflow.in"
+                    aria-describedby="email-error">
+                <div class="field-err" id="email-error">Please enter a valid email address.</div>
             </div>
-            <form id="loginForm" class="space-y-5" aria-label="Admin login form">
-                <div>
-                    <label for="email" class="block text-sm font-medium text-slate-300 mb-1.5">Email Address</label>
-                    <input type="email" id="email" name="email" required autocomplete="email"
-                        class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-slate-500 text-sm"
-                        placeholder="admin@axonflow.in" aria-describedby="email-error">
-                    <p id="email-error" class="text-red-400 text-xs mt-1 hidden">Please enter a valid email</p>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <div class="input-wrap">
+                    <input
+                        type="password" id="password" name="password"
+                        required autocomplete="current-password"
+                        placeholder="Enter password"
+                        aria-describedby="password-error">
+                    <button type="button" class="eye-btn" onclick="togglePassword()" aria-label="Toggle password visibility">
+                        <svg id="eyeIcon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                        <svg id="eyeOffIcon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M3 3l18 18"/>
+                        </svg>
+                    </button>
                 </div>
-                <div>
-                    <label for="password" class="block text-sm font-medium text-slate-300 mb-1.5">Password</label>
-                    <div class="relative">
-                        <input type="password" id="password" name="password" required autocomplete="current-password"
-                            class="input-field w-full px-4 py-3 pr-12 rounded-xl text-white placeholder-slate-500 text-sm"
-                            placeholder="Enter password" aria-describedby="password-error">
-                        <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors" aria-label="Toggle password visibility">
-                            <svg id="eyeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                            <svg id="eyeOffIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M3 3l18 18"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <p id="password-error" class="text-red-400 text-xs mt-1 hidden">Password is required</p>
-                </div>
-                <div id="loginError" class="hidden bg-red-500/10 border border-red-500/30 rounded-xl p-3">
-                    <p class="text-red-400 text-sm text-center">Invalid credentials. Please try again.</p>
-                </div>
-                <button type="submit" id="loginBtn"
-                    class="btn-gradient w-full py-3 rounded-xl text-white font-semibold text-sm tracking-wide">
-                    Sign In
-                </button>
-            </form>
-            <div class="mt-6 pt-6 border-t border-slate-700/50 text-center">
-                <p class="text-slate-500 text-xs">Protected area. Unauthorized access is prohibited.</p>
+                <div class="field-err" id="password-error">Password is required.</div>
             </div>
-        </div>
+
+            <div class="login-err" id="loginError">Invalid email or password. Please try again.</div>
+
+            <button type="submit" class="submit-btn" id="loginBtn">Sign In →</button>
+        </form>
+
+        <div class="card-footer">Protected area · Unauthorized access is prohibited</div>
     </div>
-    <footer class="relative w-full z-10 border-t border-slate-800 bg-black/50 backdrop-blur-xl mt-12">
-        <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center space-x-3">
-                <img src="/assets/logo_pro.png" alt="AxonFlow AI" class="h-6">
-                <span class="text-sm font-bold tracking-tighter uppercase text-white/80">AXONFLOW AI</span>
-            </div>
-            <p class="text-slate-600 text-xs">&copy; 2025 AxonFlow AI. All rights reserved. <span class="text-slate-700">UDYAM-UP-50-0236406</span></p>
-            <a href="/" class="text-cyan-400 hover:text-cyan-300 text-xs font-medium transition-colors">Back to Site</a>
-        </div>
-    </footer>
-    <script>
-        const CRM_CREDENTIALS = { email: 'admin@axonflow.in', password: 'axonflow2025' };
-        const SESSION_KEY = 'crm_admin_session';
+</div>
 
-        (function checkSession() {
-            const session = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
-            if (session && session.authenticated && session.email === CRM_CREDENTIALS.email) {
-                window.location.href = '/crmdashboard';
-            }
-        })();
+<script>
+    const CRM_CREDENTIALS = { email: 'admin@axonflow.in', password: 'axonflow2025' };
+    const SESSION_KEY = 'crm_admin_session';
 
-        function togglePassword() {
-            const pw = document.getElementById('password');
-            const eye = document.getElementById('eyeIcon');
-            const eyeOff = document.getElementById('eyeOffIcon');
-            if (pw.type === 'password') {
-                pw.type = 'text';
-                eye.classList.add('hidden');
-                eyeOff.classList.remove('hidden');
-            } else {
-                pw.type = 'password';
-                eye.classList.remove('hidden');
-                eyeOff.classList.add('hidden');
-            }
+    (function checkSession() {
+        const session = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+        if (session && session.authenticated && new Date(session.expiresAt) > new Date()) {
+            window.location.href = '/crmdashboard';
         }
+    })();
 
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-            const emailErr = document.getElementById('email-error');
-            const pwErr = document.getElementById('password-error');
-            const loginErr = document.getElementById('loginError');
-            let valid = true;
+    function togglePassword() {
+        const pw = document.getElementById('password');
+        const eye = document.getElementById('eyeIcon');
+        const eyeOff = document.getElementById('eyeOffIcon');
+        if (pw.type === 'password') {
+            pw.type = 'text';
+            eye.style.display = 'none';
+            eyeOff.style.display = '';
+        } else {
+            pw.type = 'password';
+            eye.style.display = '';
+            eyeOff.style.display = 'none';
+        }
+    }
 
-            emailErr.classList.add('hidden');
-            pwErr.classList.add('hidden');
-            loginErr.classList.add('hidden');
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const emailErr = document.getElementById('email-error');
+        const pwErr = document.getElementById('password-error');
+        const loginErr = document.getElementById('loginError');
+        let valid = true;
 
-            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                emailErr.classList.remove('hidden');
-                valid = false;
-            }
-            if (!password) {
-                pwErr.classList.remove('hidden');
-                valid = false;
-            }
-            if (!valid) return;
+        emailErr.classList.remove('show');
+        pwErr.classList.remove('show');
+        loginErr.classList.remove('show');
 
-            if (email === CRM_CREDENTIALS.email && password === CRM_CREDENTIALS.password) {
-                const session = {
-                    authenticated: true,
-                    email: email,
-                    loginTime: new Date().toISOString(),
-                    expiresAt: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString()
-                };
-                localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-                window.location.href = '/crmdashboard';
-            } else {
-                loginErr.classList.remove('hidden');
-                document.getElementById('password').value = '';
-                document.getElementById('password').focus();
-            }
-        });
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            emailErr.classList.add('show');
+            valid = false;
+        }
+        if (!password) {
+            pwErr.classList.add('show');
+            valid = false;
+        }
+        if (!valid) return;
 
-        document.getElementById('email').focus();
-    </script>
+        if (email === CRM_CREDENTIALS.email && password === CRM_CREDENTIALS.password) {
+            localStorage.setItem(SESSION_KEY, JSON.stringify({
+                authenticated: true,
+                email: email,
+                loginTime: new Date().toISOString(),
+                expiresAt: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString()
+            }));
+            document.getElementById('loginBtn').textContent = 'Redirecting...';
+            window.location.href = '/crmdashboard';
+        } else {
+            loginErr.classList.add('show');
+            document.getElementById('password').value = '';
+            document.getElementById('password').focus();
+        }
+    });
+
+    document.getElementById('email').focus();
+</script>
 </body>
 </html>
