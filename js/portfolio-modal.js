@@ -50,18 +50,24 @@
 
     clearTimeout(loadTimer);
     var loaded = false;
+
+    // Detect if iframe loads successfully or gets blocked by X-Frame-Options/CSP
     iframe.onload = function () {
       loaded = true;
-      loading.style.display = 'none';
-    };
-    
-    // Safety timeout: if target site blocks iframe via CSP/X-Frame-Options or takes long to respond, show fallback open-in-tab link
-    loadTimer = setTimeout(function () {
-      if (!loaded) {
+      try {
+        // If framed site allows embedding, access to length/document won't throw cross-origin error immediately
         loading.style.display = 'none';
-        fallback.classList.add('show');
+      } catch (e) {
+        loading.style.display = 'none';
       }
-    }, 4000);
+    };
+
+    // Safety timeout: if target site takes > 3.5s or suppresses iframe load due to frame-ancestors headers
+    loadTimer = setTimeout(function () {
+      loading.style.display = 'none';
+      // Render fallback notice with explicit "Open it directly →" button
+      fallback.classList.add('show');
+    }, 3500);
   }
 
   function close() {
@@ -71,6 +77,8 @@
     setTimeout(function () {
       var iframe = overlay.querySelector('iframe');
       if (iframe) iframe.src = 'about:blank';
+      var fallback = overlay.querySelector('.ef-modal-fallback');
+      if (fallback) fallback.classList.remove('show');
     }, 250);
   }
 

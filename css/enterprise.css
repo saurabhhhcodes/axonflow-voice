@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AxonFlow AI — Enterprise Design System (Master Layout & Aesthetic CSS)
+   AxonFlow AI — Master Enterprise & Modal CSS
    ========================================================================== */
 
 :root {
@@ -308,6 +308,173 @@ img { max-width: 100%; display: block; }
 .ef-social-btn:hover { border-color: var(--accent); color: var(--text); background: var(--accent-soft); }
 
 /* ==========================================================================
+   Portfolio Live-Preview Modal Component Styles
+   ========================================================================== */
+.ef-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 7, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+.ef-modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.ef-modal-box {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  width: min(1140px, 100%);
+  height: min(740px, 90vh);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(.96) translateY(12px);
+  transition: transform .25s ease;
+  box-shadow: 0 40px 100px rgba(0,0,0,.7);
+}
+.ef-modal-overlay.open .ef-modal-box {
+  transform: scale(1) translateY(0);
+}
+.ef-modal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .85rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.ef-modal-bar .url {
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  color: var(--text-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 70%;
+}
+.ef-modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all .2s ease;
+}
+.ef-modal-close:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.ef-modal-frame-wrap {
+  flex: 1;
+  position: relative;
+  background: #040507;
+}
+.ef-modal-frame-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.ef-modal-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-raised);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  gap: .75rem;
+  z-index: 2;
+}
+.ef-modal-loading .spin {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--accent);
+  animation: ef-spin .7s linear infinite;
+}
+@keyframes ef-spin { to { transform: rotate(360deg); } }
+.ef-modal-fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  background: var(--bg-raised);
+  color: var(--text-dim);
+  font-size: .95rem;
+  text-align: center;
+  padding: 2rem;
+  z-index: 3;
+}
+.ef-modal-fallback.show { display: flex; }
+
+/* ---- Browser Mockup Cards ---- */
+.browser-mockup {
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+  position: relative;
+}
+.browser-mockup .bar {
+  background: rgba(255,255,255,0.03);
+  padding: .5rem .75rem;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  border-bottom: 1px solid var(--border);
+}
+.browser-mockup .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-strong); }
+.browser-mockup .url-bar {
+  font-family: var(--font-mono); font-size: .68rem; color: var(--text-dim); margin-left: .5rem;
+  background: rgba(0,0,0,0.3); padding: .15rem .6rem; border-radius: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.browser-mockup .screen {
+  height: 210px;
+  position: relative;
+  overflow: hidden;
+  background: #040507;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.browser-mockup .screen img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+  transition: transform .4s ease;
+}
+.ef-card:hover .browser-mockup .screen img { transform: scale(1.04); }
+.preview-tag {
+  position: absolute; top: .75rem; right: .75rem;
+  background: var(--accent); color: #fff;
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 600;
+  padding: .35rem .75rem; border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  display: flex; align-items: center; gap: .35rem;
+}
+
+/* ==========================================================================
    Mobile & Tablet Responsive Drawer Styles (< 1080px)
    ========================================================================== */
 @media (max-width: 1080px) {
@@ -341,6 +508,8 @@ img { max-width: 100%; display: block; }
     margin-top: 1.25rem;
     text-align: center;
   }
+  .ef-modal-overlay { padding: 1rem; }
+  .ef-modal-box { height: 85vh; }
   
   .page-hero { padding: 7rem 0 3.5rem !important; }
   .hero-h1 { font-size: clamp(2.2rem, 7vw, 3.6rem) !important; line-height: 1.08 !important; word-break: break-word; }

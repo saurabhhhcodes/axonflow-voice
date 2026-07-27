@@ -177,7 +177,7 @@ force = false
 
 [[redirects]]
 from = "/case-studies"
-to = "/case-studies.html"
+to = "/case-studies/index.html"
 status = 200.0
 force = false
 
@@ -189,7 +189,7 @@ force = false
 
 [[redirects]]
 from = "/case-studies/"
-to = "/case-studies.html"
+to = "/case-studies/index.html"
 status = 200.0
 force = false
 
