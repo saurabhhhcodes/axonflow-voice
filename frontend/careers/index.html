@@ -133,6 +133,18 @@ img{max-width:100%;display:block}
 })();
 </script>
 </div>
+<script>
+(function(){
+  var btn = document.getElementById('efMenuToggle');
+  var menu = document.getElementById('efNavMenu');
+  if(btn && menu){
+    btn.addEventListener('click', function(){
+      menu.classList.toggle('open');
+    });
+  }
+})();
+</script>
+</div>
 </nav>
 </header>
 <main id="main">
