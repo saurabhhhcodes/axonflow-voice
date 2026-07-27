@@ -421,8 +421,8 @@ write_both("who-we-are/index.html", who_we_are_page)
 
 # 2. GENERATE LONG-FORM SEO / GEO / AEO COUNTRY MARKET PAGES FOR ALL 195 COUNTRIES
 for slug, country, flag, currency, region, tz, capital, subregion in COUNTRIES:
-    title = f"IT Services & Enterprise AI Agency in {country} | AxonFlow AI"
-    desc = f"Premier IT Engineering & Autonomous AI Services in {country} ({capital}). Cloud architecture, full-stack software, custom ERP/CRM, and AI agents. Invoicing in {currency}."
+    title = f"AxonFlow AI {country} | IT Engineering & Autonomous AI Agency"
+    desc = f"AxonFlow AI in {country} ({capital}). Official enterprise IT software development, cloud infrastructure, custom ERP/CRM, and autonomous AI agent pods in {country}. Local currency invoicing in {currency}."
     canon = f"/markets/{slug}"
     
     # JSON-LD Schema for GEO / AEO Search Engines
