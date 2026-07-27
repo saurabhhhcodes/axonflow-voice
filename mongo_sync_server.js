@@ -1,20 +1,20 @@
 const http = require('http');
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
 
-const PORT = 3001;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017';
+const PORT = process.env.PORT || 3001;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017';
 const DB_NAME = 'axonflow_crm';
 
 let db = null;
 
-// Connect to MongoDB
-MongoClient.connect(MONGO_URI, { useUnifiedTopology: true })
+// Connect to MongoDB using modern v6 driver options
+MongoClient.connect(MONGO_URI)
   .then(client => {
-    console.log('✅ Connected to MongoDB at', MONGO_URI);
+    console.log('✅ Connected successfully to MongoDB at', MONGO_URI);
     db = client.db(DB_NAME);
   })
   .catch(err => {
-    console.warn('⚠️ Could not connect to local MongoDB. Operating with fallback queue:', err.message);
+    console.warn('⚠️ Could not connect to MongoDB:', err.message);
   });
 
 const server = http.createServer((req, res) => {
@@ -34,7 +34,7 @@ const server = http.createServer((req, res) => {
     req.on('end', async () => {
       try {
         const payload = JSON.parse(body);
-        console.log('📥 Received CRM Inbound Submission:', payload);
+        console.log('📥 Inbound CRM Submission:', payload);
 
         if (db) {
           const collectionName = payload.type === 'intern' ? 'proposals' : 'enquiries';
@@ -42,7 +42,7 @@ const server = http.createServer((req, res) => {
             ...payload,
             syncedAt: new Date().toISOString()
           });
-          console.log(`💾 Persisted to MongoDB collection [${collectionName}]`);
+          console.log(`💾 Persisted to collection [${collectionName}]`);
         }
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
