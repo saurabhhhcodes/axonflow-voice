@@ -1,10 +1,5 @@
 /* ==========================================================================
-   AxonFlow AI — Enterprise Design System
-   A single source of truth for the elevated visual identity.
-   Palette: warm near-black surfaces, one restrained signature accent
-   (electric indigo), an emerald reserved strictly for live/positive data.
-   Type: Fraunces (display, gravitas) x Inter (body/UI) x IBM Plex Mono
-   (data, labels, the "systems ledger" motif).
+   AxonFlow AI — Enterprise Design System (Fully Mobile & Responsive Optimized)
    ========================================================================== */
 
 :root {
@@ -33,32 +28,50 @@ body.ef-body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
+  overflow-x: hidden;
 }
 
 /* ---- Nav ---- */
 .ef-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-  background: rgba(7, 8, 10, 0.72);
+  background: rgba(7, 8, 10, 0.88);
   backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
   border-bottom: 1px solid var(--border);
 }
 .ef-nav a.ef-navlink {
   color: var(--text-dim); font-size: 0.8rem; font-weight: 500;
   letter-spacing: 0.04em; transition: color .2s ease;
+  white-space: nowrap;
 }
 .ef-nav a.ef-navlink:hover { color: var(--text); }
 .ef-cta {
   background: var(--accent); color: #fff; font-weight: 600;
-  padding: .6rem 1.3rem; border-radius: 8px; font-size: .85rem;
+  padding: .5rem 1.1rem; border-radius: 8px; font-size: .8rem;
   transition: transform .18s ease, background .18s ease;
-  display: inline-block;
+  display: inline-block; white-space: nowrap; text-align: center;
 }
 .ef-cta:hover { background: #6e70ff; transform: translateY(-1px); }
 
-/* ---- Signature element: the System Rail ----
-   A live-monitoring style readout that runs along key sections.
-   Ties directly to the product: this is an agency whose product IS
-   uptime, latency, and autonomous throughput. */
+/* Hamburger Menu Toggle for Mobile */
+.ef-menu-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: .4rem .6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.ef-menu-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+/* System Rail */
 .ef-rail {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -69,9 +82,11 @@ body.ef-body {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 0.6rem 0;
-  overflow: hidden;
+  overflow-x: auto;
   white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
+.ef-rail::-webkit-scrollbar { display: none; }
 .ef-rail .dot-live {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--accent-2);
@@ -85,7 +100,7 @@ body.ef-body {
   100% { box-shadow: 0 0 0 0 rgba(53,208,127,0); }
 }
 
-/* ---- Eyebrow / section label (mono, not decorative numbering) ---- */
+/* Section Labels */
 .ef-eyebrow {
   font-family: var(--font-mono); font-size: .72rem; letter-spacing: .12em;
   text-transform: uppercase; color: var(--accent);
@@ -93,7 +108,7 @@ body.ef-body {
 }
 .ef-eyebrow::before { content: ''; width: 14px; height: 1px; background: var(--accent); }
 
-/* ---- Cards ---- */
+/* Cards & Buttons */
 .ef-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -108,18 +123,19 @@ body.ef-body {
 
 .ef-btn-primary {
   background: var(--text); color: var(--bg); font-weight: 600;
-  padding: 1rem 2rem; border-radius: 10px; display: inline-flex;
-  align-items: center; gap: .5rem; transition: transform .2s ease, box-shadow .2s ease;
+  padding: .875rem 1.75rem; border-radius: 10px; display: inline-flex;
+  align-items: center; justify-content: center; gap: .5rem; transition: transform .2s ease, box-shadow .2s ease;
+  white-space: nowrap; font-size: .95rem;
 }
 .ef-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,.35); }
 .ef-btn-secondary {
   background: transparent; color: var(--text); border: 1px solid var(--border-strong);
-  padding: 1rem 2rem; border-radius: 10px; display: inline-flex; align-items: center; gap: .5rem;
-  transition: border-color .2s ease, background .2s ease;
+  padding: .875rem 1.75rem; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  transition: border-color .2s ease, background .2s ease; white-space: nowrap; font-size: .95rem;
 }
 .ef-btn-secondary:hover { border-color: var(--accent); background: var(--accent-soft); }
 
-/* ---- Footer ---- */
+/* Footer */
 .ef-footer { background: var(--bg-raised); border-top: 1px solid var(--border); }
 .ef-social-btn {
   width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border);
@@ -128,45 +144,72 @@ body.ef-body {
 }
 .ef-social-btn:hover { border-color: var(--accent); color: var(--text); background: var(--accent-soft); }
 
-/* ---- Portfolio preview modal ---- */
-.ef-modal-overlay {
-  position: fixed; inset: 0; background: rgba(4,5,7,0.85);
-  backdrop-filter: blur(6px); z-index: 200;
-  display: flex; align-items: center; justify-content: center;
-  padding: 2rem; opacity: 0; pointer-events: none; transition: opacity .25s ease;
+/* ==========================================================================
+   Mobile & Responsive Media Queries
+   ========================================================================== */
+@media (max-width: 960px) {
+  .ef-menu-toggle { display: flex; }
+  .ef-nav-menu {
+    display: none;
+    position: absolute;
+    top: 4rem; left: 0; right: 0;
+    background: rgba(13, 15, 19, 0.98);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-bottom: 1px solid var(--border-strong);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.25rem !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  }
+  .ef-nav-menu.open { display: flex; }
+  .ef-nav-menu a.ef-navlink {
+    font-size: 1rem;
+    padding: .4rem 0;
+  }
+  .ef-nav-menu a.ef-cta {
+    width: 100%;
+    padding: .75rem;
+    font-size: .95rem;
+    margin-top: .5rem;
+  }
+  
+  .page-hero { padding: 7rem 0 3rem !important; }
+  .hero-h1 { font-size: clamp(2.4rem, 7.5vw, 3.8rem) !important; line-height: 1.05 !important; }
+  .hero-p { font-size: 1.05rem !important; margin-bottom: 2rem !important; }
+  
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  
+  .cta-row {
+    flex-direction: column;
+    align-items: stretch !important;
+    width: 100%;
+  }
+  .cta-row a {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .cta-block {
+    padding: 3rem 1.5rem !important;
+  }
+  
+  footer .wrap > div:first-child {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
 }
-.ef-modal-overlay.open { opacity: 1; pointer-events: auto; }
-.ef-modal-box {
-  background: var(--bg-raised); border: 1px solid var(--border-strong);
-  border-radius: 16px; width: min(1100px, 100%); height: min(720px, 90vh);
-  display: flex; flex-direction: column; overflow: hidden;
-  transform: scale(.97) translateY(8px); transition: transform .25s ease;
-  box-shadow: 0 40px 100px rgba(0,0,0,.6);
+
+@media (max-width: 480px) {
+  .wrap { padding: 0 1.25rem !important; }
+  .page-hero { padding: 6.5rem 0 2.5rem !important; }
+  .hero-h1 { font-size: 2.2rem !important; }
+  .section { padding: 3.5rem 0 !important; }
+  .card { padding: 1.5rem !important; }
 }
-.ef-modal-overlay.open .ef-modal-box { transform: scale(1) translateY(0); }
-.ef-modal-bar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: .8rem 1.2rem; border-bottom: 1px solid var(--border); background: var(--surface);
-}
-.ef-modal-bar .url { font-family: var(--font-mono); font-size: .78rem; color: var(--text-dim); }
-.ef-modal-close {
-  width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border);
-  color: var(--text-dim); display: flex; align-items: center; justify-content: center; cursor: pointer;
-}
-.ef-modal-close:hover { color: var(--text); border-color: var(--accent); }
-.ef-modal-frame-wrap { flex: 1; position: relative; background: #000; }
-.ef-modal-frame-wrap iframe { width: 100%; height: 100%; border: 0; }
-.ef-modal-loading {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  color: var(--text-faint); font-family: var(--font-mono); font-size: .8rem; gap: .6rem;
-}
-.ef-modal-loading .spin {
-  width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--border-strong);
-  border-top-color: var(--accent); animation: ef-spin .7s linear infinite;
-}
-@keyframes ef-spin { to { transform: rotate(360deg); } }
-.ef-modal-fallback { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; height: 100%; color: var(--text-dim); font-size: .9rem; text-align: center; padding: 2rem; }
-.ef-modal-fallback.show { display: flex; }
 
 @media (prefers-reduced-motion: reduce) {
   .ef-card, .ef-cta, .ef-btn-primary, .ef-modal-overlay, .ef-modal-box { transition: none; }

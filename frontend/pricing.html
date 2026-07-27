@@ -85,7 +85,10 @@ img{max-width:100%;display:block}
 <img src="/assets/logo_pro.png" alt="AxonFlow AI" style="height:2rem;width:2rem">
 <span class="ef-display" style="font-size:1rem;font-weight:700;letter-spacing:-.01em">AxonFlow AI</span>
 </a>
-<div style="display:flex;align-items:center;gap:1.1rem;font-size:.78rem;font-weight:500" role="menubar">
+<button class="ef-menu-toggle" id="efMenuToggle" aria-label="Toggle navigation menu">
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+</button>
+<div class="ef-nav-menu" id="efNavMenu" role="menubar">
 <a href="/" class="ef-navlink" role="menuitem">Home</a>
 <a href="/what-we-do" class="ef-navlink" role="menuitem">Services</a>
 <a href="/case-studies" class="ef-navlink" role="menuitem">Case Studies</a>
@@ -94,8 +97,20 @@ img{max-width:100%;display:block}
 <a href="/blog" class="ef-navlink" role="menuitem">Blog</a>
 <a href="/about-us" class="ef-navlink" role="menuitem">About</a>
 <a href="/pricing" class="ef-navlink" role="menuitem">Pricing</a>
-<a href="/contact" class="ef-cta" style="padding:.45rem 1.1rem;font-size:.78rem" role="menuitem">Talk to us</a>
+<a href="/contact" class="ef-cta" role="menuitem">Talk to us</a>
 </div>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('efMenuToggle');
+  var menu = document.getElementById('efNavMenu');
+  if(btn && menu){
+    btn.addEventListener('click', function(){
+      menu.classList.toggle('open');
+    });
+  }
+})();
+</script>
 </div>
 </nav>
 </header>

@@ -56,6 +56,126 @@ for = "/js/*"
 Cache-Control = "public, max-age=31536000, immutable"
 
 [[redirects]]
+from = "/pricing"
+to = "/pricing.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/pricing/"
+to = "/pricing.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog"
+to = "/blog.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/"
+to = "/blog.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/architecting-zero-downtime-kubernetes-pipelines"
+to = "/blog/architecting-zero-downtime-kubernetes-pipelines/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/architecting-zero-downtime-kubernetes-pipelines/"
+to = "/blog/architecting-zero-downtime-kubernetes-pipelines/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/building-sub-400ms-production-rag-pipelines"
+to = "/blog/building-sub-400ms-production-rag-pipelines/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/building-sub-400ms-production-rag-pipelines/"
+to = "/blog/building-sub-400ms-production-rag-pipelines/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/self-hosted-n8n-workflows-for-enterprise-erp"
+to = "/blog/self-hosted-n8n-workflows-for-enterprise-erp/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/self-hosted-n8n-workflows-for-enterprise-erp/"
+to = "/blog/self-hosted-n8n-workflows-for-enterprise-erp/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
 from = "/case-studies"
 to = "/case-studies.html"
 status = 200.0
@@ -176,54 +296,6 @@ force = false
 [redirects.headers]
 
 [[redirects]]
-from = "/pricing"
-to = "/pricing.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
-from = "/pricing/"
-to = "/pricing.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
-from = "/blog"
-to = "/blog.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
-from = "/blog/"
-to = "/blog.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
 from = "/contact"
 to = "/contact.html"
 status = 200.0
@@ -249,6 +321,18 @@ force = false
 
 [[redirects]]
 from = "/open-source"
+to = "/open-source/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/open-source/"
 to = "/open-source/index.html"
 status = 200.0
 force = false
