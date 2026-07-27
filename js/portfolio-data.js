@@ -1,5 +1,5 @@
 /* AxonFlow AI — Master Portfolio Grid.
-   Renders scaled live iframe previews inside browser mockup windows for all 20 projects,
+   Renders scaled live iframe previews inside browser mockup windows for all 30 projects,
    with interactive mouse passthrough and seamless modal zoom. */
 (function () {
   var PROJECTS = [
@@ -13,6 +13,8 @@
     { name: 'AI Calendar Agent', url: 'https://ai-outlook-calendar-agent.streamlit.app', host: 'ai-outlook-calendar-agent.streamlit.app', desc: 'Natural language Outlook automation.', icon: '📅', tag: 'Automation' },
     { name: 'OpenBioGen-AI', url: 'https://openbiogen.vercel.app', host: 'openbiogen.vercel.app', desc: 'Biological data generation system.', icon: '🧬', tag: 'Genomics AI' },
     { name: 'Smart Plant Care', url: 'https://smart-plant-care-langchain.streamlit.app/', host: 'smart-plant-care-langchain.streamlit.app', desc: 'AI-powered plant health monitoring.', icon: '🌿', tag: 'Vision AI' },
+    { name: 'VISUALAIZE', url: 'https://visualaize-six.vercel.app', host: 'visualaize-six.vercel.app', desc: 'AI graph visualization platform powered by Google Gemini 2.5 context windows.', icon: '📊', tag: 'Open Source' },
+    { name: 'VoiceForge AI', url: 'https://voice-forge-client.vercel.app', host: 'voice-forge-client.vercel.app', desc: 'Browser-based assistive communication platform with AI voice cloning.', icon: '🎙️', tag: 'AI & Privacy' },
     { name: 'NPMChat', url: 'https://npm-chat-fxjq.vercel.app/', host: 'npm-chat-fxjq.vercel.app', desc: 'Real-time collaborative developer chat & code execution platform.', icon: '💬', tag: 'Open Source' },
     { name: 'MergeShip', url: 'https://mergeship.vercel.app', host: 'mergeship.vercel.app', desc: 'Gamified open-source bridge & AI Command Center for PR velocity.', icon: '🚀', tag: 'Open Source' },
     { name: 'CommitPulse 3D', url: 'https://commitpulse.vercel.app', host: 'commitpulse.vercel.app', desc: 'Real-time GraphQL 3D isometric GitHub contribution visualizer.', icon: '📊', tag: 'Open Source' },
@@ -21,6 +23,14 @@
     { name: 'DoubtDesk AI', url: 'https://doubt-desk-seven.vercel.app/', host: 'doubt-desk-seven.vercel.app', desc: 'Anonymous AI doubt-solving platform integrated with classrooms.', icon: '🙋', tag: 'Production AI' },
     { name: 'VidyaSetu', url: 'https://vidya-setu-olive.vercel.app', host: 'vidya-setu-olive.vercel.app', desc: 'AI-powered study platform for NCERT quizzes, notes & revision.', icon: '🎓', tag: 'Production AI' },
     { name: 'CertiNova', url: 'https://certinova.vercel.app', host: 'certinova.vercel.app', desc: 'Bulk certificate generator and validation platform.', icon: '📜', tag: 'Open Source' },
+    { name: 'InternHack SaaS', url: 'https://internhack.xyz', host: 'internhack.xyz', desc: 'All-in-one SaaS platform connecting hackathon talent directly with recruiters.', icon: '🏆', tag: 'SaaS Platform' },
+    { name: 'LeetCode City', url: 'https://the-leetcode-city.vercel.app', host: 'the-leetcode-city.vercel.app', desc: '3D isometric city visualization powered by LeetCode problem solving stats.', icon: '🏙️', tag: 'Open Source' },
+    { name: 'DevTrack Pro', url: 'https://devtrack-delta.vercel.app', host: 'devtrack-delta.vercel.app', desc: 'Developer productivity dashboard tracking GitHub contributions and PR metrics.', icon: '📈', tag: 'Developer Tools' },
+    { name: 'Arnio Data Clean', url: 'https://arnio.vercel.app/', host: 'arnio.vercel.app', desc: 'C++ accelerated data quality toolkit for Python dataset cleaning and validation.', icon: '🧹', tag: 'Data Engineering' },
+    { name: 'ResourceHub Dev', url: 'https://resourcehubdev.vercel.app/', host: 'resourcehubdev.vercel.app', desc: 'Open-source developer resources repository curated by community contributors.', icon: '📚', tag: 'Open Source' },
+    { name: 'RankerHub', url: 'https://ranker-hub-xi.vercel.app/', host: 'ranker-hub-xi.vercel.app', desc: 'Developer ranking platform combining GitHub streaks, challenges & leaderboards.', icon: '🥇', tag: 'Developer Platform' },
+    { name: 'Helpdesk.AI', url: 'https://helpdeskai1918.vercel.app', host: 'helpdeskai1918.vercel.app', desc: 'Full-stack AI helpdesk platform with NLP incident detection and OCR triage.', icon: '🛠️', tag: 'Enterprise AI' },
+    { name: 'Checkora Chess Engine', url: 'https://checkora.vercel.app', host: 'checkora.vercel.app', desc: 'Chess platform with C++ minimax alpha-beta pruning AI engine.', icon: '♟️', tag: 'AI Engine' },
     { name: 'Prestige Estates', url: 'https://legendary-tapioca-50caa6.netlify.app', host: 'legendary-tapioca-50caa6.netlify.app', desc: 'Ultra-luxury real estate showcase platform built for an Irvine, CA client.', icon: '🏰', tag: 'Client Project' },
     { name: 'Wanderlux Landing', url: 'https://animated-profiterole-542134.netlify.app', host: 'animated-profiterole-542134.netlify.app', desc: 'Bespoke ultra-luxury travel experiences landing platform.', icon: '✈️', tag: 'Client Project' }
   ];
