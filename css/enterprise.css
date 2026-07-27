@@ -581,3 +581,16 @@ img { max-width: 100%; display: block; }
   line-height: 1 !important;
 }
 
+/* Futuristic Brand Video Typography Mask Styling */
+@media (max-width: 900px) {
+  .futuristic-brand-vertical-container {
+    height: 180px !important;
+    border-left: none !important;
+    border-top: 1px solid var(--border) !important;
+    padding-left: 0 !important;
+    padding-top: 1rem !important;
+    margin-top: 2rem !important;
+  }
+}
+
+
