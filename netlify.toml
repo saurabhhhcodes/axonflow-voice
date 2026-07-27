@@ -53,12 +53,12 @@
 
 [[redirects]]
   from = "/case-studies"
-  to = "/case-studies.html"
+  to = "/case-studies/index.html"
   status = 200
 
 [[redirects]]
   from = "/case-studies/"
-  to = "/case-studies.html"
+  to = "/case-studies/index.html"
   status = 200
 
 [[redirects]]
