@@ -705,7 +705,7 @@ contact = HEAD("Contact AxonFlow AI | Start Your IT Project",
 <textarea id="cf_message" required rows="4" placeholder="Describe your project scope or internship skills..." class="input-field" style="width:100%;padding:.8rem 1rem;border-radius:10px;background:var(--bg-raised);border:1px solid var(--border);color:var(--text);font-size:.9rem"></textarea>
 </div>
 
-<button type="submit" class="ef-btn-primary" style="width:100%;justify-content:center;padding:1rem">Send to AxonFlow CRM &rarr;</button>
+<button type="submit" class="ef-btn-primary" style="width:100%;justify-content:center;padding:1rem">Send &rarr;</button>
 <div id="formStatus" style="display:none;margin-top:1rem;padding:1rem;border-radius:10px;font-size:.88rem"></div>
 </form>
 </div>
