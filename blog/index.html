@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engineering Blog | AxonFlow AI</title>
-<meta name="description" content="Technical notes on full-stack software development, cloud infrastructure, cybersecurity audits, and AI agent architectures.">
+<title>Engineering Blog & Technical Insights | AxonFlow AI</title>
+<meta name="description" content="Deep-dive technical articles on cloud infrastructure, DevOps pipelines, multi-agent AI architecture, and full-stack software engineering.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="https://axonflow.in/blog">
 <link rel="icon" type="image/png" href="/assets/logo_pro.png">
 <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
 <link rel="apple-touch-icon" href="/assets/logo_pro.png">
 <meta name="theme-color" content="#07080a">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article" if "/blog/" in canon else "website">
 <meta property="og:url" content="https://axonflow.in/blog">
-<meta property="og:title" content="Engineering Blog | AxonFlow AI">
-<meta property="og:description" content="Technical notes on full-stack software development, cloud infrastructure, cybersecurity audits, and AI agent architectures.">
+<meta property="og:title" content="Engineering Blog & Technical Insights | AxonFlow AI">
+<meta property="og:description" content="Deep-dive technical articles on cloud infrastructure, DevOps pipelines, multi-agent AI architecture, and full-stack software engineering.">
 <meta property="og:image" content="https://axonflow.in/assets/og-image.jpg">
 <meta property="og:site_name" content="AxonFlow AI">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +37,7 @@ img{max-width:100%;display:block}
 .section-alt{padding:5rem 0;background:var(--bg-raised)}
 .section-title{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.5rem);font-weight:600;line-height:1.05;margin-bottom:1.5rem}
 .section-sub{font-size:1.125rem;color:var(--text-dim);line-height:1.7;max-width:42ch}
-.hero-h1{font-family:var(--font-display);font-size:clamp(3.5rem,8vw,6rem);font-weight:600;line-height:.97;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero-h1{font-family:var(--font-display);font-size:clamp(3.5rem,8vw,5.5rem);font-weight:600;line-height:.97;letter-spacing:-.02em;margin-bottom:1.5rem}
 .hero-p{font-size:1.25rem;color:var(--text-dim);max-width:48ch;line-height:1.7;margin-bottom:3rem}
 .cta-row{display:flex;align-items:center;flex-wrap:wrap;gap:1rem}
 .accent{color:var(--accent);font-style:italic}
@@ -54,16 +54,16 @@ img{max-width:100%;display:block}
 .card:hover{border-color:var(--border-strong);transform:translateY(-3px)}
 .card-h{font-size:1.15rem;font-weight:700;margin-bottom:.75rem}
 .card-p{font-size:.9rem;color:var(--text-dim);line-height:1.65}
-.step-num{font-family:var(--font-mono);font-size:.8rem;font-weight:700;color:var(--accent);flex-shrink:0;width:2.5rem;padding-top:2px}
-.step-row{display:flex;gap:1.5rem;padding:1.75rem 0;border-bottom:1px solid var(--border)}
-.step-row:last-child{border-bottom:none}
-.tag{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;border-radius:5px;background:var(--accent-soft);color:var(--accent)}
-.tag-green{background:var(--accent-2-soft);color:var(--accent-2)}
-.cta-block{border-radius:20px;background:var(--surface);border:1px solid var(--border);padding:5rem 3rem;text-align:center}
-.faq-item{padding:1.75rem 0;border-bottom:1px solid var(--border)}
-.faq-item:last-child{border-bottom:none}
-.faq-q{font-weight:700;font-size:1rem;margin-bottom:.75rem}
-.faq-a{color:var(--text-dim);font-size:.95rem;line-height:1.7}
+.price-tag{font-family:var(--font-display);font-size:3rem;font-weight:700;color:var(--text);margin:1.5rem 0 .5rem}
+.price-sub{font-size:.85rem;color:var(--text-dim);margin-bottom:2rem}
+.article-content{font-size:1.1rem;line-height:1.8;color:var(--text-dim);max-width:720px;margin:0 auto}
+.article-content h2{font-family:var(--font-display);font-size:2rem;color:var(--text);margin:3rem 0 1.25rem}
+.article-content h3{font-size:1.4rem;color:var(--text);margin:2rem 0 1rem}
+.article-content p{margin-bottom:1.5rem}
+.article-content ul{margin-bottom:1.5rem;padding-left:1.5rem}
+.article-content li{margin-bottom:.5rem}
+.article-content code{background:var(--bg-raised);padding:.2rem .4rem;border-radius:4px;font-family:var(--font-mono);font-size:.9em;color:var(--accent-2)}
+.article-content pre{background:var(--bg-raised);padding:1.5rem;border-radius:12px;border:1px solid var(--border);overflow-x:auto;margin:2rem 0;font-family:var(--font-mono);font-size:.88rem;color:var(--text)}
 
 </style>
 </head>
@@ -93,9 +93,44 @@ img{max-width:100%;display:block}
 <main id="main">
 <section class="page-hero">
 <div class="wrap inner">
-<div class="ef-eyebrow" style="margin-bottom:1.5rem">Technical Notes</div>
-<h1 class="hero-h1">Engineering <br><span class="accent">insights.</span></h1>
-<p class="hero-p">Articles on building reliable software systems, scaling cloud infrastructure, and orchestrating multi-agent AI pods.</p>
+<div class="ef-eyebrow" style="margin-bottom:1.5rem">Engineering Blog</div>
+<h1 class="hero-h1">Technical <br><span class="accent">notes & articles.</span></h1>
+<p class="hero-p">Deep-dive technical articles written by our lead software engineers and cloud architects on building production-grade IT systems.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap">
+<div class="grid-3" style="gap:2rem;margin-bottom:5rem">
+
+<div class="card" style="display:flex;flex-direction:column;justify-content:space-between">
+<div>
+<span class="tag" style="margin-bottom:1rem;display:inline-block">Cloud Infrastructure</span>
+<h3 class="card-h" style="font-size:1.3rem"><a href="/blog/architecting-zero-downtime-kubernetes-pipelines" style="color:inherit">Architecting Zero-Downtime Kubernetes Pipelines</a></h3>
+<p class="card-p" style="margin-bottom:1.5rem">A comprehensive guide to blue-green deployments, ingress routing, automated rollback triggers, and zero-downtime database migrations in production.</p>
+</div>
+<a href="/blog/architecting-zero-downtime-kubernetes-pipelines" style="color:var(--accent);font-weight:600;font-size:.9rem">Read Full Article &rarr;</a>
+</div>
+
+<div class="card" style="display:flex;flex-direction:column;justify-content:space-between">
+<div>
+<span class="tag" style="margin-bottom:1rem;display:inline-block">AI Engineering</span>
+<h3 class="card-h" style="font-size:1.3rem"><a href="/blog/building-sub-400ms-production-rag-pipelines" style="color:inherit">Building Sub-400ms Production RAG Pipelines</a></h3>
+<p class="card-p" style="margin-bottom:1.5rem">How we combined hybrid vector search with Cohere re-ranking and streaming chunk responses to achieve sub-400ms latency across 2M+ medical papers.</p>
+</div>
+<a href="/blog/building-sub-400ms-production-rag-pipelines" style="color:var(--accent);font-weight:600;font-size:.9rem">Read Full Article &rarr;</a>
+</div>
+
+<div class="card" style="display:flex;flex-direction:column;justify-content:space-between">
+<div>
+<span class="tag" style="margin-bottom:1rem;display:inline-block">DevOps & Automation</span>
+<h3 class="card-h" style="font-size:1.3rem"><a href="/blog/self-hosted-n8n-workflows-for-enterprise-erp" style="color:inherit">Self-Hosted N8N Workflows for Enterprise ERP</a></h3>
+<p class="card-p" style="margin-bottom:1.5rem">Architecting resilient webhook triggers, database mutations, and automated notification loops to connect custom ERP systems without cloud vendor lock-in.</p>
+</div>
+<a href="/blog/self-hosted-n8n-workflows-for-enterprise-erp" style="color:var(--accent);font-weight:600;font-size:.9rem">Read Full Article &rarr;</a>
+</div>
+
+</div>
 </div>
 </section>
 
@@ -132,6 +167,7 @@ img{max-width:100%;display:block}
 <li><a href="/who-we-are" style="transition:color .2s">Who We Are</a></li>
 <li><a href="/testimonials" style="transition:color .2s">Testimonials</a></li>
 <li><a href="/case-studies" style="transition:color .2s">Case Studies</a></li>
+<li><a href="/open-source" style="transition:color .2s">Open Source</a></li>
 <li><a href="/blog" style="transition:color .2s">Blog</a></li>
 <li><a href="/contact" style="transition:color .2s">Contact</a></li>
 </ul>

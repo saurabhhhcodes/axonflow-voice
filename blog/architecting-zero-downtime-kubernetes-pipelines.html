@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transparent IT & AI Engineering Pricing | AxonFlow AI</title>
-<meta name="description" content="Fixed-scope pricing packages for custom software, cloud architecture, cybersecurity, and autonomous AI agents backed by a 6-month SLA guarantee.">
+<title>Architecting Zero-Downtime Kubernetes Pipelines | AxonFlow AI Engineering</title>
+<meta name="description" content="Technical guide on setting up zero-downtime Kubernetes deployments with automated rollbacks, blue-green ingress, and schema migrations.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<link rel="canonical" href="https://axonflow.in/pricing">
+<link rel="canonical" href="https://axonflow.in/blog/architecting-zero-downtime-kubernetes-pipelines">
 <link rel="icon" type="image/png" href="/assets/logo_pro.png">
 <link rel="shortcut icon" type="image/png" href="/assets/logo_pro.png">
 <link rel="apple-touch-icon" href="/assets/logo_pro.png">
 <meta name="theme-color" content="#07080a">
 <meta property="og:type" content="article" if "/blog/" in canon else "website">
-<meta property="og:url" content="https://axonflow.in/pricing">
-<meta property="og:title" content="Transparent IT & AI Engineering Pricing | AxonFlow AI">
-<meta property="og:description" content="Fixed-scope pricing packages for custom software, cloud architecture, cybersecurity, and autonomous AI agents backed by a 6-month SLA guarantee.">
+<meta property="og:url" content="https://axonflow.in/blog/architecting-zero-downtime-kubernetes-pipelines">
+<meta property="og:title" content="Architecting Zero-Downtime Kubernetes Pipelines | AxonFlow AI Engineering">
+<meta property="og:description" content="Technical guide on setting up zero-downtime Kubernetes deployments with automated rollbacks, blue-green ingress, and schema migrations.">
 <meta property="og:image" content="https://axonflow.in/assets/og-image.jpg">
 <meta property="og:site_name" content="AxonFlow AI">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,86 +92,73 @@ img{max-width:100%;display:block}
 </header>
 <main id="main">
 <section class="page-hero">
-<div class="wrap inner">
-<div class="ef-eyebrow" style="margin-bottom:1.5rem">Transparent Fixed Rates</div>
-<h1 class="hero-h1">Engineering Packages & <br><span class="accent">Transparent Pricing.</span></h1>
-<p class="hero-p">Fixed-scope deliverables with guaranteed timelines, full source code ownership, and 6 months of post-launch SLA support included.</p>
+<div class="wrap inner" style="max-width:720px;margin:0 auto;text-align:left">
+<div style="display:flex;gap:1rem;align-items:center;margin-bottom:1.5rem">
+<span class="tag">Cloud Infrastructure</span>
+<span style="font-size:.85rem;color:var(--text-faint)">July 20, 2026 &middot; 8 min read</span>
+</div>
+<h1 class="hero-h1" style="font-size:clamp(2.5rem,5vw,3.8rem);line-height:1.05">Architecting Zero-Downtime <br><span class="accent">Kubernetes Pipelines.</span></h1>
+<p class="hero-p">How we implement production zero-downtime deployments using Helm, ArgoCD, and automated schema migrations.</p>
 </div>
 </section>
 
-<div class="ef-rail wrap" style="padding-left:1.5rem;padding-right:1.5rem">
-<span><span class="dot-live"></span>Zero Hourly Ambiguity</span>
-<span>&middot;</span><span>6-Month SLA Included</span>
-<span>&middot;</span><span>100% IP & Code Ownership</span>
-</div>
-
 <section class="section">
 <div class="wrap">
-<div class="grid-3" style="gap:2rem;margin-bottom:5rem">
-<div class="card" style="display:flex;flex-direction:column;justify-content:space-between">
-<div>
-<span class="tag">Starter Sprint</span>
-<h3 class="card-h" style="font-size:1.5rem;margin-top:1rem">Cloud & Web MVP</h3>
-<p class="card-p">Ideal for early-stage companies and specialized IT automation workflows.</p>
-<div class="price-tag">$4,900 <span style="font-size:1rem;color:var(--text-dim);font-weight:400">/ project</span></div>
-<p class="price-sub">Fixed 2-3 Week Delivery</p>
-<hr class="divider" style="margin-bottom:1.5rem">
-<ul class="check-list">
-<li>Full-stack Web App or Middleware</li>
-<li>Cloud Setup (AWS/GCP/Docker)</li>
-<li>Single AI Agent or Webhook Integration</li>
-<li>Automated Testing Suite</li>
-<li>30 Days SLA Guarantee</li>
-</ul>
-</div>
-<a href="/contact" class="ef-btn-secondary" style="margin-top:2rem;text-align:center">Scope Starter Project &rarr;</a>
-</div>
+<article class="article-content">
+<p>Deploying application updates without dropping a single active HTTP connection is a fundamental requirement for mission-critical enterprise systems. In this article, we outline the exact production pipeline blueprint used by AxonFlow AI engineers when orchestrating Kubernetes clusters on AWS EKS and GCP GKE.</p>
 
-<div class="card" style="display:flex;flex-direction:column;justify-content:space-between;border-color:var(--accent);position:relative">
-<div style="position:absolute;top:-12px;right:20px;background:var(--accent);color:#fff;font-size:.65rem;font-family:var(--font-mono);letter-spacing:.08em;padding:.2rem .75rem;border-radius:10px;text-transform:uppercase">Most Popular</div>
-<div>
-<span class="tag" style="background:var(--accent-soft);color:var(--accent)">Growth Pod</span>
-<h3 class="card-h" style="font-size:1.5rem;margin-top:1rem">Enterprise Systems & AI</h3>
-<p class="card-p">Full-scale digital transformation, custom ERP/CRM, RAG, and AI agent pods.</p>
-<div class="price-tag">$14,500 <span style="font-size:1rem;color:var(--text-dim);font-weight:400">/ project</span></div>
-<p class="price-sub">Fixed 4-6 Week Delivery</p>
-<hr class="divider" style="margin-bottom:1.5rem">
-<ul class="check-list">
-<li>Custom Enterprise Web & Mobile Platform</li>
-<li>Multi-Agent Autonomous Orchestration</li>
-<li>Sub-400ms Enterprise RAG Engine</li>
-<li>Cybersecurity & Compliance Audit</li>
-<li>6 Months SLA & Priority Support</li>
+<h2>1. The Four Golden Rules of Zero-Downtime Deployments</h2>
+<p>Achieving zero downtime requires strict discipline across both application software and infrastructure provisioning:</p>
+<ul>
+<li><strong>Backward-Compatible Database Migrations:</strong> Schema changes must always support both old and new code versions simultaneously.</li>
+<li><strong>Graceful Shutdown Signals (SIGTERM):</strong> Containers must stop accepting new requests and finish existing connections within a termination grace period.</li>
+<li><strong>Readiness & Liveness Probes:</strong> Kubernetes ingress must route traffic only after the container passes health checks.</li>
+<li><strong>Rolling Update Strategies:</strong> Pods must be created and verified before old pods are decommissioned.</li>
 </ul>
-</div>
-<a href="/contact" class="ef-btn-primary" style="margin-top:2rem;text-align:center">Scope Growth Project &rarr;</a>
-</div>
 
-<div class="card" style="display:flex;flex-direction:column;justify-content:space-between">
-<div>
-<span class="tag">Dedicated Pod</span>
-<h3 class="card-h" style="font-size:1.5rem;margin-top:1rem">Dedicated IT Engineering</h3>
-<p class="card-p">Full senior engineering team integrated directly into your product roadmap.</p>
-<div class="price-tag">$9,500 <span style="font-size:1rem;color:var(--text-dim);font-weight:400">/ month</span></div>
-<p.price-sub>Dedicated Senior Team</p>
-<hr class="divider" style="margin-bottom:1.5rem">
-<ul class="check-list">
-<li>2 Senior Full-Stack Engineers + 1 AI Lead</li>
-<li>Daily Standups & Direct Slack Integration</li>
-<li>Continuous Feature Shipping & CI/CD</li>
-<li>Infrastructure Monitoring & Security</li>
-<li>Cancel Anytime With 14 Days Notice</li>
-</ul>
-</div>
-<a href="/contact" class="ef-btn-secondary" style="margin-top:2rem;text-align:center">Hire Dedicated Pod &rarr;</a>
-</div>
-</div>
+<h2>2. Kubernetes Deployment Specification</h2>
+<p>Below is our standardized production Kubernetes deployment manifest demonstrating <code>maxSurge</code> and <code>readinessProbe</code> configurations:</p>
 
-<div class="cta-block">
-<h2 class="section-title">Need a Custom <span class="accent">Architectural Proposal?</span></h2>
-<p class="hero-p" style="margin:0 auto 2rem">We provide detailed fixed-bid scope proposals within 24 hours of technical discovery.</p>
-<a href="/contact" class="ef-btn-primary">Schedule Scoping Call &rarr;</a>
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core-api-service
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 0
+  template:
+    spec:
+      containers:
+      - name: api
+        image: axonflow/core-api:v2.4.1
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 3
+</code></pre>
+
+<h2>3. Database Schema Migration Strategy</h2>
+<p>To avoid race conditions during deployment, we utilize a 3-step migration pattern:</p>
+<ol>
+<li><strong>Expand:</strong> Add new columns or tables without removing old ones. Deploy code that writes to both columns.</li>
+<li><strong>Migrate:</strong> Backfill historic data asynchronously in the background.</li>
+<li><strong>Contract:</strong> Deprecate and remove old columns only after the new code release is 100% stable.</li>
+</ol>
+
+<hr class="divider" style="margin:3rem 0">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<a href="/blog" style="color:var(--accent);font-weight:600">&larr; Back to Engineering Blog</a>
+<a href="/contact" class="ef-btn-primary">Talk to an Infrastructure Architect &rarr;</a>
 </div>
+</article>
 </div>
 </section>
 
