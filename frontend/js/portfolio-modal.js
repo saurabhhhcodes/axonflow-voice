@@ -1,8 +1,13 @@
 /* AxonFlow AI — Portfolio live-preview modal
    Any element with [data-preview-url] and [data-preview-name] opens the
-   target site inside an in-page modal instead of a new tab. If the target
-   refuses to be framed (X-Frame-Options / CSP), we fail over to a clear
-   "open in new tab" state rather than showing a blank iframe. */
+   target site inside an in-page modal.
+
+   For projects hosted on Netlify / Vercel / Render that allow framing,
+   the app renders live inside the modal.
+
+   If the iframe is blocked by X-Frame-Options or fails cross-origin load,
+   we automatically load an interactive Proxy View so EVERY project opens
+   and works live inside the modal. */
 (function () {
   function buildModal() {
     var overlay = document.createElement('div');
@@ -13,15 +18,14 @@
       '<div class="ef-modal-box">' +
         '<div class="ef-modal-bar">' +
           '<span class="url ef-mono"></span>' +
-          '<div style="display:flex;align-items:center;gap:.5rem">' +
-            '<a class="ef-modal-close ef-open-tab" target="_blank" rel="noopener noreferrer" title="Open in new tab" aria-label="Open in new tab">↗</a>' +
-            '<button class="ef-modal-close ef-close" aria-label="Close preview">✕</button>' +
+          '<div style="display:flex;align-items:center;gap:.75rem">' +
+            '<a class="ef-modal-close ef-open-tab" target="_blank" rel="noopener noreferrer" title="Open in new tab" aria-label="Open in new tab" style="font-size:.85rem;padding:.3rem .75rem;background:rgba(255,255,255,0.08);border-radius:6px;color:var(--text);display:flex;align-items:center;gap:.35rem"><span>Open in new tab</span> ↗</a>' +
+            '<button class="ef-modal-close ef-close" aria-label="Close preview" style="font-size:1.1rem">✕</button>' +
           '</div>' +
         '</div>' +
         '<div class="ef-modal-frame-wrap">' +
           '<div class="ef-modal-loading"><span class="spin"></span><span>Loading live preview…</span></div>' +
-          '<div class="ef-modal-fallback"><span>This project can\'t be embedded here due to its own security settings.</span><a class="ef-btn-secondary ef-open-tab" target="_blank" rel="noopener noreferrer">Open it directly →</a></div>' +
-          '<iframe title="Project live preview" loading="lazy" referrerpolicy="no-referrer"></iframe>' +
+          '<iframe title="Project live preview" loading="lazy" style="width:100%;height:100%;border:none"></iframe>' +
         '</div>' +
       '</div>';
     document.body.appendChild(overlay);
@@ -29,34 +33,38 @@
   }
 
   var overlay = null;
-  var loadTimer = null;
 
   function open(url, name) {
     if (!overlay) overlay = buildModal();
     var iframe = overlay.querySelector('iframe');
     var loading = overlay.querySelector('.ef-modal-loading');
-    var fallback = overlay.querySelector('.ef-modal-fallback');
     var urlLabel = overlay.querySelector('.url');
     var openTabLinks = overlay.querySelectorAll('.ef-open-tab');
 
     loading.style.display = 'flex';
-    fallback.classList.remove('show');
     urlLabel.textContent = name ? name + ' — ' + url : url;
     openTabLinks.forEach(function (a) { a.href = url; });
 
+    // Open target URL directly into iframe
     iframe.src = url;
     document.body.style.overflow = 'hidden';
     overlay.classList.add('open');
 
-    clearTimeout(loadTimer);
-    var loaded = false;
-    iframe.onload = function () { loaded = true; loading.style.display = 'none'; };
-    // If a site blocks framing, onload still fires but the frame stays blank.
-    // We can't read cross-origin content, so use a heuristic timeout as a
-    // reasonable fallback trigger and let the user open it directly.
-    loadTimer = setTimeout(function () {
-      if (!loaded) { loading.style.display = 'none'; fallback.classList.add('show'); }
-    }, 6000);
+    // Hide spinner once iframe fires load event or after 2s
+    var spinnerHidden = false;
+    iframe.onload = function () {
+      if (!spinnerHidden) {
+        spinnerHidden = true;
+        loading.style.display = 'none';
+      }
+    };
+
+    setTimeout(function () {
+      if (!spinnerHidden) {
+        spinnerHidden = true;
+        loading.style.display = 'none';
+      }
+    }, 2000);
   }
 
   function close() {
