@@ -12,7 +12,7 @@
     { name: 'Chatlly Assistant', url: 'https://pal.chatlly.com', host: 'pal.chatlly.com', desc: 'Enterprise RAG knowledge assistant.', icon: '💬', tag: 'Enterprise RAG' },
     { name: 'AI Calendar Agent', url: 'https://ai-outlook-calendar-agent.streamlit.app', host: 'ai-outlook-calendar-agent.streamlit.app', desc: 'Natural language Outlook automation.', icon: '📅', tag: 'Automation' },
     { name: 'OpenBioGen-AI', url: 'https://openbiogen.vercel.app', host: 'openbiogen.vercel.app', desc: 'Biological data generation system.', icon: '🧬', tag: 'Genomics AI' },
-    { name: 'Smart Plant Care', url: 'https://smart-plant-care-langchain.streamlit.app/', host: 'smart-plant-care-langchain.streamlit.app', desc: 'AI-powered plant health monitoring.', icon: '🌿', tag: 'Vision AI' },
+    { name: 'PlantGuardian-AI', url: 'https://smart-plant-care-langchain.streamlit.app/', host: 'smart-plant-care-langchain.streamlit.app', desc: 'AI-powered botanical health monitoring and diagnostic platform.', icon: '🌿', tag: 'Vision AI' },
     { name: 'VISUALAIZE', url: 'https://visualaize-six.vercel.app', host: 'visualaize-six.vercel.app', desc: 'AI graph visualization platform powered by Google Gemini 2.5 context windows.', icon: '📊', tag: 'Open Source' },
     { name: 'VoiceForge AI', url: 'https://voice-forge-client.vercel.app', host: 'voice-forge-client.vercel.app', desc: 'Browser-based assistive communication platform with AI voice cloning.', icon: '🎙️', tag: 'AI & Privacy' },
     { name: 'NPMChat', url: 'https://npm-chat-fxjq.vercel.app/', host: 'npm-chat-fxjq.vercel.app', desc: 'Real-time collaborative developer chat & code execution platform.', icon: '💬', tag: 'Open Source' },
