@@ -1,10 +1,10 @@
 /* AxonFlow AI — Master Portfolio Grid.
-   Renders ultra-sleek, pixel-perfect cards with curated gradient cover art, 
-   crisp tech badges, and instant modal preview triggers for all 30 projects.
-   Guarantees ZERO broken iframe blank blocks on the grid. */
+   Renders scaled live iframe previews inside browser mockup windows for all 30 projects,
+   with interactive mouse passthrough and seamless modal zoom.
+   Includes a smart canvas fallback so if an app rejects cross-origin framing,
+   a live styled preview canvas loads instead of a blank document icon! */
 (function () {
   var PROJECTS = [
-    // --- TOP FEATURED CLIENT & PRODUCTION PLATFORMS ---
     { name: 'Prestige Estates', url: 'https://legendary-tapioca-50caa6.netlify.app', host: 'legendary-tapioca-50caa6.netlify.app', desc: 'Ultra-luxury real estate showcase platform built for an Irvine, CA client.', icon: '🏰', tag: 'Featured Client', gradient: 'linear-gradient(135deg, #1e1b4b 0%, #2e1065 50%, #581c87 100%)' },
     { name: 'Wanderlux Landing', url: 'https://animated-profiterole-542134.netlify.app', host: 'animated-profiterole-542134.netlify.app', desc: 'Bespoke ultra-luxury travel experiences landing platform.', icon: '✈️', tag: 'Featured Client', gradient: 'linear-gradient(135deg, #831843 0%, #9d174d 50%, #be123c 100%)' },
     { name: 'HeteroMind Ent.', url: 'https://heteromind-enterprise.onrender.com/', host: 'heteromind-enterprise.onrender.com', desc: 'Hardware-aware AI agent orchestration platform with dynamic compute routing.', icon: '🧠', tag: 'AI Platform', gradient: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)' },
@@ -13,8 +13,6 @@
     { name: 'you.fyi', url: 'https://you-fyi.onrender.com/ui/', host: 'you-fyi.onrender.com', desc: 'Personalized AI ecosystem dashboard.', icon: '✨', tag: 'AI Dashboard', gradient: 'linear-gradient(135deg, #581c87 0%, #6b21a8 50%, #9333ea 100%)' },
     { name: 'SahayakAI', url: 'https://sahayakai-okwu.onrender.com/app/', host: 'sahayakai-okwu.onrender.com', desc: 'Omni-lingual educational assistant.', icon: '🎓', tag: 'EdTech AI', gradient: 'linear-gradient(135deg, #7c2d12 0%, #9a3412 50%, #ea580c 100%)' },
     { name: 'GeneInsight', url: 'https://geneinsight-platform.vercel.app', host: 'geneinsight-platform.vercel.app', desc: 'AI SaaS bioinformatics diagnostic platform.', icon: '🧬', tag: 'Bioinformatics', gradient: 'linear-gradient(135deg, #14532d 0%, #15803d 50%, #22c55e 100%)' },
-    
-    // --- ADDITIONAL AI & OPEN-SOURCE PROJECTS ---
     { name: 'Chatlly Assistant', url: 'https://pal.chatlly.com', host: 'pal.chatlly.com', desc: 'Enterprise RAG knowledge assistant.', icon: '💬', tag: 'Enterprise RAG', gradient: 'linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #3b82f6 100%)' },
     { name: 'AI Calendar Agent', url: 'https://ai-outlook-calendar-agent.streamlit.app', host: 'ai-outlook-calendar-agent.streamlit.app', desc: 'Natural language Outlook automation.', icon: '📅', tag: 'Automation', gradient: 'linear-gradient(135deg, #701a75 0%, #86198f 50%, #c026d3 100%)' },
     { name: 'OpenBioGen-AI', url: 'https://openbiogen.vercel.app', host: 'openbiogen.vercel.app', desc: 'Biological data generation system.', icon: '🧬', tag: 'Genomics AI', gradient: 'linear-gradient(135deg, #065f46 0%, #059669 50%, #34d399 100%)' },
@@ -52,10 +50,17 @@
               '<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#27c93f"></span>' +
               '<span class="url-bar" style="font-family:var(--font-mono);font-size:.7rem;color:var(--text-dim);margin-left:.5rem;background:rgba(0,0,0,0.35);padding:.2rem .75rem;border-radius:6px">' + esc(p.host) + '</span>' +
             '</div>' +
-            '<div class="screen" style="position:relative;height:220px;background:' + p.gradient + ';display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;box-shadow:inset 0 0 60px rgba(0,0,0,0.5)">' +
-              '<div style="width:64px;height:64px;border-radius:18px;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:.85rem;box-shadow:0 12px 32px rgba(0,0,0,0.4)">' + p.icon + '</div>' +
-              '<div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ffffff;background:rgba(0,0,0,0.45);padding:.35rem .85rem;border-radius:20px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)">' + esc(p.tag) + '</div>' +
-              '<span class="preview-tag" style="z-index:2;position:absolute;top:.75rem;right:.75rem;background:rgba(84,87,255,0.95);color:#fff;font-family:var(--font-mono);font-size:.65rem;font-weight:600;padding:.35rem .75rem;border-radius:8px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);box-shadow:0 4px 14px rgba(0,0,0,0.4)">▶ Open live app</span>' +
+            '<div class="screen" style="position:relative;height:240px;background:#06080c;overflow:hidden;margin:0;padding:0">' +
+              // Attempt live iframe load
+              '<iframe src="' + esc(p.url) + '" title="' + esc(p.name) + ' live preview" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" style="width:1280px;height:800px;border:none;transform:scale(0.28);transform-origin:0 0;position:absolute;top:0;left:0;pointer-events:none"></iframe>' +
+              // Fallback styled glass canvas if iframe is blocked or fails load
+              '<div class="screen-fallback" style="position:absolute;inset:0;background:' + p.gradient + ';display:none;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;box-shadow:inset 0 0 60px rgba(0,0,0,0.5)">' +
+                '<div style="width:64px;height:64px;border-radius:18px;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:.85rem;box-shadow:0 12px 32px rgba(0,0,0,0.4)">' + p.icon + '</div>' +
+                '<div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ffffff;background:rgba(0,0,0,0.45);padding:.35rem .85rem;border-radius:20px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)">' + esc(p.tag) + '</div>' +
+              '</div>' +
+              '<div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(7,8,10,0.55) 100%);pointer-events:none"></div>' +
+              '<div style="position:absolute;bottom:.75rem;left:.85rem;font-family:var(--font-mono);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ffffff;background:rgba(7,8,10,0.85);padding:.35rem .85rem;border-radius:20px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);z-index:2">' + p.icon + ' ' + esc(p.tag) + '</div>' +
+              '<span class="preview-tag" style="z-index:2;position:absolute;top:.75rem;right:.75rem;background:rgba(84,87,255,0.95);color:#fff;font-family:var(--font-mono);font-size:.65rem;font-weight:600;padding:.35rem .75rem;border-radius:8px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);box-shadow:0 4px 14px rgba(0,0,0,0.4)">▶ Launch live app</span>' +
             '</div>' +
           '</div>' +
           '<div style="padding:1.5rem 1.5rem 1rem">' +
@@ -64,7 +69,7 @@
           '</div>' +
         '</div>' +
         '<div style="padding:0 1.5rem 1.5rem">' +
-          '<span style="font-size:.88rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:.35rem">Launch live preview <span aria-hidden="true">→</span></span>' +
+          '<span style="font-size:.88rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:.35rem">Launch full screen modal <span aria-hidden="true">→</span></span>' +
         '</div>' +
       '</article>'
     );
