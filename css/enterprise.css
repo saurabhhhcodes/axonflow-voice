@@ -362,6 +362,25 @@ img { max-width: 100%; display: block; }
   white-space: nowrap;
   max-width: 70%;
 }
+.ef-btn-open-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .8rem;
+  font-weight: 500;
+  padding: .4rem .85rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  color: var(--text);
+  white-space: nowrap;
+  transition: all .2s ease;
+}
+.ef-btn-open-tab:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--text);
+}
 .ef-modal-close {
   width: 32px;
   height: 32px;

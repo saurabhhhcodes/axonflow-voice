@@ -18,9 +18,9 @@
       '<div class="ef-modal-box">' +
         '<div class="ef-modal-bar">' +
           '<span class="url ef-mono"></span>' +
-          '<div style="display:flex;align-items:center;gap:.75rem">' +
-            '<a class="ef-modal-close ef-open-tab" target="_blank" rel="noopener noreferrer" title="Open in new tab" aria-label="Open in new tab" style="font-size:.85rem;padding:.3rem .75rem;background:rgba(255,255,255,0.08);border-radius:6px;color:var(--text);display:flex;align-items:center;gap:.35rem"><span>Open in new tab</span> ↗</a>' +
-            '<button class="ef-modal-close ef-close" aria-label="Close preview" style="font-size:1.1rem">✕</button>' +
+          '<div style="display:flex;align-items:center;gap:.75rem;flex-shrink:0">' +
+            '<a class="ef-btn-open-tab ef-open-tab" target="_blank" rel="noopener noreferrer" title="Open in new tab" aria-label="Open in new tab"><span>Open in new tab</span> ↗</a>' +
+            '<button class="ef-modal-close ef-close" aria-label="Close preview">✕</button>' +
           '</div>' +
         '</div>' +
         '<div class="ef-modal-frame-wrap">' +
