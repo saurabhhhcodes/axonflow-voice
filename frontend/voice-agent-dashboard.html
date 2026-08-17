@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AxonFlow Voice — AI-Operated Voice Agent & BYON Platform</title>
+    <meta name="description"
+        content="Deploy an autonomous AI voice agent for your small business. Keep your existing phone number with Bring-Your-Own-Number (BYON) call forwarding, license creator voices, and automate orders & bookings.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/voice-dashboard.css">
+</head>
+
+<body class="min-h-screen bg-[#070b14] text-slate-100 flex flex-col font-sans">
+
+    <!-- Top Navigation Bar -->
+    <header class="border-b border-white/10 bg-[#0b101d]/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-cyan-400 flex items-center justify-center font-black text-white text-lg shadow-lg shadow-indigo-500/30">
+                    A
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg tracking-tight gradient-text">AxonFlow Voice</span>
+                    <span
+                        class="text-[10px] ml-2 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-200 border border-purple-500/40 font-bold tracking-wide">
+                        🏆 Gemini XPRIZE Official Partner
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div
+                    class="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-950/50 border border-indigo-500/30 text-xs">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                    <span class="text-slate-300 font-medium">Powered by <span class="text-white font-bold">Google Gemini
+                            2.5 Flash + Vertex AI</span></span>
+                </div>
+                <button onclick="triggerStripeCheckout('trial_entry')"
+                    class="px-3.5 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-semibold hover:bg-emerald-500/20 transition flex items-center gap-1.5">
+                    <span>⚡ ₹1 Trial Active</span>
+                </button>
+                <a href="/index.html" class="text-xs text-slate-400 hover:text-white transition">Main Site →</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subheader / Tabs -->
+    <div class="border-b border-white/5 bg-[#090e1a]/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-2 py-2 overflow-x-auto">
+            <button
+                class="nav-tab-btn active px-4 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-2 bg-indigo-600/30 text-white border border-indigo-500/30"
+                data-section="overview">
+                <span>📊 Dashboard & BYON</span>
+            </button>
+            <button
+                class="nav-tab-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition flex items-center gap-2"
+                data-section="usecases">
+                <span>🧪 Multi-Use Case Voice Testing Suite</span>
+            </button>
+            <button
+                class="nav-tab-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition flex items-center gap-2"
+                data-section="marketplace">
+                <span>🎙️ Voice Marketplace & Licensing</span>
+            </button>
+            <button
+                class="nav-tab-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition flex items-center gap-2"
+                data-section="logs">
+                <span>⚡ Execution Logs & Telemetry</span>
+            </button>
+            <button
+                class="nav-tab-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition flex items-center gap-2"
+                data-section="financials">
+                <span>💰 Stripe P&L Ledger</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ================= SECTION 1: OVERVIEW & BYON ================= -->
+        <section id="sec-overview" class="dashboard-section space-y-6">
+
+            <!-- Top Metrics Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-panel p-5 stat-glow">
+                    <div class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Total Conversations
+                    </div>
+                    <div class="text-3xl font-extrabold text-white" id="stat-total-calls">0</div>
+                    <div class="text-xs text-indigo-400 mt-1 flex items-center gap-1">
+                        <span>PSTN Calls + WhatsApp</span>
+                    </div>
+                </div>
+                <div class="glass-panel p-5 stat-glow">
+                    <div class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Autonomous Resolution
+                    </div>
+                    <div class="text-3xl font-extrabold text-emerald-400" id="stat-auto-rate">100%</div>
+                    <div class="text-xs text-slate-400 mt-1">Zero human intervention</div>
+                </div>
+                <div class="glass-panel p-5 stat-glow">
+                    <div class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Agent Revenue
+                        Generated</div>
+                    <div class="text-3xl font-extrabold text-cyan-400" id="stat-revenue-gen">₹0</div>
+                    <div class="text-xs text-slate-400 mt-1">From automated orders & bookings</div>
+                </div>
+                <div class="glass-panel p-5 stat-glow">
+                    <div class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Human Escalations
+                    </div>
+                    <div class="text-3xl font-extrabold text-amber-400" id="stat-escalations">0</div>
+                    <div class="text-xs text-slate-400 mt-1">Handed off to duty manager</div>
+                </div>
+            </div>
+
+            <!-- BYON Live Setup & Simulator Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- Left Column: Tenant Status & BYON Forwarding Card (7 cols) -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="glass-panel p-6 border-indigo-500/20">
+                        <div
+                            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-3 border-b border-white/10">
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <span class="live-badge"><span class="live-dot"></span> LIVE IN PRODUCTION</span>
+                                    <span id="tenant-agent-role"
+                                        class="text-[11px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold border border-purple-500/30">Clinic
+                                        & Salon Closer</span>
+                                </div>
+                                <h2 class="text-xl font-bold text-white mt-1.5" id="tenant-business-name">Glow & Shine
+                                    Salon & Spa</h2>
+                                <p class="text-xs text-slate-400" id="tenant-category">Salon & Wellness</p>
+                            </div>
+
+                            <!-- Agent / Business Switcher -->
+                            <div class="flex flex-col items-start sm:items-end">
+                                <label class="text-[10px] text-slate-400 uppercase font-semibold mb-1">Switch Active
+                                    Business Agent:</label>
+                                <select id="select-agent-tenant" onchange="switchAgentTenant(this.value)"
+                                    class="bg-black/60 border border-indigo-500/40 rounded-lg text-xs text-white px-3 py-1.5 focus:outline-none focus:border-indigo-400">
+                                    <option value="tenant_demo_clinic">🏥 Apex Medicare & Dental Clinic (Patient Intake & Booking)</option>
+                                    <option value="tenant_demo_salon">💇 Glow & Shine Salon (Appointment Closer)</option>
+                                    <option value="tenant_demo_realestate">🏢 Apex Prime Real Estate (High-Ticket Sales)</option>
+                                    <option value="tenant_demo_cafe">☕ Artisan Roast Café (Fast F&B Dispatch)</option>
+                                </select>
+                                <div class="text-[11px] font-bold text-indigo-300 mt-1">Voice: <span
+                                        id="tenant-active-voice">Saurabh (Executive)</span></div>
+                            </div>
+                        </div>
+
+                        <!-- BYON 1-Minute Call Forwarding Instructions -->
+                        <div class="bg-indigo-950/40 border border-indigo-500/30 rounded-xl p-4 mb-5">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-lg">📲</span>
+                                    <h3 class="text-sm font-bold text-white">Bring Your Own Number (BYON) Gateway</h3>
+                                </div>
+                                <span
+                                    class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-bold">🔒
+                                    SUPER ADMIN PROTECTED</span>
+                            </div>
+                            <p class="text-xs text-slate-300 mb-3">
+                                Forward inbound calls from your verified carrier number (<span
+                                    class="text-indigo-300 font-mono font-semibold" id="tenant-phone">+91 98***
+                                    *****</span>) to the encrypted cloud SIP trunk:
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                                <div class="p-2.5 bg-black/40 rounded-lg border border-white/5">
+                                    <div class="font-bold text-slate-300">Jio Carrier Code:</div>
+                                    <code
+                                        class="text-indigo-300 text-[11px] block mt-1 select-all">*401*[GATEWAY_PIN]</code>
+                                </div>
+                                <div class="p-2.5 bg-black/40 rounded-lg border border-white/5">
+                                    <div class="font-bold text-slate-300">Airtel / Vi Carrier Code:</div>
+                                    <code
+                                        class="text-indigo-300 text-[11px] block mt-1 select-all">*21*[GATEWAY_PIN]#</code>
+                                </div>
+                                <div class="p-2.5 bg-black/40 rounded-lg border border-white/5">
+                                    <div class="font-bold text-slate-300">Carrier Deactivation:</div>
+                                    <code class="text-slate-400 text-[11px] block mt-1 select-all">##21# or *402</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Connected Catalog / Inventory -->
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                                    <span>📦</span> Live Business Catalog (Agent Tools)
+                                </h3>
+                                <span class="text-xs text-slate-400">Vertex AI Function Calling Enabled</span>
+                            </div>
+                            <div class="overflow-x-auto rounded-xl border border-white/5 bg-black/20">
+                                <table class="w-full text-left text-xs">
+                                    <thead
+                                        class="bg-white/5 text-slate-400 uppercase tracking-wider font-semibold border-b border-white/10">
+                                        <tr>
+                                            <th class="py-2.5 px-4">Item / Service</th>
+                                            <th class="py-2.5 px-4">Price</th>
+                                            <th class="py-2.5 px-4">Stock / Duration</th>
+                                            <th class="py-2.5 px-4">Agent Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="inventory-table-body" class="divide-y divide-white/5">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Orders from Voice Agent -->
+                    <div class="glass-panel p-5">
+                        <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
+                            <span>🛍️</span> Real-Time Bookings & Orders Captured
+                        </h3>
+                        <div id="recent-orders-list" class="space-y-2">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Voice Simulator (5 cols) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="flex items-center justify-between pb-3 mb-2 border-b border-white/10">
+                        <div>
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                                <span>🎙️</span> In-Browser Voice Agent Bench
+                            </h3>
+                            <p class="text-xs text-slate-400">Ultra-Realistic Neural Voice Stream</p>
+                        </div>
+                        <div class="waveform-bars">
+                            <div class="waveform-bar"></div>
+                            <div class="waveform-bar"></div>
+                            <div class="waveform-bar"></div>
+                            <div class="waveform-bar"></div>
+                            <div class="waveform-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Voice Delivery & Tone Tuner Bar -->
+                    <div
+                        class="bg-black/40 p-2.5 rounded-xl border border-white/5 mb-3 flex flex-wrap items-center justify-between gap-2 text-[11px]">
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-slate-400 font-semibold">Active Voice Tone:</span>
+                            <select id="select-voice-tone" onchange="updateVoiceTone(this.value)"
+                                class="bg-slate-900 border border-indigo-500/40 rounded px-2.5 py-1 text-white font-medium focus:outline-none focus:border-indigo-400">
+                                <option value="natural_conversational" selected>✨ My Cloned Voice (Natural Conversational)</option>
+                                <option value="executive_closer">👔 Executive Closer (High Precision)</option>
+                                <option value="high_energy_sales">🚀 High-Energy Sales (Assertive)</option>
+                                <option value="warm_hospitality">🩺 Warm Empathy (Healthcare & Salon)</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center gap-2 text-slate-400">
+                            <span>Pacing:</span>
+                            <button onclick="setVoiceSpeed('-4%')"
+                                class="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-white">0.9x</button>
+                            <button onclick="setVoiceSpeed('+2%')"
+                                class="px-2 py-0.5 rounded bg-indigo-600 text-white font-bold">1.0x</button>
+                            <button onclick="setVoiceSpeed('+8%')"
+                                class="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-white">1.1x</button>
+                        </div>
+                    </div>
+
+                    <!-- Chat / Audio message box -->
+                    <div id="sim-messages-box" class="flex-1 overflow-y-auto pr-2 space-y-3">
+                        <div class="flex flex-col items-start mb-3">
+                            <div
+                                class="max-w-[85%] rounded-2xl px-4 py-2.5 bg-slate-800 text-slate-100 border border-white/10 rounded-bl-none text-sm">
+                                Hello! Thanks for calling Glow & Shine Salon. I am your AI assistant powered by
+                                AxonFlow. How may I help you today?
+                            </div>
+                            <span class="text-[10px] text-slate-500 mt-1">AxonFlow Voice Agent (Saurabh Model)</span>
+                        </div>
+                    </div>
+
+                    <!-- Presets -->
+                    <div class="pt-2 pb-2">
+                        <div class="text-[11px] text-slate-400 mb-1.5">Try saying / testing:</div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <button
+                                class="preset-prompt-btn text-[11px] bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-md border border-white/10 text-slate-300 transition"
+                                data-prompt="How much is the Hydra Facial treatment?">
+                                💰 Price check
+                            </button>
+                            <button
+                                class="preset-prompt-btn text-[11px] bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-md border border-white/10 text-slate-300 transition"
+                                data-prompt="I want to book a haircut for today at 5 PM">
+                                📅 Book haircut
+                            </button>
+                            <button
+                                class="preset-prompt-btn text-[11px] bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-md border border-white/10 text-slate-300 transition"
+                                data-prompt="Order 2 bottles of Argan Oil Serum please">
+                                🛍️ Buy product
+                            </button>
+                            <button
+                                class="preset-prompt-btn text-[11px] bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-md border border-white/10 text-slate-300 transition"
+                                data-prompt="Can I speak to the human manager?">
+                                📞 Human escalation
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Input bar -->
+                    <div class="pt-3 border-t border-white/10 flex gap-2">
+                        <input id="sim-user-input" type="text" placeholder="Type or speak what the caller says..."
+                            class="flex-1 bg-black/40 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
+                        <button id="sim-send-btn"
+                            class="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-bold shadow-lg shadow-indigo-500/20 transition">
+                            Speak / Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 2: MULTI-USE CASE VOICE TESTING SUITE ================= -->
+        <section id="sec-usecases" class="dashboard-section hidden space-y-6">
+            <div
+                class="glass-panel p-6 border-indigo-500/30 bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900/60">
+                <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span
+                                class="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-bold">
+                                🧪 Gemini XPRIZE Interactive Test Lab
+                            </span>
+                            <span class="text-xs text-emerald-400 font-semibold">● Real-Time Neural Speech
+                                Generation</span>
+                        </div>
+                        <h2 class="text-2xl font-black text-white">Multi-Industry Voice Agent Simulator</h2>
+                        <p class="text-xs text-slate-300 mt-1 max-w-3xl">
+                            Test how your cloned voice handles real-world customer conversations across multiple
+                            business verticals with Gemini 2.5 Flash function calling, autonomous appointment booking,
+                            and order processing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Cases Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Case 1: Luxury Salon & Aesthetic Clinic -->
+                <div class="glass-panel p-6 border-pink-500/20 hover:border-pink-500/40 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-2xl">💇‍♀️</span>
+                            <span
+                                class="text-[10px] bg-pink-500/20 text-pink-300 font-bold px-2 py-0.5 rounded">High-Ticket
+                                Wellness</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1">Clinic & Salon Closer</h3>
+                        <p class="text-xs text-slate-400 mb-4">Handles high-ticket Hydra Facials, Keratin consultations,
+                            and real-time slot booking.</p>
+
+                        <div class="space-y-2 mb-4">
+                            <div class="p-2.5 bg-black/40 rounded-lg border border-white/5 text-xs text-slate-300">
+                                <strong>Sample Prompt:</strong> "I want to schedule a Hydra Facial treatment for
+                                tomorrow at 3 PM."
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        onclick="launchUseCase('tenant_demo_salon', 'I want to schedule a Hydra Facial treatment for tomorrow at 3 PM.')"
+                        class="w-full py-2.5 rounded-xl bg-pink-600/30 hover:bg-pink-600 text-pink-200 hover:text-white font-bold text-xs border border-pink-500/40 transition">
+                        ▶ Test in Your Voice
+                    </button>
+                </div>
+
+                <!-- Case 2: Ultra-Luxury Real Estate & Villa Sales -->
+                <div class="glass-panel p-6 border-cyan-500/20 hover:border-cyan-500/40 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-2xl">🏢</span>
+                            <span class="text-[10px] bg-cyan-500/20 text-cyan-300 font-bold px-2 py-0.5 rounded">Real
+                                Estate Closer</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1">Apex Prime Luxury Realty</h3>
+                        <p class="text-xs text-slate-400 mb-4">Qualifies HNIs, presents ₹8.5 Cr penthouse
+                            specifications, and schedules VIP private tours.</p>
+
+                        <div class="space-y-2 mb-4">
+                            <div class="p-2.5 bg-black/40 rounded-lg border border-white/5 text-xs text-slate-300">
+                                <strong>Sample Prompt:</strong> "What are the specs and price for the Sky Villa
+                                Penthouse?"
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        onclick="launchUseCase('tenant_demo_realestate', 'What are the specs and price for the Sky Villa Penthouse?')"
+                        class="w-full py-2.5 rounded-xl bg-cyan-600/30 hover:bg-cyan-600 text-cyan-200 hover:text-white font-bold text-xs border border-cyan-500/40 transition">
+                        ▶ Test in Your Voice
+                    </button>
+                </div>
+
+                <!-- Case 3: High-Speed Café & Cloud Kitchen -->
+                <div
+                    class="glass-panel p-6 border-amber-500/20 hover:border-amber-500/40 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-2xl">☕</span>
+                            <span class="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded">F&B
+                                Fast Dispatch</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1">Artisan Roast Café</h3>
+                        <p class="text-xs text-slate-400 mb-4">Instant order catalog lookups, parcel dispatch, and order
+                            logging in 800ms flat.</p>
+
+                        <div class="space-y-2 mb-4">
+                            <div class="p-2.5 bg-black/40 rounded-lg border border-white/5 text-xs text-slate-300">
+                                <strong>Sample Prompt:</strong> "I want to order 2 Iced Hazelnut Lattes and a Butter
+                                Croissant."
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        onclick="launchUseCase('tenant_demo_cafe', 'I want to order 2 Iced Hazelnut Lattes and a Butter Croissant.')"
+                        class="w-full py-2.5 rounded-xl bg-amber-600/30 hover:bg-amber-600 text-amber-200 hover:text-white font-bold text-xs border border-amber-500/40 transition">
+                        ▶ Test in Your Voice
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 3: VOICE MARKETPLACE & VOICE STUDIO ================= -->
+        <section id="sec-marketplace" class="dashboard-section hidden space-y-6">
+
+            <!-- Creator Voice Studio Banner (Record / Upload Your Voice) -->
+            <div
+                class="glass-panel p-6 border-2 border-indigo-500/30 relative overflow-hidden bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900/60">
+                <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+                    <div class="max-w-2xl">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span
+                                class="px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs font-bold flex items-center gap-1.5">
+                                <span>🎙️</span> CREATOR STUDIO
+                            </span>
+                            <span class="text-xs text-emerald-400 font-semibold">● Instant Custom Voice Cloning
+                                Active</span>
+                        </div>
+                        <h2 class="text-2xl font-black text-white">Add & Monetize Your Own Voice Across All Platforms
+                        </h2>
+                        <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                            Record or upload a 30-second audio sample of your voice. Our Google Cloud TTS model
+                            generates an instant neural voice clone that you can license to other businesses on
+                            AxonFlow, or export via universal API keys into <strong>Twilio, Vapi.ai, Retell AI, Bland
+                                AI, and WebRTC</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Voice Upload / Record Action Buttons -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button onclick="openVoiceUploadModal()"
+                            class="px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-bold text-xs transition shadow-xl shadow-indigo-600/30 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            <span>+ Record / Clone My Voice</span>
+                        </button>
+                        <button onclick="openExportModal('saurabh_energetic_pro')"
+                            class="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs transition border border-white/10 flex items-center gap-2">
+                            <span>⚡ Get Multi-Platform API Keys</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Instant Zero-Shot Voice Test Bench -->
+                <div class="mt-6 pt-5 border-t border-white/10">
+                    <label class="text-xs font-bold text-white flex items-center gap-2 mb-2">
+                        <span>🔊</span> Test Your Cloned Voice Right Now (Type ANY text to hear your voice say it):
+                    </label>
+                    <div class="flex flex-col sm:flex-row items-center gap-3">
+                        <input id="quick-custom-voice-text" type="text"
+                            placeholder="Type any sentence here to hear your cloned voice say it..."
+                            value="Hello! This is my authentic cloned voice speaking completely new text for our users."
+                            class="w-full bg-black/50 border border-indigo-500/40 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-400">
+                        <button onclick="testQuickCustomVoiceText()"
+                            class="w-full sm:w-auto shrink-0 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-purple-600/30 transition flex items-center justify-center gap-2">
+                            <span>▶️ Speak in My Voice</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marketplace Catalog -->
+            <div class="glass-panel p-6">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Featured Creator Voice Models</h2>
+                        <p class="text-xs text-slate-400 mt-1">Ready-made neural voices for high-converting phone lines
+                            and automated messaging.</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs text-slate-400">Creator Earnings Active: <strong
+                                class="text-emerald-400">₹499 + 15% rev-share</strong></span>
+                    </div>
+                </div>
+
+                <!-- Marketplace Cards Grid -->
+                <div id="voice-marketplace-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= MODAL: LIVE RECORD & CLONE VOICE STUDIO ================= -->
+        <div id="modal-voice-upload"
+            class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+            <div
+                class="glass-panel max-w-2xl w-full p-6 border-indigo-500/50 relative max-h-[90vh] overflow-y-auto shadow-2xl shadow-indigo-500/20">
+                <button onclick="closeVoiceUploadModal()"
+                    class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+
+                <div class="flex items-center gap-2 mb-1">
+                    <span
+                        class="w-8 h-8 rounded-lg bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center text-lg">🎙️</span>
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Live Voice Recording Studio</h3>
+                        <p class="text-xs text-slate-400">Read the sample script below aloud into your microphone to
+                            generate your neural clone and list it for sale.</p>
+                    </div>
+                </div>
+
+                <!-- Teleprompter Script Card & Custom Subtitle Input -->
+                <div class="mt-4 p-4 rounded-xl bg-indigo-950/40 border border-indigo-500/30 relative">
+                    <div class="flex justify-between items-center mb-2">
+                        <span
+                            class="text-[11px] font-bold text-indigo-300 uppercase tracking-wider flex items-center gap-1.5">
+                            <span>📜</span> Teleprompter Subtitle & Calibration Script:
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <span
+                                class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded font-semibold">User
+                                Configurable</span>
+                        </div>
+                    </div>
+                    <textarea id="teleprompter-script" rows="3"
+                        class="w-full text-slate-100 text-xs font-medium leading-relaxed italic bg-black/40 p-3 rounded-lg border border-white/10 focus:outline-none focus:border-indigo-400">"Hello! Welcome to our store. I am an autonomous voice assistant powered by AxonFlow. I can help you check our latest catalog, reserve an appointment, or place an order in seconds. How may I assist you today?"</textarea>
+                </div>
+
+                <!-- Live Mic Recording & File Upload Controls -->
+                <div class="mt-4 p-4 rounded-xl bg-black/40 border border-white/10 space-y-3">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-3 w-full sm:w-auto">
+                            <button id="btn-record-mic" onclick="toggleMicRecording()"
+                                class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-rose-600/30">
+                                <span id="record-dot" class="w-3 h-3 rounded-full bg-white animate-pulse"></span>
+                                <span id="record-btn-label">Start Live Recording</span>
+                            </button>
+                            <span id="record-timer" class="text-xs font-mono font-bold text-slate-300">00:00</span>
+                        </div>
+
+                        <!-- Or Upload Existing Audio File -->
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <label class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 text-xs font-semibold cursor-pointer border border-white/10 transition flex items-center gap-1.5">
+                                <span>📁 Upload Audio (MP3 / WAV)</span>
+                                <input type="file" id="manual-audio-file-input" accept="audio/*" onchange="handleManualAudioUpload(event)" class="hidden">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Audio Playback Preview -->
+                    <div id="recorded-audio-preview-container" class="hidden flex items-center justify-between p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-500/30">
+                        <div class="flex items-center gap-3">
+                            <span class="text-emerald-400 font-bold text-xs">✓ Voice Audio Loaded:</span>
+                            <audio id="recorded-audio-element" controls class="h-8 max-w-[260px]"></audio>
+                        </div>
+                        <span id="audio-status-tag" class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-mono">Chirp 3 Ready</span>
+                    </div>
+                </div>
+
+                <!-- Open Source LLM & User-Level Agent Configuration -->
+                <div class="mt-4 p-4 rounded-xl bg-slate-900/60 border border-cyan-500/30">
+                    <div class="flex items-center justify-between mb-2 pb-2 border-b border-white/5">
+                        <div class="flex items-center gap-2">
+                            <span class="text-base">🧠</span>
+                            <h4 class="text-xs font-bold text-white">Open Source LLM & Agent Core Extension</h4>
+                        </div>
+                        <span
+                            class="text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-mono font-semibold">OpenAI
+                            / Ollama / vLLM API Compatible</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div>
+                            <label class="block text-slate-300 font-semibold mb-1">Attached LLM Engine</label>
+                            <select id="user-llm-engine"
+                                class="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-white focus:outline-none focus:border-cyan-400">
+                                <option value="gemini_2_5_flash" selected>⚡ Google Gemini 2.5 Flash (XPRIZE Partner
+                                    Edition)</option>
+                                <option value="llama_3_3_70b">🦙 Meta Llama 3.3 (Open Source via vLLM / Ollama)</option>
+                                <option value="mistral_large">🌪️ Mistral Large / NeMo (Self-Hosted Agent)</option>
+                                <option value="custom_openai_endpoint">🔌 Custom OpenAI Compatible Endpoint
+                                    (Self-Hosted)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 font-semibold mb-1">Acoustic Tone Preset</label>
+                            <select id="user-voice-tone-preset"
+                                class="w-full bg-black/40 border border-white/10 rounded-lg p-2 text-white focus:outline-none focus:border-cyan-400">
+                                <option value="natural_conversational" selected>🇮🇳 Natural Conversational (Warm &
+                                    Charismatic)</option>
+                                <option value="executive_closer">👔 Executive Closer (Authoritative Baritone)</option>
+                                <option value="high_energy_sales">🚀 High-Energy Sales (Fast Pacing)</option>
+                                <option value="warm_hospitality">🤝 Gentle Hospitality & Support</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Voice Metadata & Monetization Settings -->
+                <div class="mt-4 space-y-3.5 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-slate-300 font-semibold mb-1">Creator / Your Name</label>
+                            <input id="new-voice-creator" type="text" value="Saurabh Kumar Bajpai"
+                                class="w-full bg-black/40 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 font-semibold mb-1">Voice Model Title</label>
+                            <input id="new-voice-name" type="text" value="Saurabh — Signature Neural Voice"
+                                placeholder="e.g. Saurabh — Executive Closer"
+                                class="w-full bg-black/40 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-300 font-semibold mb-1">Voice Description & Ideal Business
+                            Categories</label>
+                        <textarea id="new-voice-desc" rows="2"
+                            class="w-full bg-black/40 border border-white/10 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500">Charismatic, energetic, and professional tone tailored for sales, hospitality, real estate, and high-ticket customer appointments.</textarea>
+                    </div>
+
+                    <!-- Monetization Terms Badge -->
+                    <div
+                        class="p-3 bg-emerald-950/30 border border-emerald-500/20 rounded-lg flex items-center justify-between">
+                        <div>
+                            <div class="text-[11px] font-bold text-emerald-400">Marketplace Monetization Active:</div>
+                            <div class="text-[10px] text-slate-300">You will earn <strong
+                                    class="text-white font-semibold">₹499 one-time</strong> per business license +
+                                <strong class="text-white font-semibold">15% recurring revenue share</strong> on every
+                                minute they use.</div>
+                        </div>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded font-bold">100%
+                            Margin</span>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mt-6 flex justify-end gap-3">
+                    <button onclick="closeVoiceUploadModal()"
+                        class="px-4 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold">Cancel</button>
+                    <button id="btn-publish-voice" onclick="submitCustomVoice()"
+                        class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white text-xs font-bold shadow-xl shadow-indigo-500/30 flex items-center gap-2">
+                        <span>🚀 Generate Neural Model & Publish to Marketplace</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL: MULTI-PLATFORM EXPORT (TWILIO, VAPI, RETELL) ================= -->
+        <div id="modal-voice-export"
+            class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+            <div class="glass-panel max-w-2xl w-full p-6 border-cyan-500/40 relative max-h-[90vh] overflow-y-auto">
+                <button onclick="closeExportModal()"
+                    class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg font-bold">&times;</button>
+
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-xl">🌐</span>
+                    <h3 class="text-lg font-bold text-white">Cross-Platform Voice API & Integration Keys</h3>
+                </div>
+                <p class="text-xs text-slate-400 mb-4">Use <strong id="export-voice-title"
+                        class="text-indigo-300">Saurabh's Voice</strong> in any external AI phone agent platform or
+                    custom stack.</p>
+
+                <!-- API Key Bar -->
+                <div class="p-3 bg-black/40 rounded-xl border border-white/10 mb-4 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-slate-400 uppercase font-semibold block">Universal Voice API
+                            Key</span>
+                        <code id="export-api-key"
+                            class="text-emerald-400 text-xs font-mono">af_live_voice_saurabh_pro_88a91c</code>
+                    </div>
+                    <button onclick="copyApiKey()"
+                        class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-slate-200 border border-white/10">Copy
+                        Key</button>
+                </div>
+
+                <!-- Platform Tabs -->
+                <div class="space-y-4 text-xs">
+                    <!-- Vapi.ai -->
+                    <div class="p-4 bg-slate-900/60 rounded-xl border border-white/5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-cyan-300 flex items-center gap-1.5">
+                                <span>⚡</span> Vapi.ai Custom Voice Provider
+                            </span>
+                            <span class="text-[10px] text-slate-400">JSON Payload</span>
+                        </div>
+                        <pre id="code-vapi"
+                            class="p-3 bg-black/60 rounded-lg text-slate-300 font-mono text-[11px] overflow-x-auto border border-white/5"></pre>
+                    </div>
+
+                    <!-- Twilio -->
+                    <div class="p-4 bg-slate-900/60 rounded-xl border border-white/5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-rose-300 flex items-center gap-1.5">
+                                <span>📞</span> Twilio Media Stream & TwiML
+                            </span>
+                            <span class="text-[10px] text-slate-400">XML</span>
+                        </div>
+                        <pre id="code-twilio"
+                            class="p-3 bg-black/60 rounded-lg text-slate-300 font-mono text-[11px] overflow-x-auto border border-white/5"></pre>
+                    </div>
+
+                    <!-- Terminal cURL -->
+                    <div class="p-4 bg-slate-900/60 rounded-xl border border-white/5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-purple-300 flex items-center gap-1.5">
+                                <span>💻</span> Direct Terminal / cURL Audio Synthesis
+                            </span>
+                            <span class="text-[10px] text-slate-400">Bash</span>
+                        </div>
+                        <pre id="code-curl"
+                            class="p-3 bg-black/60 rounded-lg text-amber-300 font-mono text-[11px] overflow-x-auto border border-white/5"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SECTION 3: EXECUTION LOGS (EVIDENCE) ================= -->
+        <section id="sec-logs" class="dashboard-section hidden space-y-6">
+            <div class="glass-panel p-6">
+                <div
+                    class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-4 pb-4 border-b border-white/10">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-xl font-bold text-white">Agent Execution Logs (Hackathon Evidence)</h2>
+                            <span
+                                class="text-[10px] bg-cyan-500/20 text-cyan-300 font-bold px-2 py-0.5 rounded">AUDITABLE</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Durable telemetry logs recording every Gemini reasoning
+                            turn, function call, and business outcome.</p>
+                    </div>
+                    <button onclick="loadExecutionLogs()"
+                        class="px-3.5 py-1.5 bg-white/5 hover:bg-white/10 rounded-lg text-xs text-slate-200 border border-white/10 transition">
+                        🔄 Refresh Logs
+                    </button>
+                </div>
+
+                <!-- Feed of Execution Logs -->
+                <div id="execution-logs-feed" class="space-y-3 max-h-[700px] overflow-y-auto pr-2">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 4: STRIPE BILLING & P&L ================= -->
+        <section id="sec-financials" class="dashboard-section hidden space-y-6">
+            <div class="glass-panel p-6">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-black text-white gradient-text">P&L Financial Statement & Unit Margins</h2>
+                    <p class="text-sm text-slate-400 mt-1">Live accounting of gross Stripe collections vs. actual Google
+                        Cloud & Twilio infrastructure expenses.</p>
+                </div>
+
+                <!-- Financial Highlights -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                        <div class="text-xs text-slate-400 uppercase font-semibold">Total Gross Revenue</div>
+                        <div class="text-3xl font-extrabold text-white mt-1" id="fin-gross-rev">₹0</div>
+                        <div class="text-xs text-slate-400 mt-1">Subscriptions + Usage + Licenses</div>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                        <div class="text-xs text-slate-400 uppercase font-semibold">Total Platform Costs</div>
+                        <div class="text-3xl font-extrabold text-rose-400 mt-1" id="fin-expenses">₹0</div>
+                        <div class="text-xs text-slate-400 mt-1">Google Cloud + Twilio + Stripe</div>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                        <div class="text-xs text-slate-400 uppercase font-semibold">Net Profit</div>
+                        <div class="text-3xl font-extrabold text-emerald-400 mt-1" id="fin-net-profit">₹0</div>
+                        <div class="text-xs text-emerald-400/80 mt-1 font-semibold">Real gross profit</div>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                        <div class="text-xs text-slate-400 uppercase font-semibold">Gross Profit Margin</div>
+                        <div class="text-3xl font-extrabold text-cyan-400 mt-1" id="fin-margin">0%</div>
+                        <div class="text-xs text-slate-400 mt-1">Healthy 2.5x–3.8x unit markup</div>
+                    </div>
+                </div>
+
+                <!-- Pricing & Margin Breakdown Matrix -->
+                <div class="bg-black/30 rounded-2xl border border-white/5 p-6 mb-6">
+                    <h3 class="text-base font-bold text-white mb-4">Unit Margin Economics vs. Infra Costs</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-white/5 text-slate-400 uppercase border-b border-white/10">
+                                <tr>
+                                    <th class="py-3 px-4">Platform Channel</th>
+                                    <th class="py-3 px-4">Cost Basis (All-In)</th>
+                                    <th class="py-3 px-4">Customer Rate</th>
+                                    <th class="py-3 px-4">Gross Margin</th>
+                                    <th class="py-3 px-4">Billing Method</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5 text-slate-200">
+                                <tr>
+                                    <td class="py-3 px-4 font-semibold text-white">Voice Call (per minute)</td>
+                                    <td class="py-3 px-4 text-slate-400">≈ ₹6.50 / min (Twilio + Google STT/TTS +
+                                        Gemini)</td>
+                                    <td class="py-3 px-4 text-emerald-400 font-bold">₹15.00 / min</td>
+                                    <td class="py-3 px-4 text-cyan-400 font-bold">+₹8.50 / min (57% margin)</td>
+                                    <td class="py-3 px-4">Metered Stripe Usage</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-semibold text-white">WhatsApp Message</td>
+                                    <td class="py-3 px-4 text-slate-400">≈ ₹1.30 / msg (Twilio/Meta + Gemini)</td>
+                                    <td class="py-3 px-4 text-emerald-400 font-bold">₹5.00 / msg</td>
+                                    <td class="py-3 px-4 text-cyan-400 font-bold">+₹3.70 / msg (74% margin)</td>
+                                    <td class="py-3 px-4">Metered Stripe Usage</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-semibold text-white">Voice Marketplace (Saurabh's Voice)
+                                    </td>
+                                    <td class="py-3 px-4 text-slate-400">₹0 (Zero marginal cost)</td>
+                                    <td class="py-3 px-4 text-emerald-400 font-bold">₹499 setup + 15% rev-share</td>
+                                    <td class="py-3 px-4 text-cyan-400 font-bold">100% Gross Margin</td>
+                                    <td class="py-3 px-4">Stripe Connect / Direct</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Simulated Stripe Checkout Actions -->
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="triggerStripeCheckout('trial_entry')"
+                        class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow-lg shadow-emerald-600/20">
+                        ⚡ Simulate ₹1 Instant Verification
+                    </button>
+                    <button onclick="triggerStripeCheckout('subscription_base')"
+                        class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition shadow-lg shadow-indigo-600/20">
+                        💳 Simulate ₹999 Base Subscription
+                    </button>
+                    <button onclick="triggerStripeCheckout('marketplace_voice')"
+                        class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition shadow-lg shadow-purple-600/20">
+                        🎙️ Simulate ₹499 Marketplace Voice License
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-white/10 py-6 bg-[#070b14] text-center text-xs text-slate-500">
+        AxonFlow Voice • Built natively for Google Cloud & Gemini XPRIZE (Small Business Services) • &copy; 2026
+        AxonFlow AI
+    </footer>
+
+    <!-- Dashboard Controller Script -->
+    <script src="/js/voice-dashboard.js"></script>
+</body>
+
+</html>

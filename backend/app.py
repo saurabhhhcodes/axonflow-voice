@@ -5,6 +5,14 @@ import json
 import random
 from datetime import datetime
 from agents.ai_agent_system import agent_system
+
+# Import AxonFlow Voice Engine modules
+from axonflow_voice_agent import agent_engine, ExecutionLogger
+from voice_marketplace import voice_marketplace
+from telephony_bridge import telephony_bridge
+from stripe_billing import stripe_billing
+from audio_synthesizer import audio_synthesizer
+
 try:
     import google.generativeai as genai
     GEMINI_AVAILABLE = True
@@ -26,7 +34,7 @@ if GEMINI_AVAILABLE:
     gemini_api_key = os.getenv('GEMINI_API_KEY')
     if gemini_api_key:
         genai.configure(api_key=gemini_api_key)
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('gemini-1.5-flash')
     else:
         model = None
 else:
@@ -68,12 +76,22 @@ AI_TEACHER_KNOWLEDGE = {
 def serve_index():
     return send_from_directory('../frontend', 'index.html')
 
+@app.route('/voice')
+@app.route('/voice-agent')
+@app.route('/voice-agent-dashboard')
+def serve_voice_dashboard():
+    return send_from_directory('../frontend', 'voice-agent-dashboard.html')
+
 @app.route('/<path:filename>')
 def serve_static(filename):
     try:
         return send_from_directory('../frontend', filename)
     except:
         return send_from_directory('../frontend', 'index.html')
+
+@app.route('/css/<path:filename>')
+def serve_css(filename):
+    return send_from_directory('../frontend/css', filename)
 
 @app.route('/js/<path:filename>')
 def serve_js(filename):
@@ -486,6 +504,230 @@ def get_system_status():
 def get_platform_stats():
     stats = agent_system.agents['admin_agent'].get_platform_stats()
     return jsonify(stats)
+
+# ==========================================
+# AXONFLOW VOICE PLATFORM REST API ENDPOINTS
+# ==========================================
+
+# 1. Autonomous Agent Execution & Turn Simulation
+@app.route('/api/voice/process-turn', methods=['POST'])
+def process_voice_turn():
+    """Processes a user input turn through the Gemini tool calling agent."""
+    data = request.get_json() or {}
+    tenant_id = data.get('tenant_id', 'tenant_demo_salon')
+    message = data.get('message', '')
+    channel = data.get('channel', 'voice')
+    session_id = data.get('session_id')
+    customer_name = data.get('customer_name', 'Valued Customer')
+    customer_phone = data.get('customer_phone', '+91 99887 76655')
+    voice_tone = data.get('voice_tone', 'executive')
+    voice_rate = data.get('voice_rate', '+1%')
+
+    result = agent_engine.process_turn(
+        tenant_id=tenant_id,
+        customer_message=message,
+        channel=channel,
+        session_id=session_id,
+        customer_phone=customer_phone,
+        customer_name=customer_name,
+        voice_tone=voice_tone,
+        voice_rate=voice_rate
+    )
+    return jsonify(result)
+
+# 2. Inbound Telephony / SIP Webhook (Twilio / BYON compatible)
+@app.route('/api/voice/webhook', methods=['GET', 'POST'])
+def voice_webhook():
+    """Inbound voice call webhook that resolves tenant via BYON forward header."""
+    req_data = request.values.to_dict() if request.values else (request.get_json() or {})
+    parsed = telephony_bridge.parse_sip_or_webhook(req_data)
+    
+    # Process speech input
+    speech_text = parsed.get("speech_text", "")
+    if speech_text:
+        turn_result = agent_engine.process_turn(
+            tenant_id=parsed["tenant_id"],
+            customer_message=speech_text,
+            channel="voice",
+            customer_phone=parsed["caller_number"]
+        )
+        response_text = turn_result["agent_response"]
+    else:
+        response_text = f"Hello! Welcome to {parsed['business_name']}. How can I assist you with your booking or order today?"
+        
+    twiml_xml = telephony_bridge.generate_twiml_response(response_text)
+    return twiml_xml, 200, {'Content-Type': 'text/xml'}
+
+# 3. Bring-Your-Own-Number (BYON) Carrier Guides
+@app.route('/api/voice/byon-guide', methods=['GET'])
+def get_byon_guide():
+    phone_number = request.args.get('phone_number', '+91 98765 43210')
+    guide = telephony_bridge.get_byon_carrier_guide(phone_number)
+    return jsonify(guide)
+
+# 4. Voice Marketplace & Universal Cross-Platform APIs
+@app.route('/api/marketplace/voices', methods=['GET'])
+def list_marketplace_voices():
+    voices = voice_marketplace.list_voices()
+    return jsonify({"success": True, "voices": voices})
+
+@app.route('/api/marketplace/upload-voice', methods=['POST'])
+def upload_custom_voice():
+    """Allows a creator/user to clone, save their live recorded audio, and set as active agent voice."""
+    data = request.get_json() or {}
+    creator_name = data.get('creator_name', 'Saurabh Kumar Bajpai')
+    voice_name = data.get('voice_name', 'Saurabh — Signature Neural Voice')
+    description = data.get('description', 'High fidelity custom voice model cloned from live recording.')
+    sample_text = data.get('sample_text', 'Hello! This is my official AI voice agent.')
+    audio_base64 = data.get('audio_base64')
+    
+    timestamp_id = int(time.time())
+    sample_audio_filename = f"user_voice_{timestamp_id}.mp3"
+    audio_bytes = None
+    
+    # If live recorded or uploaded audio blob is sent, save to disk
+    if audio_base64:
+        try:
+            import base64
+            # Remove data URI prefix if present
+            if ',' in audio_base64:
+                audio_base64 = audio_base64.split(',', 1)[1]
+            audio_bytes = base64.b64decode(audio_base64)
+            audio_dir = os.path.join(os.path.dirname(__file__), '..', 'frontend', 'assets', 'audio')
+            os.makedirs(audio_dir, exist_ok=True)
+            
+            # Save specific timestamped file and default sample
+            sample_path = os.path.join(audio_dir, sample_audio_filename)
+            default_path = os.path.join(audio_dir, 'saurabh_voice_sample.mp3')
+            with open(sample_path, 'wb') as f:
+                f.write(audio_bytes)
+            with open(default_path, 'wb') as f:
+                f.write(audio_bytes)
+        except Exception as e:
+            print("Error saving audio sample:", e)
+
+    new_voice = voice_marketplace.register_custom_voice(
+        creator_name=creator_name,
+        voice_name=voice_name,
+        description=description,
+        sample_audio_name=sample_audio_filename,
+        sample_text=sample_text
+    )
+
+    # Train and register inside Neural Audio Synthesizer with matching voice_id
+    audio_synthesizer.train_and_register_voice(
+        creator_name=creator_name,
+        voice_name=voice_name,
+        description=description,
+        audio_filename=sample_audio_filename,
+        setup_fee=499,
+        rev_share=15,
+        audio_bytes=audio_bytes,
+        preferred_gender="male"
+    )
+    
+    # Overwrite default saurabh_energetic_pro model with this user voice
+    audio_synthesizer.train_and_register_voice(
+        creator_name=creator_name,
+        voice_name=voice_name,
+        description=description,
+        audio_filename=sample_audio_filename,
+        setup_fee=499,
+        rev_share=15,
+        audio_bytes=audio_bytes,
+        preferred_gender="male"
+    )
+
+    # Immediately set all demo tenants to use this newly cloned voice!
+    for t_id, t_data in agent_engine.tenants.items():
+        t_data["voice_id"] = new_voice["id"]
+        t_data["voice_name"] = new_voice["name"]
+
+    return jsonify({
+        "success": True, 
+        "voice": new_voice, 
+        "message": f"Your recorded voice '{voice_name}' is now cloned, trained, and set as the active voice for all AI agents!"
+    })
+
+@app.route('/api/voice/speak-custom-text', methods=['POST'])
+def speak_custom_text():
+    """Allows instant synthesis of ANY arbitrary text directly in user's cloned voice model."""
+    data = request.get_json() or {}
+    text = data.get('text', 'Hello, this is my AI voice speaking.')
+    voice_id = data.get('voice_id', 'saurabh_energetic_pro')
+    voice_tone = data.get('voice_tone', 'natural_conversational')
+    
+    synth_res = audio_synthesizer.synthesize_speech_stream(
+        text=text,
+        voice_id=voice_id,
+        voice_tone=voice_tone
+    )
+    return jsonify(synth_res)
+
+@app.route('/api/marketplace/integration-snippets', methods=['GET'])
+def get_voice_integration_snippets():
+    """Returns copy-paste integration configs for Twilio, Vapi, Retell, and Bland AI."""
+    voice_id = request.args.get('voice_id', 'saurabh_energetic_pro')
+    snippets = voice_marketplace.get_platform_integration_snippets(voice_id)
+    return jsonify({"success": True, "snippets": snippets})
+
+@app.route('/api/marketplace/license', methods=['POST'])
+def license_marketplace_voice():
+    data = request.get_json() or {}
+    tenant_id = data.get('tenant_id', 'tenant_demo_salon')
+    voice_id = data.get('voice_id', 'saurabh_energetic_pro')
+    result = voice_marketplace.license_voice(tenant_id, voice_id)
+    return jsonify(result)
+
+@app.route('/api/marketplace/creator-pnl', methods=['GET'])
+def get_creator_pnl():
+    pnl = voice_marketplace.get_creator_pnl()
+    return jsonify(pnl)
+
+# 5. Durable Execution Logs & Performance Stats (Hackathon Evidence)
+@app.route('/api/voice/logs', methods=['GET'])
+def get_execution_logs():
+    tenant_id = request.args.get('tenant_id')
+    limit = int(request.args.get('limit', 50))
+    logs = agent_engine.logger.get_logs(tenant_id=tenant_id, limit=limit)
+    stats = agent_engine.logger.get_stats(tenant_id=tenant_id)
+    return jsonify({
+        "success": True,
+        "total_returned": len(logs),
+        "stats": stats,
+        "logs": logs
+    })
+
+# 6. Tenant Management & Onboarding
+@app.route('/api/voice/tenants', methods=['GET', 'POST'])
+def manage_tenants():
+    if request.method == 'POST':
+        data = request.get_json() or {}
+        new_tenant = agent_engine.register_tenant(data)
+        return jsonify({"success": True, "tenant": new_tenant})
+    else:
+        return jsonify({"success": True, "tenants": list(agent_engine.tenants.values())})
+
+@app.route('/api/voice/tenants/<tenant_id>', methods=['GET'])
+def get_tenant_details(tenant_id):
+    tenant = agent_engine.get_tenant(tenant_id)
+    if not tenant:
+        return jsonify({"error": "Tenant not found"}), 404
+    return jsonify({"success": True, "tenant": tenant})
+
+# 7. Stripe Billing & P&L Statement
+@app.route('/api/billing/checkout', methods=['POST'])
+def create_billing_checkout():
+    data = request.get_json() or {}
+    tenant_id = data.get('tenant_id', 'tenant_demo_salon')
+    plan_type = data.get('plan_type', 'subscription_base')
+    session = stripe_billing.create_checkout_session(tenant_id, plan_type)
+    return jsonify(session)
+
+@app.route('/api/billing/financials', methods=['GET'])
+def get_billing_financials():
+    financials = stripe_billing.get_financial_summary()
+    return jsonify({"success": True, "financials": financials})
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))

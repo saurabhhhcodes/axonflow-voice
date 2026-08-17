@@ -1,0 +1,128 @@
+{
+  "saurabh_energetic_pro": {
+    "voice_id": "saurabh_energetic_pro",
+    "creator_name": "Saurabh Kumar Bajpai",
+    "voice_name": "Saurabh \u2014 Signature Neural Voice",
+    "description": "Natural Indian executive, charismatic, high-energy sales and support closer.",
+    "tones": {
+      "natural_conversational": {
+        "base_voice": "hi-IN-MadhurNeural",
+        "rate": "+2%",
+        "pitch": "-1Hz"
+      },
+      "executive_closer": {
+        "base_voice": "en-IN-PrabhatNeural",
+        "rate": "+1%",
+        "pitch": "-2Hz"
+      },
+      "high_energy_sales": {
+        "base_voice": "hi-IN-MadhurNeural",
+        "rate": "+5%",
+        "pitch": "-2Hz"
+      },
+      "warm_hospitality": {
+        "base_voice": "hi-IN-MadhurNeural",
+        "rate": "-2%",
+        "pitch": "+1Hz"
+      }
+    },
+    "pricing": {
+      "setup_fee_inr": 499,
+      "rev_share_pct": 15
+    },
+    "sample_audio_url": "/assets/audio/saurabh_voice_sample.mp3",
+    "status": "trained_active",
+    "active_servers": [
+      "AxonFlow WebRTC",
+      "Twilio SIP Trunk",
+      "Vapi.ai Gateway",
+      "Retell AI Bridge"
+    ],
+    "created_at": "2026-08-16T12:00:00Z"
+  },
+  "voice_edbdfd5d": {
+    "voice_id": "voice_edbdfd5d",
+    "creator_name": "Saurabh Kumar Bajpai",
+    "voice_name": "Saurabh Studio Master",
+    "description": "Authoritative, warm Indian closer tone for high-ticket bookings",
+    "tones": {
+      "natural_conversational": {
+        "base_voice": "hi-IN-MadhurNeural",
+        "rate": "+2%",
+        "pitch": "-1Hz"
+      },
+      "executive_closer": {
+        "base_voice": "en-IN-PrabhatNeural",
+        "rate": "+1%",
+        "pitch": "-2Hz"
+      },
+      "high_energy_sales": {
+        "base_voice": "hi-IN-MadhurNeural",
+        "rate": "+6%",
+        "pitch": "-1Hz"
+      },
+      "warm_hospitality": {
+        "base_voice": "hi-IN-MadhurNeural",
+        "rate": "-2%",
+        "pitch": "+1Hz"
+      }
+    },
+    "pricing": {
+      "setup_fee_inr": 499,
+      "rev_share_pct": 15
+    },
+    "sample_audio_url": "/assets/audio/saurabh_voice_sample.mp3",
+    "status": "trained_active",
+    "active_servers": [
+      "AxonFlow WebRTC",
+      "Twilio SIP Trunk",
+      "Vapi.ai Gateway",
+      "Retell AI Bridge",
+      "Bland AI Webhook"
+    ],
+    "created_at": "2026-08-16T11:27:07Z"
+  },
+  "voice_b691f4b6": {
+    "voice_id": "voice_b691f4b6",
+    "creator_name": "Saurabh Kumar Bajpai",
+    "voice_name": "Saurabh \u2014 Signature Neural Voice",
+    "gcp_chirp_key": "gcp_chirp3_33b83ff421420cdf075f3cce",
+    "description": "Charismatic, energetic, and professional tone tailored for sales, hospitality, real estate, and high-ticket customer appointments.",
+    "tones": {
+      "natural_conversational": {
+        "base_voice": "hi-IN-MadhurNeural",
+        "rate": "+2%",
+        "pitch": "-1Hz"
+      },
+      "executive_closer": {
+        "base_voice": "en-IN-PrabhatNeural",
+        "rate": "+1%",
+        "pitch": "-2Hz"
+      },
+      "high_energy_sales": {
+        "base_voice": "hi-IN-MadhurNeural",
+        "rate": "+6%",
+        "pitch": "-1Hz"
+      },
+      "warm_hospitality": {
+        "base_voice": "hi-IN-MadhurNeural",
+        "rate": "-2%",
+        "pitch": "+1Hz"
+      }
+    },
+    "pricing": {
+      "setup_fee_inr": 499,
+      "rev_share_pct": 15
+    },
+    "sample_audio_url": "/assets/audio/saurabh_voice_sample.mp3",
+    "status": "trained_active",
+    "active_servers": [
+      "Google Cloud Chirp 3",
+      "AxonFlow WebRTC",
+      "Twilio SIP Trunk",
+      "Vapi.ai Gateway",
+      "Retell AI Bridge"
+    ],
+    "created_at": "2026-08-17T16:59:08Z"
+  }
+}

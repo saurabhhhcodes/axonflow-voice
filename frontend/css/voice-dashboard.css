@@ -1,0 +1,202 @@
+/* AxonFlow World-Class SaaS Design System & Motion Graphics */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-glow: #6366f1;
+  --secondary-glow: #a855f7;
+  --accent-cyan: #06b6d4;
+  --success-emerald: #10b981;
+  --warning-amber: #f59e0b;
+  --danger-rose: #f43f5e;
+  --bg-dark: #040711;
+  --surface-dark: #070c18;
+  --surface-card: rgba(13, 20, 38, 0.75);
+  --border-glass: rgba(255, 255, 255, 0.09);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.18) 0px, transparent 45%),
+    radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.16) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, rgba(6, 182, 212, 0.10) 0px, transparent 55%),
+    radial-gradient(at 80% 60%, rgba(217, 70, 239, 0.08) 0px, transparent 40%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Glassmorphism Ultra Cards with Neon Edge Glow on Hover */
+.glass-panel {
+  background: var(--surface-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.6);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.glass-panel:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 24px 60px -12px rgba(99, 102, 241, 0.22), 0 0 24px 0 rgba(99, 102, 241, 0.12);
+  transform: translateY(-3px);
+}
+
+/* World-class Gradient Typography */
+.gradient-text {
+  background: linear-gradient(135deg, #c7d2fe 0%, #f0abfc 45%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 35px rgba(168, 85, 247, 0.28);
+}
+
+/* Ambient Stat Glow */
+.stat-glow {
+  position: relative;
+  overflow: hidden;
+}
+.stat-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.stat-glow:hover::before {
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, transparent 60%);
+}
+
+/* SaaS Live Pulse Indicators */
+@keyframes live-pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.75); }
+  70% { transform: scale(1); box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(10px);
+}
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  animation: live-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Dynamic Live Waveform Visualizer */
+.waveform-bars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 6px;
+}
+.waveform-bar {
+  width: 4px;
+  background: linear-gradient(180deg, #818cf8 0%, #d946ef 100%);
+  border-radius: 99px;
+  animation: wave-anim 1.1s ease-in-out infinite alternate;
+}
+.waveform-bar:nth-child(1) { height: 10px; animation-delay: 0.1s; }
+.waveform-bar:nth-child(2) { height: 20px; animation-delay: 0.3s; }
+.waveform-bar:nth-child(3) { height: 28px; animation-delay: 0.5s; }
+.waveform-bar:nth-child(4) { height: 16px; animation-delay: 0.2s; }
+.waveform-bar:nth-child(5) { height: 24px; animation-delay: 0.4s; }
+
+@keyframes wave-anim {
+  0% { transform: scaleY(0.25); opacity: 0.55; }
+  100% { transform: scaleY(1); opacity: 1; filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.75)); }
+}
+
+/* Micro-Interaction Button Styles */
+button {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+button:active {
+  transform: scale(0.96);
+}
+
+/* Neon Glow Shimmer Buttons */
+.btn-glow-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #9333ea 50%, #06b6d4 100%);
+  box-shadow: 0 6px 24px -4px rgba(99, 102, 241, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+.btn-glow-primary:hover {
+  box-shadow: 0 10px 36px 0 rgba(99, 102, 241, 0.7), 0 0 18px rgba(6, 182, 212, 0.45);
+  transform: translateY(-2px);
+}
+.btn-glow-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: 0.55s ease;
+}
+.btn-glow-primary:hover::after {
+  left: 100%;
+}
+
+/* Navigation Tabs */
+.nav-tab-btn {
+  position: relative;
+  transition: all 0.25s ease;
+}
+.nav-tab-btn.active {
+  background: rgba(99, 102, 241, 0.22) !important;
+  border-color: rgba(99, 102, 241, 0.55) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 24px rgba(99, 102, 241, 0.3);
+}
+.nav-tab-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+/* Terminal & Log Console */
+.log-box {
+  background: #02050c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.825rem;
+  line-height: 1.6;
+  border-radius: 16px;
+}
+.log-box::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.log-box::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 99px;
+}
+.log-tool { color: #38bdf8; font-weight: 600; }
+.log-param { color: #c084fc; }
+.log-success { color: #34d399; }
+.log-escalate { color: #f43f5e; }
