@@ -464,13 +464,18 @@ function handleOmniMediaUpload(event) {
     const isImage = file.type.startsWith('image/');
 
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = async function(e) {
+        let processedDataUrl = e.target.result;
+        if (!isVideo) {
+            processedDataUrl = await optimizeImageForMetaInstagram(e.target.result);
+        }
+
         currentCustomMedia = {
-            url: e.target.result,
+            url: processedDataUrl,
             name: file.name,
             type: isVideo ? 'video' : 'image',
             size: (file.size / (1024 * 1024)).toFixed(2) + ' MB',
-            dataUrl: e.target.result,
+            dataUrl: processedDataUrl,
             publicUrl: null
         };
 
@@ -1860,30 +1865,92 @@ function sendTestDm() {
     }, 600);
 }
 
+function optimizeImageForMetaInstagram(dataUrl) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = function() {
+            const w = img.naturalWidth || img.width;
+            const h = img.naturalHeight || img.height;
+            const ratio = w / h;
+
+            // Meta strict requirement for Instagram Feed Photos: aspect ratio between 4:5 (0.80) and 1.91:1 (1.91)
+            if (ratio >= 0.80 && ratio <= 1.91) {
+                resolve(dataUrl);
+                return;
+            }
+
+            // Outside Meta limits (e.g. 9:16 vertical screenshot or panorama):
+            // Fit seamlessly onto a certified 4:5 Portrait (1080x1350) canvas with dark studio background
+            const canvas = document.createElement('canvas');
+            const targetW = 1080;
+            const targetH = 1350;
+            canvas.width = targetW;
+            canvas.height = targetH;
+            const ctx = canvas.getContext('2d');
+
+            // Dark gradient backdrop
+            const grad = ctx.createLinearGradient(0, 0, targetW, targetH);
+            grad.addColorStop(0, '#090d16');
+            grad.addColorStop(0.5, '#020617');
+            grad.addColorStop(1, '#090d16');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, targetW, targetH);
+
+            // Subtle studio tech grid
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
+            for (let x = 0; x < targetW; x += 40) ctx.fillRect(x, 0, 1, targetH);
+            for (let y = 0; y < targetH; y += 40) ctx.fillRect(0, y, targetW, 1);
+
+            // Scale and center image cleanly
+            const scale = Math.min(targetW / w, targetH / h) * 0.96;
+            const drawW = w * scale;
+            const drawH = h * scale;
+            const drawX = (targetW - drawW) / 2;
+            const drawY = (targetH - drawH) / 2;
+
+            ctx.shadowColor = 'rgba(0,0,0,0.6)';
+            ctx.shadowBlur = 30;
+            ctx.shadowOffsetY = 10;
+
+            ctx.drawImage(img, drawX, drawY, drawW, drawH);
+
+            resolve(canvas.toDataURL('image/jpeg', 0.95));
+        };
+        img.onerror = () => resolve(dataUrl);
+        img.src = dataUrl;
+    });
+}
+
 function handlePublisherMediaUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
 
     const isVideo = file.type.startsWith('video/');
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = async function(e) {
+        let processedDataUrl = e.target.result;
+        if (!isVideo) {
+            processedDataUrl = await optimizeImageForMetaInstagram(e.target.result);
+        }
+
         currentCustomMedia = {
-            url: e.target.result,
+            url: processedDataUrl,
             name: file.name,
             type: isVideo ? 'video' : 'image',
             size: (file.size / (1024 * 1024)).toFixed(2) + ' MB',
-            dataUrl: e.target.result
+            dataUrl: processedDataUrl,
+            publicUrl: null
         };
 
         const label = document.getElementById('publisherAssetLabel');
-        if (label) label.textContent = `${file.name} (${currentCustomMedia.size})`;
+        if (label) label.textContent = `${file.name} (Meta 4:5/Reels Compliant)`;
 
         const previewArea = document.getElementById('publisherMediaPreviewArea');
         if (previewArea) {
             if (isVideo) {
-                previewArea.innerHTML = `<video src="${e.target.result}" controls class="w-full h-full object-contain bg-black"></video>`;
+                previewArea.innerHTML = `<video src="${processedDataUrl}" controls class="w-full h-full object-contain bg-black"></video>`;
             } else {
-                previewArea.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-contain bg-black">`;
+                previewArea.innerHTML = `<img src="${processedDataUrl}" class="w-full h-full object-contain bg-black">`;
             }
         }
     };
@@ -1915,17 +1982,23 @@ async function publishInstagramReel() {
     try {
         let publicMediaUrl = currentCustomMedia.publicUrl;
 
-        // If custom uploaded image/video (base64 dataUrl), host it on the media serverless endpoint
+        // If custom uploaded image/video (base64 dataUrl), ensure image is optimized then host it on the media serverless endpoint
         if (!publicMediaUrl && currentCustomMedia.dataUrl) {
-            statusText.textContent = "1/3 Uploading custom media asset to cloud host...";
+            statusText.textContent = "1/3 Auto-formatting aspect ratio & uploading to cloud host...";
+            
+            let uploadPayload = currentCustomMedia.dataUrl;
+            if (!isVideo) {
+                uploadPayload = await optimizeImageForMetaInstagram(currentCustomMedia.dataUrl);
+            }
+
             try {
                 const uploadRes = await fetch('/.netlify/functions/media', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        fileData: currentCustomMedia.dataUrl,
+                        fileData: uploadPayload,
                         fileName: currentCustomMedia.name,
-                        mimeType: currentCustomMedia.type === 'video' ? 'video/mp4' : 'image/jpeg'
+                        mimeType: isVideo ? 'video/mp4' : 'image/jpeg'
                     })
                 });
                 const uploadData = await uploadRes.json();
