@@ -1,5 +1,5 @@
 functionsDirectory = "/Users/saurabhkumarbajpaiai/.gemini/antigravity/scratch/autonomiq-website/netlify/functions"
-functionsDirectoryOrigin = "default"
+functionsDirectoryOrigin = "config-v1"
 redirectsOrigin = "config"
 plugins = []
 

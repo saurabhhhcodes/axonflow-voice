@@ -1292,8 +1292,16 @@ async function publishInstagramReel() {
             throw new Error(pubData.error.message || 'Failed to publish media container');
         }
 
-        statusDiv.className = "mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 flex items-center gap-2";
-        statusDiv.innerHTML = `✅ <strong>Published!</strong> Live Post ID: <code>${pubData.id}</code> is now live on <a href="https://instagram.com/${ig.username}" target="_blank" class="underline ml-1 text-white font-bold">instagram.com/${ig.username}</a>`;
+        statusDiv.className = "mb-4 p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs text-emerald-300 flex flex-wrap items-center justify-between gap-2";
+        statusDiv.innerHTML = `
+            <div class="flex items-center gap-2">
+                <span class="text-base">✅</span>
+                <span><strong>Published Live!</strong> Post ID: <code class="font-mono bg-emerald-950 px-1.5 py-0.5 rounded text-white">${pubData.id}</code></span>
+            </div>
+            <a href="https://instagram.com/${ig.username}" target="_blank" class="px-3 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-white font-semibold flex items-center gap-1 transition-all">
+                <span>View on Instagram &rarr;</span>
+            </a>
+        `;
         ig.mediaCount += 1;
         saveInstagramConfig(ig);
 
