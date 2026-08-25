@@ -1502,6 +1502,178 @@ function generateDynamicPostImage(promptText) {
     return canvas.toDataURL('image/png');
 }
 
+async function renderDynamicReelVideo(promptText, audioDataUrl) {
+    return new Promise((resolve) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 720;
+        canvas.height = 1280;
+        const ctx = canvas.getContext('2d');
+
+        const audio = new Audio();
+        audio.crossOrigin = "anonymous";
+        if (audioDataUrl) audio.src = audioDataUrl;
+
+        const durationSec = 6;
+        const fps = 30;
+        const totalFrames = durationSec * fps;
+        let frameCount = 0;
+
+        const stream = canvas.captureStream(fps);
+
+        try {
+            if (audioDataUrl) {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const source = audioCtx.createMediaElementSource(audio);
+                const dest = audioCtx.createMediaStreamDestination();
+                source.connect(dest);
+                source.connect(audioCtx.destination);
+                dest.stream.getAudioTracks().forEach(track => stream.addTrack(track));
+            }
+        } catch(e) {}
+
+        let mediaRecorder;
+        try {
+            mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+        } catch(e) {
+            try {
+                mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+            } catch(e2) {
+                mediaRecorder = new MediaRecorder(stream);
+            }
+        }
+
+        const recordedChunks = [];
+        mediaRecorder.ondataavailable = (e) => {
+            if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks, { type: 'video/mp4' });
+            const videoUrl = URL.createObjectURL(blob);
+            resolve(videoUrl);
+        };
+
+        mediaRecorder.start();
+        if (audioDataUrl) audio.play().catch(() => {});
+
+        function drawFrame() {
+            frameCount++;
+            const t = frameCount / fps;
+
+            // Background Deep Gradient
+            const grad = ctx.createLinearGradient(0, 0, 720, 1280);
+            grad.addColorStop(0, '#020617');
+            grad.addColorStop(0.4, '#0f172a');
+            grad.addColorStop(1, '#3b0764');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 720, 1280);
+
+            // Animated glowing Grid lines
+            ctx.strokeStyle = 'rgba(236, 72, 153, 0.12)';
+            ctx.lineWidth = 1.5;
+            const offsetY = (frameCount * 1.5) % 60;
+            for (let x = 0; x < 720; x += 60) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 1280); ctx.stroke();
+            }
+            for (let y = offsetY; y < 1280; y += 60) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(720, y); ctx.stroke();
+            }
+
+            // Top AxonFlow Verified Badge Header
+            ctx.fillStyle = '#ec4899';
+            ctx.font = 'bold 30px sans-serif';
+            ctx.fillText('⚡ AXONFLOW AI', 50, 95);
+
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = 'bold 15px monospace';
+            ctx.fillText('AUTONOMOUS ENTERPRISE INFRASTRUCTURE', 50, 130);
+
+            // Animated Headline Text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 36px sans-serif';
+            
+            const words = promptText.split(' ');
+            let line = '';
+            let y = 230;
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = ctx.measureText(testLine);
+                if (metrics.width > 620 && n > 0) {
+                    ctx.fillText(line, 50, y);
+                    line = words[n] + ' ';
+                    y += 48;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, 50, y);
+
+            // Animated Equalizer Waveforms
+            const eqY = Math.min(y + 35, 480);
+            ctx.fillStyle = 'rgba(236, 72, 153, 0.15)';
+            ctx.fillRect(50, eqY, 620, 90);
+            ctx.strokeStyle = '#ec4899';
+            ctx.strokeRect(50, eqY, 620, 90);
+
+            for (let b = 0; b < 24; b++) {
+                const barHeight = Math.sin(t * 8 + b) * 30 + 35;
+                const barGrad = ctx.createLinearGradient(0, eqY + 80, 0, eqY + 80 - barHeight);
+                barGrad.addColorStop(0, '#a855f7');
+                barGrad.addColorStop(1, '#ec4899');
+                ctx.fillStyle = barGrad;
+                ctx.fillRect(75 + b * 24, eqY + 80 - barHeight, 16, barHeight);
+            }
+
+            // Terminal Code Blueprint
+            const termY = eqY + 120;
+            ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+            ctx.fillRect(50, termY, 620, 360);
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+            ctx.strokeRect(50, termY, 620, 360);
+
+            // Terminal dots
+            ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(75, termY + 25, 6, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = '#eab308'; ctx.beginPath(); ctx.arc(95, termY + 25, 6, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = '#22c55e'; ctx.beginPath(); ctx.arc(115, termY + 25, 6, 0, Math.PI*2); ctx.fill();
+
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = '15px monospace';
+            ctx.fillText('// Deterministic Sub-400ms Pipeline Active', 70, termY + 65);
+
+            ctx.fillStyle = '#a855f7';
+            ctx.fillText('const agent = await Axon.cluster.init({ mode: "prod" });', 70, termY + 105);
+
+            ctx.fillStyle = '#4ade80';
+            ctx.fillText('await agent.deployZeroDowntime({ rollbackOnDrift: true });', 70, termY + 145);
+
+            ctx.fillStyle = '#f472b6';
+            ctx.fillText(`p99_latency: "<380ms" | semantic_cache: "99.4%"`, 70, termY + 185);
+
+            ctx.fillStyle = '#e2e8f0';
+            const logLine = (frameCount % 60 < 30) ? '⚡ Streaming real-time neural vectors...' : '✓ Pipeline verified • Zero packet loss';
+            ctx.fillText(logLine, 70, termY + 230);
+
+            // Footer Call To Action
+            ctx.fillStyle = 'rgba(236, 72, 153, 0.25)';
+            ctx.fillRect(50, 1140, 620, 70);
+            ctx.strokeStyle = '#ec4899';
+            ctx.strokeRect(50, 1140, 620, 70);
+
+            ctx.fillStyle = '#f472b6';
+            ctx.font = 'bold 20px sans-serif';
+            ctx.fillText('🚀 Book 15-min Sprint at https://axonflow.in', 80, 1182);
+
+            if (frameCount < totalFrames) {
+                requestAnimationFrame(drawFrame);
+            } else {
+                mediaRecorder.stop();
+            }
+        }
+
+        requestAnimationFrame(drawFrame);
+    });
+}
+
 async function executeAiAgentCreation() {
     const input = document.getElementById('aiAgentPromptInput');
     const prompt = input ? input.value.trim() : '';
@@ -1513,7 +1685,7 @@ async function executeAiAgentCreation() {
     const btn = document.getElementById('btnExecuteAgent');
     if (btn) {
         btn.disabled = true;
-        btn.innerHTML = `<span>⏳ Agent Synthesizing...</span>`;
+        btn.innerHTML = `<span>⏳ Synthesizing Voice & Video...</span>`;
     }
 
     // High-converting human engineer narrative expansion
@@ -1525,18 +1697,27 @@ async function executeAiAgentCreation() {
         mediaTitle = `Viral Reel: ${prompt.slice(0, 30)}...`;
         generatedCaption = `Why are most enterprise AI deployments failing to deliver ROI?\n\nBecause they treat AI as a toy instead of deterministic infrastructure.\n\nHere is how AxonFlow solves this:\n🔹 Sub-400ms Production RAG with semantic vector caching\n🔹 Zero-downtime Kubernetes deployments with automated rollback\n🔹 Air-gapped compliance and HIPAA/SOC2 ready\n\nPrompt Context: ${prompt}\n\nSchedule a 15-min architectural scoping sprint with our lead engineers: https://axonflow.in/contact\n\n#AxonFlowAI #EnterpriseAI #Sub400msRAG #Kubernetes #AutonomousAgents #AIAgency #TechLeadership`;
         
-        // Video Reel Media Mode
+        // Generate ElevenLabs voice first
+        await generateElevenLabsVoice(generatedCaption, 'publisherAudioPlayer', 'publisherVoiceStatus', 'btnExecuteAgent');
+        const audioEl = document.getElementById('publisherAudioPlayer');
+        const voiceAudioSrc = audioEl ? audioEl.src : null;
+
+        if (btn) btn.innerHTML = `<span>🎬 Rendering 9:16 Video Reel...</span>`;
+
+        // Render dynamic animated video reel with audio
+        const dynamicVideoBlobUrl = await renderDynamicReelVideo(prompt, voiceAudioSrc);
+
         currentCustomMedia = {
-            url: '/axonflow_cinematic_reels_shorts.mp4',
-            name: 'axonflow_reel_video.mp4',
+            url: dynamicVideoBlobUrl,
+            name: 'axonflow_generated_reel.mp4',
             type: 'video',
-            size: '1.8 MB',
-            dataUrl: null,
+            size: '2.4 MB',
+            dataUrl: dynamicVideoBlobUrl,
             publicUrl: 'https://www.axonflow.in/axonflow_cinematic_reels_shorts.mp4'
         };
 
         if (previewArea) {
-            previewArea.innerHTML = `<video src="/axonflow_cinematic_reels_shorts.mp4" controls autoplay loop muted class="w-full h-full object-contain bg-black"></video>`;
+            previewArea.innerHTML = `<video src="${dynamicVideoBlobUrl}" controls autoplay loop class="w-full h-full object-contain bg-black"></video>`;
         }
     } else if (selectedCreationFormat === 'story') {
         mediaTitle = `Interactive Story: ${prompt.slice(0, 30)}...`;
@@ -1555,6 +1736,7 @@ async function executeAiAgentCreation() {
         if (previewArea) {
             previewArea.innerHTML = `<img src="${dynamicStory}" class="w-full h-full object-contain bg-black">`;
         }
+        await generateElevenLabsVoice(generatedCaption, 'publisherAudioPlayer', 'publisherVoiceStatus', 'btnExecuteAgent');
     } else if (selectedCreationFormat === 'post') {
         mediaTitle = `Feed Post: ${prompt.slice(0, 30)}...`;
         generatedCaption = `🚀 Engineering Update: ${prompt}\n\nAt AxonFlow, we build autonomous AI agent pipelines that replace 40+ hours of manual triage weekly with 99.9% deterministic reliability.\n\nExplore our case studies: https://axonflow.in/blog\n\n#EnterpriseAutomation #FullStackAI #AxonFlowAI #CloudNative`;
@@ -1572,6 +1754,7 @@ async function executeAiAgentCreation() {
         if (previewArea) {
             previewArea.innerHTML = `<img src="${dynamicImg}" class="w-full h-full object-contain bg-black">`;
         }
+        await generateElevenLabsVoice(generatedCaption, 'publisherAudioPlayer', 'publisherVoiceStatus', 'btnExecuteAgent');
     } else {
         mediaTitle = `Carousel Deck: ${prompt.slice(0, 30)}...`;
         generatedCaption = `Swipe through our 5-step playbook for ${prompt} ➡️\n\n1/5 The Problem: Vector drift & high latency\n2/5 The Fix: Semantic clustering in memory\n3/5 The Benchmarks: Sub-400ms retrieval\n4/5 The Rollout: 2-week agile sprint\n5/5 ROI: 74% reduction in operating costs\n\nBook your team's sprint at https://axonflow.in/contact\n\n#AIArchitecture #DevOps #EngineeringPlaybook #AxonFlow`;
@@ -1589,6 +1772,7 @@ async function executeAiAgentCreation() {
         if (previewArea) {
             previewArea.innerHTML = `<img src="${dynamicCarouselCover}" class="w-full h-full object-contain bg-black">`;
         }
+        await generateElevenLabsVoice(generatedCaption, 'publisherAudioPlayer', 'publisherVoiceStatus', 'btnExecuteAgent');
     }
 
     // Set caption in publisher
@@ -1597,9 +1781,6 @@ async function executeAiAgentCreation() {
 
     const assetLabel = document.getElementById('publisherAssetLabel');
     if (assetLabel) assetLabel.textContent = mediaTitle;
-
-    // Trigger ElevenLabs voiceover generation automatically
-    await generateElevenLabsVoice(generatedCaption, 'publisherAudioPlayer', 'publisherVoiceStatus', 'btnExecuteAgent');
 
     if (btn) {
         btn.disabled = false;
