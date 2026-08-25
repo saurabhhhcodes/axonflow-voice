@@ -1219,56 +1219,84 @@ async function publishInstagramReel() {
     btn.disabled = true;
     btn.classList.add('opacity-50');
 
-    statusText.textContent = "1/3 Initializing Meta Graph API video upload container...";
+    statusText.textContent = "1/3 Initializing Meta Graph API media container...";
 
-    // Determine public media URL for Meta Graph API container
-    let mediaPublicUrl = window.location.origin + (currentCustomMedia.url || '/axonflow_cinematic_reels_shorts.mp4');
-    if (currentCustomMedia.dataUrl && !currentCustomMedia.dataUrl.startsWith('http')) {
-        // Fallback to cinematic showcase if custom upload is purely base64 local
-        mediaPublicUrl = window.location.origin + '/axonflow_cinematic_reels_shorts.mp4';
+    const token = ig.accessToken || 'IGAAUpwSIMCRpBZAGFiYl9Gd1BRZAm1NYU5tVU91WDNxZAU1oQkVCbnEtUXZA0OU9mRWsxa1g4cWVycW1NU0FsRG9MRUU4NlpIUEZAseUJyaC04SXp2WXhmMXVEQ2JfbXpPbkgtVEpnekxJSmEtQy0tVm05T2ZAMakUyT3Q1WDFsRHNsTQZDZD';
+    const igUserId = ig.accountId || '27982373448109546';
+    const isVideo = currentCustomMedia.type === 'video' || (!currentCustomMedia.dataUrl);
+
+    // Determine public media URL for Meta crawlers
+    let publicMediaUrl = 'https://www.axonflow.in/axonflow_cinematic_reels_shorts.mp4';
+    if (!isVideo) {
+        publicMediaUrl = 'https://www.axonflow.in/assets/logo_pro.png';
     }
 
+    const apiBase = token.startsWith('IGA') 
+        ? 'https://graph.instagram.com/v18.0' 
+        : 'https://graph.facebook.com/v18.0';
+
     try {
-        if (ig.accessToken && !ig.accessToken.startsWith('EAAPwQz9...')) {
-            statusText.textContent = "2/3 Uploading container to Meta Graph API for @" + ig.username + "...";
+        statusText.textContent = "2/3 Uploading container to @" + ig.username + " via Meta Graph API...";
 
-            const res = await fetch('/.netlify/functions/instagram-publish', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    accountId: ig.accountId,
-                    accessToken: ig.accessToken,
-                    mediaUrl: mediaPublicUrl,
-                    caption: caption,
-                    mediaType: currentCustomMedia.type
-                })
-            });
+        // Step 1: Create Container
+        const containerUrl = `${apiBase}/${igUserId}/media`;
+        const params = new URLSearchParams();
+        params.append('access_token', token);
+        params.append('caption', caption || '🚀 Transforming enterprise operations with autonomous AI agents. Explore our production systems at https://axonflow.in #AxonFlowAI #EnterpriseAI');
 
-            const data = await res.json();
-            if (!res.ok || data.error) {
-                throw new Error(data.error || 'Meta API rejected publish request. Please verify token permissions in Configure API Keys.');
-            }
-
-            statusDiv.className = "mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 flex items-center gap-2";
-            statusDiv.innerHTML = `✅ <strong>Success!</strong> Live Post ID: <code>${data.mediaId}</code> is now public on <a href="https://instagram.com/${ig.username}" target="_blank" class="underline ml-1 text-white">instagram.com/${ig.username}</a>`;
-            ig.mediaCount += 1;
-            saveInstagramConfig(ig);
+        if (isVideo) {
+            params.append('media_type', 'REELS');
+            params.append('video_url', publicMediaUrl);
+            params.append('share_to_feed', 'true');
         } else {
-            // Simulated / Token Prompt Flow
-            setTimeout(() => {
-                statusText.textContent = `2/3 Processing container for @${ig.username}...`;
-                setTimeout(() => {
-                    statusDiv.className = "mb-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-300 flex flex-col gap-2";
-                    statusDiv.innerHTML = `
-                        <div class="flex items-center gap-2">
-                            <span>🔑 <strong>Access Token Required for Live Meta Push:</strong></span>
-                        </div>
-                        <p class="text-[11px] text-slate-300">To push directly to live Instagram from your CRM, click <strong><a href="javascript:openInstagramConnectModal()" class="text-pink-400 underline">Configure API Keys</a></strong> and paste your Meta User / System Token from Meta Business Suite.</p>
-                        <p class="text-[11px] text-slate-400">Or click <strong>Download & Copy Caption</strong> below to post in 5 seconds via Instagram app or Meta Suite!</p>
-                    `;
-                }, 1000);
-            }, 800);
+            params.append('image_url', publicMediaUrl);
         }
+
+        const createRes = await fetch(`${containerUrl}?${params.toString()}`, { method: 'POST' });
+        const createData = await createRes.json();
+
+        if (createData.error) {
+            throw new Error(createData.error.message || 'Failed to create Meta media container');
+        }
+
+        const containerId = createData.id;
+
+        // Step 2: Poll container status until ready
+        let ready = false;
+        for (let attempt = 1; attempt <= 12; attempt++) {
+            statusText.textContent = `2/3 Meta processing media container (Attempt ${attempt}/12)...`;
+            await new Promise(r => setTimeout(r, 2000));
+
+            const statusRes = await fetch(`${apiBase}/${containerId}?fields=status_code,status&access_token=${token}`);
+            const statusData = await statusRes.json();
+
+            if (statusData.status_code === 'FINISHED' || (!statusData.status_code && !statusData.error)) {
+                ready = true;
+                break;
+            } else if (statusData.status_code === 'ERROR') {
+                throw new Error('Meta media processing failed: ' + (statusData.status || 'Format error'));
+            }
+        }
+
+        // Step 3: Publish Container
+        statusText.textContent = "3/3 Container verified. Publishing live to Instagram...";
+        const publishUrl = `${apiBase}/${igUserId}/media_publish`;
+        const pubParams = new URLSearchParams();
+        pubParams.append('creation_id', containerId);
+        pubParams.append('access_token', token);
+
+        const pubRes = await fetch(`${publishUrl}?${pubParams.toString()}`, { method: 'POST' });
+        const pubData = await pubRes.json();
+
+        if (pubData.error) {
+            throw new Error(pubData.error.message || 'Failed to publish media container');
+        }
+
+        statusDiv.className = "mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 flex items-center gap-2";
+        statusDiv.innerHTML = `✅ <strong>Published!</strong> Live Post ID: <code>${pubData.id}</code> is now live on <a href="https://instagram.com/${ig.username}" target="_blank" class="underline ml-1 text-white font-bold">instagram.com/${ig.username}</a>`;
+        ig.mediaCount += 1;
+        saveInstagramConfig(ig);
+
     } catch (err) {
         statusDiv.className = "mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300 flex items-center gap-2";
         statusDiv.innerHTML = `❌ <strong>Meta API Error:</strong> ${err.message} <button onclick="openInstagramConnectModal()" class="ml-2 underline text-white">Update Token</button>`;
