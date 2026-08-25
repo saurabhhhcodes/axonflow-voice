@@ -957,6 +957,13 @@ function getInstagramConfig() {
     return DEFAULT_IG_CONFIG;
 }
 
+function saveInstagramConfig(config) {
+    if (config && config.username === 'axonflow.ai') {
+        config.username = 'axonflowai.in';
+    }
+    localStorage.setItem('axonflow_instagram_config', JSON.stringify(config));
+}
+
 // ---------- ELEVENLABS VOICE AI ENGINE ----------
 const DEFAULT_ELEVENLABS_CONFIG = {
     apiKey: 'sk_9e952ab06ef480bda1f9d7a50a7daa6d10f04bf70d772a78',
@@ -1356,19 +1363,24 @@ function renderSocial(container) {
             </button>
         </div>
 
-        <!-- TAB 1: REELS & VIDEO PUBLISHER -->
+        <!-- TAB 1: ALL-IN-ONE REELS & VIDEO STUDIO PUBLISHER -->
         ${activeSocialTab === 'reels' ? `
-            <!-- Website Pages 1-Click Reels Picker Banner -->
-            <div class="glass-card rounded-2xl p-5 mb-6 border border-slate-800 bg-slate-950/60">
-                <div class="flex items-center justify-between mb-3">
-                    <h4 class="text-xs font-bold text-white flex items-center gap-2">
-                        <span>🌐 Generate Reel/Post from Website Pages & Case Studies:</span>
-                    </h4>
-                    <span class="text-[10px] text-slate-400 font-mono">1-Click Auto Fill</span>
+            <!-- Website Pages 1-Click Studio Picker Banner -->
+            <div class="glass-card rounded-2xl p-4 sm:p-5 mb-6 border border-slate-800 bg-slate-950/60">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <div>
+                        <h4 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                            <span>🌐 All-in-One Publisher: 1-Click Page Reels & AI Voiceovers</span>
+                        </h4>
+                        <p class="text-[11px] text-slate-400">Select any website page or case study to auto-load animated showcase, storyboard, and human voiceover.</p>
+                    </div>
+                    <span class="text-[10px] text-pink-400 font-mono bg-pink-500/10 px-2 py-0.5 rounded border border-pink-500/20 w-fit">
+                        10 Pages Ready
+                    </span>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
                     ${AXONFLOW_PAGES_CATALOG.map(p => `
-                        <button type="button" onclick="selectPageForGeneration('${p.id}'); switchSocialTab('reels');" class="p-2.5 rounded-xl bg-slate-900/80 hover:bg-pink-500/15 border border-slate-800 hover:border-pink-500/30 text-left transition-all group">
+                        <button type="button" onclick="selectPageForGeneration('${p.id}'); switchSocialTab('reels');" class="p-2.5 rounded-xl bg-slate-900/90 hover:bg-pink-500/15 border border-slate-800 hover:border-pink-500/40 text-left transition-all group">
                             <span class="text-xs font-bold text-slate-200 group-hover:text-pink-300 block truncate">${p.title}</span>
                             <span class="text-[9px] text-slate-400 mt-0.5 block truncate">${p.category}</span>
                         </button>
@@ -1376,73 +1388,125 @@ function renderSocial(container) {
                 </div>
             </div>
 
-            <!-- Two Column Reels Layout -->
-            <div class="grid lg:grid-cols-2 gap-8 mb-8">
-                <!-- Left: Video Preview & Setup -->
-                <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+            <!-- Two Column All-in-One Studio Layout (100% Mobile Friendly) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+                <!-- Left: Live Animated Video & Media Viewport -->
+                <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex flex-col justify-between space-y-4">
                     <div>
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center gap-3">
                                 <div class="w-9 h-9 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 font-bold">🎬</div>
                                 <div>
-                                    <h3 class="text-base font-bold text-white">Instagram Reels Publisher</h3>
-                                    <p class="text-xs text-slate-400">Meta Graph API v18.0 &bull; Video & Graphic Publishing</p>
+                                    <h3 class="text-sm sm:text-base font-bold text-white">Live Animated Page & Reels Viewport</h3>
+                                    <p class="text-[11px] text-slate-400">Meta Graph API v18.0 &bull; 9:16 Vertical Video & Graphics</p>
                                 </div>
                             </div>
-                            <span class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-pink-500/15 text-pink-300 border border-pink-500/20">9:16 Vertical</span>
+                            <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-pink-500/15 text-pink-300 border border-pink-500/20">9:16 Reels</span>
                         </div>
 
-                        <!-- Video / Media Preview Container -->
-                        <div class="p-4 rounded-xl bg-black/60 border border-slate-800 mb-4">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-semibold text-slate-300">Selected Media Asset:</span>
+                        <!-- Live Device Media Preview Container -->
+                        <div class="p-3 sm:p-4 rounded-xl bg-black/70 border border-slate-800 mb-4">
+                            <div class="flex items-center justify-between mb-2.5">
+                                <span class="text-xs font-semibold text-slate-300">Live Asset Preview:</span>
                                 <div class="flex items-center gap-2">
-                                    <span id="publisherAssetLabel" class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded truncate max-w-[200px]">
+                                    <span id="publisherAssetLabel" class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded truncate max-w-[140px] sm:max-w-[220px]">
                                         ${currentCustomMedia.name}
                                     </span>
-                                    <button type="button" onclick="document.getElementById('publisherMediaInput').click()" class="text-[10px] px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/30 hover:bg-pink-500/30">
-                                        Change / Upload
+                                    <button type="button" onclick="document.getElementById('publisherMediaInput').click()" class="text-[10px] px-2 py-1 rounded bg-pink-500/20 text-pink-300 border border-pink-500/30 hover:bg-pink-500/30 font-semibold">
+                                        Upload Custom
                                     </button>
                                     <input type="file" id="publisherMediaInput" accept="video/mp4,video/quicktime,video/webm,image/png,image/jpeg,image/webp" class="hidden" onchange="handlePublisherMediaUpload(event)">
                                 </div>
                             </div>
-                            <div id="publisherMediaPreviewArea" class="aspect-[9/6] w-full bg-slate-950 rounded-lg overflow-hidden relative flex items-center justify-center border border-slate-800">
+                            <div id="publisherMediaPreviewArea" class="aspect-[9/10] sm:aspect-[9/8] w-full bg-slate-950 rounded-xl overflow-hidden relative flex items-center justify-center border border-slate-800">
                                 ${currentCustomMedia.dataUrl ? (
                                     currentCustomMedia.type === 'video' ? `
-                                        <video src="${currentCustomMedia.dataUrl}" controls class="w-full h-full object-contain bg-black"></video>
+                                        <video src="${currentCustomMedia.dataUrl}" controls autoplay loop muted class="w-full h-full object-contain bg-black"></video>
                                     ` : `
                                         <img src="${currentCustomMedia.dataUrl}" class="w-full h-full object-contain bg-black">
                                     `
-                                ) : `
-                                    <div class="text-center p-4">
-                                        <div class="text-3xl mb-2">🎥</div>
-                                        <p class="text-xs font-semibold text-white">AxonFlow Cinematic 9:16 Showcase</p>
-                                        <p class="text-[11px] text-slate-400 mt-1">1080x1920 &bull; Full Device Responsiveness Tour &bull; 26.4s</p>
-                                    </div>
-                                `}
+                                ) : (
+                                    currentCustomMedia.type === 'video' ? `
+                                        <video src="${currentCustomMedia.url || '/axonflow_cinematic_reels_shorts.mp4'}" controls autoplay loop muted class="w-full h-full object-contain bg-black"></video>
+                                    ` : `
+                                        <img src="${currentCustomMedia.url || '/assets/logo_pro.png'}" class="w-full h-full object-contain bg-black">
+                                    `
+                                )}
                             </div>
                         </div>
 
-                        <!-- Caption & Hashtags -->
-                        <div class="space-y-3 mb-4">
+                        <!-- ElevenLabs Voice Studio Integration -->
+                        <div class="p-3.5 rounded-xl bg-purple-950/30 border border-purple-500/30 space-y-2.5 mb-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-base">🎙️</span>
+                                    <div>
+                                        <h5 class="text-xs font-bold text-white">ElevenLabs AI Voice Studio</h5>
+                                        <p class="text-[10px] text-purple-300">Synchronized Human Voiceover for Reels</p>
+                                    </div>
+                                </div>
+                                <select id="publisherVoiceSelect" class="input-field rounded-lg px-2 py-1 text-[11px] bg-slate-900 border-slate-700" onchange="const c = getElevenLabsConfig(); c.voiceId = this.value; saveElevenLabsConfig(c);">
+                                    <option value="pNInz6obpgDQGcFmaJgB">🎙️ Adam (Founder Voice)</option>
+                                    <option value="21m00Tcm4TlvDq8ikWAM">🎙️ Rachel (Executive)</option>
+                                    <option value="ErXwobaYiN019PkySvjV">🎙️ Antoni (High Energy)</option>
+                                    <option value="TxGEqnHWrfWFTfGW9XjX">🎙️ Josh (Narrator)</option>
+                                    <option value="EXAVITQu4vr4xnSDxMaL">🎙️ Bella (Engaging)</option>
+                                </select>
+                            </div>
+                            <div id="publisherVoiceStatus" class="hidden text-xs"></div>
+                            <audio id="publisherAudioPlayer" controls class="hidden w-full rounded-lg bg-black/60"></audio>
+                            <button type="button" id="btnPublisherVoice" onclick="generateElevenLabsVoice(document.getElementById('reelCaption').value, 'publisherAudioPlayer', 'publisherVoiceStatus', 'btnPublisherVoice')" class="w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-md flex items-center justify-center gap-2 transition-all">
+                                <span>🎙️ Generate ElevenLabs Human Voiceover</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Storyboard, Caption & Publishing Controls -->
+                <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex flex-col justify-between space-y-4">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1">Reel Caption & Description</label>
-                                <textarea id="reelCaption" rows="4" class="input-field w-full rounded-xl p-3 text-xs leading-relaxed" placeholder="Enter caption...">🚀 Transforming enterprise operations with autonomous AI agents & sub-400ms RAG pipelines. Fully responsive, scalable, and production-ready.
+                                <h4 class="text-sm font-bold text-white">Reel Caption, Storyboard & Direct Publish</h4>
+                                <p class="text-[11px] text-slate-400">Auto-formatted for Meta Graph API @${ig.username}</p>
+                            </div>
+                            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">Meta Graph v18.0</span>
+                        </div>
+
+                        <!-- Caption & Description Input -->
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Reel Caption & Description</label>
+                            <textarea id="reelCaption" rows="6" class="input-field w-full rounded-xl p-3 text-xs leading-relaxed font-sans" placeholder="Enter reel caption...">🚀 Transforming enterprise operations with autonomous AI agents & sub-400ms RAG pipelines. Fully responsive, scalable, and production-ready.
 
 Explore our systems: https://axonflow.in
 
 #AxonFlowAI #EnterpriseAI #AutonomousAgents #AIAgency #TechInnovation #AIAutomation #FullStackAI</textarea>
+                        </div>
+
+                        <!-- Quick Live Metrics Banner -->
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                <span class="text-[10px] text-slate-400 block">Total Reach</span>
+                                <p class="text-base font-bold text-white">84.6K</p>
+                                <span class="text-[9px] text-pink-400">&uarr; +28.9% engagement</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                <span class="text-[10px] text-slate-400 block">Published Posts</span>
+                                <p class="text-base font-bold text-white">${ig.mediaCount}</p>
+                                <span class="text-[9px] text-emerald-400">Live Active</span>
                             </div>
                         </div>
                     </div>
 
-                    <div id="reelsPublishStatus" class="hidden mb-4 p-3 rounded-xl bg-pink-500/10 border border-pink-500/30 text-xs text-pink-300 flex items-center gap-2">
+                    <!-- Publishing Status Notification -->
+                    <div id="reelsPublishStatus" class="hidden my-2 p-3 rounded-xl bg-pink-500/10 border border-pink-500/30 text-xs text-pink-300 flex items-center gap-2">
                         <span class="animate-spin inline-block">⏳</span>
-                        <span id="reelsStatusText">Publishing video container to Instagram Graph API...</span>
+                        <span id="reelsStatusText">Publishing media container to Instagram Graph API...</span>
                     </div>
 
-                    <div class="space-y-2">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Action Buttons (Mobile-Optimized Touch Targets) -->
+                    <div class="space-y-2 pt-3 border-t border-slate-800">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                             <button onclick="publishInstagramReel()" id="btnPublishReel" class="w-full py-3 rounded-xl text-xs font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 hover:from-pink-500 hover:to-indigo-500 text-white shadow-lg flex items-center justify-center gap-2 transition-all">
                                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
                                 <span>Publish Now via Meta API</span>
@@ -1454,38 +1518,6 @@ Explore our systems: https://axonflow.in
                         <button onclick="instantDownloadAndCopy()" class="w-full py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center justify-center gap-2 transition-all">
                             <span id="btnInstantText">Download Video & Copy Caption</span>
                         </button>
-                    </div>
-                </div>
-
-                <!-- Right: Platform Overview & Metrics -->
-                <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
-                    <div>
-                        <h4 class="text-sm font-bold text-white mb-3">Live Meta Platform Metrics</h4>
-                        <div class="grid grid-cols-2 gap-3 mb-4">
-                            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
-                                <span class="text-[10px] text-slate-400">Total Reach</span>
-                                <p class="text-lg font-bold text-white mt-0.5">84.6K</p>
-                                <span class="text-[10px] text-pink-400">&uarr; +28.9% engagement</span>
-                            </div>
-                            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
-                                <span class="text-[10px] text-slate-400">Published Posts</span>
-                                <p class="text-lg font-bold text-white mt-0.5">${ig.mediaCount}</p>
-                                <span class="text-[10px] text-emerald-400">Active Live</span>
-                            </div>
-                        </div>
-
-                        <h4 class="text-sm font-bold text-white mb-2">Live Post Preview on @${ig.username}</h4>
-                        <div class="rounded-xl p-4 bg-black/80 border border-slate-800 space-y-2">
-                            <div class="flex items-center gap-2">
-                                <img src="${ig.profilePic}" class="w-6 h-6 rounded-full">
-                                <span class="text-xs font-bold text-white">axonflowai.in</span>
-                                <span class="text-[10px] text-slate-500 font-mono">&bull; Just now</span>
-                            </div>
-                            <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                                🚀 Transforming enterprise operations with autonomous AI agents & sub-400ms RAG pipelines.
-                            </p>
-                            <span class="text-[11px] text-pink-400 font-mono">#AxonFlowAI #EnterpriseAI #AutonomousAgents</span>
-                        </div>
                     </div>
                 </div>
             </div>
