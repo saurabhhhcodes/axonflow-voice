@@ -666,4 +666,77 @@ img { max-width: 100%; display: block; }
   }
 }
 
+/* ==========================================================================
+   Framer Motion Style UI/UX & Spring Motion Tokens
+   ========================================================================== */
+
+.framer-spotlight-card {
+  position: relative;
+  overflow: hidden;
+  --mouse-x: -1000px;
+  --mouse-y: -1000px;
+}
+
+.framer-spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(84, 87, 255, 0.12), transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+}
+
+.framer-reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.framer-reveal.framer-in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Kinetic Floating Badges */
+.kinetic-float {
+  animation: kineticFloat 6s ease-in-out infinite;
+}
+
+@keyframes kineticFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(0.5deg); }
+}
+
+/* Glowing Border Beam Animation */
+.border-beam {
+  position: relative;
+}
+
+.border-beam::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(90deg, transparent, #5457ff, #ec4899, #35d07f, transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  background-size: 200% 100%;
+  animation: borderBeam 4s linear infinite;
+}
+
+@keyframes borderBeam {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+
 
