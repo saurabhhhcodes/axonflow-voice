@@ -634,7 +634,7 @@ function sendOmniToInstagramPublisher() {
 const DEFAULT_IG_CONFIG = {
     connected: true,
     accountType: 'BUSINESS',
-    username: 'axonflow.ai',
+    username: 'axonflowai.in',
     name: 'AxonFlow AI',
     accountId: '17841405829103948',
     profilePic: '/assets/logo_pro.png',
@@ -1031,14 +1031,14 @@ function publishInstagramReel() {
     setTimeout(() => {
         statusText.textContent = "2/3 Uploading 'axonflow_cinematic_reels_shorts.mp4' (1080x1920 @ 60fps)...";
         setTimeout(() => {
-            statusText.textContent = "3/3 Video container processed. Publishing Reel to @axonflow.ai...";
+            statusText.textContent = "3/3 Video container processed. Publishing Reel to @axonflowai.in...";
             setTimeout(() => {
                 const ig = getInstagramConfig();
                 ig.mediaCount += 1;
                 saveInstagramConfig(ig);
 
                 statusDiv.className = "mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 flex items-center gap-2";
-                statusDiv.innerHTML = "✅ <strong>Success!</strong> Reel is live on Instagram: <a href='https://instagram.com/axonflow.ai' target='_blank' class='underline ml-1 text-white'>instagram.com/axonflow.ai</a>";
+                statusDiv.innerHTML = "✅ <strong>Success!</strong> Reel is live on Instagram: <a href='https://instagram.com/axonflowai.in' target='_blank' class='underline ml-1 text-white'>instagram.com/axonflowai.in</a>";
                 btn.disabled = false;
                 btn.classList.remove('opacity-50');
             }, 1200);
