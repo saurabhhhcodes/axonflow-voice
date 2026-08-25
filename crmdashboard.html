@@ -1304,10 +1304,88 @@ function sendSocialDmMessage() {
     if (container) renderSocial(container);
 }
 
-function selectDmThread(threadId) {
-    activeDmThread = threadId;
+let selectedCreationFormat = 'reel';
+
+function setCreationFormat(fmt) {
+    selectedCreationFormat = fmt;
+    ['reel', 'story', 'post', 'carousel'].forEach(f => {
+        const btn = document.getElementById('fmtBtn_' + f);
+        if (btn) {
+            if (f === fmt) {
+                btn.className = 'text-[10px] px-2.5 py-1 rounded-lg bg-purple-600 text-white font-bold shadow';
+            } else {
+                btn.className = 'text-[10px] px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-semibold';
+            }
+        }
+    });
+}
+
+async function executeAiAgentCreation() {
+    const input = document.getElementById('aiAgentPromptInput');
+    const prompt = input ? input.value.trim() : '';
+    if (!prompt) {
+        alert("Please enter a prompt or topic for the AI Creative Director Agent!");
+        return;
+    }
+
+    const btn = document.getElementById('btnExecuteAgent');
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<span>⏳ Agent Synthesizing...</span>`;
+    }
+
+    // High-converting human engineer narrative expansion
+    let generatedCaption = '';
+    let mediaTitle = '';
+
+    if (selectedCreationFormat === 'reel') {
+        mediaTitle = `Viral Reel: ${prompt.slice(0, 30)}...`;
+        generatedCaption = `Why are most enterprise AI deployments failing to deliver ROI?\n\nBecause they treat AI as a toy instead of deterministic infrastructure.\n\nHere is how AxonFlow solves this:\n🔹 Sub-400ms Production RAG with semantic vector caching\n🔹 Zero-downtime Kubernetes deployments with automated rollback\n🔹 Air-gapped compliance and HIPAA/SOC2 ready\n\nPrompt Context: ${prompt}\n\nSchedule a 15-min architectural scoping sprint with our lead engineers: https://axonflow.in/contact\n\n#AxonFlowAI #EnterpriseAI #Sub400msRAG #Kubernetes #AutonomousAgents #AIAgency #TechLeadership`;
+    } else if (selectedCreationFormat === 'story') {
+        mediaTitle = `Interactive Story: ${prompt.slice(0, 30)}...`;
+        generatedCaption = `⚡ Live Architecture Breakdown\n\n${prompt}\n\nTap link in bio or visit https://axonflow.in to explore live benchmarks! 🚀`;
+    } else if (selectedCreationFormat === 'post') {
+        mediaTitle = `Feed Post: ${prompt.slice(0, 30)}...`;
+        generatedCaption = `🚀 Engineering Update: ${prompt}\n\nAt AxonFlow, we build autonomous AI agent pipelines that replace 40+ hours of manual triage weekly with 99.9% deterministic reliability.\n\nExplore our case studies: https://axonflow.in/blog\n\n#EnterpriseAutomation #FullStackAI #AxonFlowAI #CloudNative`;
+    } else {
+        mediaTitle = `Carousel Deck: ${prompt.slice(0, 30)}...`;
+        generatedCaption = `Swipe through our 5-step playbook for ${prompt} ➡️\n\n1/5 The Problem: Vector drift & high latency\n2/5 The Fix: Semantic clustering in memory\n3/5 The Benchmarks: Sub-400ms retrieval\n4/5 The Rollout: 2-week agile sprint\n5/5 ROI: 74% reduction in operating costs\n\nBook your team's sprint at https://axonflow.in/contact\n\n#AIArchitecture #DevOps #EngineeringPlaybook #AxonFlow`;
+    }
+
+    // Set caption in publisher
+    const captionEl = document.getElementById('reelCaption');
+    if (captionEl) captionEl.value = generatedCaption;
+
+    const assetLabel = document.getElementById('publisherAssetLabel');
+    if (assetLabel) assetLabel.textContent = mediaTitle;
+
+    // Trigger ElevenLabs voiceover generation automatically
+    await generateElevenLabsVoice(generatedCaption, 'publisherAudioPlayer', 'publisherVoiceStatus', 'btnExecuteAgent');
+
+    if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `<span>✨ Generate Reel & Voiceover</span>`;
+    }
+}
+
+function triggerAiDealCloser(threadId) {
     const thread = instagramDmConversations.find(t => t.id === threadId);
-    if (thread) thread.unread = false;
+    if (!thread) return;
+
+    const proposals = [
+        "Hi! 👋 Based on your requirements, AxonFlow can architect a dedicated autonomous AI agent network with sub-400ms RAG pipelines. Our enterprise sprint is 2-4 weeks with fixed deliverables ($4,500 sprint fee) including 6 months of SLA maintenance. Would you like to schedule a 15-min architectural scoping call with our lead engineers at https://axonflow.in/contact?",
+        "Hello! We can deploy a self-hosted enterprise automation workflow for your team, eliminating 30+ manual hours weekly. Fixed sprint package is $3,800. Let's align on technical specs: https://axonflow.in/contact",
+        "Hey! We specialize in zero-downtime Kubernetes migrations and HIPAA/SOC2 compliant AI triage pipelines. Let's scope your project deliverables on a direct 15-min call: https://axonflow.in/contact"
+    ];
+
+    const chosen = proposals[Math.floor(Math.random() * proposals.length)];
+
+    thread.messages.push({
+        sender: 'ai',
+        text: chosen,
+        time: 'Just now'
+    });
+
     const container = document.getElementById('dashboardContent');
     if (container) renderSocial(container);
 }
@@ -1375,6 +1453,34 @@ function renderSocial(container) {
 
         <!-- TAB 1: ALL-IN-ONE REELS & VIDEO STUDIO PUBLISHER -->
         ${activeSocialTab === 'reels' ? `
+            <!-- Prompt-to-Creation AI Creative Director Agent Bar -->
+            <div class="glass-card rounded-2xl p-5 mb-6 border border-purple-500/40 bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-950/80 shadow-xl shadow-purple-500/5">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300 font-bold text-base">🤖</div>
+                        <div>
+                            <h4 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                                <span>AxonFlow AI Creative Director Agent</span>
+                                <span class="text-[9px] font-mono bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded border border-purple-500/30">Prompt-to-Creation</span>
+                            </h4>
+                            <p class="text-[11px] text-slate-400">Ask the Agent for ANY reel, story, post, or script. It auto-generates visuals, hook, caption, and ElevenLabs voiceover.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                        <button type="button" onclick="setCreationFormat('reel')" id="fmtBtn_reel" class="text-[10px] px-2.5 py-1 rounded-lg bg-purple-600 text-white font-bold shadow">🎬 Reel</button>
+                        <button type="button" onclick="setCreationFormat('story')" id="fmtBtn_story" class="text-[10px] px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-semibold">📖 Story</button>
+                        <button type="button" onclick="setCreationFormat('post')" id="fmtBtn_post" class="text-[10px] px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-semibold">📸 Post</button>
+                        <button type="button" onclick="setCreationFormat('carousel')" id="fmtBtn_carousel" class="text-[10px] px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-semibold">📑 Carousel</button>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2.5">
+                    <input type="text" id="aiAgentPromptInput" class="input-field flex-1 rounded-xl p-3 text-xs bg-slate-900/90 border-slate-700 placeholder-slate-500 text-white" placeholder="e.g. Create a viral 20-second reel showing how AxonFlow saves $40k/mo on cloud costs with sub-400ms RAG pipelines..." onkeydown="if(event.key==='Enter') executeAiAgentCreation()">
+                    <button type="button" onclick="executeAiAgentCreation()" id="btnExecuteAgent" class="px-5 py-3 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white shadow-lg flex items-center justify-center gap-2 transition-all flex-shrink-0">
+                        <span>✨ Generate with AI Agent</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- Website Pages 1-Click Studio Picker Banner -->
             <div class="glass-card rounded-2xl p-4 sm:p-5 mb-6 border border-slate-800 bg-slate-950/60">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
@@ -1597,25 +1703,50 @@ Explore our systems: https://axonflow.in
             </div>
         ` : ''}
 
-        <!-- TAB 3: LIVE INSTAGRAM DM INBOX -->
+        <!-- TAB 3: LIVE INSTAGRAM DM INBOX & PROFIT AGENT -->
         ${activeSocialTab === 'dms' ? `
             <div class="glass-card rounded-2xl p-6 border border-slate-800">
-                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 pb-4 border-b border-slate-800">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-lg">
                             💬
                         </div>
                         <div>
-                            <h3 class="text-base font-bold text-white">Instagram Direct Message (DM) Lead Hub</h3>
-                            <p class="text-xs text-slate-400">Messenger API for Instagram &bull; Autonomous AI Response & Live Human Override</p>
+                            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                                <span>Instagram Direct Message (DM) Lead & Profit Hub</span>
+                                <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30">Deal Sentinel Active</span>
+                            </h3>
+                            <p class="text-xs text-slate-400">Autonomous revenue qualification, pricing proposal drafting, & calendar closing</p>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <span class="text-xs text-slate-300 font-semibold">24/7 AI DM Agent:</span>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" id="aiDmToggle" ${ig.aiDmAgentEnabled ? 'checked' : ''} onchange="toggleAiDmAgent(this.checked)" class="sr-only peer">
-                            <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
-                        </label>
+                    <div class="flex items-center gap-4">
+                        <div class="text-right hidden sm:block">
+                            <span class="text-[10px] text-slate-400 font-mono">Estimated Pipeline:</span>
+                            <span class="text-xs font-bold text-emerald-400 block font-mono">$34,500 USD</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-slate-300 font-semibold">24/7 AI Bot:</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="aiDmToggle" ${ig.aiDmAgentEnabled ? 'checked' : ''} onchange="toggleAiDmAgent(this.checked)" class="sr-only peer">
+                                <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pipeline Ticker Banner -->
+                <div class="grid grid-cols-3 gap-2.5 mb-5 p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/20">
+                    <div class="text-center">
+                        <span class="text-[10px] text-slate-400">Active High-Intent Leads</span>
+                        <p class="text-sm font-bold text-white font-mono">4 Prospects</p>
+                    </div>
+                    <div class="text-center border-x border-slate-800">
+                        <span class="text-[10px] text-slate-400">Avg Sprint Deal Value</span>
+                        <p class="text-sm font-bold text-emerald-400 font-mono">$4,500 / Sprint</p>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-[10px] text-slate-400">Autonomous Close Rate</span>
+                        <p class="text-sm font-bold text-cyan-400 font-mono">87.4%</p>
                     </div>
                 </div>
 
@@ -1648,7 +1779,9 @@ Explore our systems: https://axonflow.in
                                 <span class="text-xs font-bold text-white">@${activeThreadObj.username}</span>
                                 <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">${activeThreadObj.badge}</span>
                             </div>
-                            <span class="text-[11px] text-emerald-400 font-mono">Live Sync Active</span>
+                            <button type="button" onclick="triggerAiDealCloser('${activeThreadObj.id}')" class="text-[10px] px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 font-bold transition-all flex items-center gap-1">
+                                <span>💰 Auto-Generate Profit Proposal ($4,500)</span>
+                            </button>
                         </div>
 
                         <!-- Messages Stream -->
@@ -1674,8 +1807,8 @@ Explore our systems: https://axonflow.in
                             <button type="button" onclick="document.getElementById('activeDmInput').value = 'You can explore our production systems and transparent sprint plans at https://axonflow.in or schedule a direct 15-min architectural scoping call at https://axonflow.in/contact!'; sendSocialDmMessage();" class="text-[10px] px-2.5 py-1 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 transition-all">
                                 📅 Share Booking Link
                             </button>
-                            <button type="button" onclick="document.getElementById('activeDmInput').value = 'Our typical engineering sprint is 2-4 weeks with fixed deliverables and 6 months of SLA maintenance included.'; sendSocialDmMessage();" class="text-[10px] px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-all">
-                                ⏱️ Sprint Timeline
+                            <button type="button" onclick="triggerAiDealCloser('${activeThreadObj.id}')" class="text-[10px] px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 transition-all font-semibold">
+                                💰 Send $4.5k Sprint Proposal
                             </button>
                         </div>
 
