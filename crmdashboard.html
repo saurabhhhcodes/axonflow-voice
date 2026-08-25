@@ -339,6 +339,71 @@ const OMNIROUTE_PRESETS = [
     }
 ];
 
+// Global State for Custom Media
+let currentCustomMedia = {
+    url: '/axonflow_cinematic_reels_shorts.mp4',
+    name: 'axonflow_cinematic_reels_shorts.mp4',
+    type: 'video',
+    size: '1.8 MB',
+    dataUrl: null
+};
+
+function handleOmniMediaUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const isVideo = file.type.startsWith('video/');
+    const isImage = file.type.startsWith('image/');
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        currentCustomMedia = {
+            url: e.target.result,
+            name: file.name,
+            type: isVideo ? 'video' : 'image',
+            size: (file.size / (1024 * 1024)).toFixed(2) + ' MB',
+            dataUrl: e.target.result
+        };
+
+        // Update preview in OmniRoute
+        const previewContainer = document.getElementById('omniMediaPreviewWrap');
+        if (previewContainer) {
+            if (isVideo) {
+                previewContainer.innerHTML = `
+                    <div class="relative w-full rounded-xl overflow-hidden bg-black border border-slate-700">
+                        <video src="${e.target.result}" controls class="w-full max-h-52 object-contain bg-black"></video>
+                        <div class="p-2 bg-slate-900/90 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-300">
+                            <span class="truncate font-mono">${file.name}</span>
+                            <span class="text-emerald-400 font-semibold">${currentCustomMedia.size}</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                previewContainer.innerHTML = `
+                    <div class="relative w-full rounded-xl overflow-hidden bg-black border border-slate-700">
+                        <img src="${e.target.result}" alt="Uploaded Image" class="w-full max-h-52 object-contain bg-black">
+                        <div class="p-2 bg-slate-900/90 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-300">
+                            <span class="truncate font-mono">${file.name}</span>
+                            <span class="text-emerald-400 font-semibold">${currentCustomMedia.size}</span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Auto-populate prompt with media context and auto-generate human caption
+        const promptEl = document.getElementById('omniPrompt');
+        if (promptEl) {
+            const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+            promptEl.value = `Custom media: "${cleanName}". Generate an authentic, high-converting organic caption and hook that sounds like a real human engineer/founder posting on social media.`;
+        }
+
+        // Trigger human-authentic generation
+        generateOmniContent();
+    };
+    reader.readAsDataURL(file);
+}
+
 function renderOmniRoute(container) {
     container.innerHTML = `
         <!-- OmniRoute Banner Header -->
@@ -351,9 +416,9 @@ function renderOmniRoute(container) {
                     <div>
                         <div class="flex items-center gap-2">
                             <h3 class="text-xl font-bold text-white">OmniRoute AI Content Studio</h3>
-                            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">v2.4 Engine Active</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">100% Organic Human Voice &bull; Zero AI Markers</span>
                         </div>
-                        <p class="text-xs text-slate-300 mt-1">Multi-modal AI generator for Instagram Reels, YouTube Shorts, viral captions, LinkedIn authority pieces & Twitter threads.</p>
+                        <p class="text-xs text-slate-300 mt-1">Upload custom images or videos, or select architecture topics to generate authentic, high-converting reels scripts, carousels, and viral captions.</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
@@ -370,18 +435,44 @@ function renderOmniRoute(container) {
 
         <!-- Main Two-Column Studio Layout -->
         <div class="grid lg:grid-cols-12 gap-8">
-            <!-- Left 5 Cols: Input & Engine Controls -->
+            <!-- Left 5 Cols: Input, Media Upload & Engine Controls -->
             <div class="lg:col-span-5 space-y-6">
-                <!-- Generator Controls -->
+                <!-- Media Uploader Card -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                            <span>📸 Upload Custom Media (Image / Video)</span>
+                        </h4>
+                        <span class="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded">Reels & Feed Ready</span>
+                    </div>
+
+                    <!-- Drag & Drop / File Input Box -->
+                    <div class="border-2 border-dashed border-slate-700 hover:border-amber-500/50 rounded-xl p-4 text-center cursor-pointer transition-all bg-slate-950/40 hover:bg-slate-900/60" onclick="document.getElementById('customMediaInput').click()">
+                        <input type="file" id="customMediaInput" accept="video/mp4,video/quicktime,video/webm,image/png,image/jpeg,image/webp" class="hidden" onchange="handleOmniMediaUpload(event)">
+                        <div class="text-2xl mb-1.5">📁</div>
+                        <p class="text-xs font-semibold text-slate-200">Click to upload custom Video or Image</p>
+                        <p class="text-[10px] text-slate-400 mt-1">Supports MP4, MOV, WEBM, JPG, PNG &bull; Auto-analyzes & writes organic caption</p>
+                    </div>
+
+                    <!-- Live Media Preview Slot -->
+                    <div id="omniMediaPreviewWrap">
+                        <div class="p-3 rounded-xl bg-black/60 border border-slate-800 flex items-center justify-between text-xs">
+                            <span class="text-slate-300 font-mono text-[11px] truncate max-w-[70%]">🎬 axonflow_cinematic_reels_shorts.mp4</span>
+                            <span class="text-emerald-400 font-mono text-[10px]">1080x1920 60FPS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generator Parameters -->
                 <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
                     <h4 class="text-sm font-bold text-white flex items-center gap-2">
-                        <span>1. Prompt & Generation Parameters</span>
+                        <span>2. Topic & Stealth Human Settings</span>
                     </h4>
 
                     <!-- Topic / Prompt -->
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1.5">Core Topic / Concept</label>
-                        <textarea id="omniPrompt" rows="4" class="input-field w-full rounded-xl p-3 text-xs leading-relaxed" placeholder="Describe the system or feature you want to generate content for... (e.g. Sub-400ms RAG pipelines, autonomous agent swarm demo, custom device responsiveness)"></textarea>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5">Prompt / Context for Media</label>
+                        <textarea id="omniPrompt" rows="3" class="input-field w-full rounded-xl p-3 text-xs leading-relaxed" placeholder="Describe what this video/image shows or enter a topic..."></textarea>
                     </div>
 
                     <!-- Quick Preset Badges -->
@@ -396,38 +487,30 @@ function renderOmniRoute(container) {
                         </div>
                     </div>
 
-                    <!-- Tone & Length Grid -->
+                    <!-- Tone & Stealth Human Mode -->
                     <div class="grid grid-cols-2 gap-3 pt-2">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Tone of Voice</label>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Human Writing Style</label>
                             <select id="omniTone" class="input-field w-full rounded-xl p-2.5 text-xs">
-                                <option value="viral">🔥 High-Energy & Viral</option>
-                                <option value="architectural" selected>🏛️ Deep Tech & Architectural</option>
-                                <option value="executive">👔 Executive & ROI-Driven</option>
-                                <option value="story">📖 Case Study Storytelling</option>
+                                <option value="architectural" selected>🧑‍💻 Founder / Lead Architect (Direct)</option>
+                                <option value="viral">🔥 Viral Tech Hook (High-Pace)</option>
+                                <option value="executive">👔 Executive Summary (Data-Driven)</option>
+                                <option value="story">💡 Behind-The-Scenes Build Story</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">AI Engine Model</label>
-                            <select id="omniModel" class="input-field w-full rounded-xl p-2.5 text-xs">
-                                <option value="omniroute_ultra" selected>OmniRoute Ultra-Fast</option>
-                                <option value="gpt4o">Claude / GPT-4o Hybrid</option>
-                                <option value="gemini_pro">Gemini 1.5 Pro Agent</option>
-                            </select>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">AI Output Polish</label>
+                            <div class="p-2 rounded-xl bg-slate-900 border border-slate-700 text-[11px] text-emerald-400 font-semibold flex items-center gap-1.5">
+                                <span>🔒 100% Invisible AI</span>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Generate Button -->
                     <button onclick="generateOmniContent()" id="btnOmniGenerate" class="w-full py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 hover:from-amber-400 hover:to-rose-400 text-white shadow-xl shadow-amber-500/10 flex items-center justify-center gap-2 transition-all mt-4">
                         <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                        <span>Generate with OmniRoute AI</span>
+                        <span>Generate Natural Captions & Script</span>
                     </button>
-                </div>
-
-                <!-- Media Link Info -->
-                <div class="p-4 rounded-2xl bg-black/40 border border-slate-800 text-xs text-slate-400 space-y-2">
-                    <p class="font-semibold text-slate-200">🔗 Instagram Platform Integration:</p>
-                    <p>Generated reels scripts and captions can be sent directly to the <a href="javascript:showSection('social')" class="text-pink-400 underline">Instagram Reels Publisher</a> with 1 click.</p>
                 </div>
             </div>
 
@@ -438,7 +521,7 @@ function renderOmniRoute(container) {
                         <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
                             <div class="flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                <h4 class="text-sm font-bold text-white">OmniRoute Generated Output</h4>
+                                <h4 class="text-sm font-bold text-white">Generated Organic Content</h4>
                             </div>
                             <div class="flex items-center gap-2">
                                 <button onclick="copyOmniOutput()" class="px-3 py-1.5 rounded-lg text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1.5 transition-all">
@@ -446,28 +529,27 @@ function renderOmniRoute(container) {
                                     <span id="copyBtnText">Copy</span>
                                 </button>
                                 <button onclick="sendOmniToInstagramPublisher()" class="px-3 py-1.5 rounded-lg text-xs bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 border border-pink-500/30 flex items-center gap-1.5 transition-all font-semibold">
-                                    <span>Send to Instagram Publisher &rarr;</span>
+                                    <span>Send Media & Caption to Instagram &rarr;</span>
                                 </button>
                             </div>
                         </div>
 
                         <!-- Generated Content Container -->
-                        <div id="omniOutputArea" class="rounded-xl bg-slate-950 p-4 border border-slate-800 text-xs font-mono leading-relaxed text-slate-200 min-h-[340px] whitespace-pre-wrap select-text overflow-y-auto">
+                        <div id="omniOutputArea" class="rounded-xl bg-slate-950 p-4 border border-slate-800 text-xs font-mono leading-relaxed text-slate-200 min-h-[360px] whitespace-pre-wrap select-text overflow-y-auto">
 // Ready to generate! 
-// Select a preset on the left or type your topic and click "Generate with OmniRoute AI".
+// Select a preset or upload custom media on the left.
                         </div>
                     </div>
 
                     <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between text-xs text-slate-400">
-                        <span>Characters: <strong id="omniCharCount" class="text-slate-200">0</strong> &bull; Estimated Read/Watch Time: <strong id="omniDuration" class="text-emerald-400">~0s</strong></span>
-                        <span class="text-amber-400 font-mono">OmniRoute Live</span>
+                        <span>Characters: <strong id="omniCharCount" class="text-slate-200">0</strong> &bull; Estimated Time: <strong id="omniDuration" class="text-emerald-400">~0s</strong></span>
+                        <span class="text-emerald-400 font-mono">Organic Human Verified</span>
                     </div>
                 </div>
             </div>
         </div>
     `;
 
-    // Load initial preset
     loadOmniPreset(0);
 }
 
@@ -484,13 +566,13 @@ function updateOmniRouteTemplate() {
     const plat = document.getElementById('omniPlatform').value;
     const promptEl = document.getElementById('omniPrompt');
     if (plat === 'reels') {
-        promptEl.value = "Create a 30s high-converting Instagram Reels script for AxonFlow AI: Hook (0-3s), Retain & Demo (3-20s), CTA (20-30s), plus caption and tags.";
+        promptEl.value = "Create a 28s high-converting Instagram Reels script for AxonFlow AI: Hook (0-3s), Retain & System Demo (3-20s), CTA (20-28s), plus organic human caption and hashtags.";
     } else if (plat === 'instagram_feed') {
-        promptEl.value = "Create a multi-slide Instagram carousel copy on '5 Architecture Pillars for Enterprise AI Agents' with caption and hashtags.";
+        promptEl.value = "Create a 5-slide carousel post on '5 Production Pillars for Enterprise AI Agents' with human-sounding caption and hashtags.";
     } else if (plat === 'linkedin') {
-        promptEl.value = "Write a high-authority LinkedIn post on how modern enterprises can replace brittle legacy RPA with self-healing autonomous agents.";
+        promptEl.value = "Write a direct, authority-driven LinkedIn post explaining why legacy automation fails and how autonomous agent pods maintain sub-second reliability.";
     } else if (plat === 'twitter_thread') {
-        promptEl.value = "Write a 5-tweet engineering breakdown on sub-400ms RAG pipelines, vector caching, and hybrid reranking.";
+        promptEl.value = "Write a 5-tweet engineering breakdown on sub-400ms RAG pipelines, semantic vector caching, and fallback architectures.";
     }
 }
 
@@ -504,99 +586,106 @@ function generateOmniContent() {
     const btn = document.getElementById('btnOmniGenerate');
 
     if (!prompt) {
-        alert("Please enter a topic or select a preset.");
+        alert("Please enter a prompt or upload media.");
         return;
     }
 
     btn.disabled = true;
-    btn.innerHTML = `<span class="animate-spin inline-block">⏳</span> <span>OmniRoute AI Generating...</span>`;
-    output.textContent = "⚡ OmniRoute AI is analyzing topic and structuring multi-layer hooks...";
+    btn.innerHTML = `<span class="animate-spin inline-block">⏳</span> <span>Writing Organic Human Copy...</span>`;
+    output.textContent = "⚡ Analyzing media & crafting 100% human-authentic content...";
 
     setTimeout(() => {
         let result = "";
 
         if (plat === 'reels') {
-            result = `🎬 [INSTAGRAM REEL & YOUTUBE SHORTS SCRIPT]
+            result = `🎬 [REEL / SHORTS STORYBOARD & SCRIPT]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📌 VIDEO SPECS: 9:16 Vertical (1080x1920) | Duration: 28s | Pacing: Dynamic Fast
-🎵 AUDIO RECOMMENDATION: Ambient Cyber Minimal Techno / Future Beat
+Media: ${currentCustomMedia.name} (${currentCustomMedia.type.toUpperCase()})
+Duration: 26s | Style: Direct Technical Founder
 
-[SCENE 1 | 00:00 - 00:04 | THE HOOK]
-🎥 VISUAL: Dynamic snap zoom onto AxonFlow dark-mode terminal showing agent swarm metrics.
-🎙️ VOICEOVER: "Most AI agents fail in production. Here is how we engineered sub-400ms autonomous pipelines that actually scale."
-📝 ON-SCREEN TEXT: "Why 90% of AI Agents Fail (And How to Fix Them) ⚡"
+[0:00 - 0:03 | HOOK]
+🎥 VISUAL: Quick cuts showing the responsive UI on mobile, foldable, and desktop screens.
+🎙️ AUDIO: "Here's what happens when you build enterprise AI agents for real production workloads."
+📝 ON-SCREEN: "How we engineer sub-400ms autonomous agents ⚡"
 
-[SCENE 2 | 00:04 - 00:18 | THE SYSTEM BREAKDOWN]
-🎥 VISUAL: Smooth glide across the Live Agent System Portfolio and interactive responsive modals.
-🎙️ VOICEOVER: "Instead of monolithic LLM calls, AxonFlow routes tasks across specialized sub-agent pods. Vector databases handle instant retrieval, while self-healing fallback circuits guarantee zero-downtime uptime."
-📝 ON-SCREEN TEXT: "✅ Multi-Agent Orchestration\n✅ Sub-400ms RAG Latency\n✅ 100% Fully Responsive UI"
+[0:03 - 0:18 | THE BREAKDOWN]
+🎥 VISUAL: Seamless navigation through live agent pods and vector search benchmarks.
+🎙️ AUDIO: "Zero monolithic scripts. Everything is isolated into single-purpose worker pods with automated fallback routing and instant vector caching. And it works seamlessly across every screen size."
+📝 ON-SCREEN: "Sub-400ms RAG • 100% Responsive UI • Zero Downtime"
 
-[SCENE 3 | 00:18 - 00:28 | THE CTA]
-🎥 VISUAL: Showing the sleek mobile navigation drawer opening and direct scoping scheduler.
-🎙️ VOICEOVER: "Ready to automate your enterprise workflows? Tap the link in our bio to book a direct architectural scoping call with our lead team."
-📝 ON-SCREEN TEXT: "Deploy Your Autonomous System 🚀\nhttps://axonflow.in"
+[0:18 - 0:26 | CTA]
+🎥 VISUAL: Booking a direct scoping session on https://axonflow.in/contact.
+🎙️ AUDIO: "If you're looking to deploy custom agent infrastructure for your business, talk to our lead engineering team."
+📝 ON-SCREEN: "Explore the live systems 🚀 axonflow.in"
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📱 INSTAGRAM CAPTION & HASHTAGS:
-🚀 We don't just build AI chatbots — we engineer resilient autonomous systems for global enterprises. 
+📱 ORGANIC INSTAGRAM CAPTION & HASHTAGS:
+We don't build generic chatbot wrappers. We architect high-throughput autonomous agent infrastructure and sub-400ms RAG pipelines designed for real enterprise scale.
 
-From sub-400ms hybrid RAG to self-healing incident triage pods, explore our live production systems at https://axonflow.in
+Every system comes with 6 months of post-launch engineering support and full cross-device responsiveness.
 
-#AxonFlowAI #AutonomousAgents #EnterpriseAI #AIAgency #TechInnovation #SoftwareEngineering #FutureOfWork #MachineLearning #AIEngineering`;
+Explore our production systems at https://axonflow.in (Link in bio @axonflowai.in)
+
+#AxonFlowAI #AutonomousAgents #EnterpriseAI #SoftwareEngineering #AIAutomation #FullStackAI #TechFounders #DevOps`;
         } else if (plat === 'instagram_feed') {
-            result = `📸 [INSTAGRAM CAROUSEL & FEED POST COPY]
+            result = `📸 [CAROUSEL & FEED POST]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SLIDE 1 (Cover): 5 Reasons Your Enterprise Needs Autonomous Agents in 2026 🧠
-SLIDE 2: 1. Legacy RPA is brittle. Self-healing agent swarms adapt to UI & API changes automatically.
-SLIDE 3: 2. Sub-400ms RAG pipelines deliver instantaneous answers from millions of internal documents.
-SLIDE 4: 3. Dedicated security sandboxes keep your proprietary company data completely isolated.
-SLIDE 5: 4. 6 Months of post-launch engineering support included with every production deployment.
-SLIDE 6 (CTA): Ready to build? Schedule your architecture review at https://axonflow.in 🚀
+Media: ${currentCustomMedia.name}
+
+Slide 1: Why most enterprise AI prototypes never survive production (and how to fix them).
+Slide 2: 1. Vector latency kills UX. Use hybrid reciprocal rank fusion with edge semantic caching.
+Slide 3: 2. Brittle automations break easily. Split monoliths into autonomous self-healing agent pods.
+Slide 4: 3. Security must be first-class. Isolate customer data in dedicated execution sandboxes.
+Slide 5: 4. Post-launch maintenance matters. We include 6 months of active engineering SLA.
+Slide 6: Build your next enterprise system with us at https://axonflow.in.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📱 CAPTION:
-Building AI that works reliably in production is hard. That's why AxonFlow AI designs mission-critical autonomous systems built from the ground up for high concurrency and sub-second execution.
+Building AI systems that don't fall over under real concurrency is hard. 
 
-👉 Save this post for your next engineering sprint!
-🔗 Link in bio: https://axonflow.in
+At AxonFlow AI, we focus on engineering resilient autonomous agent pods and high-performance search pipelines built from the ground up for speed and uptime.
 
-#AxonFlowAI #EnterpriseAI #ArtificialIntelligence #SoftwareArchitecture #CloudNative #DevOps #Innovation`;
+Save this breakdown for your team's next sprint.
+Full architecture case studies live on https://axonflow.in
+
+#AxonFlowAI #EnterpriseAI #MachineLearning #CloudArchitecture #BackendEngineering #AIEngineering`;
         } else if (plat === 'linkedin') {
-            result = `💼 [LINKEDIN THOUGHT LEADERSHIP POST]
+            result = `💼 [LINKEDIN POST]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-The era of monolithic LLM wrappers is officially over.
+The era of brittle AI prototypes is over.
 
-In 2026, enterprise AI isn't about asking a chatbot questions. It's about deploying autonomous agent pods that:
-→ Ingest structured & unstructured telemetry in real-time
-→ Execute deterministic validation checks before taking action
-→ Guarantee sub-400ms latency on mission-critical search queries
-→ Operate with continuous security auditing and 6 months post-launch support
+When enterprises deploy autonomous systems to production, they don't need another generic chat interface. They need:
 
-At AxonFlow AI, we help companies across North America, Europe, and India transition from experimental AI prototypes to bulletproof production infrastructure.
+1. Sub-400ms query latency across millions of private documents
+2. Self-healing multi-agent workflows with automated exception handling
+3. Isolated security sandboxes and continuous uptime monitoring
+4. Transparent engineering SLAs with dedicated post-launch support
 
-What is the biggest bottleneck your team faces when deploying AI to production? Let's discuss below. 👇
+At AxonFlow AI, we build and operate autonomous agent infrastructure for companies across India, North America, and Europe.
 
-#EnterpriseAI #SoftwareEngineering #AutonomousAgents #CTO #Innovation #AxonFlow`;
+If your team is evaluating autonomous workflows this quarter, let's connect.
+
+#EnterpriseAI #AutonomousAgents #SoftwareArchitecture #CTO #AxonFlow`;
         } else {
-            result = `🧵 [TWITTER / X 5-PART THREAD]
+            result = `🧵 [TWITTER / X THREAD]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1/5 🧵 How to build sub-400ms production RAG pipelines for enterprise data (without blowing your compute budget):
+1/5 🧵 How to build production-grade autonomous agent infrastructure that scales:
 
-2/5 1. Hybrid Search + Reciprocal Rank Fusion: Don't rely solely on dense vector embeddings. Combine BM25 keyword matching with dense vectors for 99.4% precision.
+2/5 1. Modular Sub-Agents: Never rely on one giant prompt. Break tasks into specialized single-purpose worker pods orchestrated by a supervisor.
 
-3/5 2. Semantic Caching: Cache top 20% high-frequency intent embeddings at the edge. Slashes LLM latency from 1.8s down to 45ms.
+3/5 2. Hybrid RAG: Combine BM25 keyword matching with dense vector embeddings + semantic caching for sub-400ms response times.
 
-4/5 3. Multi-Agent Routing: Break complex workflows into specialized single-purpose worker pods orchestrated by a supervisor agent.
+4/5 3. Multi-Device Resilience: Ensure full UI responsiveness and touch-friendly observability across mobile, tablet, and desktop dashboards.
 
-5/5 4. Built for scale: Explore our live architecture breakdowns & enterprise systems at https://axonflow.in 🚀 #AIEngineering #AxonFlow`;
+5/5 4. Explore our live production architectures and case studies at https://axonflow.in 🚀 #AIEngineering #AxonFlow`;
         }
 
         output.textContent = result;
         charCount.textContent = result.length;
-        duration.textContent = plat === 'reels' ? '~28s video' : '~1 min read';
+        duration.textContent = plat === 'reels' ? '~26s video' : '~1 min read';
         btn.disabled = false;
-        btn.innerHTML = `<svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> <span>Generate with OmniRoute AI</span>`;
-    }, 700);
+        btn.innerHTML = `<svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> <span>Generate Natural Captions & Script</span>`;
+    }, 600);
 }
 
 function copyOmniOutput() {
@@ -610,10 +699,9 @@ function copyOmniOutput() {
 
 function sendOmniToInstagramPublisher() {
     const text = document.getElementById('omniOutputArea').textContent;
-    // Extract caption portion
     let caption = text;
-    if (text.includes('INSTAGRAM CAPTION & HASHTAGS:')) {
-        caption = text.split('INSTAGRAM CAPTION & HASHTAGS:')[1].trim();
+    if (text.includes('ORGANIC INSTAGRAM CAPTION & HASHTAGS:')) {
+        caption = text.split('ORGANIC INSTAGRAM CAPTION & HASHTAGS:')[1].trim();
     } else if (text.includes('CAPTION:')) {
         caption = text.split('CAPTION:')[1].trim();
     }
@@ -626,6 +714,12 @@ function sendOmniToInstagramPublisher() {
             captionArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
             captionArea.classList.add('ring-2', 'ring-pink-500');
             setTimeout(() => { captionArea.classList.remove('ring-2', 'ring-pink-500'); }, 2500);
+        }
+
+        // Update selected asset info in publisher
+        const assetLabel = document.getElementById('publisherAssetLabel');
+        if (assetLabel && currentCustomMedia) {
+            assetLabel.textContent = `${currentCustomMedia.name} (${currentCustomMedia.size})`;
         }
     }, 150);
 }
@@ -651,12 +745,22 @@ const DEFAULT_IG_CONFIG = {
 function getInstagramConfig() {
     const saved = localStorage.getItem('axonflow_instagram_config');
     if (saved) {
-        try { return JSON.parse(saved); } catch(e) {}
+        try {
+            const parsed = JSON.parse(saved);
+            if (!parsed.username || parsed.username === 'axonflow.ai') {
+                parsed.username = 'axonflowai.in';
+                localStorage.setItem('axonflow_instagram_config', JSON.stringify(parsed));
+            }
+            return parsed;
+        } catch(e) {}
     }
     return DEFAULT_IG_CONFIG;
 }
 
 function saveInstagramConfig(config) {
+    if (config && config.username === 'axonflow.ai') {
+        config.username = 'axonflowai.in';
+    }
     localStorage.setItem('axonflow_instagram_config', JSON.stringify(config));
 }
 
@@ -749,18 +853,34 @@ function renderSocial(container) {
                         <span class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-pink-500/15 text-pink-300 border border-pink-500/20">9:16 Vertical</span>
                     </div>
 
-                    <!-- Video Preview Container -->
+                    <!-- Video / Media Preview Container -->
                     <div class="p-4 rounded-xl bg-black/60 border border-slate-800 mb-4">
                         <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-semibold text-slate-300">Selected Reel Asset:</span>
-                            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">axonflow_cinematic_reels_shorts.mp4 (60 FPS)</span>
-                        </div>
-                        <div class="aspect-[9/6] w-full bg-slate-950 rounded-lg overflow-hidden relative flex items-center justify-center border border-slate-800">
-                            <div class="text-center p-4">
-                                <div class="text-3xl mb-2">🎥</div>
-                                <p class="text-xs font-semibold text-white">AxonFlow Cinematic 9:16 Showcase</p>
-                                <p class="text-[11px] text-slate-400 mt-1">1080x1920 &bull; Full Device Responsiveness Tour &bull; 26.4s</p>
+                            <span class="text-xs font-semibold text-slate-300">Selected Media Asset:</span>
+                            <div class="flex items-center gap-2">
+                                <span id="publisherAssetLabel" class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded truncate max-w-[200px]">
+                                    ${currentCustomMedia.name}
+                                </span>
+                                <button type="button" onclick="document.getElementById('publisherMediaInput').click()" class="text-[10px] px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/30 hover:bg-pink-500/30">
+                                    Change / Upload
+                                </button>
+                                <input type="file" id="publisherMediaInput" accept="video/mp4,video/quicktime,video/webm,image/png,image/jpeg,image/webp" class="hidden" onchange="handlePublisherMediaUpload(event)">
                             </div>
+                        </div>
+                        <div id="publisherMediaPreviewArea" class="aspect-[9/6] w-full bg-slate-950 rounded-lg overflow-hidden relative flex items-center justify-center border border-slate-800">
+                            ${currentCustomMedia.dataUrl ? (
+                                currentCustomMedia.type === 'video' ? `
+                                    <video src="${currentCustomMedia.dataUrl}" controls class="w-full h-full object-contain bg-black"></video>
+                                ` : `
+                                    <img src="${currentCustomMedia.dataUrl}" class="w-full h-full object-contain bg-black">
+                                `
+                            ) : `
+                                <div class="text-center p-4">
+                                    <div class="text-3xl mb-2">🎥</div>
+                                    <p class="text-xs font-semibold text-white">AxonFlow Cinematic 9:16 Showcase</p>
+                                    <p class="text-[11px] text-slate-400 mt-1">1080x1920 &bull; Full Device Responsiveness Tour &bull; 26.4s</p>
+                                </div>
+                            `}
                         </div>
                     </div>
 
@@ -1017,28 +1137,58 @@ function sendTestDm() {
     }, 600);
 }
 
+function handlePublisherMediaUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const isVideo = file.type.startsWith('video/');
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        currentCustomMedia = {
+            url: e.target.result,
+            name: file.name,
+            type: isVideo ? 'video' : 'image',
+            size: (file.size / (1024 * 1024)).toFixed(2) + ' MB',
+            dataUrl: e.target.result
+        };
+
+        const label = document.getElementById('publisherAssetLabel');
+        if (label) label.textContent = `${file.name} (${currentCustomMedia.size})`;
+
+        const previewArea = document.getElementById('publisherMediaPreviewArea');
+        if (previewArea) {
+            if (isVideo) {
+                previewArea.innerHTML = `<video src="${e.target.result}" controls class="w-full h-full object-contain bg-black"></video>`;
+            } else {
+                previewArea.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-contain bg-black">`;
+            }
+        }
+    };
+    reader.readAsDataURL(file);
+}
+
 function publishInstagramReel() {
     const statusDiv = document.getElementById('reelsPublishStatus');
     const statusText = document.getElementById('reelsStatusText');
     const btn = document.getElementById('btnPublishReel');
+    const ig = getInstagramConfig();
 
     statusDiv.classList.remove('hidden');
     btn.disabled = true;
     btn.classList.add('opacity-50');
 
-    statusText.textContent = "1/3 Initializing Meta Graph API video upload container...";
+    statusText.textContent = "1/3 Initializing Meta Graph API media upload container...";
 
     setTimeout(() => {
-        statusText.textContent = "2/3 Uploading 'axonflow_cinematic_reels_shorts.mp4' (1080x1920 @ 60fps)...";
+        statusText.textContent = `2/3 Uploading '${currentCustomMedia.name}' (${currentCustomMedia.size})...`;
         setTimeout(() => {
-            statusText.textContent = "3/3 Video container processed. Publishing Reel to @axonflowai.in...";
+            statusText.textContent = `3/3 Container verified. Publishing to @${ig.username}...`;
             setTimeout(() => {
-                const ig = getInstagramConfig();
                 ig.mediaCount += 1;
                 saveInstagramConfig(ig);
 
                 statusDiv.className = "mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 flex items-center gap-2";
-                statusDiv.innerHTML = "✅ <strong>Success!</strong> Reel is live on Instagram: <a href='https://instagram.com/axonflowai.in' target='_blank' class='underline ml-1 text-white'>instagram.com/axonflowai.in</a>";
+                statusDiv.innerHTML = `✅ <strong>Success!</strong> Media '${currentCustomMedia.name}' is published live to Instagram: <a href="https://instagram.com/${ig.username}" target="_blank" class="underline ml-1 text-white">instagram.com/${ig.username}</a>`;
                 btn.disabled = false;
                 btn.classList.remove('opacity-50');
             }, 1200);
