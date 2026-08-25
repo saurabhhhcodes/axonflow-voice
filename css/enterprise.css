@@ -738,5 +738,67 @@ img { max-width: 100%; display: block; }
   100% { background-position: 200% 0%; }
 }
 
+/* Responsive Card Iframes & Mobile Alignment */
+.portfolio-iframe {
+  width: 1280px;
+  height: 800px;
+  border: none;
+  transform-origin: 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transform: scale(0.28);
+}
+
+@media (max-width: 1024px) {
+  .portfolio-iframe {
+    transform: scale(0.26);
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-iframe {
+    transform: scale(0.29);
+  }
+  .browser-mockup {
+    margin: 0 auto !important;
+    width: 100% !important;
+  }
+  .portfolio-card-screen {
+    height: 200px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-iframe {
+    transform: scale(0.24);
+  }
+  .portfolio-card-screen {
+    height: 180px !important;
+  }
+  .browser-mockup .bar {
+    padding: 6px 10px !important;
+    gap: 4px !important;
+  }
+  .browser-mockup .bar .url-bar {
+    font-size: 0.65rem !important;
+    padding: 0.15rem 0.5rem !important;
+  }
+  .ef-card {
+    border-radius: 14px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .portfolio-iframe {
+    transform: scale(0.21);
+  }
+  .portfolio-card-screen {
+    height: 160px !important;
+  }
+}
+
+
 
 

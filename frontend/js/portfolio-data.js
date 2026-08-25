@@ -41,26 +41,24 @@
 
   function card(p) {
     return (
-      '<article class="card ef-card overflow-hidden cursor-pointer" data-preview-url="' + esc(p.url) + '" data-preview-name="' + esc(p.name) + '" role="button" tabindex="0" aria-label="Open live preview of ' + esc(p.name) + '" style="padding:0;background:var(--surface);border:1px solid var(--border);border-radius:18px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease">' +
-        '<div>' +
-          '<div class="browser-mockup" style="border-radius:18px 18px 0 0;border:none;border-bottom:1px solid var(--border)">' +
-            '<div class="bar" style="background:rgba(255,255,255,0.04);padding:.6rem .85rem;display:flex;align-items:center;gap:.4rem">' +
-              '<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#ff5f56"></span>' +
-              '<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#ffbd2e"></span>' +
-              '<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#27c93f"></span>' +
-              '<span class="url-bar" style="font-family:var(--font-mono);font-size:.7rem;color:var(--text-dim);margin-left:.5rem;background:rgba(0,0,0,0.35);padding:.2rem .75rem;border-radius:6px">' + esc(p.host) + '</span>' +
+      '<article class="card ef-card overflow-hidden cursor-pointer framer-spotlight-card border-beam" data-preview-url="' + esc(p.url) + '" data-preview-name="' + esc(p.name) + '" role="button" tabindex="0" aria-label="Open live preview of ' + esc(p.name) + '" style="padding:0;background:var(--surface);border:1px solid var(--border);border-radius:18px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;width:100%;max-width:100%">' +
+        '<div style="width:100%">' +
+          '<div class="browser-mockup" style="border-radius:18px 18px 0 0;border:none;border-bottom:1px solid var(--border);width:100%">' +
+            '<div class="bar" style="background:rgba(255,255,255,0.04);padding:.6rem .85rem;display:flex;align-items:center;gap:.4rem;width:100%">' +
+              '<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#ff5f56;flex-shrink:0"></span>' +
+              '<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#ffbd2e;flex-shrink:0"></span>' +
+              '<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#27c93f;flex-shrink:0"></span>' +
+              '<span class="url-bar" style="font-family:var(--font-mono);font-size:.7rem;color:var(--text-dim);margin-left:.5rem;background:rgba(0,0,0,0.35);padding:.2rem .75rem;border-radius:6px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.host) + '</span>' +
             '</div>' +
-            '<div class="screen" style="position:relative;height:240px;background:#06080c;overflow:hidden;margin:0;padding:0">' +
-              // Attempt live iframe load
-              '<iframe src="' + esc(p.url) + '" title="' + esc(p.name) + ' live preview" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" style="width:1280px;height:800px;border:none;transform:scale(0.28);transform-origin:0 0;position:absolute;top:0;left:0;pointer-events:none"></iframe>' +
-              // Fallback styled glass canvas if iframe is blocked or fails load
+            '<div class="screen portfolio-card-screen" style="position:relative;height:220px;background:#06080c;overflow:hidden;margin:0;padding:0;width:100%">' +
+              '<iframe src="' + esc(p.url) + '" title="' + esc(p.name) + ' live preview" loading="lazy" class="portfolio-iframe" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"></iframe>' +
               '<div class="screen-fallback" style="position:absolute;inset:0;background:' + p.gradient + ';display:none;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;box-shadow:inset 0 0 60px rgba(0,0,0,0.5)">' +
-                '<div style="width:64px;height:64px;border-radius:18px;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:.85rem;box-shadow:0 12px 32px rgba(0,0,0,0.4)">' + p.icon + '</div>' +
+                '<div style="width:60px;height:60px;border-radius:18px;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:.75rem;box-shadow:0 12px 32px rgba(0,0,0,0.4)">' + p.icon + '</div>' +
                 '<div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ffffff;background:rgba(0,0,0,0.45);padding:.35rem .85rem;border-radius:20px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)">' + esc(p.tag) + '</div>' +
               '</div>' +
-              '<div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(7,8,10,0.55) 100%);pointer-events:none"></div>' +
+              '<div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(7,8,10,0.6) 100%);pointer-events:none"></div>' +
               '<div style="position:absolute;bottom:.75rem;left:.85rem;font-family:var(--font-mono);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ffffff;background:rgba(7,8,10,0.85);padding:.35rem .85rem;border-radius:20px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);z-index:2">' + p.icon + ' ' + esc(p.tag) + '</div>' +
-              '<span class="preview-tag" style="z-index:2;position:absolute;top:.75rem;right:.75rem;background:rgba(84,87,255,0.95);color:#fff;font-family:var(--font-mono);font-size:.65rem;font-weight:600;padding:.35rem .75rem;border-radius:8px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);box-shadow:0 4px 14px rgba(0,0,0,0.4)">▶ Launch live app</span>' +
+              '<span class="preview-tag" style="z-index:2;position:absolute;top:.75rem;right:.75rem;background:rgba(84,87,255,0.95);color:#fff;font-family:var(--font-mono);font-size:.65rem;font-weight:600;padding:.35rem .75rem;border-radius:8px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);box-shadow:0 4px 14px rgba(0,0,0,0.4)">▶ Live View</span>' +
             '</div>' +
           '</div>' +
           '<div style="padding:1.5rem 1.5rem 1rem">' +
