@@ -730,8 +730,8 @@ const DEFAULT_IG_CONFIG = {
     accountType: 'BUSINESS',
     username: 'axonflowai.in',
     name: 'AxonFlow AI',
-    accountId: '17841477835387101',
-    accessToken: '',
+    accountId: '27982373448109546',
+    accessToken: 'IGAAUpwSIMCRpBZAGFiYl9Gd1BRZAm1NYU5tVU91WDNxZAU1oQkVCbnEtUXZA0OU9mRWsxa1g4cWVycW1NU0FsRG9MRUU4NlpIUEZAseUJyaC04SXp2WXhmMXVEQ2JfbXpPbkgtVEpnekxJSmEtQy0tVm05T2ZAMakUyT3Q1WDFsRHNsTQZDZD',
     profilePic: '/assets/logo_pro.png',
     followersCount: 12480,
     followingCount: 142,
@@ -748,7 +748,9 @@ function getInstagramConfig() {
     if (saved) {
         try {
             const parsed = JSON.parse(saved);
-            if (!parsed.username || parsed.username === 'axonflow.ai') {
+            if (!parsed.accessToken || parsed.accessToken.startsWith('EAAPwQz9') || parsed.accessToken.startsWith('EAAbAhHE')) {
+                parsed.accessToken = DEFAULT_IG_CONFIG.accessToken;
+                parsed.accountId = DEFAULT_IG_CONFIG.accountId;
                 parsed.username = 'axonflowai.in';
                 localStorage.setItem('axonflow_instagram_config', JSON.stringify(parsed));
             }
