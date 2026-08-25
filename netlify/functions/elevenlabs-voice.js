@@ -2,6 +2,8 @@
 // Endpoint: /.netlify/functions/elevenlabs-voice
 // Converts Reel Script & Hooks to natural human speech using ElevenLabs TTS API
 
+const DEFAULT_ELEVENLABS_KEY = 'sk_9e952ab06ef480bda1f9d7a50a7daa6d10f04bf70d772a78';
+
 exports.handler = async function(event, context) {
     if (event.httpMethod !== 'POST') {
         return {
@@ -21,16 +23,7 @@ exports.handler = async function(event, context) {
             };
         }
 
-        const elevenApiKey = apiKey || process.env.ELEVENLABS_API_KEY;
-        if (!elevenApiKey) {
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ 
-                    error: 'ElevenLabs API Key required. Please configure your key in CRM Settings or pass apiKey in request body.' 
-                })
-            };
-        }
-
+        const elevenApiKey = apiKey || process.env.ELEVENLABS_API_KEY || DEFAULT_ELEVENLABS_KEY;
         const selectedVoice = voiceId || 'pNInz6obpgDQGcFmaJgB'; // Default: Adam (Authoritative Tech Founder)
         const selectedModel = modelId || 'eleven_multilingual_v2';
 
