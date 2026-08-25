@@ -1388,6 +1388,93 @@ async function executeAiAgentCreation() {
     }
 }
 
+function downloadCoverImage() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080;
+    canvas.height = 1080;
+    const ctx = canvas.getContext('2d');
+    
+    // Background gradient
+    const grad = ctx.createLinearGradient(0, 0, 1080, 1080);
+    grad.addColorStop(0, '#030712');
+    grad.addColorStop(0.5, '#0f172a');
+    grad.addColorStop(1, '#581c87');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1080, 1080);
+
+    // Grid lines
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+    ctx.lineWidth = 1;
+    for (let x = 0; x < 1080; x += 60) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 1080); ctx.stroke();
+    }
+    for (let y = 0; y < 1080; y += 60) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(1080, y); ctx.stroke();
+    }
+
+    // Header branding
+    ctx.fillStyle = '#ec4899';
+    ctx.font = 'bold 36px sans-serif';
+    ctx.fillText('⚡ AXONFLOW AI', 80, 120);
+
+    ctx.fillStyle = '#a855f7';
+    ctx.font = '24px sans-serif';
+    ctx.fillText('AUTONOMOUS ENTERPRISE INFRASTRUCTURE', 80, 160);
+
+    // Title / Hook text
+    const captionText = document.getElementById('reelCaption') ? document.getElementById('reelCaption').value : 'Sub-400ms Production AI Agents';
+    const hook = captionText.split('\n')[0] || 'Sub-400ms Production AI Agents';
+    
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 50px sans-serif';
+    
+    const words = hook.split(' ');
+    let line = '';
+    let y = 380;
+    for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > 920 && n > 0) {
+            ctx.fillText(line, 80, y);
+            line = words[n] + ' ';
+            y += 66;
+        } else {
+            line = testLine;
+        }
+    }
+    ctx.fillText(line, 80, y);
+
+    // Sub-badge
+    ctx.fillStyle = 'rgba(236, 72, 153, 0.15)';
+    ctx.fillRect(80, y + 50, 520, 70);
+    ctx.strokeStyle = '#ec4899';
+    ctx.strokeRect(80, y + 50, 520, 70);
+
+    ctx.fillStyle = '#f472b6';
+    ctx.font = 'bold 24px sans-serif';
+    ctx.fillText('🚀 Verified Sub-400ms Production RAG', 105, y + 95);
+
+    // CTA Footer
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '24px sans-serif';
+    ctx.fillText('Live Benchmarks & Transparent Sprints at https://axonflow.in', 80, 1000);
+
+    // Download PNG
+    const link = document.createElement('a');
+    link.download = 'axonflow_reel_cover.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+}
+
+function downloadCurrentVideo() {
+    const url = currentCustomMedia.dataUrl || currentCustomMedia.url || '/axonflow_cinematic_reels_shorts.mp4';
+    const link = document.createElement('a');
+    link.download = currentCustomMedia.name || 'axonflow_reel.mp4';
+    link.href = url;
+    link.target = '_blank';
+    link.click();
+}
+
 function triggerAiDealCloser(threadId) {
     const thread = instagramDmConversations.find(t => t.id === threadId);
     if (!thread) return;
@@ -1651,9 +1738,17 @@ Explore our systems: https://axonflow.in
                                 <span>🛡️ Send to Approval Queue</span>
                             </button>
                         </div>
-                        <button onclick="instantDownloadAndCopy()" class="w-full py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center justify-center gap-2 transition-all">
-                            <span id="btnInstantText">Download Video & Copy Caption</span>
-                        </button>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+                            <button type="button" onclick="downloadCurrentVideo()" class="py-2.5 rounded-xl text-xs font-semibold bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/30 flex items-center justify-center gap-1.5 transition-all">
+                                <span>🎬 Download Video (.mp4)</span>
+                            </button>
+                            <button type="button" onclick="downloadCoverImage()" class="py-2.5 rounded-xl text-xs font-semibold bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30 flex items-center justify-center gap-1.5 transition-all">
+                                <span>🖼️ Download Cover (.png)</span>
+                            </button>
+                            <button type="button" onclick="instantDownloadAndCopy()" class="py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center justify-center gap-1.5 transition-all">
+                                <span>📋 Copy Caption</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
