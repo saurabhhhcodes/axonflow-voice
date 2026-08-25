@@ -315,29 +315,136 @@ function renderSection() {
     }
 }
 
-// ---------- OMNIROUTE AI CONTENT & REELS ENGINE ----------
-const OMNIROUTE_PRESETS = [
+// ---------- AXONFLOW WEBSITE PAGES & CASE STUDIES CATALOG ----------
+const AXONFLOW_PAGES_CATALOG = [
     {
-        title: "Enterprise RAG Pipeline (Sub-400ms)",
-        prompt: "Create an attention-grabbing Instagram Reel script and post breakdown showing how AxonFlow achieves sub-400ms latency for enterprise document search with hybrid reranking.",
-        type: "reels"
+        id: 'home',
+        title: '🏠 Home / Unified Enterprise Platform',
+        url: 'https://axonflow.in/',
+        type: 'video',
+        mediaUrl: '/axonflow_cinematic_reels_shorts.mp4',
+        name: 'axonflow_cinematic_reels_shorts.mp4',
+        category: 'Core Platform',
+        summary: 'Autonomous AI agent infrastructure & enterprise RAG systems with sub-400ms latency and 6 months of SLA engineering support.',
+        hook: 'Most AI demos look cool until you put 10,000 real users on them. Here is how we engineered sub-400ms RAG pipelines at AxonFlow that run with zero downtime.',
+        caption: `Most AI demos look cool until you put 10,000 real enterprise users on them.\n\nAt AxonFlow, we build autonomous AI agent pods that handle ticket triage, complex document synthesis, and ERP automation in sub-400ms.\n\n✅ Hybrid Vector + BM25 Search\n✅ Multi-Agent Orchestration with deterministic guardrails\n✅ 6 Months of included post-launch SLA support\n\nExplore our production systems: https://axonflow.in\n\n#AxonFlowAI #EnterpriseAI #AutonomousAgents #FullStackAI #TechFounders #DevOps`
     },
     {
-        title: "Autonomous Agent Swarm Demo",
-        prompt: "Generate a viral high-energy tech reel script demonstrating an autonomous multi-agent pod handling client onboarding, ticket triage, and automated resolution.",
-        type: "reels"
+        id: 'rag-deep-dive',
+        title: '⚡ Sub-400ms Production RAG Architecture',
+        url: 'https://axonflow.in/blog/building-sub-400ms-production-rag-pipelines',
+        type: 'image',
+        mediaUrl: '/assets/logo_pro.png',
+        name: 'rag_architecture_diagram.png',
+        category: 'Engineering Deep Dive',
+        summary: 'How to achieve sub-400ms latency for enterprise document search using hybrid reranking, semantic caching, and streaming tokens.',
+        hook: 'Why are 90% of enterprise RAG pipelines unacceptably slow? Here is the exact sub-400ms architecture we deploy for Fortune 500 teams.',
+        caption: `Why are 90% of enterprise RAG pipelines unacceptably slow?\n\nIf your search takes 3+ seconds, users abandon it. Here is how we get retrieval down to <400ms:\n\n1️⃣ Semantic Caching: 60% of enterprise queries hit pre-computed vector clusters in <40ms.\n2️⃣ Reciprocal Rank Fusion: Combining BM25 keyword matching with dense embeddings.\n3️⃣ Cross-Encoder Reranking only on the top-15 candidate chunks.\n\nRead the full engineering breakdown: https://axonflow.in/blog/building-sub-400ms-production-rag-pipelines\n\n#RAG #VectorSearch #AIArchitecture #MachineLearning #TechDeepDive`
     },
     {
-        title: "AxonFlow Cinematic Showcase & Custom Devices",
-        prompt: "Promote the newly launched AxonFlow AI platform showcase video, emphasizing seamless 100% responsiveness across iPhone SE, Foldables, iPads, and large displays.",
-        type: "reels"
+        id: 'k8s-migration',
+        title: '☸️ Zero-Downtime Kubernetes Migration',
+        url: 'https://axonflow.in/blog/architecting-zero-downtime-kubernetes-pipelines',
+        type: 'image',
+        mediaUrl: '/assets/logo_pro.png',
+        name: 'k8s_zero_downtime.png',
+        category: 'Case Study',
+        summary: 'Architecting zero-downtime microservice migrations to Kubernetes with blue-green traffic cutovers and automated rollback.',
+        hook: 'We migrated 45 critical microservices to Kubernetes with zero dropped connections. Here is the rollback protocol we used.',
+        caption: `Migrating 45+ enterprise microservices without a single dropped packet or customer outage isn't luck — it's deterministic engineering.\n\nOur zero-downtime playbook:\n🔹 Canary deployment with Envoy-based weight shifting\n🔹 Dual-write database replication with automated drift reconciliation\n🔹 Instant automated rollback triggered on p99 latency spikes > 500ms\n\nCheck out the full case study: https://axonflow.in/blog/architecting-zero-downtime-kubernetes-pipelines\n\n#DevOps #Kubernetes #CloudArchitecture #SiteReliability #ZeroDowntime`
     },
     {
-        title: "Zero-Downtime Kubernetes Migration Case Study",
-        prompt: "Draft a high-credibility LinkedIn thought leadership post explaining our zero-downtime microservice migration architecture with post-launch SLA guarantee.",
-        type: "linkedin"
+        id: 'n8n-erp',
+        title: '🔄 Self-Hosted n8n Enterprise ERP Workflows',
+        url: 'https://axonflow.in/blog/self-hosted-n8n-workflows-for-enterprise-erp',
+        type: 'image',
+        mediaUrl: '/assets/logo_pro.png',
+        name: 'n8n_enterprise_workflows.png',
+        category: 'Enterprise Automation',
+        summary: 'Why self-hosted n8n workflows outperform Zapier for enterprise ERP, data sovereignty, and compliance.',
+        hook: 'Stop paying $2,000/month for cloud webhooks that leak your customer PII. Here is why enterprise teams are self-hosting n8n.',
+        caption: `Stop paying thousands every month for cloud workflow tools that expose your proprietary data to third parties.\n\nWe design self-hosted n8n automation pipelines deployed directly inside your VPC:\n🔒 100% Data Sovereignty & GDPR/HIPAA compliance\n⚡ Unlimited webhook throughput with zero per-task fees\n🤖 Deep integration with local LLMs and internal ERPs\n\nRead our architectural guide: https://axonflow.in/blog/self-hosted-n8n-workflows-for-enterprise-erp\n\n#n8n #EnterpriseAutomation #DataPrivacy #OpenSource #DevOps`
+    },
+    {
+        id: 'healthcare',
+        title: '🏥 Healthcare & MedTech AI Engine',
+        url: 'https://axonflow.in/markets/healthcare',
+        type: 'image',
+        mediaUrl: '/assets/logo_pro.png',
+        name: 'healthcare_ai_engine.png',
+        category: 'Industry Solution',
+        summary: 'HIPAA-compliant autonomous patient intake, medical records RAG, and automated consultation summaries.',
+        hook: 'How clinics and hospital networks are automating 80% of patient triage without violating HIPAA regulations.',
+        caption: `Doctors spend up to 2 hours every day typing clinical notes. That's time taken away from patients.\n\nAxonFlow's Healthcare AI suite delivers:\n🩺 Automated HIPAA-compliant voice-to-EHR clinical transcription\n📋 Instant diagnostic history search across 10+ years of lab records\n📅 24/7 patient scheduling & triage bots on WhatsApp & Web\n\nSee our healthcare deployment specs: https://axonflow.in/markets/healthcare\n\n#HealthTech #MedTech #ClinicalAI #HIPAA #HealthcareInnovation`
+    },
+    {
+        id: 'fintech',
+        title: '💳 FinTech & Algorithmic Fraud Triage',
+        url: 'https://axonflow.in/markets/fintech',
+        type: 'image',
+        mediaUrl: '/assets/logo_pro.png',
+        name: 'fintech_fraud_triage.png',
+        category: 'Industry Solution',
+        summary: 'Sub-second fraud detection, real-time transaction anomaly scoring, and automated compliance auditing.',
+        hook: 'Detecting financial fraud in under 80 milliseconds before the payment clears the gateway.',
+        caption: `When fraudulent transactions happen, milliseconds matter.\n\nAxonFlow designs real-time anomaly detection pipelines for FinTech leaders:\n🛡️ Sub-80ms transaction scoring using lightweight inference engines\n📊 Automated AML (Anti-Money Laundering) report generation\n🔐 Strict cryptographic audit trails for regulatory compliance\n\nExplore our FinTech systems: https://axonflow.in/markets/fintech\n\n#FinTech #FraudDetection #AIinFinance #BankingSecurity #AlgorithmicTrading`
+    },
+    {
+        id: 'legal',
+        title: '⚖️ Legal & Contract Analysis Pipeline',
+        url: 'https://axonflow.in/markets/legal',
+        type: 'image',
+        mediaUrl: '/assets/logo_pro.png',
+        name: 'legal_contract_ai.png',
+        category: 'Industry Solution',
+        summary: 'Multi-document clause comparison, automated redlining, and instant NDA risk assessment with verified citations.',
+        hook: 'Reviewing a 120-page M&A contract in 4 minutes with citation-verified risk highlights.',
+        caption: `Legal teams shouldn't spend entire weekends manually comparing indemnity clauses and non-compete terms.\n\nOur Legal Contract AI Engine:\n📑 Analyzes 100+ page agreements with pinpoint citation accuracy\n⚠️ Flags hidden indemnification liabilities and compliance breaches\n📝 Generates instant standardized redlines based on company playbook\n\nReview the legal platform: https://axonflow.in/markets/legal\n\n#LegalTech #ContractAI #CorporateLaw #LegalInnovation #LawTech`
+    },
+    {
+        id: 'ecommerce',
+        title: '🛍️ E-Commerce & Dynamic Inventory AI',
+        url: 'https://axonflow.in/markets/ecommerce',
+        type: 'image',
+        mediaUrl: '/assets/logo_pro.png',
+        name: 'ecommerce_ai_routing.png',
+        category: 'Industry Solution',
+        summary: 'Autonomous inventory replenishment forecasting, dynamic price optimization, and conversational cart recovery.',
+        hook: 'How top D2C and marketplace brands recovered 22% of abandoned carts using personalized AI voice & DM agents.',
+        caption: `Generic email blasts don't convert abandoned carts anymore.\n\nAxonFlow's Autonomous Retail Suite:\n🛒 Instant conversational checkout assistance on Instagram DMs & WhatsApp\n📦 Predictive demand forecasting to prevent stockouts before peak season\n💰 Dynamic pricing engines that optimize gross margins in real time\n\nScale your e-commerce revenue: https://axonflow.in/markets/ecommerce\n\n#Ecommerce #D2C #RetailTech #ConversionOptimization #AIforBusiness`
+    },
+    {
+        id: 'pricing',
+        title: '🏷️ Transparent Engineering Sprints & Pricing',
+        url: 'https://axonflow.in/pricing',
+        type: 'image',
+        mediaUrl: '/assets/logo_pro.png',
+        name: 'axonflow_pricing_matrix.png',
+        category: 'Pricing & Sprints',
+        summary: 'Fixed-scope, sprint-based pricing for enterprise AI architecture with 6 months of included SLA maintenance.',
+        hook: 'No hidden hourly consulting fees. Fixed sprints with guaranteed SLA deliverability.',
+        caption: `Most AI agencies bill endless hourly retainers with nothing to show after 3 months.\n\nAt AxonFlow, we work in fixed-scope, high-velocity engineering sprints:\n⚡ Production-ready delivery in 2-4 weeks\n🛠️ 100% full IP and code ownership\n🛡️ 6 months of dedicated SLA maintenance & latency monitoring included\n\nView our transparent pricing tiers: https://axonflow.in/pricing\n\n#TechStartups #SoftwareEngineering #PricingTransparency #EnterpriseAI`
+    },
+    {
+        id: 'about',
+        title: '👥 Who We Are & Engineering Ethos',
+        url: 'https://axonflow.in/about-us',
+        type: 'image',
+        mediaUrl: '/assets/logo_pro.png',
+        name: 'axonflow_leadership_team.png',
+        category: 'Company & Culture',
+        summary: 'Founded in India, building mission-critical autonomous systems for forward-thinking enterprises globally.',
+        hook: 'We are a dedicated team of systems architects, ML engineers, and infrastructure builders.',
+        caption: `We don't build toys or surface-level wrapper apps.\n\nAxonFlow is an engineering-first collective operating globally from India, building the foundational autonomous AI infrastructure that powers modern enterprise operations.\n\nFrom high-throughput RAG to zero-downtime microservice clusters, we build systems that run themselves.\n\nLearn more about our team and journey: https://axonflow.in/about-us\n\n#AxonFlowAI #CompanyCulture #EngineeringFirst #GlobalAI #TechLeadership`
     }
 ];
+
+const OMNIROUTE_PRESETS = AXONFLOW_PAGES_CATALOG.map(item => ({
+    title: item.title,
+    prompt: `Create a viral, high-converting ${item.type === 'video' ? 'Reels script and caption' : 'carousel post and caption'} for AxonFlow page: "${item.title}". Context: ${item.summary}`,
+    type: item.type === 'video' ? 'reels' : 'instagram_feed',
+    pageId: item.id
+}));
 
 // Global State for Custom Media
 let currentCustomMedia = {
@@ -345,7 +452,8 @@ let currentCustomMedia = {
     name: 'axonflow_cinematic_reels_shorts.mp4',
     type: 'video',
     size: '1.8 MB',
-    dataUrl: null
+    dataUrl: null,
+    publicUrl: null
 };
 
 function handleOmniMediaUpload(event) {
@@ -362,7 +470,8 @@ function handleOmniMediaUpload(event) {
             name: file.name,
             type: isVideo ? 'video' : 'image',
             size: (file.size / (1024 * 1024)).toFixed(2) + ' MB',
-            dataUrl: e.target.result
+            dataUrl: e.target.result,
+            publicUrl: null
         };
 
         // Update preview in OmniRoute
@@ -402,6 +511,68 @@ function handleOmniMediaUpload(event) {
         generateOmniContent();
     };
     reader.readAsDataURL(file);
+}
+
+function selectPageForGeneration(pageId) {
+    const page = AXONFLOW_PAGES_CATALOG.find(p => p.id === pageId);
+    if (!page) return;
+
+    // Update custom media state
+    currentCustomMedia = {
+        url: page.mediaUrl,
+        name: page.name,
+        type: page.type,
+        size: page.type === 'video' ? '1.8 MB' : '0.45 MB',
+        dataUrl: null,
+        publicUrl: page.type === 'video' ? 'https://www.axonflow.in/axonflow_cinematic_reels_shorts.mp4' : 'https://www.axonflow.in/assets/logo_pro.png'
+    };
+
+    // Update preview in OmniRoute
+    const previewContainer = document.getElementById('omniMediaPreviewWrap');
+    if (previewContainer) {
+        if (page.type === 'video') {
+            previewContainer.innerHTML = `
+                <div class="relative w-full rounded-xl overflow-hidden bg-black border border-amber-500/40 shadow-lg shadow-amber-500/10">
+                    <video src="${page.mediaUrl}" controls autoplay muted loop class="w-full max-h-52 object-contain bg-black"></video>
+                    <div class="p-2.5 bg-slate-900/95 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-300">
+                        <span class="font-bold text-amber-400 flex items-center gap-1">🌐 Page Asset: ${page.title}</span>
+                        <a href="${page.url}" target="_blank" class="text-cyan-400 underline hover:text-cyan-300">Visit Page ↗</a>
+                    </div>
+                </div>
+            `;
+        } else {
+            previewContainer.innerHTML = `
+                <div class="relative w-full rounded-xl overflow-hidden bg-black border border-amber-500/40 shadow-lg shadow-amber-500/10">
+                    <div class="h-44 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/30 text-center">
+                        <img src="/assets/logo_pro.png" class="w-16 h-16 object-contain mb-3 drop-shadow-lg">
+                        <h5 class="text-sm font-bold text-white">${page.title}</h5>
+                        <p class="text-[10px] text-slate-400 mt-1 max-w-xs">${page.summary}</p>
+                    </div>
+                    <div class="p-2.5 bg-slate-900/95 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-300">
+                        <span class="font-bold text-amber-400 flex items-center gap-1">🌐 Page Graphic Ready</span>
+                        <a href="${page.url}" target="_blank" class="text-cyan-400 underline hover:text-cyan-300">Visit Page ↗</a>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    // Set Platform and Prompt
+    const platEl = document.getElementById('omniPlatform');
+    const promptEl = document.getElementById('omniPrompt');
+    if (platEl) platEl.value = page.type === 'video' ? 'reels' : 'instagram_feed';
+    if (promptEl) promptEl.value = `Generate post for ${page.title}: ${page.summary}`;
+
+    // Auto-populate direct authentic copy
+    const outputArea = document.getElementById('omniOutputArea');
+    if (outputArea) {
+        outputArea.textContent = `// 🌐 Generated Post from Page: ${page.title}\n// Source: ${page.url}\n\n🎬 HOOK / OPENER:\n${page.hook}\n\n📝 INSTAGRAM / SOCIAL CAPTION:\n${page.caption}`;
+        
+        const charCount = document.getElementById('omniCharCount');
+        const duration = document.getElementById('omniDuration');
+        if (charCount) charCount.textContent = page.caption.length;
+        if (duration) duration.textContent = page.type === 'video' ? '~28s' : '~15s read';
+    }
 }
 
 function renderOmniRoute(container) {
@@ -767,12 +938,244 @@ function saveInstagramConfig(config) {
     localStorage.setItem('axonflow_instagram_config', JSON.stringify(config));
 }
 
+// Global State for Social Platform Modules
+let activeSocialTab = 'reels'; // 'reels' | 'approval' | 'dms' | 'comments'
+
+let instagramApprovalQueue = [
+    {
+        id: 'appr_1',
+        title: '⚡ Sub-400ms Production RAG Architecture',
+        pageUrl: 'https://axonflow.in/blog/building-sub-400ms-production-rag-pipelines',
+        mediaUrl: '/axonflow_cinematic_reels_shorts.mp4',
+        mediaName: 'rag_architecture_reel_9x16.mp4',
+        mediaType: 'video',
+        status: 'PENDING_APPROVAL',
+        date: 'Today, 4:30 PM',
+        hook: 'Why are 90% of enterprise RAG pipelines unacceptably slow? Here is the exact sub-400ms architecture we deploy.',
+        caption: `Why are 90% of enterprise RAG pipelines unacceptably slow?\n\nIf your search takes 3+ seconds, users abandon it. Here is how we get retrieval down to <400ms:\n\n1️⃣ Semantic Caching: 60% of enterprise queries hit pre-computed vector clusters in <40ms.\n2️⃣ Reciprocal Rank Fusion: Combining BM25 keyword matching with dense embeddings.\n3️⃣ Cross-Encoder Reranking only on the top-15 candidate chunks.\n\nExplore our production systems: https://axonflow.in\n\n#AxonFlowAI #RAG #VectorSearch #AIArchitecture #MachineLearning #TechDeepDive`
+    },
+    {
+        id: 'appr_2',
+        title: '☸️ Zero-Downtime Kubernetes Migration Case Study',
+        pageUrl: 'https://axonflow.in/blog/architecting-zero-downtime-kubernetes-pipelines',
+        mediaUrl: '/axonflow_cinematic_reels_shorts.mp4',
+        mediaName: 'k8s_migration_reel.mp4',
+        mediaType: 'video',
+        status: 'PENDING_APPROVAL',
+        date: 'Today, 2:15 PM',
+        hook: 'We migrated 45 critical microservices to Kubernetes with zero dropped connections. Here is the rollback protocol we used.',
+        caption: `Migrating 45+ enterprise microservices without a single dropped packet or customer outage isn't luck — it's deterministic engineering.\n\nOur zero-downtime playbook:\n🔹 Canary deployment with Envoy-based weight shifting\n🔹 Dual-write database replication with automated drift reconciliation\n🔹 Instant automated rollback triggered on p99 latency spikes > 500ms\n\nCheck out the full case study: https://axonflow.in/blog/architecting-zero-downtime-kubernetes-pipelines\n\n#DevOps #Kubernetes #CloudArchitecture #SiteReliability #ZeroDowntime`
+    },
+    {
+        id: 'appr_3',
+        title: '🔄 Self-Hosted n8n Enterprise ERP Workflows',
+        pageUrl: 'https://axonflow.in/blog/self-hosted-n8n-workflows-for-enterprise-erp',
+        mediaUrl: '/assets/logo_pro.png',
+        mediaName: 'n8n_enterprise_workflows.png',
+        mediaType: 'image',
+        status: 'PENDING_APPROVAL',
+        date: 'Yesterday',
+        hook: 'Stop paying $2,000/month for cloud webhooks that leak customer PII. Here is why enterprise teams are self-hosting n8n.',
+        caption: `Stop paying thousands every month for cloud workflow tools that expose your proprietary data to third parties.\n\nWe design self-hosted n8n automation pipelines deployed directly inside your VPC:\n🔒 100% Data Sovereignty & GDPR/HIPAA compliance\n⚡ Unlimited webhook throughput with zero per-task fees\n🤖 Deep integration with local LLMs and internal ERPs\n\nRead our architectural guide: https://axonflow.in/blog/self-hosted-n8n-workflows-for-enterprise-erp\n\n#n8n #EnterpriseAutomation #DataPrivacy #OpenSource #DevOps`
+    }
+];
+
+let instagramCommentsList = [
+    {
+        id: 'cmt_1',
+        postId: '18121946026808070',
+        postTitle: 'Autonomous AI Agent Infrastructure',
+        author: 'sarah_techleads',
+        authorPic: '👩‍💻',
+        time: '12m ago',
+        text: 'Is the sub-400ms latency guaranteed across 1M+ chunk vector indexes in production?',
+        intent: 'HIGH PURCHASE INTENT',
+        reply: 'Yes! We use hierarchical HNSW indexing with pre-warmed semantic vector clusters in memory. You can test our live benchmarks directly at https://axonflow.in',
+        repliedAt: '10m ago',
+        aiReplied: true
+    },
+    {
+        id: 'cmt_2',
+        postId: '18121946026808070',
+        postTitle: 'Autonomous AI Agent Infrastructure',
+        author: 'alex_fintech',
+        authorPic: '👨‍💼',
+        time: '34m ago',
+        text: 'What is the typical sprint timeline for migrating 20 microservices to your zero-downtime K8s setup?',
+        intent: 'LEAD INQUIRY',
+        reply: null,
+        repliedAt: null,
+        aiReplied: false
+    },
+    {
+        id: 'cmt_3',
+        postId: '17889288285435324',
+        postTitle: 'AxonFlow Platform Launch',
+        author: 'dr_rachel_m',
+        authorPic: '🩺',
+        time: '2h ago',
+        text: 'Are your clinical triage and healthcare AI agents fully HIPAA compliant with BAA signing?',
+        intent: 'COMPLIANCE INQUIRY',
+        reply: 'Hi Dr. Rachel! Yes, all our healthcare pipelines run fully air-gapped or in HIPAA-compliant isolated VPCs with standard BAA execution. Feel free to book a scoping call: https://axonflow.in/contact',
+        repliedAt: '1h ago',
+        aiReplied: true
+    }
+];
+
+let activeDmThread = 'dm_1';
+let instagramDmConversations = [
+    {
+        id: 'dm_1',
+        username: 'dev_founder_sam',
+        name: 'Samir Patel',
+        badge: 'SaaS Founder',
+        unread: false,
+        messages: [
+            { sender: 'them', text: 'Hey! We need an autonomous AI customer support agent for our SaaS. What is your pricing and timeline?', time: '10:14 AM' },
+            { sender: 'ai', text: 'Hi Samir! 👋 AxonFlow designs custom enterprise autonomous agent pipelines with sub-400ms latency. We operate in 2-4 week fixed sprints with 6 months of included SLA maintenance. Would you like to schedule a 15-min scoping call with our lead architects at https://axonflow.in/contact?', time: '10:15 AM' },
+            { sender: 'them', text: 'That sounds perfect. Does it integrate directly with Stripe and PostgreSQL?', time: '10:18 AM' }
+        ]
+    },
+    {
+        id: 'dm_2',
+        username: 'marcus_ops',
+        name: 'Marcus Vance',
+        badge: 'VP of Engineering',
+        unread: true,
+        messages: [
+            { sender: 'them', text: 'Hello AxonFlow team, do you provide on-premise deployments for your self-hosted n8n ERP workflows?', time: '1:45 PM' }
+        ]
+    },
+    {
+        id: 'dm_3',
+        username: 'elena_legalai',
+        name: 'Elena Rostova',
+        badge: 'Legal Tech Lead',
+        unread: false,
+        messages: [
+            { sender: 'them', text: 'We want to test your contract clause comparison engine on 50 commercial NDAs next week.', time: 'Yesterday' },
+            { sender: 'ai', text: 'Hi Elena! We would love to set up a dedicated test environment with your playbook rules. Please pick a slot here: https://axonflow.in/contact', time: 'Yesterday' }
+        ]
+    }
+];
+
+function switchSocialTab(tab) {
+    activeSocialTab = tab;
+    const container = document.getElementById('dashboardContent');
+    if (container) renderSocial(container);
+}
+
+function approveAndPublishReel(queueId) {
+    const item = instagramApprovalQueue.find(i => i.id === queueId);
+    if (!item) return;
+
+    if (!confirm(`Are you sure you want to approve and publish "${item.title}" live to Instagram @axonflowai.in?`)) {
+        return;
+    }
+
+    currentCustomMedia = {
+        url: item.mediaUrl,
+        name: item.mediaName,
+        type: item.mediaType,
+        size: item.mediaType === 'video' ? '1.8 MB' : '0.45 MB',
+        dataUrl: null,
+        publicUrl: item.mediaType === 'video' ? 'https://www.axonflow.in/axonflow_cinematic_reels_shorts.mp4' : 'https://www.axonflow.in/assets/logo_pro.png'
+    };
+
+    // Switch to reels tab, set caption, and trigger publish
+    activeSocialTab = 'reels';
+    const container = document.getElementById('dashboardContent');
+    if (container) renderSocial(container);
+
+    setTimeout(() => {
+        const captionArea = document.getElementById('reelCaption');
+        if (captionArea) captionArea.value = item.caption;
+        
+        // Remove from approval queue
+        instagramApprovalQueue = instagramApprovalQueue.filter(i => i.id !== queueId);
+        
+        publishInstagramReel();
+    }, 200);
+}
+
+function rejectApprovalItem(queueId) {
+    if (confirm("Discard this drafted reel from the approval queue?")) {
+        instagramApprovalQueue = instagramApprovalQueue.filter(i => i.id !== queueId);
+        const container = document.getElementById('dashboardContent');
+        if (container) renderSocial(container);
+    }
+}
+
+function queueCurrentReelForApproval() {
+    const caption = document.getElementById('reelCaption') ? document.getElementById('reelCaption').value : '';
+    const newId = 'appr_' + Date.now();
+    
+    instagramApprovalQueue.unshift({
+        id: newId,
+        title: currentCustomMedia.name || 'Custom Video Creation',
+        pageUrl: 'https://axonflow.in/',
+        mediaUrl: currentCustomMedia.url || '/axonflow_cinematic_reels_shorts.mp4',
+        mediaName: currentCustomMedia.name || 'custom_reel.mp4',
+        mediaType: currentCustomMedia.type || 'video',
+        status: 'PENDING_APPROVAL',
+        date: 'Just now',
+        hook: 'New custom drafted reel awaiting admin review',
+        caption: caption
+    });
+
+    alert("✅ Reel successfully queued for approval! Go to the 'Approval Queue' tab to review and release.");
+    switchSocialTab('approval');
+}
+
+function replyToInstagramComment(commentId) {
+    const input = document.getElementById(`replyInput_${commentId}`);
+    if (!input || !input.value.trim()) return;
+
+    const cmt = instagramCommentsList.find(c => c.id === commentId);
+    if (!cmt) return;
+
+    cmt.reply = input.value.trim();
+    cmt.repliedAt = 'Just now';
+    cmt.aiReplied = false;
+
+    const container = document.getElementById('dashboardContent');
+    if (container) renderSocial(container);
+}
+
+function sendSocialDmMessage() {
+    const input = document.getElementById('activeDmInput');
+    if (!input || !input.value.trim()) return;
+
+    const thread = instagramDmConversations.find(t => t.id === activeDmThread);
+    if (!thread) return;
+
+    thread.messages.push({
+        sender: 'ai',
+        text: input.value.trim(),
+        time: 'Just now'
+    });
+
+    input.value = '';
+    const container = document.getElementById('dashboardContent');
+    if (container) renderSocial(container);
+}
+
+function selectDmThread(threadId) {
+    activeDmThread = threadId;
+    const thread = instagramDmConversations.find(t => t.id === threadId);
+    if (thread) thread.unread = false;
+    const container = document.getElementById('dashboardContent');
+    if (container) renderSocial(container);
+}
+
 function renderSocial(container) {
     const ig = getInstagramConfig();
+    const pendingCount = instagramApprovalQueue.length;
+    const activeThreadObj = instagramDmConversations.find(t => t.id === activeDmThread) || instagramDmConversations[0];
 
     container.innerHTML = `
         <!-- Top Status Bar -->
-        <div class="glass-card rounded-2xl p-6 mb-8 border ${ig.connected ? 'border-pink-500/30 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-slate-900/80' : 'border-amber-500/30 bg-slate-900/80'}">
+        <div class="glass-card rounded-2xl p-6 mb-6 border ${ig.connected ? 'border-pink-500/30 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-slate-900/80' : 'border-amber-500/30 bg-slate-900/80'}">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div class="flex items-center gap-5">
                     <div class="relative">
@@ -793,223 +1196,373 @@ function renderSocial(container) {
                                 ${ig.accountType}
                             </span>
                         </div>
-                        <p class="text-xs text-slate-400 mt-1">Instagram Business Account ID: <span class="font-mono text-slate-300">${ig.accountId}</span> &bull; Token valid for <span class="text-emerald-400 font-semibold">${ig.tokenExpiryDays} days</span></p>
+                        <p class="text-xs text-slate-400 mt-1">Instagram Account ID: <span class="font-mono text-slate-300">${ig.accountId}</span> &bull; Token valid for <span class="text-emerald-400 font-semibold">${ig.tokenExpiryDays} days</span></p>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
                     <button onclick="openInstagramConnectModal()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all flex items-center gap-2">
                         <svg class="w-4 h-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg>
-                        <span>${ig.connected ? 'Configure API Keys' : 'Connect Account'}</span>
+                        <span>Configure API Keys</span>
                     </button>
-                    ${ig.connected ? `
-                        <button onclick="toggleInstagramConnection()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 transition-all">
-                            Disconnect
-                        </button>
-                    ` : `
-                        <button onclick="toggleInstagramConnection()" class="px-4 py-2 rounded-xl text-xs font-semibold btn-gradient text-white shadow-lg">
-                            Quick Connect
-                        </button>
-                    `}
+                    <a href="https://instagram.com/${ig.username}" target="_blank" class="px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white shadow-lg flex items-center gap-1.5">
+                        <span>Visit Profile ↗</span>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Meta Platform Insights -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div class="glass-card rounded-2xl p-5 border border-slate-800">
-                <span class="text-xs text-slate-400">Total Followers</span>
-                <p class="text-2xl font-bold text-white mt-1">${ig.followersCount.toLocaleString()}</p>
-                <span class="text-[11px] text-emerald-400 font-medium mt-1 inline-block">&uarr; +14.2% this week</span>
-            </div>
-            <div class="glass-card rounded-2xl p-5 border border-slate-800">
-                <span class="text-xs text-slate-400">Reels & Post Reach</span>
-                <p class="text-2xl font-bold text-white mt-1">84.6K</p>
-                <span class="text-[11px] text-pink-400 font-medium mt-1 inline-block">&uarr; +28.9% engagement</span>
-            </div>
-            <div class="glass-card rounded-2xl p-5 border border-slate-800">
-                <span class="text-xs text-slate-400">AI DM Conversations</span>
-                <p class="text-2xl font-bold text-white mt-1">194</p>
-                <span class="text-[11px] text-cyan-400 font-medium mt-1 inline-block">100% automated response</span>
-            </div>
-            <div class="glass-card rounded-2xl p-5 border border-slate-800">
-                <span class="text-xs text-slate-400">Published Reels</span>
-                <p class="text-2xl font-bold text-white mt-1">${ig.mediaCount}</p>
-                <span class="text-[11px] text-purple-400 font-medium mt-1 inline-block">Cinematic Tour Ready</span>
-            </div>
+        <!-- 4-Tab Navigation Bar -->
+        <div class="flex items-center gap-2 mb-6 border-b border-slate-800 pb-3 overflow-x-auto">
+            <button onclick="switchSocialTab('reels')" class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${activeSocialTab === 'reels' ? 'bg-pink-500/20 text-pink-300 border border-pink-500/40 shadow-lg' : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'}">
+                <span>🎬 Video & Reels Publisher</span>
+            </button>
+            <button onclick="switchSocialTab('approval')" class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 relative ${activeSocialTab === 'approval' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-lg' : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'}">
+                <span>🛡️ Pending Approval Queue</span>
+                ${pendingCount > 0 ? `<span class="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-amber-500 text-black font-bold">${pendingCount}</span>` : ''}
+            </button>
+            <button onclick="switchSocialTab('dms')" class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${activeSocialTab === 'dms' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-lg' : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'}">
+                <span>💬 Instagram DM Inbox (AI & Chat)</span>
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            </button>
+            <button onclick="switchSocialTab('comments')" class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${activeSocialTab === 'comments' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-lg' : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'}">
+                <span>🗨️ Comments Moderation & Auto-Replies</span>
+            </button>
         </div>
 
-        <!-- Two Column Main Layout: Reels Publisher & AI DM Responder -->
-        <div class="grid lg:grid-cols-2 gap-8 mb-8">
-            <!-- Left: Direct Instagram Reels Publisher -->
-            <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 font-bold">
-                                🎬
-                            </div>
-                            <div>
-                                <h3 class="text-base font-bold text-white">Instagram Reels Publisher</h3>
-                                <p class="text-xs text-slate-400">Meta Graph API v18.0 &bull; Video Reels Publishing</p>
-                            </div>
-                        </div>
-                        <span class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-pink-500/15 text-pink-300 border border-pink-500/20">9:16 Vertical</span>
-                    </div>
+        <!-- TAB 1: REELS & VIDEO PUBLISHER -->
+        ${activeSocialTab === 'reels' ? `
+            <!-- Website Pages 1-Click Reels Picker Banner -->
+            <div class="glass-card rounded-2xl p-5 mb-6 border border-slate-800 bg-slate-950/60">
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="text-xs font-bold text-white flex items-center gap-2">
+                        <span>🌐 Generate Reel/Post from Website Pages & Case Studies:</span>
+                    </h4>
+                    <span class="text-[10px] text-slate-400 font-mono">1-Click Auto Fill</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+                    ${AXONFLOW_PAGES_CATALOG.map(p => `
+                        <button type="button" onclick="selectPageForGeneration('${p.id}'); switchSocialTab('reels');" class="p-2.5 rounded-xl bg-slate-900/80 hover:bg-pink-500/15 border border-slate-800 hover:border-pink-500/30 text-left transition-all group">
+                            <span class="text-xs font-bold text-slate-200 group-hover:text-pink-300 block truncate">${p.title}</span>
+                            <span class="text-[9px] text-slate-400 mt-0.5 block truncate">${p.category}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
 
-                    <!-- Video / Media Preview Container -->
-                    <div class="p-4 rounded-xl bg-black/60 border border-slate-800 mb-4">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-semibold text-slate-300">Selected Media Asset:</span>
-                            <div class="flex items-center gap-2">
-                                <span id="publisherAssetLabel" class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded truncate max-w-[200px]">
-                                    ${currentCustomMedia.name}
-                                </span>
-                                <button type="button" onclick="document.getElementById('publisherMediaInput').click()" class="text-[10px] px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/30 hover:bg-pink-500/30">
-                                    Change / Upload
-                                </button>
-                                <input type="file" id="publisherMediaInput" accept="video/mp4,video/quicktime,video/webm,image/png,image/jpeg,image/webp" class="hidden" onchange="handlePublisherMediaUpload(event)">
-                            </div>
-                        </div>
-                        <div id="publisherMediaPreviewArea" class="aspect-[9/6] w-full bg-slate-950 rounded-lg overflow-hidden relative flex items-center justify-center border border-slate-800">
-                            ${currentCustomMedia.dataUrl ? (
-                                currentCustomMedia.type === 'video' ? `
-                                    <video src="${currentCustomMedia.dataUrl}" controls class="w-full h-full object-contain bg-black"></video>
-                                ` : `
-                                    <img src="${currentCustomMedia.dataUrl}" class="w-full h-full object-contain bg-black">
-                                `
-                            ) : `
-                                <div class="text-center p-4">
-                                    <div class="text-3xl mb-2">🎥</div>
-                                    <p class="text-xs font-semibold text-white">AxonFlow Cinematic 9:16 Showcase</p>
-                                    <p class="text-[11px] text-slate-400 mt-1">1080x1920 &bull; Full Device Responsiveness Tour &bull; 26.4s</p>
+            <!-- Two Column Reels Layout -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <!-- Left: Video Preview & Setup -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 font-bold">🎬</div>
+                                <div>
+                                    <h3 class="text-base font-bold text-white">Instagram Reels Publisher</h3>
+                                    <p class="text-xs text-slate-400">Meta Graph API v18.0 &bull; Video & Graphic Publishing</p>
                                 </div>
-                            `}
+                            </div>
+                            <span class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-pink-500/15 text-pink-300 border border-pink-500/20">9:16 Vertical</span>
                         </div>
-                    </div>
 
-                    <!-- Caption & Hashtags -->
-                    <div class="space-y-3 mb-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Reel Caption & Description</label>
-                            <textarea id="reelCaption" rows="4" class="input-field w-full rounded-xl p-3 text-xs leading-relaxed" placeholder="Enter caption...">🚀 Transforming enterprise operations with autonomous AI agents & sub-400ms RAG pipelines. Fully responsive, scalable, and production-ready.
+                        <!-- Video / Media Preview Container -->
+                        <div class="p-4 rounded-xl bg-black/60 border border-slate-800 mb-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-semibold text-slate-300">Selected Media Asset:</span>
+                                <div class="flex items-center gap-2">
+                                    <span id="publisherAssetLabel" class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded truncate max-w-[200px]">
+                                        ${currentCustomMedia.name}
+                                    </span>
+                                    <button type="button" onclick="document.getElementById('publisherMediaInput').click()" class="text-[10px] px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/30 hover:bg-pink-500/30">
+                                        Change / Upload
+                                    </button>
+                                    <input type="file" id="publisherMediaInput" accept="video/mp4,video/quicktime,video/webm,image/png,image/jpeg,image/webp" class="hidden" onchange="handlePublisherMediaUpload(event)">
+                                </div>
+                            </div>
+                            <div id="publisherMediaPreviewArea" class="aspect-[9/6] w-full bg-slate-950 rounded-lg overflow-hidden relative flex items-center justify-center border border-slate-800">
+                                ${currentCustomMedia.dataUrl ? (
+                                    currentCustomMedia.type === 'video' ? `
+                                        <video src="${currentCustomMedia.dataUrl}" controls class="w-full h-full object-contain bg-black"></video>
+                                    ` : `
+                                        <img src="${currentCustomMedia.dataUrl}" class="w-full h-full object-contain bg-black">
+                                    `
+                                ) : `
+                                    <div class="text-center p-4">
+                                        <div class="text-3xl mb-2">🎥</div>
+                                        <p class="text-xs font-semibold text-white">AxonFlow Cinematic 9:16 Showcase</p>
+                                        <p class="text-[11px] text-slate-400 mt-1">1080x1920 &bull; Full Device Responsiveness Tour &bull; 26.4s</p>
+                                    </div>
+                                `}
+                            </div>
+                        </div>
+
+                        <!-- Caption & Hashtags -->
+                        <div class="space-y-3 mb-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Reel Caption & Description</label>
+                                <textarea id="reelCaption" rows="4" class="input-field w-full rounded-xl p-3 text-xs leading-relaxed" placeholder="Enter caption...">🚀 Transforming enterprise operations with autonomous AI agents & sub-400ms RAG pipelines. Fully responsive, scalable, and production-ready.
 
 Explore our systems: https://axonflow.in
 
 #AxonFlowAI #EnterpriseAI #AutonomousAgents #AIAgency #TechInnovation #AIAutomation #FullStackAI</textarea>
+                            </div>
                         </div>
-                        <div class="flex items-center justify-between text-xs text-slate-400">
-                            <span>Post to: <strong>Feed & Reels Tab</strong></span>
-                            <span>Cover Image: <strong>Auto-generated (Hero Frame)</strong></span>
+                    </div>
+
+                    <div id="reelsPublishStatus" class="hidden mb-4 p-3 rounded-xl bg-pink-500/10 border border-pink-500/30 text-xs text-pink-300 flex items-center gap-2">
+                        <span class="animate-spin inline-block">⏳</span>
+                        <span id="reelsStatusText">Publishing video container to Instagram Graph API...</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <button onclick="publishInstagramReel()" id="btnPublishReel" class="w-full py-3 rounded-xl text-xs font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 hover:from-pink-500 hover:to-indigo-500 text-white shadow-lg flex items-center justify-center gap-2 transition-all">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                                <span>Publish Now via Meta API</span>
+                            </button>
+                            <button onclick="queueCurrentReelForApproval()" class="w-full py-3 rounded-xl text-xs font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 flex items-center justify-center gap-2 transition-all">
+                                <span>🛡️ Send to Approval Queue</span>
+                            </button>
                         </div>
+                        <button onclick="instantDownloadAndCopy()" class="w-full py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center justify-center gap-2 transition-all">
+                            <span id="btnInstantText">Download Video & Copy Caption</span>
+                        </button>
                     </div>
                 </div>
 
-                <div id="reelsPublishStatus" class="hidden mb-4 p-3 rounded-xl bg-pink-500/10 border border-pink-500/30 text-xs text-pink-300 flex items-center gap-2">
-                    <span class="animate-spin inline-block">⏳</span>
-                    <span id="reelsStatusText">Publishing video container to Instagram Graph API...</span>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <button onclick="publishInstagramReel()" id="btnPublishReel" class="w-full py-3 rounded-xl text-xs font-semibold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 hover:from-pink-500 hover:to-indigo-500 text-white shadow-lg flex items-center justify-center gap-2 transition-all">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-                        <span>Meta Graph API Publish</span>
-                    </button>
-                    <button onclick="instantDownloadAndCopy()" class="w-full py-3 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-pink-500/40 flex items-center justify-center gap-2 transition-all">
-                        <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                        <span id="btnInstantText">Download & Copy Caption</span>
-                    </button>
-                </div>
-                <div class="mt-3 p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-[10px] text-slate-400 flex items-start gap-2">
-                    <span class="text-amber-400 font-bold">ℹ️</span>
-                    <span><strong>Note on Meta Graph API:</strong> Posting directly via Graph API requires a valid Meta Long-Lived Access Token in <em>Configure API Keys</em>. You can also use <em>Download & Copy Caption</em> to post instantly from your phone or Meta Business Suite!</span>
-                </div>
-            </div>
-
-            <!-- Right: Instagram Messaging API & Autonomous DM Agent -->
-            <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold">
-                                💬
+                <!-- Right: Platform Overview & Metrics -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-sm font-bold text-white mb-3">Live Meta Platform Metrics</h4>
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                                <span class="text-[10px] text-slate-400">Total Reach</span>
+                                <p class="text-lg font-bold text-white mt-0.5">84.6K</p>
+                                <span class="text-[10px] text-pink-400">&uarr; +28.9% engagement</span>
                             </div>
-                            <div>
-                                <h3 class="text-base font-bold text-white">Instagram Messaging AI Agent</h3>
-                                <p class="text-xs text-slate-400">Messenger API for Instagram &bull; 24/7 Lead Qual</p>
+                            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                                <span class="text-[10px] text-slate-400">Published Posts</span>
+                                <p class="text-lg font-bold text-white mt-0.5">${ig.mediaCount}</p>
+                                <span class="text-[10px] text-emerald-400">Active Live</span>
                             </div>
                         </div>
+
+                        <h4 class="text-sm font-bold text-white mb-2">Live Post Preview on @${ig.username}</h4>
+                        <div class="rounded-xl p-4 bg-black/80 border border-slate-800 space-y-2">
+                            <div class="flex items-center gap-2">
+                                <img src="${ig.profilePic}" class="w-6 h-6 rounded-full">
+                                <span class="text-xs font-bold text-white">axonflowai.in</span>
+                                <span class="text-[10px] text-slate-500 font-mono">&bull; Just now</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                                🚀 Transforming enterprise operations with autonomous AI agents & sub-400ms RAG pipelines.
+                            </p>
+                            <span class="text-[11px] text-pink-400 font-mono">#AxonFlowAI #EnterpriseAI #AutonomousAgents</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ` : ''}
+
+        <!-- TAB 2: PENDING APPROVAL QUEUE -->
+        ${activeSocialTab === 'approval' ? `
+            <div class="space-y-4">
+                <div class="flex items-center justify-between mb-2">
+                    <div>
+                        <h3 class="text-base font-bold text-white">Reel & Video Creations Approval Queue</h3>
+                        <p class="text-xs text-slate-400">Review video drafts, hooks, and captions before approving live deployment to @${ig.username}.</p>
+                    </div>
+                    <span class="text-xs px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-semibold font-mono">
+                        ${pendingCount} Pending Review
+                    </span>
+                </div>
+
+                ${instagramApprovalQueue.length === 0 ? `
+                    <div class="glass-card rounded-2xl p-12 text-center border border-slate-800">
+                        <div class="text-4xl mb-3">🎉</div>
+                        <h4 class="text-base font-bold text-white">All Clear! No pending reels awaiting approval.</h4>
+                        <p class="text-xs text-slate-400 mt-1">Generate new drafts from any page or click below to create a new reel.</p>
+                        <button onclick="switchSocialTab('reels')" class="mt-4 px-5 py-2.5 rounded-xl text-xs font-bold bg-pink-600 hover:bg-pink-500 text-white shadow-lg">
+                            + Create New Reel
+                        </button>
+                    </div>
+                ` : `
+                    <div class="grid gap-4">
+                        ${instagramApprovalQueue.map(item => `
+                            <div class="glass-card rounded-2xl p-5 border border-amber-500/30 bg-slate-950/70 hover:border-amber-500/50 transition-all flex flex-col lg:flex-row items-start justify-between gap-6">
+                                <div class="flex items-start gap-4 flex-1">
+                                    <div class="w-24 h-32 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-slate-700 relative">
+                                        ${item.mediaType === 'video' ? `
+                                            <video src="${item.mediaUrl}" class="w-full h-full object-cover"></video>
+                                            <span class="absolute bottom-1 right-1 text-[8px] bg-black/80 text-white px-1 py-0.5 rounded font-mono">VIDEO</span>
+                                        ` : `
+                                            <img src="${item.mediaUrl}" class="w-full h-full object-cover">
+                                            <span class="absolute bottom-1 right-1 text-[8px] bg-black/80 text-white px-1 py-0.5 rounded font-mono">IMAGE</span>
+                                        `}
+                                    </div>
+                                    <div class="space-y-2 flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="text-sm font-bold text-white">${item.title}</h4>
+                                            <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">PENDING APPROVAL</span>
+                                            <span class="text-[10px] text-slate-500 font-mono">${item.date}</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300">
+                                            <strong class="text-amber-400 text-[11px] block mb-0.5">🎙️ Opening Hook:</strong>
+                                            ${item.hook}
+                                        </div>
+                                        <p class="text-xs text-slate-400 line-clamp-2 whitespace-pre-line">${item.caption}</p>
+                                    </div>
+                                </div>
+                                <div class="flex lg:flex-col items-center gap-2 w-full lg:w-44 flex-shrink-0">
+                                    <button onclick="approveAndPublishReel('${item.id}')" class="w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-lg flex items-center justify-center gap-1.5 transition-all">
+                                        <span>✅ Approve & Post Live</span>
+                                    </button>
+                                    <button onclick="rejectApprovalItem('${item.id}')" class="w-full py-2 rounded-xl text-xs font-semibold bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition-all">
+                                        <span>❌ Discard</span>
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `}
+            </div>
+        ` : ''}
+
+        <!-- TAB 3: LIVE INSTAGRAM DM INBOX -->
+        ${activeSocialTab === 'dms' ? `
+            <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-lg">
+                            💬
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Instagram Direct Message (DM) Lead Hub</h3>
+                            <p class="text-xs text-slate-400">Messenger API for Instagram &bull; Autonomous AI Response & Live Human Override</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs text-slate-300 font-semibold">24/7 AI DM Agent:</span>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="aiDmToggle" ${ig.aiDmAgentEnabled ? 'checked' : ''} onchange="toggleAiDmAgent(this.checked)" class="sr-only peer">
                             <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
                         </label>
                     </div>
+                </div>
 
-                    <div class="p-3 rounded-xl bg-cyan-500/5 border border-cyan-500/20 mb-4 text-xs text-cyan-200">
-                        Autonomous AI bot responds immediately to incoming prospect DMs on Instagram, answers questions about AxonFlow services/pricing, and schedules discovery calls automatically.
-                    </div>
-
-                    <!-- Live DM Simulator -->
-                    <div class="rounded-xl border border-slate-800 bg-black/50 p-4 mb-4">
-                        <div class="text-xs font-semibold text-slate-300 mb-3 flex items-center justify-between">
-                            <span>Interactive DM Bot Simulator:</span>
-                            <span class="text-[10px] text-emerald-400 font-mono">Agent Active</span>
-                        </div>
-                        <div id="dmSimulatorChat" class="space-y-2 h-44 overflow-y-auto pr-1 text-xs mb-3">
-                            <div class="flex items-start gap-2">
-                                <div class="w-6 h-6 rounded-full bg-slate-700 flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white">IG</div>
-                                <div class="bg-slate-800 p-2.5 rounded-2xl rounded-tl-none text-slate-200 max-w-[85%]">
-                                    Hey! We need an autonomous AI customer support agent for our SaaS. What is your pricing and timeline?
+                <div class="grid lg:grid-cols-12 gap-6 h-[480px]">
+                    <!-- Left 4 Cols: Conversations List -->
+                    <div class="lg:col-span-4 border-r border-slate-800 pr-4 space-y-2 overflow-y-auto">
+                        <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">Active Conversations</span>
+                        ${instagramDmConversations.map(conv => `
+                            <div onclick="selectDmThread('${conv.id}')" class="p-3 rounded-xl cursor-pointer transition-all ${conv.id === activeDmThread ? 'bg-cyan-500/15 border border-cyan-500/40 text-white' : 'bg-slate-900/60 hover:bg-slate-800 text-slate-300 border border-transparent'}">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-xs font-bold text-white">
+                                            ${conv.name[0]}
+                                        </div>
+                                        <div>
+                                            <span class="text-xs font-bold block">@${conv.username}</span>
+                                            <span class="text-[10px] text-slate-400 block">${conv.badge}</span>
+                                        </div>
+                                    </div>
+                                    ${conv.unread ? `<span class="w-2 h-2 rounded-full bg-cyan-400"></span>` : ''}
                                 </div>
                             </div>
-                            <div class="flex items-start gap-2 justify-end">
-                                <div class="bg-gradient-to-r from-purple-600 to-cyan-600 p-2.5 rounded-2xl rounded-tr-none text-white max-w-[85%]">
-                                    Hi there! 👋 AxonFlow designs custom enterprise autonomous agent pipelines with sub-400ms latency. We include 6 months of post-launch support. Would you like to schedule a 15-min scoping call with our lead architects at https://axonflow.in/contact?
-                                </div>
-                                <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-pink-500 to-purple-600 flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white">AI</div>
+                        `).join('')}
+                    </div>
+
+                    <!-- Right 8 Cols: Chat Window & Live Reply -->
+                    <div class="lg:col-span-8 flex flex-col justify-between pl-2">
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-white">@${activeThreadObj.username}</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">${activeThreadObj.badge}</span>
                             </div>
+                            <span class="text-[11px] text-emerald-400 font-mono">Live Sync Active</span>
                         </div>
-                        <div class="flex gap-2">
-                            <input type="text" id="simDmInput" class="input-field flex-1 rounded-xl p-2.5 text-xs" placeholder="Type a test prospect message..." onkeydown="if(event.key==='Enter') sendTestDm()">
-                            <button onclick="sendTestDm()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white transition-all">Send</button>
+
+                        <!-- Messages Stream -->
+                        <div class="flex-1 overflow-y-auto py-4 space-y-3 pr-2 text-xs">
+                            ${activeThreadObj.messages.map(m => `
+                                <div class="flex items-start gap-2 ${m.sender === 'ai' ? 'justify-end' : ''}">
+                                    ${m.sender !== 'ai' ? `<div class="w-6 h-6 rounded-full bg-slate-700 flex-shrink-0 flex items-center justify-center text-[10px] text-white">IG</div>` : ''}
+                                    <div class="p-3 rounded-2xl max-w-[80%] ${m.sender === 'ai' ? 'bg-gradient-to-r from-purple-600 to-cyan-600 text-white rounded-tr-none' : 'bg-slate-800 text-slate-200 rounded-tl-none'}">
+                                        <p class="leading-relaxed">${m.text}</p>
+                                        <span class="text-[9px] opacity-60 mt-1 block text-right">${m.time}</span>
+                                    </div>
+                                    ${m.sender === 'ai' ? `<div class="w-6 h-6 rounded-full bg-cyan-500 flex-shrink-0 flex items-center justify-center text-[10px] text-white font-bold">AI</div>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <!-- Manual / AI Reply Input -->
+                        <div class="pt-3 border-t border-slate-800 flex gap-2">
+                            <input type="text" id="activeDmInput" class="input-field flex-1 rounded-xl p-3 text-xs" placeholder="Type a direct response or trigger AI proposal..." onkeydown="if(event.key==='Enter') sendSocialDmMessage()">
+                            <button onclick="sendSocialDmMessage()" class="px-5 py-3 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white transition-all">
+                                Send DM
+                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        ` : ''}
+
+        <!-- TAB 4: COMMENTS MODERATION & AUTO-REPLIES -->
+        ${activeSocialTab === 'comments' ? `
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-lg">
+                            🗨️
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Post Comments & Autonomous Responder</h3>
+                            <p class="text-xs text-slate-400">Real-time comment monitoring & intelligent auto-replies on @${ig.username}</p>
+                        </div>
+                    </div>
+                    <span class="text-xs px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-semibold font-mono">
+                        Auto-Responder Active
+                    </span>
                 </div>
 
-                <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                    <span>Webhook URL: <code class="text-slate-300 font-mono">https://axonflow.in/api/instagram-webhook</code></span>
-                    <span class="text-emerald-400">Status: Listening</span>
-                </div>
-            </div>
-        </div>
+                <div class="space-y-4">
+                    ${instagramCommentsList.map(c => `
+                        <div class="rounded-xl p-4 bg-slate-950/80 border border-slate-800 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-lg">${c.authorPic}</span>
+                                    <span class="text-xs font-bold text-white">@${c.author}</span>
+                                    <span class="text-[10px] text-slate-500">&bull; on post <em>"${c.postTitle}"</em></span>
+                                </div>
+                                <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/30 font-bold">${c.intent}</span>
+                            </div>
 
-        <!-- Other Linked Social Channels -->
-        <h3 class="text-sm font-semibold text-white mb-4">Other Marketing Channels</h3>
-        <div class="grid md:grid-cols-2 gap-4">
-            <div class="glass-card rounded-xl p-4 border border-slate-800 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-blue-600/10 border border-blue-600/30 flex items-center justify-center text-[#0A66C2]">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-white">LinkedIn Company Page</p>
-                        <a href="https://linkedin.com/company/axonflow-ai" target="_blank" class="text-xs text-slate-400 hover:text-white">AxonFlow AI</a>
-                    </div>
+                            <p class="text-xs text-slate-200 bg-slate-900 p-3 rounded-xl border border-slate-800">${c.text}</p>
+
+                            ${c.reply ? `
+                                <div class="pl-4 border-l-2 border-emerald-500 py-1 space-y-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-[10px] font-bold text-emerald-400">AxonFlow AI Reply</span>
+                                        <span class="text-[9px] text-slate-500 font-mono">${c.repliedAt}</span>
+                                    </div>
+                                    <p class="text-xs text-slate-300 leading-relaxed">${c.reply}</p>
+                                </div>
+                            ` : `
+                                <div class="flex gap-2 pt-1">
+                                    <input type="text" id="replyInput_${c.id}" class="input-field flex-1 rounded-xl p-2 text-xs" placeholder="Type a custom reply or click to auto-generate...">
+                                    <button onclick="replyToInstagramComment('${c.id}')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-purple-600 hover:bg-purple-500 text-white transition-all">
+                                        Reply
+                                    </button>
+                                </div>
+                            `}
+                        </div>
+                    `).join('')}
                 </div>
-                <span class="text-[10px] font-mono px-2 py-1 rounded-full bg-slate-800 text-slate-400">Marketing API Ready</span>
             </div>
-            <div class="glass-card rounded-xl p-4 border border-slate-800 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-[#1877F2]">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 10-11.56 9.87v-6.98H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.98A10 10 0 0022 12z"/></svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-white">Facebook Page</p>
-                        <span class="text-xs text-slate-400">Linked to Meta Business Suite</span>
-                    </div>
-                </div>
-                <span class="text-[10px] font-mono px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400">Linked</span>
-            </div>
-        </div>
+        ` : ''}
+    `;
+}
     `;
 }
 
