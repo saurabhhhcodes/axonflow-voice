@@ -1,13 +1,12 @@
+functionsDirectory = "/Users/saurabhkumarbajpaiai/.gemini/antigravity/scratch/autonomiq-website/netlify/functions"
+functionsDirectoryOrigin = "default"
 redirectsOrigin = "config"
 plugins = []
-
-[functions]
-
-[functions."*"]
 
 [build]
 publish = "/Users/saurabhkumarbajpaiai/.gemini/antigravity/scratch/autonomiq-website"
 publishOrigin = "config"
+functions = "/Users/saurabhkumarbajpaiai/.gemini/antigravity/scratch/autonomiq-website/netlify/functions"
 
 [build.environment]
 
@@ -22,6 +21,10 @@ publishOrigin = "config"
 [build.processing.js]
 
 [build.services]
+
+[functions]
+
+[functions."*"]
 
 [[headers]]
 for = "/*"
