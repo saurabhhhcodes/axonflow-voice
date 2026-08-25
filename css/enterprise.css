@@ -739,44 +739,37 @@ img { max-width: 100%; display: block; }
 }
 
 /* Responsive Card Iframes & Mobile Alignment */
+.portfolio-card-screen {
+  width: 100% !important;
+  aspect-ratio: 16 / 10 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: #06080c !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 0 0 0 !important;
+}
+
 .portfolio-iframe {
-  width: 1280px;
-  height: 800px;
-  border: none;
-  transform-origin: 0 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  transform: scale(0.28);
+  width: 1280px !important;
+  height: 800px !important;
+  border: none !important;
+  transform-origin: 0 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  pointer-events: none !important;
+  will-change: transform;
 }
 
-@media (max-width: 1024px) {
-  .portfolio-iframe {
-    transform: scale(0.26);
-  }
+.browser-mockup {
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
 }
 
-@media (max-width: 768px) {
-  .portfolio-iframe {
-    transform: scale(0.29);
-  }
-  .browser-mockup {
-    margin: 0 auto !important;
-    width: 100% !important;
-  }
-  .portfolio-card-screen {
-    height: 200px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .portfolio-iframe {
-    transform: scale(0.24);
-  }
-  .portfolio-card-screen {
-    height: 180px !important;
-  }
+@media (max-width: 600px) {
   .browser-mockup .bar {
     padding: 6px 10px !important;
     gap: 4px !important;
@@ -784,18 +777,10 @@ img { max-width: 100%; display: block; }
   .browser-mockup .bar .url-bar {
     font-size: 0.65rem !important;
     padding: 0.15rem 0.5rem !important;
+    max-width: 160px !important;
   }
   .ef-card {
     border-radius: 14px !important;
-  }
-}
-
-@media (max-width: 380px) {
-  .portfolio-iframe {
-    transform: scale(0.21);
-  }
-  .portfolio-card-screen {
-    height: 160px !important;
   }
 }
 

@@ -1,8 +1,8 @@
 /* AxonFlow AI — Master Portfolio Grid.
    Renders scaled live iframe previews inside browser mockup windows for all 30 projects,
-   with interactive mouse passthrough and seamless modal zoom.
+   with dynamic pixel-perfect auto-scaling for mobile, tablet, and desktop screens.
    Includes a smart canvas fallback so if an app rejects cross-origin framing,
-   a live styled preview canvas loads instead of a blank document icon! */
+   a live styled preview canvas loads seamlessly! */
 (function () {
   var PROJECTS = [
     { name: 'Prestige Estates', url: 'https://legendary-tapioca-50caa6.netlify.app', host: 'legendary-tapioca-50caa6.netlify.app', desc: 'Ultra-luxury real estate showcase platform built for an Irvine, CA client.', icon: '🏰', tag: 'Featured Client', gradient: 'linear-gradient(135deg, #1e1b4b 0%, #2e1065 50%, #581c87 100%)' },
@@ -50,13 +50,13 @@
               '<span class="dot" style="width:8px;height:8px;border-radius:50%;background:#27c93f;flex-shrink:0"></span>' +
               '<span class="url-bar" style="font-family:var(--font-mono);font-size:.7rem;color:var(--text-dim);margin-left:.5rem;background:rgba(0,0,0,0.35);padding:.2rem .75rem;border-radius:6px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.host) + '</span>' +
             '</div>' +
-            '<div class="screen portfolio-card-screen" style="position:relative;height:220px;background:#06080c;overflow:hidden;margin:0;padding:0;width:100%">' +
-              '<iframe src="' + esc(p.url) + '" title="' + esc(p.name) + ' live preview" loading="lazy" class="portfolio-iframe" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"></iframe>' +
+            '<div class="screen portfolio-card-screen" style="position:relative;background:#06080c;overflow:hidden;margin:0;padding:0;width:100%;aspect-ratio:16/10">' +
+              '<iframe src="' + esc(p.url) + '" title="' + esc(p.name) + ' live preview" loading="lazy" class="portfolio-iframe" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:none;transform-origin:0 0;pointer-events:none"></iframe>' +
               '<div class="screen-fallback" style="position:absolute;inset:0;background:' + p.gradient + ';display:none;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;box-shadow:inset 0 0 60px rgba(0,0,0,0.5)">' +
                 '<div style="width:60px;height:60px;border-radius:18px;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:.75rem;box-shadow:0 12px 32px rgba(0,0,0,0.4)">' + p.icon + '</div>' +
                 '<div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ffffff;background:rgba(0,0,0,0.45);padding:.35rem .85rem;border-radius:20px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)">' + esc(p.tag) + '</div>' +
               '</div>' +
-              '<div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(7,8,10,0.6) 100%);pointer-events:none"></div>' +
+              '<div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.02) 0%, rgba(7,8,10,0.6) 100%);pointer-events:none"></div>' +
               '<div style="position:absolute;bottom:.75rem;left:.85rem;font-family:var(--font-mono);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ffffff;background:rgba(7,8,10,0.85);padding:.35rem .85rem;border-radius:20px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);z-index:2">' + p.icon + ' ' + esc(p.tag) + '</div>' +
               '<span class="preview-tag" style="z-index:2;position:absolute;top:.75rem;right:.75rem;background:rgba(84,87,255,0.95);color:#fff;font-family:var(--font-mono);font-size:.65rem;font-weight:600;padding:.35rem .75rem;border-radius:8px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);box-shadow:0 4px 14px rgba(0,0,0,0.4)">▶ Live View</span>' +
             '</div>' +
@@ -73,10 +73,36 @@
     );
   }
 
+  function adjustScales() {
+    var screens = document.querySelectorAll('.portfolio-card-screen');
+    for (var i = 0; i < screens.length; i++) {
+      var scr = screens[i];
+      var w = scr.offsetWidth;
+      if (w > 0) {
+        var scale = w / 1280;
+        var iframe = scr.querySelector('.portfolio-iframe');
+        if (iframe) {
+          iframe.style.transform = 'scale(' + scale + ')';
+        }
+      }
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     var grid = document.getElementById('portfolio-grid');
     if (!grid) return;
     grid.innerHTML = PROJECTS.map(card).join('');
+    
+    // Initial dynamic auto-scaling
+    setTimeout(adjustScales, 50);
+    setTimeout(adjustScales, 300);
+    window.addEventListener('resize', adjustScales, { passive: true });
+
+    // Use ResizeObserver for responsive parent container changes
+    if (window.ResizeObserver && grid) {
+      new ResizeObserver(adjustScales).observe(grid);
+    }
+
     grid.querySelectorAll('[data-preview-url]').forEach(function (el) {
       el.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
