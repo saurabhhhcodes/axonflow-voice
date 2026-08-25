@@ -1410,6 +1410,98 @@ function setCreationFormat(fmt) {
     });
 }
 
+function generateDynamicPostImage(promptText) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080;
+    canvas.height = 1080;
+    const ctx = canvas.getContext('2d');
+
+    // Background gradient
+    const grad = ctx.createLinearGradient(0, 0, 1080, 1080);
+    grad.addColorStop(0, '#020617');
+    grad.addColorStop(0.4, '#0f172a');
+    grad.addColorStop(1, '#3b0764');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1080, 1080);
+
+    // Glowing Grid lines
+    ctx.strokeStyle = 'rgba(236, 72, 153, 0.08)';
+    ctx.lineWidth = 1.5;
+    for (let x = 0; x < 1080; x += 60) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 1080); ctx.stroke();
+    }
+    for (let y = 0; y < 1080; y += 60) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(1080, y); ctx.stroke();
+    }
+
+    // Top Header Badge
+    ctx.fillStyle = '#ec4899';
+    ctx.font = 'bold 36px sans-serif';
+    ctx.fillText('⚡ AXONFLOW AI', 80, 120);
+
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '22px monospace';
+    ctx.fillText('AUTONOMOUS ENTERPRISE INFRASTRUCTURE', 80, 160);
+
+    // Dynamic Title Box
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 46px sans-serif';
+    
+    const words = promptText.split(' ');
+    let line = '';
+    let y = 280;
+    for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > 920 && n > 0) {
+            ctx.fillText(line, 80, y);
+            line = words[n] + ' ';
+            y += 60;
+        } else {
+            line = testLine;
+        }
+    }
+    ctx.fillText(line, 80, y);
+
+    // Code & Architecture Blueprint Visual Box
+    const boxY = Math.min(y + 40, 580);
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+    ctx.fillRect(80, boxY, 920, 290);
+    ctx.strokeStyle = 'rgba(168, 85, 247, 0.4)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(80, boxY, 920, 290);
+
+    // Code Window Dots
+    ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(115, boxY + 30, 7, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#eab308'; ctx.beginPath(); ctx.arc(140, boxY + 30, 7, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#22c55e'; ctx.beginPath(); ctx.arc(165, boxY + 30, 7, 0, Math.PI*2); ctx.fill();
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = '19px monospace';
+    ctx.fillText('// Deterministic Sub-400ms Pipeline Architecture', 110, boxY + 80);
+    
+    ctx.fillStyle = '#a855f7';
+    ctx.fillText('const cluster = await AxonEngine.init({ hnsw: "in_memory", p99: "<400ms" });', 110, boxY + 125);
+    
+    ctx.fillStyle = '#4ade80';
+    ctx.fillText('await cluster.deployZeroDowntime({ rollbackOnDrift: true });', 110, boxY + 170);
+
+    ctx.fillStyle = '#e2e8f0';
+    ctx.fillText('console.log("⚡ Enterprise AI Agent Live: 99.9% Deterministic");', 110, boxY + 215);
+
+    // Sub-badge Footer
+    ctx.fillStyle = 'rgba(236, 72, 153, 0.2)';
+    ctx.fillRect(80, 940, 920, 70);
+    ctx.strokeStyle = '#ec4899';
+    ctx.strokeRect(80, 940, 920, 70);
+
+    ctx.fillStyle = '#f472b6';
+    ctx.font = 'bold 24px sans-serif';
+    ctx.fillText('🚀 Verified Sub-400ms Latency • Live Benchmarks at https://axonflow.in', 110, 982);
+
+    return canvas.toDataURL('image/png');
+}
+
 async function executeAiAgentCreation() {
     const input = document.getElementById('aiAgentPromptInput');
     const prompt = input ? input.value.trim() : '';
@@ -1427,19 +1519,76 @@ async function executeAiAgentCreation() {
     // High-converting human engineer narrative expansion
     let generatedCaption = '';
     let mediaTitle = '';
+    const previewArea = document.getElementById('publisherMediaPreviewArea');
 
     if (selectedCreationFormat === 'reel') {
         mediaTitle = `Viral Reel: ${prompt.slice(0, 30)}...`;
         generatedCaption = `Why are most enterprise AI deployments failing to deliver ROI?\n\nBecause they treat AI as a toy instead of deterministic infrastructure.\n\nHere is how AxonFlow solves this:\n🔹 Sub-400ms Production RAG with semantic vector caching\n🔹 Zero-downtime Kubernetes deployments with automated rollback\n🔹 Air-gapped compliance and HIPAA/SOC2 ready\n\nPrompt Context: ${prompt}\n\nSchedule a 15-min architectural scoping sprint with our lead engineers: https://axonflow.in/contact\n\n#AxonFlowAI #EnterpriseAI #Sub400msRAG #Kubernetes #AutonomousAgents #AIAgency #TechLeadership`;
+        
+        // Video Reel Media Mode
+        currentCustomMedia = {
+            url: '/axonflow_cinematic_reels_shorts.mp4',
+            name: 'axonflow_reel_video.mp4',
+            type: 'video',
+            size: '1.8 MB',
+            dataUrl: null,
+            publicUrl: 'https://www.axonflow.in/axonflow_cinematic_reels_shorts.mp4'
+        };
+
+        if (previewArea) {
+            previewArea.innerHTML = `<video src="/axonflow_cinematic_reels_shorts.mp4" controls autoplay loop muted class="w-full h-full object-contain bg-black"></video>`;
+        }
     } else if (selectedCreationFormat === 'story') {
         mediaTitle = `Interactive Story: ${prompt.slice(0, 30)}...`;
         generatedCaption = `⚡ Live Architecture Breakdown\n\n${prompt}\n\nTap link in bio or visit https://axonflow.in to explore live benchmarks! 🚀`;
+        
+        const dynamicStory = generateDynamicPostImage(`⚡ STORY BLUEPRINT\n${prompt}`);
+        currentCustomMedia = {
+            url: null,
+            name: 'axonflow_story_post.png',
+            type: 'image',
+            size: '480 KB',
+            dataUrl: dynamicStory,
+            publicUrl: 'https://www.axonflow.in/assets/logo_pro.png'
+        };
+
+        if (previewArea) {
+            previewArea.innerHTML = `<img src="${dynamicStory}" class="w-full h-full object-contain bg-black">`;
+        }
     } else if (selectedCreationFormat === 'post') {
         mediaTitle = `Feed Post: ${prompt.slice(0, 30)}...`;
         generatedCaption = `🚀 Engineering Update: ${prompt}\n\nAt AxonFlow, we build autonomous AI agent pipelines that replace 40+ hours of manual triage weekly with 99.9% deterministic reliability.\n\nExplore our case studies: https://axonflow.in/blog\n\n#EnterpriseAutomation #FullStackAI #AxonFlowAI #CloudNative`;
+        
+        const dynamicImg = generateDynamicPostImage(prompt);
+        currentCustomMedia = {
+            url: null,
+            name: 'axonflow_generated_post.png',
+            type: 'image',
+            size: '520 KB',
+            dataUrl: dynamicImg,
+            publicUrl: 'https://www.axonflow.in/assets/logo_pro.png'
+        };
+
+        if (previewArea) {
+            previewArea.innerHTML = `<img src="${dynamicImg}" class="w-full h-full object-contain bg-black">`;
+        }
     } else {
         mediaTitle = `Carousel Deck: ${prompt.slice(0, 30)}...`;
         generatedCaption = `Swipe through our 5-step playbook for ${prompt} ➡️\n\n1/5 The Problem: Vector drift & high latency\n2/5 The Fix: Semantic clustering in memory\n3/5 The Benchmarks: Sub-400ms retrieval\n4/5 The Rollout: 2-week agile sprint\n5/5 ROI: 74% reduction in operating costs\n\nBook your team's sprint at https://axonflow.in/contact\n\n#AIArchitecture #DevOps #EngineeringPlaybook #AxonFlow`;
+        
+        const dynamicCarouselCover = generateDynamicPostImage(`📑 PLAYBOOK CAROUSEL\n${prompt}`);
+        currentCustomMedia = {
+            url: null,
+            name: 'axonflow_carousel_cover.png',
+            type: 'image',
+            size: '520 KB',
+            dataUrl: dynamicCarouselCover,
+            publicUrl: 'https://www.axonflow.in/assets/logo_pro.png'
+        };
+
+        if (previewArea) {
+            previewArea.innerHTML = `<img src="${dynamicCarouselCover}" class="w-full h-full object-contain bg-black">`;
+        }
     }
 
     // Set caption in publisher
@@ -1454,7 +1603,7 @@ async function executeAiAgentCreation() {
 
     if (btn) {
         btn.disabled = false;
-        btn.innerHTML = `<span>✨ Generate Reel & Voiceover</span>`;
+        btn.innerHTML = `<span>✨ Generate with AI Agent</span>`;
     }
 }
 
