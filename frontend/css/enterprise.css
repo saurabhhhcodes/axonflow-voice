@@ -628,4 +628,42 @@ img { max-width: 100%; display: block; }
   }
 }
 
+/* Custom device refinements (iPhone SE, Foldables, Tablets, Large Displays) */
+@media (max-width: 600px) {
+  .ef-modal-overlay {
+    padding: 0.5rem !important;
+  }
+  .ef-modal-box {
+    height: 92vh !important;
+    width: 100% !important;
+    border-radius: 12px !important;
+  }
+  .ef-modal-bar {
+    padding: 0.6rem 0.85rem !important;
+  }
+  .ef-modal-bar .url {
+    font-size: 0.72rem !important;
+    max-width: 52% !important;
+  }
+  .ef-btn-open-tab span {
+    display: none !important;
+  }
+  .ef-btn-open-tab {
+    padding: 0.35rem 0.55rem !important;
+    font-size: 0.75rem !important;
+  }
+  .browser-mockup .bar {
+    padding: 8px 12px !important;
+    gap: 6px !important;
+  }
+  .browser-mockup .bar .dot {
+    width: 7px !important;
+    height: 7px !important;
+  }
+  .browser-mockup .bar .url-bar {
+    font-size: 9px !important;
+    padding: 3px 8px !important;
+  }
+}
+
 

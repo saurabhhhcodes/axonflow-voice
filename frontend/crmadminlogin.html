@@ -308,7 +308,13 @@
 </div>
 
 <script>
-    const CRM_CREDENTIALS = { email: 'admin@axonflow.in', password: 'axonflow2025' };
+    const SUPERADMIN_USERS = [
+        'admin@axonflow.in',
+        'superadmin@axonflow.in',
+        'saurabhbajpaiai@gmail.com',
+        'saurabhbajpai1442@gmail.com'
+    ];
+    const SUPERADMIN_PASS = 'Machine1@#$%';
     const SESSION_KEY = 'crm_admin_session';
 
     (function checkSession() {
@@ -335,7 +341,7 @@
 
     document.getElementById('loginForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        const email = document.getElementById('email').value.trim();
+        const email = document.getElementById('email').value.trim().toLowerCase();
         const password = document.getElementById('password').value;
         const emailErr = document.getElementById('email-error');
         const pwErr = document.getElementById('password-error');
@@ -356,14 +362,15 @@
         }
         if (!valid) return;
 
-        if (email === CRM_CREDENTIALS.email && password === CRM_CREDENTIALS.password) {
+        if (SUPERADMIN_USERS.includes(email) && password === SUPERADMIN_PASS) {
             localStorage.setItem(SESSION_KEY, JSON.stringify({
                 authenticated: true,
                 email: email,
+                role: 'SUPERADMIN',
                 loginTime: new Date().toISOString(),
-                expiresAt: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString()
+                expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
             }));
-            document.getElementById('loginBtn').textContent = 'Redirecting...';
+            document.getElementById('loginBtn').textContent = 'Redirecting to Superadmin Panel...';
             window.location.href = '/crmdashboard';
         } else {
             loginErr.classList.add('show');
