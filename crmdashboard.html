@@ -532,6 +532,26 @@ function selectPageForGeneration(pageId) {
         publicUrl: page.type === 'video' ? 'https://www.axonflow.in/axonflow_cinematic_reels_shorts.mp4' : 'https://www.axonflow.in/assets/logo_pro.png'
     };
 
+    // Update Instagram Publisher Reel/Post UI if present
+    const publisherCaption = document.getElementById('reelCaption');
+    if (publisherCaption) {
+        publisherCaption.value = page.caption;
+    }
+
+    const assetLabel = document.getElementById('publisherAssetLabel');
+    if (assetLabel) {
+        assetLabel.textContent = `🌐 ${page.title}`;
+    }
+
+    const publisherPreview = document.getElementById('publisherMediaPreviewArea');
+    if (publisherPreview) {
+        if (page.type === 'video') {
+            publisherPreview.innerHTML = `<video src="${page.mediaUrl}" controls autoplay loop muted class="w-full h-full object-contain bg-black"></video>`;
+        } else {
+            publisherPreview.innerHTML = `<img src="${page.mediaUrl}" class="w-full h-full object-contain bg-black">`;
+        }
+    }
+
     // Update preview in OmniRoute
     const previewContainer = document.getElementById('omniMediaPreviewWrap');
     if (previewContainer) {
